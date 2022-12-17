@@ -61,6 +61,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function(){
 
         Route::post('ckeditor/upload', 'CKEditorController@upload')->name('ckeditor.image-upload');
 
+        // contacts
+        Route::get('contacts', [App\Http\Controllers\Admin\ContactController::class ,'index'])->name('contacts.list');
+
     });
 
 });
@@ -75,6 +78,7 @@ Route::controller(App\Http\Controllers\Frontend\PageController::class)->group(
         Route::get('/home',  'home')->name('home');
         Route::get('/about-us', 'about')->name('about');
         Route::get('/contact-us', 'contact')->name('contact');
+        Route::post('/contact-us', 'store_contacts_data')->name('contact.data');
         Route::get('/editorial', 'editorial')->name('editorial');
         Route::get('/rights', 'rights')->name('rights');
         Route::get('/privacy-policy', 'privacy')->name('privacy');

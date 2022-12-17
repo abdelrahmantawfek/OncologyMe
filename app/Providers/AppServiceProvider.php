@@ -35,7 +35,7 @@ class AppServiceProvider extends ServiceProvider
         $data['latest_news'] = Post::orderBy('created_at', 'DESC')->where('post_type', 'articles')->take(5)->get();
         $data['highlights'] = Post::where('post_type', 'news')->where('highlights', true)->with('topics', 'postmeta')->get()->take(5);
 
-        // $data['posts'] = Post::where('post_type', 'news')->get();
+        $data['posts'] = Post::where('post_type', 'news')->get();
 
 
         // dd($data['all_topics']);

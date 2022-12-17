@@ -33,8 +33,14 @@ class TopicController extends Controller
         $slug = $request->slug;
         $topic = Topic::create($input);
         if(is_null($slug)){
-            $topic->slug = strtolower(preg_replace('/\s+/', '-', $request->title));
+            do{
+                $new_slug = $request->title .  ' ' . rand(1, 10);
+                $topic_slug = strtolower(preg_replace('/\s+/', '-', $new_slug));
+            }
+            while(Topic::where('slug', $topic_slug)->exists());
         }
+
+        $topic->slug = $topic_slug;
 
         if(isset($parent_topic)){
         $topic->parent_name = $parent_topic->title;  

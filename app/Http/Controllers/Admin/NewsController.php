@@ -60,8 +60,14 @@ class NewsController extends Controller
         ]);
 
         if(is_null($slug)){
-            $post->slug = strtolower(preg_replace('/\s+/', '-', $request->title));
+            do{
+                $new_slug = $request->title .  ' ' . rand(1, 10);
+                $post_slug = strtolower(preg_replace('/\s+/', '-', $new_slug));
+            }
+            while(Post::where('slug', $post_slug)->exists());
         }
+
+        $post->slug = $post_slug;
 
         $post->post_type = 'news';
         $post->save();

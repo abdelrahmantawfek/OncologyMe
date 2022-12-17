@@ -45,7 +45,7 @@ class Topic extends Model
      */
     public static $rules = [
         'title' => 'required|string',
-        'slug' => 'nullable',
+        'slug' => 'nullable|unique:topics',
         'is_parent' => 'boolean|nullable',
         'parent_id' => 'integer|nullable',
         'parent_name' => 'nullable',

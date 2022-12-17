@@ -8,7 +8,10 @@ use App\Models\News;
 use App\Models\Page;
 use App\Models\Post;
 use App\Models\Topic;
+use App\Models\Contact;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Laracasts\Flash\Flash;
 
 class PageController extends Controller
 {
@@ -71,6 +74,24 @@ class PageController extends Controller
         $data['page'] = Page::with('sections')->find(3);
 
         return view('frontend.contact-us', compact('data'));
+    }
+
+     public function store_contacts_data(Request $request)
+    {
+        $input = $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'phone' => 'required',
+            'subject' => 'required',
+            'message' => 'required',
+        ]);
+
+        DB::beginTransaction();
+        $contact = Contact::create($request->all());
+        DB::commit();
+
+        Flash::success('Your record saved successfully.');
+        return redirect()->back();
     }
 
     public function editorial()

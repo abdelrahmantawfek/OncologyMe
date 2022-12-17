@@ -43,7 +43,7 @@ class Category extends Model
      */
     public static $rules = [
         'title' => 'required',
-        'slug' => 'nullable',
+        'slug' => 'nullable|unique:categories',
         'featured_image' => 'nullable',
         'is_main' => 'integer',
         // 'is_parent' => 'nullable',

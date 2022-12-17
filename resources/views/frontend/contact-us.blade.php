@@ -39,31 +39,38 @@
                     </div>
                     <div class="careerfy-contact-form">
                         <h2>We want to hear from you!</h2>
-                        <form>
+                        {!! Form::open(['route' => ['contact.data'], 'method' => 'post']) !!}
                             <ul>
                                 <li>
-                                    <input value="Enter Your Name" onblur="if(this.value == '') { this.value ='Enter Your Name'; }" onfocus="if(this.value =='Enter Your Name') { this.value = ''; }" type="text">
+                                    {!! Form::text('name', null, ['class' => 'form-control', 'onblur' =>"if(this.value == '') { this.value ='Enter Your Name'; }", 'onfocus' => "if(this.value =='Enter Your Name') { this.value = ''; }" , 'placeholder' => 'Enter Your Name']) !!}
                                     <i class="careerfy-icon careerfy-user"></i>
                                 </li>
                                 <li>
-                                    <input value="Subject" onblur="if(this.value == '') { this.value ='Subject'; }" onfocus="if(this.value =='Subject') { this.value = ''; }" type="text">
+                                    {!! Form::text('subject', null, ['class' => 'form-control', 'onblur' =>"if(this.value == '') { this.value ='Subject'; }", 'onfocus' => "if(this.value =='Subject') { this.value = ''; }" , 'placeholder' => 'Subject']) !!}
                                     <i class="careerfy-icon careerfy-user"></i>
                                 </li>
                                 <li>
-                                    <input value="Enter Your Email Address" onblur="if(this.value == '') { this.value ='Enter Your Email Address'; }" onfocus="if(this.value =='Enter Your Email Address') { this.value = ''; }" type="text">
+                                    {!! Form::text('email', null, ['class' => 'form-control', 'onblur' =>"if(this.value == '') { this.value ='Enter Your Email Address'; }", 'onfocus' => "if(this.value =='Enter Your Email Address') { this.value = ''; }" , 'placeholder' => 'Enter Your Email Address']) !!}
                                     <i class="careerfy-icon careerfy-mail"></i>
                                 </li>
                                 <li>
-                                    <input value="Enter Your Phone Number" onblur="if(this.value == '') { this.value ='Enter Your Phone Number'; }" onfocus="if(this.value =='Enter Your Phone Number') { this.value = ''; }" type="text">
+                                    {!! Form::text('phone', null, ['class' => 'form-control', 'onblur' =>"if(this.value == '') { this.value ='Enter Your Phone Number'; }", 'onfocus' => "if(this.value =='Enter Your Phone Number') { this.value = ''; }" , 'placeholder' => 'Enter Your Phone Number']) !!}
                                     <i class="careerfy-icon careerfy-technology"></i>
                                 </li>
                                 <li class="careerfy-contact-form-full">
-                                    <textarea placeholder='Write your message ...'></textarea>
+                                    {!! Form::textarea('message', null, [
+                                        'class'      => 'form-control',
+                                        'rows'       => 3, 
+                                        'name'       => 'message',
+                                        'id'         => 'message',
+                                        'onkeypress' => "return nameFunction(event);",
+                                        'placeholder'=> "Write your message ..."
+                                    ]) !!}
                                 </li>
-                                <li><input type="submit" value="Submit"></li>
+                                <li>  {!! Form::submit('supmit', ['class' => 'btn']) !!}</li>
                             </ul>
                             <div class="clearfix"></div>
-                        </form>
+                        {!! Form::close() !!}
                     </div>
                 </div>
             </div>

@@ -28,7 +28,7 @@ class ArticlesController extends Controller
         // $input = $request->all();
         $input = $request->validate([
             'title' => 'required',
-            // 'slug' => 'required',
+            'slug' => 'nullable|unique:posts',
             // 'pdf' => 'required',
             // 'key_points' => 'required',
             // 'content' => 'required',
@@ -51,8 +51,14 @@ class ArticlesController extends Controller
         ]);
 
         if(is_null($slug)){
-            $post->slug = strtolower(preg_replace('/\s+/', '-', $request->title));
+            do{
+                $new_slug = $request->title .  ' ' . rand(1, 10);
+                $post_slug = strtolower(preg_replace('/\s+/', '-', $new_slug));
+            }
+            while(Post::where('slug', $post_slug)->exists());
         }
+
+        $post->slug = $post_slug;
 
         $post->post_type = 'articles';
         $post->save();

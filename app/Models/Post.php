@@ -40,7 +40,7 @@ class Post extends Model
     public static $rules = [
         'author' => 'string',
         'title' => 'string',
-        'slug' => 'unique',
+        'slug' => 'nullable|unique:posts',
         'excerpt' => 'string',
         'content' => 'text',
     ];
