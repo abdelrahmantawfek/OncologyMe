@@ -1,0 +1,8 @@
+.login-bg {
+    /* background-image: url(/uploads/bg.jpg) !important; */
+    background-color: #000;
+}
+
+.login-bg.header-fixed.toolbar-fixed .wrapper{
+    padding: 20px;
+}
