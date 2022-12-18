@@ -44,18 +44,38 @@
                                 <li>
                                     {!! Form::text('name', null, ['class' => 'form-control', 'onblur' =>"if(this.value == '') { this.value ='Enter Your Name'; }", 'onfocus' => "if(this.value =='Enter Your Name') { this.value = ''; }" , 'placeholder' => 'Enter Your Name']) !!}
                                     <i class="careerfy-icon careerfy-user"></i>
+                                    @error('name')
+                                    <span class="invalid-feedback cs-danger" role="alert">
+                                        {{ $message }}
+                                    </span>
+                                    @enderror
                                 </li>
                                 <li>
                                     {!! Form::text('subject', null, ['class' => 'form-control', 'onblur' =>"if(this.value == '') { this.value ='Subject'; }", 'onfocus' => "if(this.value =='Subject') { this.value = ''; }" , 'placeholder' => 'Subject']) !!}
                                     <i class="careerfy-icon careerfy-user"></i>
+                                    @error('subject')
+                                    <span class="invalid-feedback cs-danger" role="alert">
+                                        {{ $message }}
+                                    </span>
+                                    @enderror
                                 </li>
                                 <li>
                                     {!! Form::text('email', null, ['class' => 'form-control', 'onblur' =>"if(this.value == '') { this.value ='Enter Your Email Address'; }", 'onfocus' => "if(this.value =='Enter Your Email Address') { this.value = ''; }" , 'placeholder' => 'Enter Your Email Address']) !!}
                                     <i class="careerfy-icon careerfy-mail"></i>
+                                    @error('email')
+                                    <span class="invalid-feedback cs-danger" role="alert">
+                                        {{ $message }}
+                                    </span>
+                                    @enderror
                                 </li>
                                 <li>
                                     {!! Form::text('phone', null, ['class' => 'form-control', 'onblur' =>"if(this.value == '') { this.value ='Enter Your Phone Number'; }", 'onfocus' => "if(this.value =='Enter Your Phone Number') { this.value = ''; }" , 'placeholder' => 'Enter Your Phone Number']) !!}
                                     <i class="careerfy-icon careerfy-technology"></i>
+                                    @error('phone')
+                                    <span class="invalid-feedback cs-danger" role="alert">
+                                        {{ $message }}
+                                    </span>
+                                    @enderror
                                 </li>
                                 <li class="careerfy-contact-form-full">
                                     {!! Form::textarea('message', null, [
@@ -66,11 +86,17 @@
                                         'onkeypress' => "return nameFunction(event);",
                                         'placeholder'=> "Write your message ..."
                                     ]) !!}
+                                     @error('message')
+                                     <span class="invalid-feedback cs-danger" role="alert">
+                                         {{ $message }}
+                                     </span>
+                                     @enderror
                                 </li>
                                 <li>  {!! Form::submit('supmit', ['class' => 'btn']) !!}</li>
                             </ul>
                             <div class="clearfix"></div>
                         {!! Form::close() !!}
+                        @include('flash::message')
                     </div>
                 </div>
             </div>
