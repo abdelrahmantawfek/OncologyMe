@@ -33,14 +33,16 @@ class TopicController extends Controller
         $slug = $request->slug;
         $topic = Topic::create($input);
         if(is_null($slug)){
+            $val = 1;
             do{
-                $new_slug = $request->title .  ' ' . rand(1, 10);
+                $new_slug = $request->title .  ' ' . $val;
                 $topic_slug = strtolower(preg_replace('/\s+/', '-', $new_slug));
+                $val++;
             }
             while(Topic::where('slug', $topic_slug)->exists());
+            $topic->slug = $topic_slug;
         }
 
-        $topic->slug = $topic_slug;
 
         if(isset($parent_topic)){
         $topic->parent_name = $parent_topic->title;  
@@ -70,7 +72,7 @@ class TopicController extends Controller
     {
         /** @var Topic $Category */
         $topic = Topic::find($id);
-        // $parent_topic = Topic::where('is_parent', 1)->get()->pluck('title', 'id');
+        $parent_topic = Topic::where('is_parent', 1)->get()->pluck('title', 'id');
 
         if (empty($topic)) {
             Flash::error('Topic not found');

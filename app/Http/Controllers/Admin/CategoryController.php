@@ -36,14 +36,16 @@ class CategoryController extends Controller
         $slug = $request->slug;
         $category = Category::create($input);
         if(is_null($slug)){
+            $val = 1;
             do{
-                $new_slug = $request->title .  ' ' . rand(1, 10);
-                $topic_slug = strtolower(preg_replace('/\s+/', '-', $new_slug));
+                $new_slug = $request->title .  ' ' . $val;
+                $categ_slug = strtolower(preg_replace('/\s+/', '-', $new_slug));
+                $val++;
             }
-            while(Category::where('slug', $topic_slug)->exists());
+            while(Category::where('slug', $categ_slug)->exists());
+            $category->slug = $categ_slug;
         }
 
-        $category->slug = $topic_slug;
         // if(isset($parent_category)){
         // $category->parent_name = $parent_category->title;  
         // }

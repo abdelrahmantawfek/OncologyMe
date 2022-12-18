@@ -51,14 +51,15 @@ class ArticlesController extends Controller
         ]);
 
         if(is_null($slug)){
+            $val = 1;
             do{
-                $new_slug = $request->title .  ' ' . rand(1, 10);
+                $new_slug = $request->title .  ' ' . $val;
                 $post_slug = strtolower(preg_replace('/\s+/', '-', $new_slug));
+                $val++;
             }
             while(Post::where('slug', $post_slug)->exists());
+            $post->slug = $post_slug;
         }
-
-        $post->slug = $post_slug;
 
         $post->post_type = 'articles';
         $post->save();
@@ -160,6 +161,7 @@ class ArticlesController extends Controller
         $input = $request->validate([
             'title' => 'required',
             // 'slug' => 'required',
+            'slug' => 'unique:posts',
             // 'pdf' => 'required',
             // 'key_points' => 'required',
             // 'content' => 'required',
