@@ -918,11 +918,16 @@ class PostSeeder extends Seeder
             array('post_id' => 27, 'category_id' => 8),
 
 
+            // videos categories
 
-            // array('post_id' => 3, 'category_id' => 11),
-            // array('post_id' => 3, 'category_id' => 12),
-            // array('post_id' => 4, 'category_id' => 13),
-            // array('post_id' => 5, 'category_id' => 14),
+            array('post_id' => 11, 'category_id' => 10),
+            array('post_id' => 11, 'category_id' => 11),
+            array('post_id' => 12, 'category_id' => 11),
+            array('post_id' => 13, 'category_id' => 12),
+            array('post_id' => 14, 'category_id' => 13),
+            array('post_id' => 15, 'category_id' => 10),
+            array('post_id' => 16, 'category_id' => 11),
+
 
             // array('post_id' => 6, 'category_id' => 7),
             // array('post_id' => 7, 'category_id' => 8),

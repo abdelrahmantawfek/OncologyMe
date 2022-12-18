@@ -60,297 +60,62 @@
 
                 <div class="clearfix"></div>
                 <div class="banr-box">
-                    <img src="img/bnr1.jpg">
+                    <img src="{{ asset('front-assets/img/bnr1.jpg') }}">
 
                 </div>
 
                 <hr style="margin-top: 40px;">
+                @foreach ($data['categories'] as $category)
+                @if (count($category->posts))
                 <div class="articles-section">
                     <div class="row">
-                        <h2 class="cntr-title">Most Recent</h2>
-
+                        <h2 class="cntr-title">{{$category->title ?? '' }}</h2>
                         <div class="articles-box ">
                             <div class="videos-only">
+
+                                @foreach ($category->posts as $post)
                                 <div class="col-md-3 col-sm-6 col-xs-12 ">
+                                    {{-- @if (count($post->postmeta->where('meta_key', '_featured_image')) ) --}}
                                     <div class="article-item">
-                                        <div class="video-thumbnail pos-rltv">
-                                            <a href="single-video.html">
-                                                <img src="img/vid1.jpg" class="">
-                                                <img class="pos-abslt" src="img/play.png">
-                                            </a>
-                                        </div>
                                         <div class="article-tags">
-
-                                            <span><a href="all-tags.html">Colorectal Cancer</a></span>
-
+                                            <div class="video-thumbnail pos-rltv">
+                                                <a href="{{$post->post_type.'/'.$post->slug}}">
+                                                    @foreach ($post->postmeta->where('meta_key', '_featured_image') as $key => $value)
+                                                    <img src="{{ asset('uploads/'.$value->meta_value )}}" alt="{{$value->meta_value}}">
+                                                    @endforeach
+                                                 
+                                                    <img class="pos-abslt" src="{{ asset('front-assets/img/play.png') }}">
+                                                </a>
+                                            </div>
+                                            @foreach ($post->topics as $topic)
+                                            <span><a href="{{ route('showTopic', $topic->slug ?? '') }}">{{$topic->title ?? ''}}</a></span>
+                                            @endforeach
+        
                                         </div>
                                         <div class="clearfix"></div>
-                                        <h2><a href="single-video.html">S.M. Qasim Hussaini, MD, on Colon Cancer Treatment Outcomes and Historical Housing Discrimination</a></h2>
-
+                                        <h2><a href="{{$post->post_type.'/'.$post->slug}}">{{ implode(' ', array_slice(explode(' ', $post->title), 0, 10)) }}@if ( str_word_count($post->title) > 10 )...@endif</a></h2>
+                                        <h4>
+                                            <span> {{ $post->author ?? ''}} </span>
+            
+                                            <text>&nbsp;/&nbsp;<span> {{ $post->created_at->format('M d, Y') ?? ''}} </span></text>
+            
+                                        </h4>
                                     </div>
-
+                                    {{-- @endif --}}
                                 </div>
-
-                                <div class="col-md-3 col-sm-6 col-xs-12 ">
-                                    <div class="article-item">
-                                        <div class="video-thumbnail pos-rltv">
-                                            <a href="single-video.html">
-                                                <img src="img/vid1.jpg" class="">
-                                                <img class="pos-abslt" src="img/play.png">
-                                            </a>
-                                        </div>
-                                        <div class="article-tags">
-
-                                            <span><a href="all-tags.html">Colorectal Cancer</a></span>
-
-                                        </div>
-                                        <div class="clearfix"></div>
-                                        <h2><a href="single-video.html">S.M. Qasim Hussaini, MD, on Colon Cancer Treatment Outcomes and Historical Housing Discrimination</a></h2>
-
-                                    </div>
-
-                                </div>
-
-                                <div class="col-md-3 col-sm-6 col-xs-12 ">
-                                    <div class="article-item">
-                                        <div class="video-thumbnail pos-rltv">
-                                            <a href="single-video.html">
-                                                <img src="img/vid1.jpg" class="">
-                                                <img class="pos-abslt" src="img/play.png">
-                                            </a>
-                                        </div>
-                                        <div class="article-tags">
-
-                                            <span><a href="all-tags.html">Colorectal Cancer</a></span>
-
-                                        </div>
-                                        <div class="clearfix"></div>
-                                        <h2><a href="single-video.html">S.M. Qasim Hussaini, MD, on Colon Cancer Treatment Outcomes and Historical Housing Discrimination</a></h2>
-
-                                    </div>
-
-                                </div>
-
-                                <div class="col-md-3 col-sm-6 col-xs-12 ">
-                                    <div class="article-item">
-                                        <div class="video-thumbnail pos-rltv">
-                                            <a href="single-video.html">
-                                                <img src="img/vid1.jpg" class="">
-                                                <img class="pos-abslt" src="img/play.png">
-                                            </a>
-                                        </div>
-                                        <div class="article-tags">
-
-                                            <span><a href="all-tags.html">Colorectal Cancer</a></span>
-
-                                        </div>
-                                        <div class="clearfix"></div>
-                                        <h2><a href="single-video.html">S.M. Qasim Hussaini, MD, on Colon Cancer Treatment Outcomes and Historical Housing Discrimination</a></h2>
-
-                                    </div>
-
-                                </div>
-
-
+                                @endforeach
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <hr style="margin-top: 40px;">
-                <div class="articles-section">
-                    <div class="row">
-                        <h2 class="cntr-title">Breast Cancer</h2>
-
-                        <div class="articles-box ">
-                            <div class="videos-only">
-                                <div class="col-md-3 col-sm-6 col-xs-12 ">
-                                    <div class="article-item">
-                                        <div class="video-thumbnail pos-rltv">
-                                            <a href="single-video.html">
-                                                <img src="img/vid1.jpg" class="">
-                                                <img class="pos-abslt" src="img/play.png">
-                                            </a>
-                                        </div>
-                                        <div class="article-tags">
-
-                                            <span><a href="all-tags.html">Colorectal Cancer</a></span>
-
-                                        </div>
-                                        <div class="clearfix"></div>
-                                        <h2><a href="single-video.html">S.M. Qasim Hussaini, MD, on Colon Cancer Treatment Outcomes and Historical Housing Discrimination</a></h2>
-
-                                    </div>
-
-                                </div>
-
-                                <div class="col-md-3 col-sm-6 col-xs-12 ">
-                                    <div class="article-item">
-                                        <div class="video-thumbnail pos-rltv">
-                                            <a href="single-video.html">
-                                                <img src="img/vid1.jpg" class="">
-                                                <img class="pos-abslt" src="img/play.png">
-                                            </a>
-                                        </div>
-                                        <div class="article-tags">
-
-                                            <span><a href="all-tags.html">Colorectal Cancer</a></span>
-
-                                        </div>
-                                        <div class="clearfix"></div>
-                                        <h2><a href="single-video.html">S.M. Qasim Hussaini, MD, on Colon Cancer Treatment Outcomes and Historical Housing Discrimination</a></h2>
-
-                                    </div>
-
-                                </div>
-
-                                <div class="col-md-3 col-sm-6 col-xs-12 ">
-                                    <div class="article-item">
-                                        <div class="video-thumbnail pos-rltv">
-                                            <a href="single-video.html">
-                                                <img src="img/vid1.jpg" class="">
-                                                <img class="pos-abslt" src="img/play.png">
-                                            </a>
-                                        </div>
-                                        <div class="article-tags">
-
-                                            <span><a href="all-tags.html">Colorectal Cancer</a></span>
-
-                                        </div>
-                                        <div class="clearfix"></div>
-                                        <h2><a href="single-video.html">S.M. Qasim Hussaini, MD, on Colon Cancer Treatment Outcomes and Historical Housing Discrimination</a></h2>
-
-                                    </div>
-
-                                </div>
-
-                                <div class="col-md-3 col-sm-6 col-xs-12 ">
-                                    <div class="article-item">
-                                        <div class="video-thumbnail pos-rltv">
-                                            <a href="single-video.html">
-                                                <img src="img/vid1.jpg" class="">
-                                                <img class="pos-abslt" src="img/play.png">
-                                            </a>
-                                        </div>
-                                        <div class="article-tags">
-
-                                            <span><a href="all-tags.html">Colorectal Cancer</a></span>
-
-                                        </div>
-                                        <div class="clearfix"></div>
-                                        <h2><a href="single-video.html">S.M. Qasim Hussaini, MD, on Colon Cancer Treatment Outcomes and Historical Housing Discrimination</a></h2>
-
-                                    </div>
-
-                                </div>
-
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <hr style="margin-top: 40px;">
-                <div class="articles-section">
-                    <div class="row">
-                        <h2 class="cntr-title">ESMO Congress 2022</h2>
-
-                        <div class="articles-box ">
-                            <div class="videos-only">
-                                <div class="col-md-3 col-sm-6 col-xs-12 ">
-                                    <div class="article-item">
-                                        <div class="video-thumbnail pos-rltv">
-                                            <a href="single-video.html">
-                                                <img src="img/vid1.jpg" class="">
-                                                <img class="pos-abslt" src="img/play.png">
-                                            </a>
-                                        </div>
-                                        <div class="article-tags">
-
-                                            <span><a href="all-tags.html">Colorectal Cancer</a></span>
-
-                                        </div>
-                                        <div class="clearfix"></div>
-                                        <h2><a href="single-video.html">S.M. Qasim Hussaini, MD, on Colon Cancer Treatment Outcomes and Historical Housing Discrimination</a></h2>
-
-                                    </div>
-
-                                </div>
-
-                                <div class="col-md-3 col-sm-6 col-xs-12 ">
-                                    <div class="article-item">
-                                        <div class="video-thumbnail pos-rltv">
-                                            <a href="single-video.html">
-                                                <img src="img/vid1.jpg" class="">
-                                                <img class="pos-abslt" src="img/play.png">
-                                            </a>
-                                        </div>
-                                        <div class="article-tags">
-
-                                            <span><a href="all-tags.html">Colorectal Cancer</a></span>
-
-                                        </div>
-                                        <div class="clearfix"></div>
-                                        <h2><a href="single-video.html">S.M. Qasim Hussaini, MD, on Colon Cancer Treatment Outcomes and Historical Housing Discrimination</a></h2>
-
-                                    </div>
-
-                                </div>
-
-                                <div class="col-md-3 col-sm-6 col-xs-12 ">
-                                    <div class="article-item">
-                                        <div class="video-thumbnail pos-rltv">
-                                            <a href="single-video.html">
-                                                <img src="img/vid1.jpg" class="">
-                                                <img class="pos-abslt" src="img/play.png">
-                                            </a>
-                                        </div>
-                                        <div class="article-tags">
-
-                                            <span><a href="all-tags.html">Colorectal Cancer</a></span>
-
-                                        </div>
-                                        <div class="clearfix"></div>
-                                        <h2><a href="single-video.html">S.M. Qasim Hussaini, MD, on Colon Cancer Treatment Outcomes and Historical Housing Discrimination</a></h2>
-
-                                    </div>
-
-                                </div>
-
-                                <div class="col-md-3 col-sm-6 col-xs-12 ">
-                                    <div class="article-item">
-                                        <div class="video-thumbnail pos-rltv">
-                                            <a href="single-video.html">
-                                                <img src="img/vid1.jpg" class="">
-                                                <img class="pos-abslt" src="img/play.png">
-                                            </a>
-                                        </div>
-                                        <div class="article-tags">
-
-                                            <span><a href="all-tags.html">Colorectal Cancer</a></span>
-
-                                        </div>
-                                        <div class="clearfix"></div>
-                                        <h2><a href="single-video.html">S.M. Qasim Hussaini, MD, on Colon Cancer Treatment Outcomes and Historical Housing Discrimination</a></h2>
-
-                                    </div>
-
-                                </div>
-
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
+                <hr style="margin-top: 40px;">  
+                @endif
+                @endforeach
             </div>
-
-
-
         </div>
     </div>
 </div>
+
 
 @else
 
