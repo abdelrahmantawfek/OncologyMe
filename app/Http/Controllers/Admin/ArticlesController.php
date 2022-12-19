@@ -51,14 +51,22 @@ class ArticlesController extends Controller
         ]);
 
         if(is_null($slug)){
-            do{
-                $new_slug = $request->title .  ' ' . rand(1, 10);
-                $post_slug = strtolower(preg_replace('/\s+/', '-', $new_slug));
+            $old_slug = Post::where('slug', strtolower(preg_replace('/\s+/', '-', $request->title)))->exists();
+            if($old_slug){
+                $val = 1;
+                do{
+                    $new_slug = $request->title .  ' ' . $val;
+                    $post_slug = strtolower(preg_replace('/\s+/', '-', $new_slug));
+                    $val++;
+                }
+                while(Post::where('slug', $post_slug)->exists());
             }
-            while(Post::where('slug', $post_slug)->exists());
+            else{
+                $post_slug = strtolower(preg_replace('/\s+/', '-', $request->title));
+            }
+           
+            $post->slug = $post_slug;
         }
-
-        $post->slug = $post_slug;
 
         $post->post_type = 'articles';
         $post->save();
@@ -160,6 +168,7 @@ class ArticlesController extends Controller
         $input = $request->validate([
             'title' => 'required',
             // 'slug' => 'required',
+            'slug' => 'unique:posts',
             // 'pdf' => 'required',
             // 'key_points' => 'required',
             // 'content' => 'required',
@@ -178,9 +187,23 @@ class ArticlesController extends Controller
         $post->content = $request->content;
         $post->excerpt = $request->excerpt;
         $post->author = $request->author;
-                
+        $slug = $request->slug;
         if(is_null($slug)){
-            $post->slug = strtolower(preg_replace('/\s+/', '-', $request->title));
+            $old_slug = Post::where('slug', strtolower(preg_replace('/\s+/', '-', $request->title)))->exists();
+            if($old_slug){
+                $val = 1;
+                do{
+                    $new_slug = $request->title .  ' ' . $val;
+                    $post_slug = strtolower(preg_replace('/\s+/', '-', $new_slug));
+                    $val++;
+                }
+                while(Post::where('slug', $post_slug)->exists());
+            }
+            else{
+                $post_slug = strtolower(preg_replace('/\s+/', '-', $request->title));
+            }
+           
+            $post->slug = $post_slug;
         }
         $post->save();
 

@@ -2250,6 +2250,9 @@ li:hover .careerfy-read-more {
 width: 33.33333333%;*/
     padding: 32px 24px 35px 30px;
 }
+.cs-danger {
+    color: red;
+}
 
 .careerfy-contact-info-sec h2 {
     font-size: 22px;

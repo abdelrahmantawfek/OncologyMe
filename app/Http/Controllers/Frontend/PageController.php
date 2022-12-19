@@ -80,8 +80,8 @@ class PageController extends Controller
     {
         $input = $request->validate([
             'name' => 'required',
-            'email' => 'required',
-            'phone' => 'required',
+            'email' => 'required|email|regex:/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}/',
+            'phone' => 'required|regex:/(00)[0-9][0-9]{9}/',
             'subject' => 'required',
             'message' => 'required',
         ]);
@@ -90,7 +90,7 @@ class PageController extends Controller
         $contact = Contact::create($request->all());
         DB::commit();
 
-        Flash::success('Your record saved successfully.');
+        Flash::success('Form succefully sent. We will get back to you soon');
         return redirect()->back();
     }
 
