@@ -36,13 +36,20 @@ class CategoryController extends Controller
         $slug = $request->slug;
         $category = Category::create($input);
         if(is_null($slug)){
-            $val = 1;
-            do{
-                $new_slug = $request->title .  ' ' . $val;
-                $categ_slug = strtolower(preg_replace('/\s+/', '-', $new_slug));
-                $val++;
+            $old_slug = Category::where('slug', strtolower(preg_replace('/\s+/', '-', $request->title)))->exists();
+            if($old_slug){
+                $val = 1;
+                do{
+                    $new_slug = $request->title .  ' ' . $val;
+                    $categ_slug = strtolower(preg_replace('/\s+/', '-', $new_slug));
+                    $val++;
+                }
+                while(Category::where('slug', $categ_slug)->exists());
             }
-            while(Category::where('slug', $categ_slug)->exists());
+            else{
+                $categ_slug = strtolower(preg_replace('/\s+/', '-', $request->title));
+            }
+          
             $category->slug = $categ_slug;
         }
 
@@ -113,6 +120,25 @@ class CategoryController extends Controller
 
         $input = $request->validate( Category::$rules );
         $category->fill($request->all());
+        $slug = $request->slug;
+        $category = Category::create($input);
+        if(is_null($slug)){
+            $old_slug = Category::where('slug', strtolower(preg_replace('/\s+/', '-', $request->title)))->exists();
+            if($old_slug){
+                $val = 1;
+                do{
+                    $new_slug = $request->title .  ' ' . $val;
+                    $categ_slug = strtolower(preg_replace('/\s+/', '-', $new_slug));
+                    $val++;
+                }
+                while(Category::where('slug', $categ_slug)->exists());
+            }
+            else{
+                $categ_slug = strtolower(preg_replace('/\s+/', '-', $request->title));
+            }
+          
+            $category->slug = $categ_slug;
+        }
         
         $featured_image = $request->validate(['featured_image' => 'mimes:jpg,jpeg,png|max:5048']);
         $image = $request->file('featured_image');
@@ -126,6 +152,7 @@ class CategoryController extends Controller
             $category->featured_image = $fileName;
             $category->save(); 
         }
+
 
         $category->save();
 

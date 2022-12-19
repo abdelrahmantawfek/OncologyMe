@@ -52,13 +52,20 @@ class PodcastsController extends Controller
         ]);
 
         if(is_null($slug)){
-            $val = 1;
-            do{
-                $new_slug = $request->title .  ' ' . $val;
-                $post_slug = strtolower(preg_replace('/\s+/', '-', $new_slug));
-                $val++;
+            $old_slug = Post::where('slug', strtolower(preg_replace('/\s+/', '-', $request->title)))->exists();
+            if($old_slug){
+                $val = 1;
+                do{
+                    $new_slug = $request->title .  ' ' . $val;
+                    $post_slug = strtolower(preg_replace('/\s+/', '-', $new_slug));
+                    $val++;
+                }
+                while(Post::where('slug', $post_slug)->exists());
             }
-            while(Post::where('slug', $post_slug)->exists());
+            else{
+                $post_slug = strtolower(preg_replace('/\s+/', '-', $request->title));
+            }
+           
             $post->slug = $post_slug;
         }
 
@@ -196,10 +203,24 @@ class PodcastsController extends Controller
         $post->slug = $request->slug;
         $post->content = $request->content;
         $post->excerpt = $request->excerpt;
-        $post->author = $request->author;
-                
+        $post->author = $request->author;      
+        $slug = $request->slug;
         if(is_null($slug)){
-            $post->slug = strtolower(preg_replace('/\s+/', '-', $request->title));
+            $old_slug = Post::where('slug', strtolower(preg_replace('/\s+/', '-', $request->title)))->exists();
+            if($old_slug){
+                $val = 1;
+                do{
+                    $new_slug = $request->title .  ' ' . $val;
+                    $post_slug = strtolower(preg_replace('/\s+/', '-', $new_slug));
+                    $val++;
+                }
+                while(Post::where('slug', $post_slug)->exists());
+            }
+            else{
+                $post_slug = strtolower(preg_replace('/\s+/', '-', $request->title));
+            }
+           
+            $post->slug = $post_slug;
         }
         $post->save();
 

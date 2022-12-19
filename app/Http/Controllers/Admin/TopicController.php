@@ -33,13 +33,22 @@ class TopicController extends Controller
         $slug = $request->slug;
         $topic = Topic::create($input);
         if(is_null($slug)){
-            $val = 1;
-            do{
-                $new_slug = $request->title .  ' ' . $val;
-                $topic_slug = strtolower(preg_replace('/\s+/', '-', $new_slug));
-                $val++;
+            $old_slug = Topic::where('slug', strtolower(preg_replace('/\s+/', '-', $request->title)))->exists();
+
+            if($old_slug){
+                $val = 1;
+                do{
+                    $new_slug = $request->title .  ' ' . $val;
+                    $topic_slug = strtolower(preg_replace('/\s+/', '-', $new_slug));
+                    $val++;
+                }
+                while(Topic::where('slug', $topic_slug)->exists());
             }
-            while(Topic::where('slug', $topic_slug)->exists());
+            else{
+                $topic_slug = strtolower(preg_replace('/\s+/', '-', $request->title));
+            }
+            
+
             $topic->slug = $topic_slug;
         }
 
@@ -96,6 +105,26 @@ class TopicController extends Controller
 
         $input = $request->validate( Topic::$rules );
         $topic->fill($request->all());
+        $slug = $request->slug;
+        if(is_null($slug)){
+            $old_slug = Topic::where('slug', strtolower(preg_replace('/\s+/', '-', $request->title)))->exists();
+
+            if($old_slug){
+                $val = 1;
+                do{
+                    $new_slug = $request->title .  ' ' . $val;
+                    $topic_slug = strtolower(preg_replace('/\s+/', '-', $new_slug));
+                    $val++;
+                }
+                while(Topic::where('slug', $topic_slug)->exists());
+            }
+            else{
+                $topic_slug = strtolower(preg_replace('/\s+/', '-', $request->title));
+            }
+            
+
+            $topic->slug = $topic_slug;
+        }
         $topic->save();
 
         Flash::success('Topic updated successfully.');
