@@ -16,26 +16,18 @@
             <div class="careerfy-main-section careerfy-counter-full topics-section">
                 <div class="container">
                     <div class="row">
-
                         <div class="col-md-8">
                             <div class="banr-box">
                                 <img src="{{ asset('front-assets/img/bnr1.jpg') }}">
                             </div>
                             <div class="m-t-20"></div>
-
                             <div class="careerfy-typo-wrap categ-title pos-rltv">
-
                                 <h3><span>{{$data['topic']->title}}</span></h3>
-                                <form class="all-category">
+                                {!! Form::open(['route' => ['searchTopic', $data['topic']->slug ], 'method' => 'GET', 'class' => 'all-category', 'id' => 'select_topic']) !!}
                                     <div class="form-group">
-
-                                        <select class="form-control" id="category">
-                                            <option>Select a category</option>
-                                            <option>Select a topic</option>
-
-                                    </select>
+                                        {!! Form::select('topics', $data['other-topics'], null, ['class' => 'form-control', 'id' => 'category', 'placeholder' => 'Select a topic'] ) !!}
                                     </div>
-                                </form>
+                                {!! Form::close() !!}
                             </div>
                             <div class="row articles-box">
                                 <div class=" @if( !count($data['videos']->where('meta_key', '_featured_image')) )col-md-8 @else col-md-12 @endif col-sm-6">
@@ -103,9 +95,7 @@
                                 </div>
 
                             </div>
-
                         </div>
-
                         <div class="col-md-4 tblt-nn">
                             @include('partials._sidebar')
                         </div>

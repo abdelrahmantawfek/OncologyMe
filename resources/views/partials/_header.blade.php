@@ -38,13 +38,13 @@
                                 @foreach ($news_categories as $category)
                                 <li><a href="{{ route('showCategory', [$category->post_type, $category->slug]) }}">{{$category->title ?? ''}}</a></li>
                                 @endforeach
-                                <li><a href="/news">View All</a></li>
+                                <li><a href="/all-news">View All</a></li>
                             </ul>
 
 
                         </li>
 
-                        <li class="pos-unset"><a href="/videos">Oncology Watch <i class="fa fa-angle-down"></i></a>
+                        <li class="pos-unset"><a href="/all-videos">Oncology Watch <i class="fa fa-angle-down"></i></a>
                             <ul class="sub-menu dsply-dsk">
                                 <div id="myCarousel-3" class="carousel slide" data-interval="false">
                                     <div class="carousel-inner">
@@ -83,7 +83,7 @@
                             </ul>
                         </li>
 
-                        <li class="pos-unset"><a href="/articles">Articles <i class="fa fa-angle-down"></i></a>
+                        <li class="pos-unset"><a href="/all-articles">Articles <i class="fa fa-angle-down"></i></a>
                             <ul class="sub-menu dsply-dsk">
                                 <div id="myCarousel-1" class="carousel slide" data-interval="false">
                                     <div class="carousel-inner">
@@ -124,7 +124,7 @@
                             </ul>
                         </li>
 
-                        <li class="pos-unset"><a href="/podcasts">Podcasts</a></li>
+                        <li class="pos-unset"><a href="/all-podcasts">Podcasts</a></li>
 
 
                     </ul>

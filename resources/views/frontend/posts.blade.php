@@ -13,7 +13,7 @@
 
 @section('content')
 
-@if (Request::is('videos'))
+@if (Request::is('all-videos') || Request::is('videos'))
 <!-- Main Section -->
 <div class="careerfy-main-section careerfy-counter-full topics-section">
     <div class="container">
@@ -21,41 +21,22 @@
 
             <div class="col-md-12">
                 <div class="videos-filter categ-title">
-
                     <h2 class="cntr-title">OncologyMe <span>Newsreels</span></h2>
                     <p class="cntr-p">OncologyMe Newsreels help clinicians stay up to date on news in the world of clinical oncology and hematology. Newsreels feature leading authorities presenting high-impact clinical findings from major oncology meetings
                         and on timely topics.</p>
                     <div class="clearfix"></div>
                     <div class="row">
-                        <form>
-                            <div class="col-md-2"></div>
-                            <div class="col-md-4">
+                            <div class="col-md-3"></div>
+                            <div class="col-md-6">
+                                {!! Form::open(['route' => [ 'searchCategory', $data['posts'][0]->post_type ], 'method' => 'GET', 'id' => 'select_category']) !!}
                                 <div class="form-group">
-
-                                    <select class="form-control" id="meeting">
-                                <option>Select a meeting</option>
-                                <option>Select a meeting</option>
-
-                            </select>
+                                    {!! Form::select('category', $data['other-categories'], null, ['class' => 'form-control', 'id' => 'category', 'placeholder' => 'Select a category'] ) !!}
                                 </div>
+                                {!! Form::close() !!}
                             </div>
-
-                            <div class="col-md-4">
-                                <div class="form-group">
-
-                                    <select class="form-control" id="topic">
-                                <option>Select a topic</option>
-                                <option>Select a topic</option>
-
-                            </select>
-                                </div>
-                            </div>
-                            <div class="col-md-2"></div>
+                            <div class="col-md-3"></div>
                             <div class="clearfix"></div>
-                        </form>
                     </div>
-
-
                 </div>
 
                 <div class="clearfix"></div>
@@ -130,19 +111,12 @@
                 </div>
                 <div class="m-t-20"></div>
                 <div class="careerfy-typo-wrap categ-title pos-rltv">
-
                     <h3><span>{{ ucfirst($data['posts'][0]->post_type) ?? '' }}</span></h3>
-
-                    <form class="all-category">
-                        <div class="form-group">
-
-                            <select class="form-control" id="category">
-                                <option>Select a category</option>
-                                <option>Select a topic</option>
-
-                        </select>
-                        </div>
-                    </form>
+                    {!! Form::open(['route' => [ 'searchCategory', $data['posts'][0]->post_type ], 'method' => 'GET', 'class' => 'all-category', 'id' => 'select_category']) !!}
+                    <div class="form-group">
+                        {!! Form::select('category', $data['other-categories'], null, ['class' => 'form-control', 'id' => 'category', 'placeholder' => 'Select a category'] ) !!}
+                    </div>
+                    {!! Form::close() !!}
                 </div>
 
                 <div class=" {{ Request::is('podcasts') ? 'articles-section' : '' }} articles-box">

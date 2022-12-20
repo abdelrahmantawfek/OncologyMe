@@ -85,20 +85,23 @@ Route::controller(App\Http\Controllers\Frontend\PageController::class)->group(
         Route::get('/topics', 'all_topics')->name('allTopics');
         // Route::get('/recent-topics', 'recent_topics')->name('recentTopics');
         Route::get('/topics/{slug}', 'single_topic')->name('showTopic');
-        Route::get('{post_type}/categories/{slug}', 'single_category')->name('showCategory');
-
-
+        Route::get('/search-topics', 'search_topic')->name('searchTopic');
     }
 );
 
 Route::controller(App\Http\Controllers\Frontend\PostController::class)->group(
     function () {
 
-        Route::get('/{post_type}', 'post')->name('allPosts');
+        Route::get('all-{post_type}', 'post')->name('allPosts');
+        Route::get('{post_type}', 'search_category')->name('searchCategory');
 
         Route::get('/{post_type}/highlights', 'highlights')->name('allHighlights');
         Route::get('/{post_type}/{slug}', 'single_post')->name('singlePost');
-        Route::get('/{post_type}-categories', 'category_archive')->name('categoryArchive');
+        Route::get('{post_type}/categories/{slug}', 'single_category')->name('showCategory');
+
+        // Route::get('{post_type}/categories', 'category_archive')->name('categoryArchive');
+
+
 
     }
 );

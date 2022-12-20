@@ -14,7 +14,7 @@
     </h5>
     @endforeach
    
-    <div class="link-bottom-tio"><a href="/articles" class="todayinonc">View More&nbsp;<span class="triangle-link fa fa-angle-right"></span></a></div>
+    <div class="link-bottom-tio"><a href="/all-articles" class="todayinonc">View More&nbsp;<span class="triangle-link fa fa-angle-right"></span></a></div>
 </div>
 
 @endif

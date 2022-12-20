@@ -87,6 +87,14 @@
                 });
             }
 
+            $('#category').on('change', function () {
+                $('#select_topic').submit();
+            });
+
+            $('#category').on('change', function () {
+                $('#select_category').submit();
+            });
+
         });
     </script>
 </body>

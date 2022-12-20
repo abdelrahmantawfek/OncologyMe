@@ -130,84 +130,34 @@ class PageController extends Controller
         $data['topic'] = Topic::where('slug', $slug)->get()->first();
         $data['news'] = $data['topic']->posts->where('post_type', 'news');
         $data['videos'] = $data['topic']->posts->where('post_type', 'videos');
+        
+        // $topics = $data['post'];
+        $data['other-topics'] = Topic::orderBy('title')->where('is_parent', 0)
+        ->where('id', '!=', $data['topic']->id)
+        ->get()->pluck('title', 'slug');
 
-        // dd($data['news']);
         return view('frontend.single-topic', compact('data'));
     }
 
-    public function single_category($post_type, $slug)
+    public function search_topic(Request $request)
     {
-        $data['category'] = Category::where('slug', $slug)->with('posts.topics')->get()->first();
+        // $query = Topic::query();
+        $data['topic'] = Topic::where('slug', $request->topics)->get()->first();
+        $data['news'] = $data['topic']->posts->where('post_type', 'news');
+        $data['videos'] = $data['topic']->posts->where('post_type', 'videos');
+        $data['other-topics'] = Topic::orderBy('title')->where('is_parent', 0)
+        ->where('id', '!=', $data['topic']->id)
+        ->get()->pluck('title', 'slug');
 
-        return view('frontend.categories', compact('data'));
+        if (request()->filled('topics')) {
+            $data['topic']->where('slug', $request->topics);
+        }
+
+        
+        // dd($data['topic']);
+        return view('frontend.single-topic', compact('data'));
     }
 
 
-    // public function recent_topics()
-    // {
-    //     $data['page'] = Page::with('sections')->find(8);
-
-    //     return view('frontend.recent-topics', compact('data'));
-    // }
-
-
-    // public function post($post_type)
-    // {
-    //     $data['page'] = Page::with('sections')->find(9);
-    //     $data['posts'] = Post::where('post_type', $post_type)->get();
-
-    //     return view('frontend.posts', compact('data'));
-    // }
-
-    // public function single_post($post_type, $slug)
-    // {
-    //     $data['post'] = Post::where('post_type', $post_type)->where('slug', $slug)->get()->first();
-
-    //     // dd($data['post']);
-    //     return view('frontend.single', compact('data'));
-    // }
-
-
-    // public function watch()
-    // {
-    //     $data['page'] = Page::with('sections')->find(10);
-
-    //     return view('frontend.watch', compact('data'));
-    // }
-
-    // public function showWatch($slug)
-    // {
-    //     $data['watch'] = Post::where('slug', $slug)->get()->first();
-
-    //     return view('frontend.single', compact('data'));
-    // }
-
-    // public function articles()
-    // {
-    //     $data['page'] = Page::with('sections')->find(11);
-
-    //     return view('frontend.news', compact('data'));
-    // }
-
-    // public function showArticle($slug)
-    // {
-    //     $data['article'] = Post::where('slug', $slug)->get()->first();
-
-    //     return view('frontend.single', compact('data'));
-    // }
-
-
-    // public function podcasts()
-    // {
-    //     $data['page'] = Page::with('sections')->find(12);
-
-    //     return view('frontend.podcasts', compact('data'));
-    // }
-
-    // public function showPodcast($slug)
-    // {
-    //     $data['podcast'] = Post::where('slug', $slug)->get()->first();
-
-    //     return view('frontend.single', compact('data'));
-    // }
+      
 }

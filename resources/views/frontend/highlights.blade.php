@@ -24,19 +24,7 @@
                 </div>
                 <div class="m-t-20"></div>
                 <div class="careerfy-typo-wrap categ-title pos-rltv">
-
                     <h3><span> ONCOLOGY HIGHLIGHTS </span></h3>
-
-                    <form class="all-category">
-                        <div class="form-group">
-
-                            <select class="form-control" id="category">
-                                <option>Select a category</option>
-                                <option>Select a topic</option>
-
-                        </select>
-                        </div>
-                    </form>
                 </div>
 
                 <div class=" {{ Request::is('podcasts') ? 'articles-section' : '' }} articles-box">
