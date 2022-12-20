@@ -146,8 +146,8 @@
                 </ul>
                 <div class="event__search__floater">
                     <div class="search__anchor">
-                        <form id="event-search-form" action="get">
-                            <input type="text" class="search__bar" placeholder="Search">
+                        <form id="event-search-form" method="GET" action="{{ route('searchPosts')}}">
+                            <input type="text" class="search__bar" placeholder="Search" name="search" required>
                             <input class="search__submit" type="submit">
                             <div class="search__toggler"></div>
                         </form>

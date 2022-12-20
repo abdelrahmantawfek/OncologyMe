@@ -86,6 +86,8 @@ Route::controller(App\Http\Controllers\Frontend\PageController::class)->group(
         // Route::get('/recent-topics', 'recent_topics')->name('recentTopics');
         Route::get('/topics/{slug}', 'single_topic')->name('showTopic');
         Route::get('/search-topics', 'search_topic')->name('searchTopic');
+        Route::get('', 'search')->name('searchPosts');
+
     }
 );
 

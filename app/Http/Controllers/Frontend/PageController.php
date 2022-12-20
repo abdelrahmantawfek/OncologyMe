@@ -158,6 +158,36 @@ class PageController extends Controller
         return view('frontend.single-topic', compact('data'));
     }
 
+    public function search(Request $request)
+    {
+       
+        $query = Post::query();
+       
+
+        if (request()->filled('search')) {
+            $query
+            ->where('title', 'LIKE', '%' . $request->search . '%')
+            ->orWhere('slug', 'like', '%' . $request->search . '%')
+            ->orWhere('excerpt', 'like', '%' . $request->search . '%')
+            ->orWhere('content', 'like', '%' . $request->search . '%')
+            ->orWhere('author', 'like', '%' . $request->search . '%')
+            ->orWhere('post_type', 'like', '%' . $request->search . '%')
+            ->orWhereHas('topics', function($q) use($request){
+                $q->where('title', 'like', '%' . $request->search . '%');
+            })
+            ->orWhereHas('categories', function($q) use($request){
+                $q->where('title', 'like', '%' . $request->search . '%');
+            });
+        }
+    
+        $data['posts'] = $query->paginate(10);
+        $data['count'] = $query->count();
+        $data['result'] = $request->search;
+
+
+
+        return view('frontend.search', compact('data'));
+    }
 
       
 }
