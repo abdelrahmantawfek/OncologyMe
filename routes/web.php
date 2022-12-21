@@ -86,7 +86,7 @@ Route::controller(App\Http\Controllers\Frontend\PageController::class)->group(
         // Route::get('/recent-topics', 'recent_topics')->name('recentTopics');
         Route::get('/topics/{slug}', 'single_topic')->name('showTopic');
         Route::get('/search-topics', 'search_topic')->name('searchTopic');
-        Route::get('', 'search')->name('searchPosts');
+        Route::get('results', 'search')->name('searchPosts');
 
     }
 );
@@ -95,7 +95,7 @@ Route::controller(App\Http\Controllers\Frontend\PostController::class)->group(
     function () {
 
         Route::get('all-{post_type}', 'post')->name('allPosts');
-        Route::get('{post_type}', 'search_category')->name('searchCategory');
+        Route::get('search-{post_type}', 'search_category')->name('searchCategory');
 
         Route::get('/{post_type}/highlights', 'highlights')->name('allHighlights');
         Route::get('/{post_type}/{slug}', 'single_post')->name('singlePost');

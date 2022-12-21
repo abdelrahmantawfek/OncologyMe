@@ -17,6 +17,7 @@
     <link href="{{ asset('front-assets/css/color.css') }}" rel="stylesheet">
     <link href="{{ asset('front-assets/style.css') }}" rel="stylesheet">
     <link href="{{ asset('front-assets/css/responsive.css') }}" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -73,6 +74,8 @@
     <script src="{{ asset('front-assets/plugin-script/isotope.min.js') }}"></script>
     <script src="{{ asset('front-assets/plugin-script/functions.js') }}"></script>
     <script src="{{ asset('front-assets/script/functions.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
 
     <script>
         $(document).ready(function() {
@@ -86,6 +89,8 @@
                     });
                 });
             }
+
+            $('#category').select2();
 
             $('#category').on('change', function () {
                 $('#select_topic').submit();

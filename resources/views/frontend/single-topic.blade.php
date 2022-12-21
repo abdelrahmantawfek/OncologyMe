@@ -23,11 +23,13 @@
                             <div class="m-t-20"></div>
                             <div class="careerfy-typo-wrap categ-title pos-rltv">
                                 <h3><span>{{$data['topic']->title}}</span></h3>
+                                @if (count($data['other-topics']))
                                 {!! Form::open(['route' => ['searchTopic', $data['topic']->slug ], 'method' => 'GET', 'class' => 'all-category', 'id' => 'select_topic']) !!}
                                     <div class="form-group">
                                         {!! Form::select('topics', $data['other-topics'], null, ['class' => 'form-control', 'id' => 'category', 'placeholder' => 'Select a topic'] ) !!}
                                     </div>
                                 {!! Form::close() !!}
+                                @endif
                             </div>
                             <div class="row articles-box">
                                 <div class=" @if( !count($data['videos']->where('meta_key', '_featured_image')) )col-md-8 @else col-md-12 @endif col-sm-6">
@@ -107,30 +109,7 @@
 
 
 
-            <!-- Main Section -->
-            <div class="careerfy-main-section careerfy-parallex-full articles-section">
-                <div class="container">
-                    <div class="row">
+{{-- @include('partials._pagination', ['records' => $data['topic']]) --}}
 
-                        <div class="col-md-12 careerfy-typo-wrap">
-
-                            <div class="careerfy-pagination-blog">
-                                <ul class="page-numbers">
-                                    <li><a class="prev page-numbers" href="#"><span><i class="careerfy-icon careerfy-arrows4"></i></span></a></li>
-                                    <li><span class="page-numbers current">01</span></li>
-                                    <li><a class="page-numbers" href="#">02</a></li>
-                                    <li><a class="page-numbers" href="#">03</a></li>
-                                    <li><a class="page-numbers" href="#">04</a></li>
-                                    <li><a class="next page-numbers" href="#"><span><i class="careerfy-icon careerfy-arrows4"></i></span></a></li>
-                                </ul>
-                            </div>
-
-
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <!-- Main Section -->
 
 @endsection

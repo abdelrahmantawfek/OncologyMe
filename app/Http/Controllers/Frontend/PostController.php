@@ -15,10 +15,11 @@ class PostController extends Controller
     public function post($post_type)
     {
         $data['page'] = Page::with('sections')->find(9);
-        $data['posts'] = Post::where('post_type', $post_type)->with('topics')->get();
+        $data['posts'] = Post::orderBy('created_at', 'DESC')->where('post_type', $post_type)->with('topics')->paginate(10);
         $data['post_type'] = Post::where('post_type', $post_type)->pluck('post_type')->toArray();
         $data['categories'] = Category::where('post_type', 'videos')->with('posts.topics')->get();
         $data['other-categories'] = Category::orderBy('title')->where('post_type', $post_type)
+        ->whereHas('posts')
         ->get()->pluck('title', 'slug');
         $data['other-topics'] = Topic::where('is_parent', 0)
         ->get()->pluck('title', 'slug');
@@ -61,18 +62,23 @@ class PostController extends Controller
     public function single_category($post_type, $slug)
     {
         $data['category'] = Category::where('slug', $slug)->with('posts.topics')->get()->first();
+        $data['posts'] = $data['category']->posts()->paginate(10);
         $data['other-categories'] = Category::where('post_type', $post_type)
+        ->whereHas('posts')
         ->where('id', '!=', $data['category']->id)
         ->get()->pluck('title', 'slug');
 
+        // dd($data['posts']);
         return view('frontend.categories', compact('data'));
     }
 
     public function search_category(Request $request)
     {
         $data['category'] = Category::where('slug',  $request->category)->with('posts.topics')->get()->first();
+        $data['posts'] = $data['category']->posts()->paginate(10);
         $data['other-categories'] = Category::orderBy('title')->where('post_type', $data['category']->post_type)
         ->where('id', '!=', $data['category']->id)
+        ->whereHas('posts')
         ->get()->pluck('title', 'slug');
 
         if (request()->filled('category')) {

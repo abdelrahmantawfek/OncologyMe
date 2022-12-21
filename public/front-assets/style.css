@@ -4459,7 +4459,7 @@ left: 50%;*/
     position: absolute;
     left: 0;
     top: 0;
-    background-color: #1e3142;
+    /* background-color: #1e3142; */
     opacity: .95;
     width: 100%;
     height: 100%;
@@ -4472,12 +4472,12 @@ left: 50%;*/
 
 .careerfy-errorpage h2 {
     font-size: 50px;
-    color: #fff;
+    /* color: #fff; */
     margin-bottom: 0px;
 }
 
 .careerfy-errorpage p {
-    color: #fff;
+    /* color: #fff; */
     font-size: 16px;
     margin-bottom: 20px;
 }
@@ -4490,7 +4490,7 @@ left: 50%;*/
 
 .careerfy-errorpage a {
     display: inline-block;
-    background-color: #13b5ea;
+    background-color: #f06926;
     padding: 14px 29px 13px;
     color: #fff;
     font-size: 14px;

@@ -36,9 +36,9 @@ class PageController extends Controller
     public function home()
     {
         $data['page'] = Page::with('sections')->find(1);
-        $data['news'] = Post::orderBy('created_at', 'DESC')->where('post_type', 'news')->with('topics', 'postmeta')->get()->take(5);
+        $data['news'] = Post::orderBy('created_at', 'DESC')->where('post_type', 'news')->with('topics', 'postmeta')->get()->take(10);
 
-        $data['videos'] = Post::orderBy('created_at', 'DESC')->where('post_type', 'videos')->with('topics', 'postmeta')->get()->take(5);
+        $data['videos'] = Post::orderBy('created_at', 'DESC')->where('post_type', 'videos')->with('topics', 'postmeta')->get()->take(10);
 
         $data['articles'] = Post::orderBy('created_at', 'DESC')->where('post_type', 'articles')->with('topics', 'postmeta')->get()->take(5);
         $data['study_articles'] = Post::orderBy('created_at', 'DESC')->where('post_type', 'articles')->with('topics', 'postmeta', 'categories')
@@ -120,7 +120,18 @@ class PageController extends Controller
     {
         $data['page'] = Page::with('sections')->find(7);
         $data['parent_topics'] = Topic::where('is_parent', 1)->get();
-        $data['child_topics'] = Topic::where('is_parent', 0)->get();
+        $data['child_topics'] = [];
+        foreach ($data['parent_topics'] as $topic){
+            $child_topics = Topic::where('is_parent', 0)
+            ->where('parent_id', $topic->id)
+            ->whereHas('posts')
+            ->get();
+            // $child_topics;
+            array_push($data['child_topics'], $child_topics);
+        }
+        
+
+        // dd($data['child_topics']);
 
         return view('frontend.all-topics', compact('data'));
     }
@@ -134,8 +145,10 @@ class PageController extends Controller
         // $topics = $data['post'];
         $data['other-topics'] = Topic::orderBy('title')->where('is_parent', 0)
         ->where('id', '!=', $data['topic']->id)
+        ->whereHas('posts')
         ->get()->pluck('title', 'slug');
 
+        // dd($data['topic']);
         return view('frontend.single-topic', compact('data'));
     }
 
@@ -147,6 +160,7 @@ class PageController extends Controller
         $data['videos'] = $data['topic']->posts->where('post_type', 'videos');
         $data['other-topics'] = Topic::orderBy('title')->where('is_parent', 0)
         ->where('id', '!=', $data['topic']->id)
+        ->whereHas('posts')
         ->get()->pluck('title', 'slug');
 
         if (request()->filled('topics')) {
@@ -180,7 +194,7 @@ class PageController extends Controller
             });
         }
     
-        $data['posts'] = $query->paginate(10);
+        $data['posts'] = $query->orderBy('created_at', 'DESC')->paginate(10);
         $data['count'] = $query->count();
         $data['result'] = $request->search;
 

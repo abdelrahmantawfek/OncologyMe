@@ -41,7 +41,9 @@
                         <h3>{{ $topic->title }}</h3>
                         <ul>
                             @foreach ($children as $child)
+
                             <li><a href="{{ route('showTopic', $child->slug) }}">{{$child->title}}</a></li>
+                            
                             @endforeach
                         </ul>
                     </div>
@@ -61,30 +63,7 @@
 </div>
 <!-- Main Section -->
 
-<!-- Main Section -->
-<div class="careerfy-main-section careerfy-parallex-full articles-section">
-    <div class="container">
-        <div class="row">
+{{-- @include('partials._pagination', ['records' => $posts]) --}}
 
-            <div class="col-md-12 careerfy-typo-wrap">
-
-                <div class="careerfy-pagination-blog">
-                    <ul class="page-numbers">
-                        <li><a class="prev page-numbers" href="#"><span><i class="careerfy-icon careerfy-arrows4"></i></span></a></li>
-                        <li><span class="page-numbers current">01</span></li>
-                        <li><a class="page-numbers" href="#">02</a></li>
-                        <li><a class="page-numbers" href="#">03</a></li>
-                        <li><a class="page-numbers" href="#">04</a></li>
-                        <li><a class="next page-numbers" href="#"><span><i class="careerfy-icon careerfy-arrows4"></i></span></a></li>
-                    </ul>
-                </div>
-
-
-            </div>
-
-        </div>
-    </div>
-</div>
-<!-- Main Section -->
 
 @endsection

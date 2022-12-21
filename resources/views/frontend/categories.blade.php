@@ -12,7 +12,7 @@
 
 @section('content')
 
-@if (Request::is('all-videos/*') || Request::is('videos') || Request::is('videos*'))
+@if (Request::is('all-videos/*') || Request::is('videos') || Request::is('videos*') || Request::is('search-videos*'))
 <!-- Main Section -->
 <div class="careerfy-main-section careerfy-counter-full topics-section">
     <div class="container">
@@ -83,6 +83,9 @@
     </div>
 </div>
 <!-- Main Section -->
+
+{{-- @include('partials._pagination', ['records' => $data['posts']]) --}}
+
 @else
 
 <!-- Main Section -->
@@ -96,16 +99,18 @@
                 <div class="m-t-20"></div>
                 <div class="careerfy-typo-wrap categ-title pos-rltv">
                     <h3><span>{{ ucfirst($data['category']->title) ?? '' }}</span></h3>
+                    @if (count($data['other-categories']))
                     {!! Form::open(['route' => [ 'searchCategory', $data['category']->post_type], 'method' => 'GET', 'class' => 'all-category', 'id' => 'select_category']) !!}
                     <div class="form-group">
                         {!! Form::select('category', $data['other-categories'], null, ['class' => 'form-control', 'id' => 'category', 'placeholder' => 'Select a category'] ) !!}
                     </div>
                     {!! Form::close() !!}
+                    @endif
                 </div>
 
                 <div class=" {{ Request::is('podcasts') ? 'articles-section' : '' }} articles-box">
                     <div class="articles-only">
-                    @foreach ($data['category']->posts as $post)
+                    @foreach ($data['posts'] as $post)
                         <div class="article-item">
                             @if (Request::is('podcasts'))
                             <div class="article-img-text combined-txt-img">
@@ -160,32 +165,7 @@
 <!-- Main Section -->
 
 
-
-<!-- Main Section -->
-<div class="careerfy-main-section careerfy-parallex-full articles-section">
-    <div class="container">
-        <div class="row">
-
-            <div class="col-md-12 careerfy-typo-wrap">
-
-                <div class="careerfy-pagination-blog">
-                    <ul class="page-numbers">
-                        <li><a class="prev page-numbers" href="#"><span><i class="careerfy-icon careerfy-arrows4"></i></span></a></li>
-                        <li><span class="page-numbers current">01</span></li>
-                        <li><a class="page-numbers" href="#">02</a></li>
-                        <li><a class="page-numbers" href="#">03</a></li>
-                        <li><a class="page-numbers" href="#">04</a></li>
-                        <li><a class="next page-numbers" href="#"><span><i class="careerfy-icon careerfy-arrows4"></i></span></a></li>
-                    </ul>
-                </div>
-
-
-            </div>
-
-        </div>
-    </div>
-</div>
-<!-- Main Section -->
+@include('partials._pagination', ['records' => $data['posts']])
 
 @endif
 
