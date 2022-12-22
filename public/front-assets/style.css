@@ -4027,6 +4027,21 @@ left: 50%;*/
     color: #0b81e3;
     font-size: 14px;
 }
+#exTab1 div#login_form input {
+    padding: 6px 13px !important;
+    font-size: 12px !important;
+    height: 42px !important;
+    border-radius: 3px !important;
+}
+#exTab1 #login_form .careerfy-user-form input[type="text"], #exTab1 #login_form .careerfy-user-form input[type="password"],  #exTab1 #login_form .careerfy-user-form input[type="email"] {
+    padding: 6px 13px;
+    color: #999999;
+    font-size: 12px;
+    height: 42px;
+    border: 1px solid #efefef;
+    border-radius: 3px;
+    background-color: #ffffff;
+}
 
  ::-webkit-scrollbar {
     width: 8px;

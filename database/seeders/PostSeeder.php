@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class PostSeeder extends Seeder
 {
@@ -936,6 +936,22 @@ class PostSeeder extends Seeder
             // array('post_id' => 9, 'category_id' => 5),
             // array('post_id' => 10, 'category_id' => 4),
         );
+
+
+        $users = array([
+            'first_name' => 'user first name',
+            'last_name' => 'user last name',
+            'email' => 'user@email.com',
+            'password' => Hash::make('password'),
+            'phone' => '0120102022',
+            'country' => 'egy',
+            'governorate' => 'cairo',
+            'affiliation' => 'affiliation',
+            'specialty' => 'specialty',
+            'accept_newsletter_emails' => true,
+        ]);
+
+        DB::table('users')->insert($users);
 
         DB::table('posts')->insert($posts);
         DB::table('posts')->insert($highlights);

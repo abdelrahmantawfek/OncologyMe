@@ -109,7 +109,7 @@
 
 
 
-{{-- @include('partials._pagination', ['records' => $data['topic']]) --}}
+{{-- @include('partials._pagination', ['records' => $data['posts']]) --}}
 
 
 @endsection

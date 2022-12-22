@@ -138,17 +138,17 @@ class PageController extends Controller
 
     public function single_topic($slug)
     {
-        $data['topic'] = Topic::where('slug', $slug)->get()->first();
+        $data['topic'] = Topic::where('slug', $slug)->with('posts.categories')->get()->first();
         $data['news'] = $data['topic']->posts->where('post_type', 'news');
         $data['videos'] = $data['topic']->posts->where('post_type', 'videos');
-        
+        // $data['posts'] = $data['topic']->posts()->paginate(10);
         // $topics = $data['post'];
         $data['other-topics'] = Topic::orderBy('title')->where('is_parent', 0)
         ->where('id', '!=', $data['topic']->id)
         ->whereHas('posts')
         ->get()->pluck('title', 'slug');
 
-        // dd($data['topic']);
+        // dd($data['posts']);
         return view('frontend.single-topic', compact('data'));
     }
 
@@ -158,6 +158,7 @@ class PageController extends Controller
         $data['topic'] = Topic::where('slug', $request->topics)->get()->first();
         $data['news'] = $data['topic']->posts->where('post_type', 'news');
         $data['videos'] = $data['topic']->posts->where('post_type', 'videos');
+        // $data['posts'] = $data['topic']->posts()->paginate(10);
         $data['other-topics'] = Topic::orderBy('title')->where('is_parent', 0)
         ->where('id', '!=', $data['topic']->id)
         ->whereHas('posts')

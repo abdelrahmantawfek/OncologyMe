@@ -44,9 +44,16 @@
                                 <span href=""> {{$data['post']->author ?? '' }} </span>
 
                                 <text>&nbsp;/&nbsp;<span href=""> {{ $data['post']->created_at->format('M d, Y') ?? ''}} </span></text>
+
+                                
                                 @if (count($data['pdf']))
-                                <span class="flt-r"><a href="{{ asset('uploads/'. $data['pdf'][0] ?? '') }}" download><i class="fa 
-                                    Example of file-pdf-o fa-file-pdf-o"></i> Download PDF</a></span>
+                                <span class="flt-r">
+                                    @auth
+                                    <a href="{{ asset('uploads/'. $data['pdf'][0] ?? '') }}" download><i class="fa Example of file-pdf-o fa-file-pdf-o"></i> Download PDF</a>
+                                    @else
+                                    <a href="{{ route('register') }}"><i class="fa Example of file-pdf-o fa-file-pdf-o"></i> Download PDF</a>
+                                    @endauth
+                                </span>
                                 @endif
                             </h4>
                             <div class="clearfix"></div>

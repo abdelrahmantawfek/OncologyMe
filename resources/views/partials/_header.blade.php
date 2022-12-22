@@ -133,17 +133,38 @@
         </aside>
         <aside class="col-md-2 col-xs-5 no-pd">
             <div class="careerfy-right">
-
+                @if (Route::has('login'))
                 <ul class="careerfy-user-section cs-acc-menu dsply-dsk">
-                    <li class="btn1"><a class="careerfy-color careerfy-open-signin-tab" href="login.html">Log in</a></li>
-                    <li class="btn2"><a class="careerfy-color careerfy-open-signup-tab" href="signup.html">Register Now </a></li>
+                    @auth
+                    <li class="logout-btn"><a class="careerfy-color careerfy-open-signin-tab" href="{{route('logout')}}" onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();">Log out</a></li>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
+                    @else
+                    <li class="btn1"><a class="careerfy-color careerfy-open-signin-tab" href="{{route('login')}}">Log in</a></li>
+                    @if (Route::has('register'))
+                    <li class="btn2"><a class="careerfy-color careerfy-open-signup-tab" href="{{route('register')}}">Register Now </a></li>
+                    @endif
+                    @endauth
+                </ul>
+                <ul class="careerfy-user-section cs-acc-menu dsply-mob">
+                    @auth
+                    <li class="logout-btn"><a class="careerfy-color careerfy-open-signin-tab" href="{{route('logout')}}" onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();"><i class="fa fa-sign-out"></i></a></li>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
+                    @else
+                    <li class="btn1"><a class="careerfy-color careerfy-open-signin-tab" href="{{route('login')}}"><i class="fa fa-sign-in"></i></a></li>
+                    @if (Route::has('register'))
+                    <li class="btn2"><a class="careerfy-color careerfy-open-signup-tab" href="{{route('register')}}"><i class="fa fa-user-o"></i></a></a></li>
+                    @endif
+                    @endauth
                 </ul>
 
-                <ul class="careerfy-user-section cs-acc-menu dsply-mob">
-                    <li class="btn1"><a class="careerfy-color careerfy-open-signin-tab" href="login.html"><i class="fa fa-sign-in"></i></a></li>
-                    <li class="btn2"><a class="careerfy-color careerfy-open-signup-tab" href="signup.html"><i class="fa fa-user-o"></i></a></a>
-                    </li>
-                </ul>
+                @endif
+
                 <div class="event__search__floater">
                     <div class="search__anchor">
                         <form id="event-search-form" method="GET" action="{{ route('searchPosts')}}">

@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,7 +18,8 @@ use Illuminate\Support\Facades\Route;
 // return view('coming-soon');
 // });
 
-// Auth::routes();
+Auth::routes();
+Route::post('signup', [App\Http\Controllers\RegisterController::class, 'post_signup'])->name('postSignup');
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -67,6 +69,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function(){
     });
 
 });
+
+
+// user routes
 
 
 // frondend routes
