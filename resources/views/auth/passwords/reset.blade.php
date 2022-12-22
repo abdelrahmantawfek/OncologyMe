@@ -25,25 +25,46 @@
                                     <h4 class="text-center">Enter the username or e-mail you used in your profile. <br> A password reset link will be sent to you by email.</h4>
                                 </div>
 
-                                <form class="row">
+                                <form method="POST" action="{{ route('password.update') }}" class="row">
+                                    @csrf
 
                                     <div class="form-group col-md-12 ">
                                         <input class="form-control" type="email" placeholder="Email">
+                                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus>
+
+                                        @error('email')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                         <i class="careerfy-icon careerfy-mail"></i>
                                     </div>
+
+                                    <div class="form-group col-md-12 ">
+                                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+
+                                        @error('password')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        <i class="careerfy-icon careerfy-multimedia"></i>
+                                    </div>
+
+                                    <div class="form-group col-md-12 ">
+                                        <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                        <i class="careerfy-icon careerfy-multimedia"></i>
+                                    </div>
+
 
 
                                     <div class="m-b-15 m-t-15 col-md-12">
                                         <button type="submit" class="btn btn-primary pull-left">Get a new password</button>
                                         <p class="pull-right p-t-10">Already have an account?
-                                            <a href="login.html" class="careerfy-open-signin-tab">Sign in</a></p>
+                                            <a href="{{route('login')}}" class="careerfy-open-signin-tab">Sign in</a></p>
                                     </div>
-
                                 </form>
                             </div>
-
-
-
                         </div>
                     </div>
                 </div>

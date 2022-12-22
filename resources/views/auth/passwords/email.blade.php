@@ -26,11 +26,23 @@
                                     <h4 class="text-center">Enter the username or e-mail you used in your profile. <br> A password reset link will be sent to you by email.</h4>
                                 </div>
 
-                                <form class="row">
+                                @if (session('status'))
+                                    <div class="alert alert-success" role="alert">
+                                        {{ session('status') }}
+                                    </div>
+                                @endif
+
+                                <form method="POST" action="{{ route('password.email') }}" class="row">
+                                    @csrf
 
                                     <div class="form-group col-md-12 ">
-                                        <input class="form-control" type="email" placeholder="Email">
+                                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Email">
                                         <i class="careerfy-icon careerfy-mail"></i>
+                                        @error('email')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
 
 
