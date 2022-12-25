@@ -19,10 +19,8 @@
 
             <div class="col-md-8">
 
-                <div class="banr-box">
-                    <img src="{{ asset('front-assets/img/bnr1.jpg') }}">
+                @include('partials._main_banner')
 
-                </div>
                 <div class="m-t-20"></div>
 
                 <div class=" articles-box single-news-post">

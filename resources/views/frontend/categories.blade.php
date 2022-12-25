@@ -38,9 +38,8 @@
                     </div>
                 </div>
                 <div class="clearfix"></div>
-                <div class="banr-box">
-                    <img src="{{ asset('front-assets/img/bnr1.jpg') }}">
-                </div>
+                @include('partials._main_banner')
+
                 <hr style="margin-top: 40px;">
                 <div class="articles-section">
                     <div class="row">
@@ -93,9 +92,8 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8">
-                <div class="banr-box">
-                    <img src="{{ asset('front-assets/img/bnr1.jpg') }}">
-                </div>
+                @include('partials._main_banner')
+
                 <div class="m-t-20"></div>
                 <div class="careerfy-typo-wrap categ-title pos-rltv">
                     <h3><span>{{ ucfirst($data['category']->title) ?? '' }}</span></h3>

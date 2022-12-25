@@ -65,7 +65,7 @@
 
                         <div class="form-group col-md-6">
                             <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Password">
-                            <i class="fa fa-lock"></i>
+                            <i class="careerfy-icon careerfy-multimedia"></i>
                             @error('password')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -75,7 +75,7 @@
 
                         <div class="form-group col-md-6">
                             <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Confirm Password">
-                            <i class="fa fa-lock"></i>
+                            <i class="careerfy-icon careerfy-multimedia"></i>
                         </div>
 
                         <div class="form-group col-md-6">

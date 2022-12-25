@@ -4,18 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\NotifyMail;
 
 class RegisterController extends Controller
 {
-    public function register()
-    {
-        return view('auth.register');
-    }
-
-    public function index()
-    {
-        return view('auth.register');
-    }
 
     public function post_signup(Request $request)
     {
@@ -33,8 +26,10 @@ class RegisterController extends Controller
         ]);
 
         $user = User::create($data);
+         
+        Mail::to($user->email)->send(new NotifyMail($user));
 
-        return redirect('/');
+        return view('auth.login');
     }
     
 }

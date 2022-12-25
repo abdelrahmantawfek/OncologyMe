@@ -1,5 +1,13 @@
 <div class="banr-box">
-    <img src="{{ asset('front-assets/img/bnr2.jpg') }}">
+<div class="owl-carousel top-banner">
+    @foreach ($top_banners as $item)
+    <div> 
+        <a href="{{$item->url}}" target="_blank">
+            <img class="d-block w-100" src="{{ asset('uploads/'.$item->desktop_image) }}">
+        </a>
+    </div>
+    @endforeach
+  </div>
 </div>
 <div class="topics-box-clmn">
     <!-- TIN Calendar -->
@@ -12,5 +20,13 @@
 </div>
 
 <div class="banr-box">
-    <img src="{{ asset('front-assets/img/bnr2.jpg') }}">
+<div class="owl-carousel bottom-banner">
+    @foreach ($bottom_banners as $item)
+    <div> 
+        <a href="{{$item->url}}" target="_blank">
+            <img class="d-block w-100" src="{{ asset('uploads/'.$item->desktop_image) }}">
+        </a>
+    </div>
+    @endforeach
+  </div>
 </div>

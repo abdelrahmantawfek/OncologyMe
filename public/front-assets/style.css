@@ -5320,6 +5320,17 @@ bottom: -2px;
 .dsply-dsk {
     display: block;
 }
+
+.main-banner{
+    max-height: 100px;
+    overflow: hidden;
+}
+
+.top-banner, .bottom-banner{
+    max-height: 250px;
+    overflow: hidden;
+}
+
 /**** responsive******/
 
 @media (max-width:767.99px) {

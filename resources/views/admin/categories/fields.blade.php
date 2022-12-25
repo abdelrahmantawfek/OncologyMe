@@ -55,11 +55,11 @@
 </div> --}}
 
 <!--  Post Type Field -->
-<div class="form-group col-sm-12">
+{{-- <div class="form-group col-sm-12">
     {!! Form::label('post_type', 'Post Type:') !!}
-    {{-- {!! Form::select('post_type', $parent_category, $parent_category, ['class' => 'form-control form-select', 'placeholder' => 'Select post type']) !!} --}}
+    {!! Form::select('post_type', $parent_category, $parent_category, ['class' => 'form-control form-select', 'placeholder' => 'Select post type']) !!}
 
-</div>
+</div> --}}
 
 
 

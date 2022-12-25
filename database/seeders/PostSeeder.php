@@ -941,7 +941,7 @@ class PostSeeder extends Seeder
         $users = array([
             'first_name' => 'user first name',
             'last_name' => 'user last name',
-            'email' => 'user@email.com',
+            'email' => 'kemy489@gmail.com',
             'password' => Hash::make('password'),
             'phone' => '0120102022',
             'country' => 'egy',

@@ -43,11 +43,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function(){
         Route::resource('topics', App\Http\Controllers\Admin\TopicController::class);
         Route::resource('posts', App\Http\Controllers\Admin\PostController::class);
         Route::resource('categories', App\Http\Controllers\Admin\CategoryController::class)->except('new_category');
+        Route::resource('announcements', App\Http\Controllers\Admin\AnnouncementController::class);
 
         // Route::get('{post_type}/add-category', [App\Http\Controllers\Admin\CategoryController::class, 'new_category'])->name('new.category');
         // Route::post('add-category', [App\Http\Controllers\Admin\CategoryController::class, 'news_category'])->name('add.category');
-
-        Route::resource('ads', App\Http\Controllers\Admin\AdsController::class);
 
         Route::resource('news', App\Http\Controllers\Admin\NewsController::class);
 

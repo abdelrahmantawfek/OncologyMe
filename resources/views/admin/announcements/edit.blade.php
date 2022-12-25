@@ -19,7 +19,7 @@
                 <!--begin::Separator-->
                 <span class="h-20px border-1 border-gray-200 border-start ms-3 mx-2 me-1"></span>
                 <!--end::Separator-->
-                <span class="text-muted fs-7 fw-bold mt-2">Add New</span>
+                <span class="text-muted fs-7 fw-bold mt-2">Edit</span>
 
                 <!--end::Description--></h1>
                 <!--end::Title-->
@@ -34,15 +34,24 @@
         <div class="animated fadeIn">
               <div class="row">
                   <div class="col-lg-12">
+                    @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
                       <div class="card">
-                          <div class="card-body">
-                              {!! Form::open(['route' => 'admin.ads.store']) !!}
+                        <div class="card-body">
+                            {!! Form::model($announcement, ['route' => ['admin.announcements.update', $announcement->id], 'method' => 'patch', 'files' => true]) !!}
 
                                   <div class="row">
-                                      @include('admin.ads.fields')
+                                      @include('admin.announcements.fields')
                                   </div>
 
-                              {!! Form::close() !!}
+                            {!! Form::close() !!}
                           </div>
                       </div>
                   </div>

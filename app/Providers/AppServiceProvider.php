@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Announcement;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Topic;
@@ -37,7 +38,9 @@ class AppServiceProvider extends ServiceProvider
 
         $data['posts'] = Post::where('post_type', 'news')->get();
 
-
+        $data['main_banners'] = Announcement::where('place', '1')->get();
+        $data['top_banners'] = Announcement::where('place', '2')->get();
+        $data['bottom_banners'] = Announcement::where('place', '3')->get();
         // dd($data['all_topics']);
         View::share($data);
 

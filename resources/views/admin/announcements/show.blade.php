@@ -15,11 +15,11 @@
                          <div class="card">
                              <div class="card-header">
                                  <strong>Details</strong>
-                                  <a href="{{ route('admin.ads.index') }}" class="btn btn-light">Back</a>
+                                  <a href="{{ route('admin.announcements.index') }}" class="btn btn-light">Back</a>
                              </div>
                              <div class="card-body">
                                 <div class="row">
-                                    @include('admin.ads.show_fields')
+                                    @include('admin.announcements.show_fields')
                                 </div>
                              </div>
                          </div>

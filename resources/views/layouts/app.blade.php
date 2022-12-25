@@ -18,6 +18,8 @@
     <link href="{{ asset('front-assets/style.css') }}" rel="stylesheet">
     <link href="{{ asset('front-assets/css/responsive.css') }}" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
@@ -75,10 +77,45 @@
     <script src="{{ asset('front-assets/plugin-script/functions.js') }}"></script>
     <script src="{{ asset('front-assets/script/functions.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 
     <script>
         $(document).ready(function() {
+            $(".main-banner").owlCarousel({
+                items: 1,
+                touchDrag: false,
+                mouseDrag: false,
+                autoplay: true,
+                loop: true,
+                autoplayTimeout: 7000,
+                autoWidth: false,
+                animateOut: 'fadeOut',
+                dots: false,
+            });
+
+            $(".top-banner").owlCarousel({
+                items: 1,
+                touchDrag: false,
+                mouseDrag: false,
+                autoplay: true,
+                loop: true,
+                autoplayTimeout: 7000,
+                animateOut: 'fadeOut',
+                dots: false,
+            });
+
+            $(".bottom-banner").owlCarousel({
+                items: 1,
+                touchDrag: false,
+                mouseDrag: false,
+                autoplay: true,
+                loop: true,
+                autoplayTimeout: 7000,
+                animateOut: 'fadeOut',
+                dots: false,
+            });
+
 
             if ($(window).width() < 1055) {
 
