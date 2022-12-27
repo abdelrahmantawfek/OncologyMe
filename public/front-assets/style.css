@@ -2925,7 +2925,10 @@ header#careerfy-header .col-md-8 {
     background-image: none !important;
 }
 
-.carousel-control {
+.carousel-control,
+.cs-nav .owl-prev,
+.cs-nav .owl-next
+ {
     color: #1a3965 !important;
     top: -10%;
     color: #428BCA;
@@ -2935,6 +2938,24 @@ header#careerfy-header .col-md-8 {
     height: 30px;
     text-shadow: none;
     opacity: 1;
+}
+.cs-readmore {
+    position: absolute;
+    right: 0;
+    width: 100%;
+    text-align: right;
+    padding: 0 55px;
+}
+.cs-readmore a {
+    color: #1a3965;
+    font-weight: 500;
+}
+.cs-readmore a:hover {
+    color: #f06926;
+}
+.cs-nav .owl-prev,
+.cs-nav .owl-next{
+    width: 20px;
 }
 
 .carousel.slide h3 {
@@ -2959,11 +2980,20 @@ header#careerfy-header .col-md-8 {
 }
 
 .carousel-control.left,
-.carousel-control.right {
+.carousel-control.right,
+.cs-nav .owl-nav {
     position: absolute;
     top: -34px;
+    right: 10px;
     background-image: none !important;
 }
+.cs-nav .owl-nav i{
+    font-size: 15px;
+}
+.cs-nav .owl-item {
+    padding: 0 30px;
+}
+
 
 .carousel-control.right {
     left: auto;
@@ -2991,7 +3021,10 @@ header#careerfy-header .col-md-8 {
 }
 
 .carousel-control:hover,
-.carousel-control:focus {
+.carousel-control:focus,
+.cs-nav .owl-next:hover,
+.cs-nav .owl-prev:hover
+{
     color: #f06926 !important;
 }
 
@@ -3747,9 +3780,15 @@ left: 50%;*/
     margin-bottom: 0;
 }
 
-.carousel-inner .col-md-3 {
+.carousel-inner .col-md-3,
+.cs-nav .owl-item
+{
     border-left: 1px solid #dfdfdf;
 }
+.cs-nav.carousel.slide.owl-loaded > div.owl-stage-outer > div > div:nth-child(5){
+    border-left: 0 !important;
+}
+
 
 .trascript-container {
     padding: 30px;
@@ -5321,10 +5360,10 @@ bottom: -2px;
     display: block;
 }
 
-.main-banner{
+/* .main-banner{
     max-height: 100px;
     overflow: hidden;
-}
+} */
 
 .top-banner, .bottom-banner{
     max-height: 250px;

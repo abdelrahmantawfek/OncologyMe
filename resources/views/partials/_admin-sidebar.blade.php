@@ -299,7 +299,7 @@
 
 
                         <div class="menu-item">
-                            <a class="menu-link" href="{{ route('admin.categories.index') }}">
+                            <a class="menu-link" href="{{ route('admin.newscategories.index') }}">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
@@ -348,7 +348,7 @@
 
 
                         <div class="menu-item">
-                            <a class="menu-link" href="{{ route('admin.videos.index') }}">
+                            <a class="menu-link" href="{{ route('admin.videoscategories.index') }}">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
@@ -395,7 +395,7 @@
                         </div>
 
                         <div class="menu-item">
-                            <a class="menu-link" href="{{ route('admin.articles.index') }}">
+                            <a class="menu-link" href="{{ route('admin.articlescategories.index') }}">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
@@ -442,7 +442,7 @@
                         </div>
 
                         <div class="menu-item">
-                            <a class="menu-link" href="{{ route('admin.podcasts.index') }}">
+                            <a class="menu-link" href="{{ route('admin.podcastscategories.index') }}">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>

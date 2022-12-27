@@ -42,23 +42,23 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function(){
         Route::resource('pages', App\Http\Controllers\Admin\PageController::class);
         Route::resource('topics', App\Http\Controllers\Admin\TopicController::class);
         Route::resource('posts', App\Http\Controllers\Admin\PostController::class);
-        Route::resource('categories', App\Http\Controllers\Admin\CategoryController::class)->except('new_category');
+        // Route::resource('categories', App\Http\Controllers\Admin\CategoryController::class);
         Route::resource('announcements', App\Http\Controllers\Admin\AnnouncementController::class);
 
         // Route::get('{post_type}/add-category', [App\Http\Controllers\Admin\CategoryController::class, 'new_category'])->name('new.category');
         // Route::post('add-category', [App\Http\Controllers\Admin\CategoryController::class, 'news_category'])->name('add.category');
 
         Route::resource('news', App\Http\Controllers\Admin\NewsController::class);
+        Route::resource('newscategories', App\Http\Controllers\Admin\NewsCategoryController::class);
 
         Route::resource('videos', App\Http\Controllers\Admin\VideosController::class);
-        // Route::resource('videos-categories', App\Http\Controllers\Admin\VideoscategoriesController::class);
+        Route::resource('videoscategories', App\Http\Controllers\Admin\VideosCategoryController::class);
 
         Route::resource('articles', App\Http\Controllers\Admin\ArticlesController::class);
-        // Route::resource('articles-categories', App\Http\Controllers\Admin\ArticlescategoriesController::class);
+        Route::resource('articlescategories', App\Http\Controllers\Admin\ArticlesCategoryController::class);
 
         Route::resource('podcasts', App\Http\Controllers\Admin\PodcastsController::class);
-        // Route::resource('podcasts-categories', App\Http\Controllers\Admin\PodcastscategoriesController::class);
-
+        Route::resource('podcastscategories', App\Http\Controllers\Admin\PodcastsCategoryController::class);
 
         Route::post('ckeditor/upload', 'CKEditorController@upload')->name('ckeditor.image-upload');
 

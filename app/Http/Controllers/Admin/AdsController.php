@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Ads;
-use Flash;
+use Laracasts\Flash\Flash;
 use Response;
 
 class AdsController extends Controller
@@ -79,8 +79,6 @@ class AdsController extends Controller
 
             return redirect(route('admin.ads.index'));
         }
-
-        $roles = Role::pluck('name', 'id');
 
         return view('admin.ads.edit', compact('ads', 'roles'));
     }

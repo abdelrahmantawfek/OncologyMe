@@ -49,7 +49,7 @@
                                     @auth
                                     <a href="{{ asset('uploads/'. $data['pdf'][0] ?? '') }}" download><i class="fa Example of file-pdf-o fa-file-pdf-o"></i> Download PDF</a>
                                     @else
-                                    <a href="{{ route('register') }}"><i class="fa Example of file-pdf-o fa-file-pdf-o"></i> Download PDF</a>
+                                    <a href="{{ route('login') }}"><i class="fa Example of file-pdf-o fa-file-pdf-o"></i> Download PDF</a>
                                     @endauth
                                 </span>
                                 @endif
@@ -85,7 +85,12 @@
                                 <div class="pdf-holder">
 
                                     <img src="{{ asset('front-assets/img/pdf.jpg') }}">
+                                    @auth
                                     <a href="{{ asset('uploads/'. $data['pdf'][0] ?? '') }}" download>Download slideset</a>
+                                    @else
+                                    <a href="{{ route('login') }}">Download slideset</a>
+                                    @endauth
+
 
                                 </div>
                             </div>

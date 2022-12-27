@@ -7,23 +7,22 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Laracasts\Flash\Flash;
 
-
-class CategoryController extends Controller
+class ArticlesCategoryController extends Controller
 {
     public function index(Request $request)
     {
         /** @var Ads $adss */
-        $categories = Category::All();
+        $categories = Category::where('post_type', 'articles')->get();
         // $parent_category = Category::where('is_parent', 1)->get()->pluck('title', 'id');
 
-        return view('admin.categories.index', compact('categories'));
+        return view('admin.articlescategories.index', compact('categories'));
     }
 
     public function create()
     {
         // $parent_category = Category::where('is_parent', 1)->get()->pluck('title', 'id');
 
-        return view('admin.categories.create');
+        return view('admin.articlescategories.create');
     }
 
     public function store(Request $request)
@@ -70,11 +69,12 @@ class CategoryController extends Controller
             $category->save(); 
         }
 
+        $category->post_type = 'articles';
         $category->save();
 
         Flash::success('Category saved successfully.');
 
-        return redirect(route('admin.categories.index'));
+        return redirect(route('admin.articlescategories.index'));
     }
 
 
@@ -89,7 +89,7 @@ class CategoryController extends Controller
         //     return redirect(route('admin.categories.index'));
         // }
 
-        return view('admin.categories.index', compact('topic'));
+        return view('admin.articlescategories.index', compact('topic'));
     }
 
     public function edit($id)
@@ -101,10 +101,10 @@ class CategoryController extends Controller
         if (empty($category)) {
             Flash::error('Category not found');
 
-            return redirect(route('admin.categories.index'));
+            return redirect(route('admin.articlescategories.index'));
         }
 
-        return view('admin.categories.edit', compact('category'));
+        return view('admin.articlescategories.edit', compact('category'));
     }
 
     public function update($id, Request $request)
@@ -115,7 +115,7 @@ class CategoryController extends Controller
         if (empty($category)) {
             Flash::error('Category not found');
 
-            return redirect(route('admin.categories.index'));
+            return redirect(route('admin.articlescategories.index'));
         }
 
         $input = $request->validate( Category::$rules );
@@ -158,7 +158,7 @@ class CategoryController extends Controller
 
         Flash::success('Category updated successfully.');
 
-        return redirect(route('admin.categories.index'));
+        return redirect(route('admin.articlescategories.index'));
     }
 
     public function destroy($id)
@@ -169,13 +169,13 @@ class CategoryController extends Controller
         if (empty($category)) {
             Flash::error('Category not found');
 
-            return redirect(route('admin.categories.index'));
+            return redirect(route('admin.articlescategories.index'));
         }
 
         $category->delete();
 
         Flash::success('Category deleted successfully.');
 
-        return redirect(route('admin.categories.index'));
+        return redirect(route('admin.articlescategories.index'));
     }
 }

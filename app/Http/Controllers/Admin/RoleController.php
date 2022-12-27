@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Flash;
+use Laracasts\Flash\Flash;
 use Response;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Route;

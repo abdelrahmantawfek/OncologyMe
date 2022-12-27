@@ -82,6 +82,25 @@
 
     <script>
         $(document).ready(function() {
+            $(".vid-carousel, .art-carousel").owlCarousel({
+                items: 4,
+                touchDrag: false,
+                mouseDrag: false,
+                autoplay: false,
+                loop: true,
+                autoplayTimeout: 7000,
+                autoWidth: false,
+                animateOut: 'fadeOut',
+                dots: false,
+                nav: true,
+                navText: ["<i class='fa fa-chevron-left'></i>", "<i class='fa fa-chevron-right'></i>"]
+            });
+
+
+            // $(".vid-carousel").owlCarousel({
+            //     navText: ["<i class='fa fa-chevron-right'></i>","<i class='fa fa-chevron-left'></i>"]
+            // });
+
             $(".main-banner").owlCarousel({
                 items: 1,
                 touchDrag: false,

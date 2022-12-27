@@ -44,9 +44,24 @@
 
                         </li>
 
-                        <li class="pos-unset"><a href="/all-videos">Oncology Watch <i class="fa fa-angle-down"></i></a>
+                        <li class="pos-unset"><a href="javascript:void(0)">Oncology Watch <i class="fa fa-angle-down"></i></a>
                             <ul class="sub-menu dsply-dsk">
-                                <div id="myCarousel-3" class="carousel slide" data-interval="false">
+                                <div class="owl-carousel vid-carousel cs-nav carousel slide">
+                                    @foreach ($videos_categories as $category)
+                                    <div class="">
+                                        <div class="thumbnail">
+                                            <a href="{{ route('showCategory', [$category->post_type, $category->slug]) }}"> <img src="{{ asset('uploads/'.$category->featured_image) }}" alt="{{$category->featured_image}}"></a>
+                                            <div class="caption">
+                                                <h3><a href="{{ route('showCategory', [$category->post_type, $category->slug]) }}">{{$category->title ?? ''}}</a></h3>
+
+                                                <p><a href="{{ route('showCategory', [$category->post_type, $category->slug]) }}">Read More</a></p>
+                                            </div>
+                                        </div>
+                                    </div>  
+                                    @endforeach
+                                  </div>
+                                  <div class="cs-readmore"><a href="/all-videos">View All</a></div>
+                                {{-- <div id="myCarousel-3" class="carousel slide" data-interval="false">
                                     <div class="carousel-inner">
                                         <div class="item active">
                                             <div class="row">
@@ -73,19 +88,36 @@
                                         <li data-target="#myCarousel-3" data-slide-to="1"></li>
                                         <li data-target="#myCarousel-3" data-slide-to="2"></li>
                                     </ol>
-                                </div>
+                                </div> --}}
                             </ul>
 
                             <ul class="sub-menu cs-sub-menu dsply-mob">
                                 @foreach ($videos_categories as $category)
                                 <li><a href="{{ route('showCategory', [$category->post_type, $category->slug]) }}">{{$category->title ?? ''}}</a></li>
                                 @endforeach
+                                <li><a href="/all-videos">View All</a></li>
                             </ul>
                         </li>
 
-                        <li class="pos-unset"><a href="/all-articles">Articles <i class="fa fa-angle-down"></i></a>
+                        <li class="pos-unset"><a href="javascript:void(0)">Articles <i class="fa fa-angle-down"></i></a>
                             <ul class="sub-menu dsply-dsk">
-                                <div id="myCarousel-1" class="carousel slide" data-interval="false">
+                                <div class="owl-carousel art-carousel cs-nav carousel slide">
+                                    @foreach ($articles_categories as $category)
+                                    <div class="">
+                                        <div class="thumbnail">
+                                            <a href="{{ route('showCategory', [$category->post_type, $category->slug]) }}"> <img src="{{ asset('uploads/'.$category->featured_image) }}" alt="{{$category->featured_image}}"></a>
+                                            <div class="caption">
+                                                <h3><a href="{{ route('showCategory', [$category->post_type, $category->slug]) }}">{{$category->title ?? ''}} Videos</a></h3>
+
+                                                <p><a href="{{ route('showCategory', [$category->post_type, $category->slug]) }}">Read More</a></p>
+                                            </div>
+                                        </div>
+                                    </div>  
+                                    @endforeach
+                                  </div>
+                                  <div class="cs-readmore"><a href="/all-articles">View All</a></div>
+
+                                {{-- <div id="myCarousel-1" class="carousel slide" data-interval="false">
                                     <div class="carousel-inner">
                                         <div class="item active">
                                             <div class="row">
@@ -114,13 +146,14 @@
                                         <li data-target="#myCarousel-1" data-slide-to="1"></li>
                                         <li data-target="#myCarousel-1" data-slide-to="2"></li>
                                     </ol>
-                                </div>
+                                </div> --}}
                             </ul>
 
                             <ul class="sub-menu cs-sub-menu dsply-mob">
                                 @foreach ($articles_categories as $category)
                                 <li><a href="{{ route('showCategory', [$category->post_type, $category->slug]) }}">{{$category->title ?? ''}}</a></li>
                                 @endforeach
+                                <li><a href="/all-articles">View All</a></li>
                             </ul>
                         </li>
 
