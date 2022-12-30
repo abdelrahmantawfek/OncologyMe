@@ -9,7 +9,7 @@
         <!--begin::Page title-->
         <div data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}" class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
             <!--begin::Title-->
-            <h1 class="d-flex text-dark fw-bolder fs-3 align-items-center my-1">News</h1>
+            <h1 class="d-flex text-dark fw-bolder fs-3 align-items-center my-1">Articles</h1>
             <!--begin::Separator-->
             <span class="h-20px border-gray-300 border-start mx-4"></span>
             <!--end::Separator-->
@@ -26,7 +26,7 @@
                 </li>
                 <!--end::Item-->
                 <!--begin::Item-->
-                <li class="breadcrumb-item text-dark">Create Post</li>
+                <li class="breadcrumb-item text-dark">Add Article</li>
                 <!--end::Item-->
             </ul>
             <!--end::Breadcrumb-->            
@@ -37,8 +37,9 @@
 </div>
 <!--end::Toolbar-->
 
-    <div class="container-fluid">
-        <div class="animated fadeIn">
+<div class="post d-flex flex-column-fluid" id="kt_post">
+    <!--begin::Container-->
+    <div id="kt_content_container" class="container-xxl">
               <div class="row">
                   <div class="col-lg-12">
                     @if ($errors->any())
@@ -50,8 +51,8 @@
                             </ul>
                         </div>
                         @endif
-                      <div class="card">
-                          <div class="card-body">
+                      <div class="">
+                          <div class="">
                               {!! Form::open(['route' => 'admin.articles.store', 'files' => true]) !!}
 
                                   <div class="row">

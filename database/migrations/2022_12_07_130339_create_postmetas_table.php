@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('postmetas', function (Blueprint $table) {
             $table->id('meta_id');
             $table->foreignId('post_id')->constrained('posts')->onUpdate('cascade')->onDelete('cascade');
-            $table->string('meta_key');
-            $table->string('meta_value');
+            $table->text('meta_key');
+            $table->text('meta_value');
             $table->timestamps();
         });
     }

@@ -75,7 +75,7 @@ class PostController extends Controller
     public function search_category(Request $request)
     {
         $data['category'] = Category::where('slug',  $request->category)->with('posts.topics')->get()->first();
-        $data['posts'] = $data['category']->posts()->paginate(10);
+        $data['posts'] = $data['category']->posts()->orderBy('created_at', 'DESC')->paginate(10);
         $data['other-categories'] = Category::orderBy('title')->where('post_type', $data['category']->post_type)
         ->where('id', '!=', $data['category']->id)
         ->whereHas('posts')
@@ -90,7 +90,7 @@ class PostController extends Controller
 
     public function highlights($post_type)
     {
-        $data['highlights'] = Post::where('post_type', 'news')->where('highlights', true)->with('topics', 'postmeta')->get();
+        $data['highlights'] = Post::orderBy('created_at', 'DESC')->where('post_type', 'news')->where('highlights', true)->with('topics', 'postmeta')->get();
         $data['category'] = Category::where('post_type',  $post_type)->with('posts.topics')->get()->first();
         $data['other-categories'] = Category::where('post_type', $post_type)
         ->where('id', '!=', $data['category']->id)

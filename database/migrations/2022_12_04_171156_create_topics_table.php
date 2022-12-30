@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             // $table->foreignId('post_id')->constrained('posts')->onUpdate('cascade')->onDelete('cascade');
             $table->string('title');
-            $table->string('slug')->unique()->nullable();
+            $table->string('slug')->nullable();
             $table->boolean('is_parent')->default(0);
             $table->string('parent_id')->nullable();
             $table->string('parent_name')->nullable();

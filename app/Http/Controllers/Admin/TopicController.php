@@ -12,7 +12,7 @@ class TopicController extends Controller
     public function index(Request $request)
     {
         /** @var Ads $adss */
-        $topics = Topic::All();
+        $topics = Topic::paginate(10);
         return view('admin.topics.index', compact('topics'));
     }
 
@@ -31,25 +31,39 @@ class TopicController extends Controller
         /** @var Topic $Category */
         $parent_topic = Topic::find($request->parent_id);
         $slug = $request->slug;
+        $old_slug = Topic::where('slug', strtolower(preg_replace('/[^A-Za-z0-9\-]/', '-', $request->title)))->exists();
         $topic = Topic::create($input);
         if(is_null($slug)){
-            $old_slug = Topic::where('slug', strtolower(preg_replace('/\s+/', '-', $request->title)))->exists();
 
             if($old_slug){
                 $val = 1;
                 do{
                     $new_slug = $request->title .  ' ' . $val;
-                    $topic_slug = strtolower(preg_replace('/\s+/', '-', $new_slug));
+                    $topic_slug = strtolower(preg_replace('/[^A-Za-z0-9\-]/', '-', $new_slug));
                     $val++;
                 }
                 while(Topic::where('slug', $topic_slug)->exists());
             }
             else{
-                $topic_slug = strtolower(preg_replace('/\s+/', '-', $request->title));
+                $topic_slug = strtolower(preg_replace('/[^A-Za-z0-9\-]/', '-', $request->title));
             }
-            
-
             $topic->slug = $topic_slug;
+        }
+        else{
+            if($old_slug){
+                $val = 1;
+                do{
+                    $new_slug = $slug .  ' ' . $val;
+                    $topic_slug = strtolower(preg_replace('/[^A-Za-z0-9\-]/', '-', $new_slug));
+                    $val++;
+                }
+                while(Topic::where('slug', $topic_slug)->exists());
+                $topic->slug = $topic_slug;
+            }
+            else{
+                $topic_slug = strtolower(preg_replace('/[^A-Za-z0-9\-]/', '-', $slug));
+                $topic->slug = $topic_slug;
+            }
         }
 
 
@@ -102,29 +116,47 @@ class TopicController extends Controller
 
             return redirect(route('admin.topics.index'));
         }
-
         $input = $request->validate( Topic::$rules );
+
+        // $input = $request->validate([
+        //     'title' => 'required|string',
+        // ]);
         $topic->fill($request->all());
         $slug = $request->slug;
+        $old_slug = Topic::where('slug', strtolower(preg_replace('/[^A-Za-z0-9\-]/', '-', $request->title)))->exists();
         if(is_null($slug)){
-            $old_slug = Topic::where('slug', strtolower(preg_replace('/\s+/', '-', $request->title)))->exists();
 
             if($old_slug){
                 $val = 1;
                 do{
                     $new_slug = $request->title .  ' ' . $val;
-                    $topic_slug = strtolower(preg_replace('/\s+/', '-', $new_slug));
+                    $topic_slug = strtolower(preg_replace('/[^A-Za-z0-9\-]/', '-', $new_slug));
                     $val++;
                 }
                 while(Topic::where('slug', $topic_slug)->exists());
             }
             else{
-                $topic_slug = strtolower(preg_replace('/\s+/', '-', $request->title));
+                $topic_slug = strtolower(preg_replace('/[^A-Za-z0-9\-]/', '-', $request->title));
             }
-            
-
             $topic->slug = $topic_slug;
         }
+        else{
+            if($old_slug){
+                $val = 1;
+                do{
+                    $new_slug = $slug .  ' ' . $val;
+                    $topic_slug = strtolower(preg_replace('/[^A-Za-z0-9\-]/', '-', $new_slug));
+                    $val++;
+                }
+                while(Topic::where('slug', $topic_slug)->exists());
+                $topic->slug = $topic_slug;
+            }
+            else{
+                $topic_slug = strtolower(preg_replace('/[^A-Za-z0-9\-]/', '-', $slug));
+                $topic->slug = $topic_slug;
+            }
+        }
+
         $topic->save();
 
         Flash::success('Topic updated successfully.');

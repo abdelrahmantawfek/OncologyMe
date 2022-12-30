@@ -1,3 +1,4 @@
+@if (count($topics))
 <!--begin::Table-->
 <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_table_users">
     <!--begin::Table head-->
@@ -13,8 +14,6 @@
             <th class="min-w-125px">is parent</th>
             <th class="min-w-125px">parent topic</th>
             <th class="min-w-125px">is main</th>
-            <th class="min-w-125px">meta title</th>
-            <th class="min-w-125px">meta description</th>
             <th class="min-w-125px">Published date</th>
             <th class="min-w-100px text-end">actions</th>
         </tr>
@@ -22,7 +21,7 @@
     </thead>
     <!--end::Table head-->
     <!--begin::Table body-->
-    <tbody class="text-gray-600 fw-bold">
+    <tbody class="text-gray-600 fw-bold">            
         @foreach ($topics as $topic)
         <!--begin::Table row-->
         <tr>
@@ -35,13 +34,6 @@
             <!--end::Checkbox-->
             <!--begin::User=-->
             <td class="">
-                {{-- <!--begin:: Avatar -->
-                <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
-                    <a href="{{ route('admin.topics.edit', $topic->id) }}">
-                        <div class="symbol-label fs-3 bg-light-danger text-danger">{{ strtoupper(substr($topic->title ?? '', 0, 1)) }}</div>
-                    </a>
-                </div>
-                <!--end::Avatar--> --}}
                 <!--begin::User details-->
                 <div class="d-flex flex-column">
                     <a href="{{ route('admin.topics.edit', $topic->id) }}" class="text-gray-800 text-hover-primary mb-1">{{ $topic->title ?? ''}}</a>
@@ -54,17 +46,6 @@
             <td>{{ ($topic->parent_id == 0) ? '-' : $topic->parent_name}}</td>
             <td>{{ ($topic->is_main == true) ? 'Yes' : 'No'}}</td>
             <!--end::Role=-->
-            <!--begin::Last login=-->
-            <td>
-                {{ $topic->meta_title ?? ''}}
-            </td>
-            <!--end::Last login=-->
-            <!--begin::Two step=-->
-            <td> {{ $topic->meta_desc ?? ''}}</td>
-            <!--end::Two step=-->
-            {{-- <!--begin::Two step=-->
-            <td> {{ $topic->meta_keywords ?? ''}}</td>
-            <!--end::Two step=--> --}}
             <!--begin::Joined-->
             <td>{{ $topic->created_at->format('M, d, Y') ?? ''}}</td>
             <!--begin::Joined-->
@@ -135,9 +116,12 @@
         </div>
         <!--end::Modal - New Card-->
         @endforeach
+
     </tbody>
     <!--end::Table body-->
 </table>
 <!--end::Table-->
-
+@else
+No Topics found
+@endif
 

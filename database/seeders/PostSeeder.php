@@ -951,7 +951,29 @@ class PostSeeder extends Seeder
             'affiliation' => 'affiliation',
             'specialty' => 'specialty',
             'accept_newsletter_emails' => true,
+            'created_at' => '2022-08-19 04:07:05', 
+            'updated_at' => '2022-08-19 05:32:27'
         ]);
+
+        $announcements = array(
+            array('title' => 'one', 'url' => 'google.com', 'place' => '1', 'desktop_image' => 'bnr1.jpg', 'mob_image' => 'bnr2.jpg', 'created_at' => '2022-08-19 04:07:05', 'updated_at' => '2022-08-19 05:32:27'),
+            array('title' => 'one', 'url' => 'google.com', 'place' => '1', 'desktop_image' => 'bnr1.jpg', 'mob_image' => 'bnr2.jpg', 'created_at' => '2022-08-19 04:07:05', 'updated_at' => '2022-08-19 05:32:27'),
+            array('title' => 'one', 'url' => 'google.com', 'place' => '1', 'desktop_image' => 'bnr1.jpg', 'mob_image' => 'bnr2.jpg', 'created_at' => '2022-08-19 04:07:05', 'updated_at' => '2022-08-19 05:32:27'),
+            array('title' => 'one', 'url' => 'google.com', 'place' => '1', 'desktop_image' => 'bnr1.jpg', 'mob_image' => 'bnr2.jpg', 'created_at' => '2022-08-19 04:07:05', 'updated_at' => '2022-08-19 05:32:27'),
+            array('title' => 'one', 'url' => 'google.com', 'place' => '1', 'desktop_image' => 'bnr1.jpg', 'mob_image' => 'bnr2.jpg', 'created_at' => '2022-08-19 04:07:05', 'updated_at' => '2022-08-19 05:32:27'),
+            array('title' => 'one', 'url' => 'google.com', 'place' => '1', 'desktop_image' => 'bnr1.jpg', 'mob_image' => 'bnr2.jpg', 'created_at' => '2022-08-19 04:07:05', 'updated_at' => '2022-08-19 05:32:27'),
+            array('title' => 'one', 'url' => 'google.com', 'place' => '2', 'desktop_image' => 'bnr2.jpg', 'mob_image' => 'bnr2.jpg', 'created_at' => '2022-08-19 04:07:05', 'updated_at' => '2022-08-19 05:32:27'),
+            array('title' => 'one', 'url' => 'google.com', 'place' => '2', 'desktop_image' => 'bnr2.jpg', 'mob_image' => 'bnr2.jpg', 'created_at' => '2022-08-19 04:07:05', 'updated_at' => '2022-08-19 05:32:27'),
+            array('title' => 'one', 'url' => 'google.com', 'place' => '2', 'desktop_image' => 'bnr2.jpg', 'mob_image' => 'bnr2.jpg', 'created_at' => '2022-08-19 04:07:05', 'updated_at' => '2022-08-19 05:32:27'),
+            array('title' => 'one', 'url' => 'google.com', 'place' => '2', 'desktop_image' => 'bnr2.jpg', 'mob_image' => 'bnr2.jpg', 'created_at' => '2022-08-19 04:07:05', 'updated_at' => '2022-08-19 05:32:27'),
+            array('title' => 'one', 'url' => 'google.com', 'place' => '2', 'desktop_image' => 'bnr2.jpg', 'mob_image' => 'bnr2.jpg', 'created_at' => '2022-08-19 04:07:05', 'updated_at' => '2022-08-19 05:32:27'),
+            array('title' => 'one', 'url' => 'google.com', 'place' => '2', 'desktop_image' => 'bnr2.jpg', 'mob_image' => 'bnr2.jpg', 'created_at' => '2022-08-19 04:07:05', 'updated_at' => '2022-08-19 05:32:27'),
+            array('title' => 'one', 'url' => 'google.com', 'place' => '3', 'desktop_image' => 'bnr2.jpg', 'mob_image' => 'bnr2.jpg', 'created_at' => '2022-08-19 04:07:05', 'updated_at' => '2022-08-19 05:32:27'),
+            array('title' => 'one', 'url' => 'google.com', 'place' => '3', 'desktop_image' => 'bnr2.jpg', 'mob_image' => 'bnr2.jpg', 'created_at' => '2022-08-19 04:07:05', 'updated_at' => '2022-08-19 05:32:27'),
+            array('title' => 'one', 'url' => 'google.com', 'place' => '3', 'desktop_image' => 'bnr2.jpg', 'mob_image' => 'bnr2.jpg', 'created_at' => '2022-08-19 04:07:05', 'updated_at' => '2022-08-19 05:32:27'),
+            array('title' => 'one', 'url' => 'google.com', 'place' => '3', 'desktop_image' => 'bnr2.jpg', 'mob_image' => 'bnr2.jpg', 'created_at' => '2022-08-19 04:07:05', 'updated_at' => '2022-08-19 05:32:27'),
+            array('title' => 'one', 'url' => 'google.com', 'place' => '3', 'desktop_image' => 'bnr2.jpg', 'mob_image' => 'bnr2.jpg', 'created_at' => '2022-08-19 04:07:05', 'updated_at' => '2022-08-19 05:32:27'),
+        );
 
         DB::table('users')->insert($users);
 
@@ -960,6 +982,7 @@ class PostSeeder extends Seeder
         DB::table('postmetas')->insert($post_meta);
         DB::table('post_topic')->insert($topics);
         DB::table('category_post')->insert($categories);
+        DB::table('announcements')->insert($announcements);
 
 
     }

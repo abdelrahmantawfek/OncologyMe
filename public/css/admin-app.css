@@ -6,3 +6,22 @@
 .login-bg.header-fixed.toolbar-fixed .wrapper{
     padding: 20px;
 }
+.checkbox-container {
+    border: 1px solid #bababa;
+    padding: 15px 0;
+    border-radius: 10px;
+    max-height: 250px;
+    overflow-y: scroll;
+    z-index: 4;
+}
+.cs-card-body {
+    padding: 20px;
+}
+
+  .cs-card-body ::-webkit-scrollbar-track{
+    border-radius: 10px;
+  }
+
+  .cs-textarea-hight{
+    height: 120px;
+  }

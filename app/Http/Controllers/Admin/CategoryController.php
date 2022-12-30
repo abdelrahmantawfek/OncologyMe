@@ -36,18 +36,18 @@ class CategoryController extends Controller
         $slug = $request->slug;
         $category = Category::create($input);
         if(is_null($slug)){
-            $old_slug = Category::where('slug', strtolower(preg_replace('/\s+/', '-', $request->title)))->exists();
+            $old_slug = Category::where('slug', strtolower(preg_replace('/[^A-Za-z0-9\-]/', '-', $request->title)))->exists();
             if($old_slug){
                 $val = 1;
                 do{
                     $new_slug = $request->title .  ' ' . $val;
-                    $categ_slug = strtolower(preg_replace('/\s+/', '-', $new_slug));
+                    $categ_slug = strtolower(preg_replace('/[^A-Za-z0-9\-]/', '-', $new_slug));
                     $val++;
                 }
                 while(Category::where('slug', $categ_slug)->exists());
             }
             else{
-                $categ_slug = strtolower(preg_replace('/\s+/', '-', $request->title));
+                $categ_slug = strtolower(preg_replace('/[^A-Za-z0-9\-]/', '-', $request->title));
             }
           
             $category->slug = $categ_slug;
@@ -122,18 +122,18 @@ class CategoryController extends Controller
         $category->fill($request->all());
         $slug = $request->slug;
         if(is_null($slug)){
-            $old_slug = Category::where('slug', strtolower(preg_replace('/\s+/', '-', $request->title)))->exists();
+            $old_slug = Category::where('slug', strtolower(preg_replace('/[^A-Za-z0-9\-]/', '-', $request->title)))->exists();
             if($old_slug){
                 $val = 1;
                 do{
                     $new_slug = $request->title .  ' ' . $val;
-                    $categ_slug = strtolower(preg_replace('/\s+/', '-', $new_slug));
+                    $categ_slug = strtolower(preg_replace('/[^A-Za-z0-9\-]/', '-', $new_slug));
                     $val++;
                 }
                 while(Category::where('slug', $categ_slug)->exists());
             }
             else{
-                $categ_slug = strtolower(preg_replace('/\s+/', '-', $request->title));
+                $categ_slug = strtolower(preg_replace('/[^A-Za-z0-9\-]/', '-', $request->title));
             }
           
             $category->slug = $categ_slug;

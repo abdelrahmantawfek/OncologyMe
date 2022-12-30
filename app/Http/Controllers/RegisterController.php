@@ -6,9 +6,20 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\NotifyMail;
+use Illuminate\Support\Facades\Redirect;
 
 class RegisterController extends Controller
 {
+
+    public function close_defualt_register()
+    {
+        return Redirect::to('signup');
+        // abort(404);
+    }
+    public function register()
+    {
+        return view('auth.register');
+    }
 
     public function post_signup(Request $request)
     {

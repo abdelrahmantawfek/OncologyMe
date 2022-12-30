@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Post;
 use App\Models\Postmeta;
+use App\Models\Topic;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Laracasts\Flash\Flash;
@@ -14,13 +16,17 @@ class VideosController extends Controller
     public function index(Request $request)
     {
         /** @var Post $posts */
-        $posts = Post::where('post_type', 'videos')->get();
-        return view('admin.videos.index', compact('posts'));
+        $posts = Post::where('post_type', 'videos')->paginate(10);
+        $all_topics = Topic::where('is_parent', 0)->get();
+        $categories = Category::where('post_type', 'videos')->get();
+        return view('admin.videos.index', compact('posts', 'all_topics', 'categories'));
     }
 
     public function create()
     {
-        return view('admin.videos.create');
+        $all_topics = Topic::where('is_parent', 0)->get();
+        $categories = Category::where('post_type', 'videos')->get();
+        return view('admin.videos.create', compact('all_topics', 'categories'));
     }
 
     public function store(Request $request)
@@ -28,15 +34,14 @@ class VideosController extends Controller
         // $input = $request->all();
         $input = $request->validate([
             'title' => 'required',
-            // 'slug' => 'required',
-            'slug' => 'unique:posts',
-            // 'pdf' => 'required',
-            // 'key_points' => 'required',
-            // 'content' => 'required',
-            // 'excerpt' => 'required',
-            'author' => 'required',
-            // 'meta_title' => 'required',
-            // 'meta_desc' => 'required',
+            'slug' => '',
+            'pdf' => '',
+            'key_points' => '',
+            'content' => '',
+            'excerpt' => '',
+            'author' => '',
+            'meta_title' => '',
+            'meta_desc' => '',
         ]);
 
         // dd($input);
@@ -45,28 +50,43 @@ class VideosController extends Controller
         $slug = $request->slug;
         $post = Post::create([
             'title' => $request->title,
-            'slug' => $request->slug,
+            'slug' => preg_replace('/[^A-Za-z0-9\-]/', '-', $request->slug),
             'content' => $request->content,
             'excerpt' => $request->excerpt,
             'author' => $request->author,
         ]);
 
+        $old_slug = Post::where('slug', strtolower(preg_replace('/[^A-Za-z0-9\-]/', '-', $request->title)))->exists();
         if(is_null($slug)){
-            $old_slug = Post::where('slug', strtolower(preg_replace('/\s+/', '-', $request->title)))->exists();
             if($old_slug){
                 $val = 1;
                 do{
                     $new_slug = $request->title .  ' ' . $val;
-                    $post_slug = strtolower(preg_replace('/\s+/', '-', $new_slug));
+                    $categ_slug = strtolower(preg_replace('/[^A-Za-z0-9\-]/', '-', $new_slug));
                     $val++;
                 }
-                while(Post::where('slug', $post_slug)->exists());
+                while(Post::where('slug', $categ_slug)->exists());
             }
             else{
-                $post_slug = strtolower(preg_replace('/\s+/', '-', $request->title));
+                $categ_slug = strtolower(preg_replace('/[^A-Za-z0-9\-]/', '-', $request->title));
             }
-           
-            $post->slug = $post_slug;
+            $post->slug = $categ_slug;
+        }
+        else{
+            if($old_slug){
+                $val = 1;
+                do{
+                    $new_slug = $slug .  ' ' . $val;
+                    $categ_slug = strtolower(preg_replace('/[^A-Za-z0-9\-]/', '-', $new_slug));
+                    $val++;
+                }
+                while(Post::where('slug', $categ_slug)->exists());
+                $post->slug = $categ_slug;
+            }
+            else{
+                $categ_slug = strtolower(preg_replace('/[^A-Za-z0-9\-]/', '-', $slug));
+                $post->slug = $categ_slug;
+            }
         }
 
 
@@ -76,7 +96,7 @@ class VideosController extends Controller
        
         $featured_image = $request->validate(['image' => 'mimes:jpg,png|max:5048']);
         $pdf = $request->validate(['pdf' => 'mimes:pdf|max:5048']);
-        $video = $request->validate(['video' => 'mimes:mp4|max:5048']);
+        $video = $request->validate(['video' => 'required|mimes:mp4|max:5048']);
 
         $image = $request->file('image');
 
@@ -138,15 +158,17 @@ class VideosController extends Controller
             $post_meta->save();
         }
 
-        
-        if($request->key_points){
-            $post_meta = Postmeta::create([
-                'post_id' => $post->id,
-                'meta_key' => '_key_points',
-                'meta_value' => $request->key_points,
-            ]);
-            $post_meta->save();
-        }
+        if($request->topic){
+            foreach ($request->topic as $item) {
+                 $post->topics()->attach($item);
+             }
+         }
+ 
+         if($request->category){
+             foreach ($request->category as $item) {
+                  $post->categories()->attach($item);
+              }
+          }
 
         DB::commit();
 
@@ -173,6 +195,14 @@ class VideosController extends Controller
     {
         /** @var Post $Category */
         $post = Post::find($id);
+        $all_topics = Topic::where('is_parent', 0)->get();
+        $categories = Category::where('post_type', 'videos')->get();
+        $video = $post->postmeta->where('meta_key', '_video')->pluck('meta_value');
+        $video_script = $post->postmeta->where('meta_key', '_script')->pluck('meta_value');
+        $featured_image = $post->postmeta->where('meta_key', '_featured_image')->pluck('meta_value');
+        $pdf = $post->postmeta->where('meta_key', '_pdf')->pluck('meta_value');
+        $selected_topics = $post->topics->pluck('id');
+        $selected_cats = $post->categories->pluck('id');
 
         if (empty($post)) {
             Flash::error('Post not found');
@@ -180,7 +210,7 @@ class VideosController extends Controller
             return redirect(route('admin.videos.index'));
         }
 
-        return view('admin.videos.edit', compact('post'));
+        return view('admin.videos.edit', compact('post', 'all_topics', 'categories', 'featured_image', 'video', 'video_script', 'pdf'));
     }
 
     public function update($id, Request $request)
@@ -196,14 +226,14 @@ class VideosController extends Controller
 
         $input = $request->validate([
             'title' => 'required',
-            // 'slug' => 'required',
-            // 'pdf' => 'required',
-            // 'key_points' => 'required',
-            // 'content' => 'required',
-            // 'excerpt' => 'required',
-            'author' => 'required',
-            // 'meta_title' => 'required',
-            // 'meta_desc' => 'required',
+            'slug' => '',
+            'pdf' => '',
+            'key_points' => '',
+            'content' => '',
+            'excerpt' => '',
+            'author' => '',
+            'meta_title' => '',
+            'meta_desc' => '',
         ]);
 
         // dd($input);
@@ -211,27 +241,42 @@ class VideosController extends Controller
 
         $slug = $request->slug;
         $post->title = $request->title;
-        $post->slug = $request->slug;
+        $post->slug = preg_replace('/[^A-Za-z0-9\-]/', '-', $request->slug);
         $post->content = $request->content;
         $post->excerpt = $request->excerpt;
         $post->author = $request->author;
         $slug = $request->slug;
+        $old_slug = Post::where('slug', strtolower(preg_replace('/[^A-Za-z0-9\-]/', '-', $request->title)))->exists();
         if(is_null($slug)){
-            $old_slug = Post::where('slug', strtolower(preg_replace('/\s+/', '-', $request->title)))->exists();
             if($old_slug){
                 $val = 1;
                 do{
                     $new_slug = $request->title .  ' ' . $val;
-                    $post_slug = strtolower(preg_replace('/\s+/', '-', $new_slug));
+                    $categ_slug = strtolower(preg_replace('/[^A-Za-z0-9\-]/', '-', $new_slug));
                     $val++;
                 }
-                while(Post::where('slug', $post_slug)->exists());
+                while(Post::where('slug', $categ_slug)->exists());
             }
             else{
-                $post_slug = strtolower(preg_replace('/\s+/', '-', $request->title));
+                $categ_slug = strtolower(preg_replace('/[^A-Za-z0-9\-]/', '-', $request->title));
             }
-           
-            $post->slug = $post_slug;
+            $post->slug = $categ_slug;
+        }
+        else{
+            if($old_slug){
+                $val = 1;
+                do{
+                    $new_slug = $slug .  ' ' . $val;
+                    $categ_slug = strtolower(preg_replace('/[^A-Za-z0-9\-]/', '-', $new_slug));
+                    $val++;
+                }
+                while(Post::where('slug', $categ_slug)->exists());
+                $post->slug = $categ_slug;
+            }
+            else{
+                $categ_slug = strtolower(preg_replace('/[^A-Za-z0-9\-]/', '-', $slug));
+                $post->slug = $categ_slug;
+            }
         }
         $post->save();
 
@@ -239,6 +284,8 @@ class VideosController extends Controller
 
         $pdf = $request->validate(['pdf' => 'mimes:pdf|max:5048']);
         $file = $request->file('pdf');
+        $video = $request->validate(['video' => 'required|mimes:mp4|max:5048']);
+
 
         if ($file) {
 
@@ -253,11 +300,35 @@ class VideosController extends Controller
             // dd($post_meta->where('meta_key', '_pdf')->first());
 
         }
+        
+        $vid = $request->file('video');
 
-        if($request->key_points){
+        if ($vid) {
 
-            // dd($post_meta);
+            $originalName = $vid->getClientOriginalName();
+            $fileName = time() . '_' . $originalName;
+            $vid->move('uploads/', $fileName);
+            $this->attributes['video'] = $fileName;
+
+            $post_meta = Postmeta::create([
+                'post_id' => $post->id,
+                'meta_key' => '_video',
+                'meta_value' => $fileName,
+            ]);
+            $post_meta->save();
         }
+
+        if($request->topic){
+            foreach ($request->topic as $item) {
+                 $post->topics()->attach($item);
+             }
+         }
+                 
+        if($request->category){
+            foreach ($request->category as $item) {
+                 $post->categories()->attach($item);
+             }
+         }
 
         DB::commit();
 

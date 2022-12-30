@@ -16,7 +16,7 @@ class NewsController extends Controller
     public function index(Request $request)
     {
         /** @var Post $posts */
-        $posts = Post::where('post_type', 'news')->get();
+        $posts = Post::where('post_type', 'news')->paginate(10);
         $all_topics = Topic::where('is_parent', 0)->get();
         $categories = Category::where('post_type', 'news')->get();
 
@@ -37,14 +37,14 @@ class NewsController extends Controller
         // $input = $request->all();
         $input = $request->validate([
             'title' => 'required',
-            // 'slug' => 'required',
-            // 'pdf' => 'required',
-            // 'key_points' => 'required',
-            // 'content' => 'required',
-            // 'excerpt' => 'required',
-            // 'author' => 'required',
-            // 'meta_title' => 'required',
-            // 'meta_desc' => 'required',
+            'slug' => '',
+            'pdf' => '',
+            'key_points' => '',
+            'content' => '',
+            'excerpt' => '',
+            'author' => '',
+            'meta_title' => '',
+            'meta_desc' => '',
         ]);
 
         // dd($input);
@@ -53,28 +53,43 @@ class NewsController extends Controller
         $slug = $request->slug;
         $post = Post::create([
             'title' => $request->title,
-            'slug' => $request->slug,
+            'slug' => preg_replace('/[^A-Za-z0-9\-]/', '-', $request->slug),
             'content' => $request->content,
             'excerpt' => $request->excerpt,
             'author' => $request->author,
         ]);
 
+        $old_slug = Post::where('slug', strtolower(preg_replace('/[^A-Za-z0-9\-]/', '-', $request->title)))->exists();
         if(is_null($slug)){
-            $old_slug = Post::where('slug', strtolower(preg_replace('/\s+/', '-', $request->title)))->exists();
             if($old_slug){
                 $val = 1;
                 do{
                     $new_slug = $request->title .  ' ' . $val;
-                    $post_slug = strtolower(preg_replace('/\s+/', '-', $new_slug));
+                    $categ_slug = strtolower(preg_replace('/[^A-Za-z0-9\-]/', '-', $new_slug));
                     $val++;
                 }
-                while(Post::where('slug', $post_slug)->exists());
+                while(Post::where('slug', $categ_slug)->exists());
             }
             else{
-                $post_slug = strtolower(preg_replace('/\s+/', '-', $request->title));
+                $categ_slug = strtolower(preg_replace('/[^A-Za-z0-9\-]/', '-', $request->title));
             }
-           
-            $post->slug = $post_slug;
+            $post->slug = $categ_slug;
+        }
+        else{
+            if($old_slug){
+                $val = 1;
+                do{
+                    $new_slug = $slug .  ' ' . $val;
+                    $categ_slug = strtolower(preg_replace('/[^A-Za-z0-9\-]/', '-', $new_slug));
+                    $val++;
+                }
+                while(Post::where('slug', $categ_slug)->exists());
+                $post->slug = $categ_slug;
+            }
+            else{
+                $categ_slug = strtolower(preg_replace('/[^A-Za-z0-9\-]/', '-', $slug));
+                $post->slug = $categ_slug;
+            }
         }
 
         $post->post_type = 'news';
@@ -171,6 +186,13 @@ class NewsController extends Controller
         $post = Post::find($id);
         $all_topics = Topic::where('is_parent', 0)->get();
         $categories = Category::where('post_type', 'news')->get();
+        $keypoints = $post->postmeta->where('meta_key', '_key_points')->pluck('meta_value');
+        $featured_image = $post->postmeta->where('meta_key', '_featured_image')->pluck('meta_value');
+        $pdf = $post->postmeta->where('meta_key', '_pdf')->pluck('meta_value');
+        $selected_topics = $post->topics->pluck('id');
+        $selected_cats = $post->categories->pluck('id');
+
+        // dd($featured_image);
 
         if (empty($post)) {
             Flash::error('Post not found');
@@ -178,7 +200,7 @@ class NewsController extends Controller
             return redirect(route('admin.news.index'));
         }
 
-        return view('admin.news.edit', compact('post', 'all_topics', 'categories'));
+        return view('admin.news.edit', compact('post', 'all_topics', 'categories', 'featured_image', 'keypoints', 'pdf', 'selected_topics', 'selected_cats'));
     }
 
     public function update($id, Request $request)
@@ -195,12 +217,12 @@ class NewsController extends Controller
         $input = $request->validate([
             'title' => 'required',
             // 'slug' => 'required',
-            'slug' => 'unique:posts',
+            // 'slug' => 'unique:posts',
             // 'pdf' => 'required',
             // 'key_points' => 'required',
             // 'content' => 'required',
             // 'excerpt' => 'required',
-            'author' => 'required',
+            // 'author' => 'required',
             // 'meta_title' => 'required',
             // 'meta_desc' => 'required',
         ]);
@@ -210,33 +232,77 @@ class NewsController extends Controller
 
         $slug = $request->slug;
         $post->title = $request->title;
-        $post->slug = $request->slug;
+        $post->slug = preg_replace('/[^A-Za-z0-9\-]/', '-', $request->slug);
         $post->content = $request->content;
         $post->excerpt = $request->excerpt;
         $post->author = $request->author;
         $slug = $request->slug;
+        $old_slug = Post::where('slug', strtolower(preg_replace('/[^A-Za-z0-9\-]/', '-', $request->title)))->exists();
         if(is_null($slug)){
-            $old_slug = Post::where('slug', strtolower(preg_replace('/\s+/', '-', $request->title)))->exists();
             if($old_slug){
                 $val = 1;
                 do{
                     $new_slug = $request->title .  ' ' . $val;
-                    $post_slug = strtolower(preg_replace('/\s+/', '-', $new_slug));
+                    $categ_slug = strtolower(preg_replace('/[^A-Za-z0-9\-]/', '-', $new_slug));
                     $val++;
                 }
-                while(Post::where('slug', $post_slug)->exists());
+                while(Post::where('slug', $categ_slug)->exists());
             }
             else{
-                $post_slug = strtolower(preg_replace('/\s+/', '-', $request->title));
+                $categ_slug = strtolower(preg_replace('/[^A-Za-z0-9\-]/', '-', $request->title));
             }
-           
-            $post->slug = $post_slug;
+            $post->slug = $categ_slug;
         }
-        $post->save();
+        else{
+            if($old_slug){
+                $val = 1;
+                do{
+                    $new_slug = $slug .  ' ' . $val;
+                    $categ_slug = strtolower(preg_replace('/[^A-Za-z0-9\-]/', '-', $new_slug));
+                    $val++;
+                }
+                while(Post::where('slug', $categ_slug)->exists());
+                $post->slug = $categ_slug;
+            }
+            else{
+                $categ_slug = strtolower(preg_replace('/[^A-Za-z0-9\-]/', '-', $slug));
+                $post->slug = $categ_slug;
+            }
+        }
 
-        $post_meta = $post->postmeta;
+
 
         $pdf = $request->validate(['pdf' => 'mimes:pdf|max:5048']);
+        $featured_image = $request->validate(['image' => 'mimes:jpg,png|max:5048']);
+
+        $image = $request->file('image');
+
+        if ($image) {
+
+            $originalName = $image->getClientOriginalName();
+            $fileName = time() . '_' . $originalName;
+            $image->move('uploads/', $fileName);
+            $this->attributes['image'] = $fileName;
+
+            $post_meta = Postmeta::create([
+                'post_id' => $post->id,
+                'meta_key' => '_featured_image',
+                'meta_value' => $fileName,
+            ]);
+
+            // $old_image = $post->postmeta->where('post_id', $post->id)->where('meta_key', '_featured_image')->first();
+            // $meta_id = $old_image->meta_id;
+            $old_meta = Postmeta::where('post_id', $post->id)->where('meta_key', '_featured_image')->first();
+            $old_meta->delete;
+            // dd($old_meta);
+
+            // $new_image->save();
+            $post_meta->save();
+
+        }
+
+       
+
         $file = $request->file('pdf');
 
         if ($file) {
@@ -274,6 +340,8 @@ class NewsController extends Controller
             $post->highlights = true;
             $post->save();
         }
+        $post->save();
+
         DB::commit();
 
         Flash::success('Post updated successfully.');

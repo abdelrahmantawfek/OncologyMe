@@ -23,6 +23,8 @@
 
                 <div class="m-t-20"></div>
                 <div class="row articles-box">
+                    @if (count($data['news']))
+                        
                     <div class="col-md-8 col-sm-6">
                         <div class="careerfy-typo-wrap categ-title">
                             <h3><span>Latest News</span></h3>
@@ -56,6 +58,8 @@
                             
                         </div>
                     </div>
+                    @endif
+                    @if (count($data['videos']))
                     <div class="col-md-4 col-sm-6">
                         <div class="careerfy-typo-wrap categ-title">
                             <h3 class="text-right"><span>Latest Videos</span></h3>
@@ -92,17 +96,16 @@
                             @endforeach
                         </div>
                     </div>
+                    @endif
                 </div>
             </div>
-            <div class="col-md-4 col-sm-4">
-                @include('partials._sidebar')
-            </div>
+            @include('partials._sidebar')
         </div>
     </div>
 </div>
 <!-- Main Section -->
 
-
+@if (count( $data['main_study_articles'] ) )
 <!-- Main Section -->
 <div class="careerfy-main-section careerfy-parallex-full articles-section">
     <div class="container">
@@ -134,7 +137,7 @@
                     <div class="col-md-8 col-sm-4 col-xs-12 articles-only">
                         @foreach ($data['study_articles'] as $post)
                         <div class="article-item col-md-6 col-sm-6 col-xs-12 ">
-                            <h2><a href="{{$post->post_type.'/'.$data['main_study_articles'][0]->slug}}">{{ implode(' ', array_slice(explode(' ', $post->title ?? ''), 0, 10)) }}@if ( str_word_count($post->title ?? '') > 10 )...@endif</a></h2>
+                            <h2><a href="{{$post->post_type.'/'.$data['main_study_articles'][0]->slug ?? ''}}">{{ implode(' ', array_slice(explode(' ', $post->title ?? ''), 0, 10)) }}@if ( str_word_count($post->title ?? '') > 10 )...@endif</a></h2>
                             <div class="article-tags">
                                 @foreach ($post->topics as $topic)
                                 <span><a href="{{ route('showTopic', $topic->slug ?? '') }}">{{$topic->title ?? ''}}</a></span>
@@ -160,8 +163,9 @@
     </div>
 </div>
 <!-- Main Section -->
+@endif
 
-
+@if (count( $data['main_podcast'] ) )
 <!-- Main Section -->
 <div class="careerfy-main-section careerfy-parallex-full articles-section">
     <div class="container">
@@ -198,7 +202,7 @@
                         @foreach ($data['podcasts'] as $post)
                         
                         <div class="article-item col-md-6 col-sm-6 col-xs-12 ">
-                            <h2><a href="{{$post->post_type.'/'.$data['main_study_articles'][0]->slug}}">{{ implode(' ', array_slice(explode(' ', $post->title ?? ''), 0, 10)) }}@if ( str_word_count($post->title ?? '') > 10 )...@endif</a></h2>
+                            <h2><a href="{{$post->post_type.'/'.$data['main_podcast'][0]->slug ?? '' }}">{{ implode(' ', array_slice(explode(' ', $post->title ?? ''), 0, 10)) }}@if ( str_word_count($post->title ?? '') > 10 )...@endif</a></h2>
                             <div class="article-tags">
                                 @foreach ($post->topics as $topic)
                                 <span><a href="{{ route('showTopic', $topic->slug ?? '') }}">{{$topic->title ?? ''}}</a></span>
@@ -225,6 +229,6 @@
     </div>
 </div>
 <!-- Main Section -->
-
+@endif
 
 @endsection

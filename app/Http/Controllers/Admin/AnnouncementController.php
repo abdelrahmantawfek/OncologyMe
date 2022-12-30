@@ -20,7 +20,7 @@ class AnnouncementController extends Controller
     public function index(Request $request)
     {
         /** @var Announcement $announcements */
-        $announcements = Announcement::all();
+        $announcements = Announcement::paginate(10);
 
         return view('admin.announcements.index')
             ->with('announcements', $announcements);
@@ -111,6 +111,7 @@ class AnnouncementController extends Controller
             return redirect(route('admin.announcements.index'));
         }
 
+        // dd($announcement);
         return view('admin.announcements.edit')->with('announcement', $announcement);
     }
 

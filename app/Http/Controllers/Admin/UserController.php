@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
-use Flash;
+use Laracasts\Flash\Flash;
 use Response;
 
 class UserController extends Controller
@@ -71,7 +71,7 @@ class UserController extends Controller
     public function edit($id)
     {
         /** @var User $admin */
-        $user = User::with('roles')->find($id);
+        $user = User::find($id);
 
         if (empty($admin)) {
             Flash::error('User not found');

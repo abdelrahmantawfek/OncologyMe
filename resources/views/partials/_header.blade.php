@@ -23,7 +23,7 @@
                                 <li><a href="{{ route('contact') }}">Contact us</a></li>
                             </ul>
                         </li>
-
+                        @if (count($topics))
                         <li><a href="javascript:void(0)">Topics <i class="fa fa-angle-down"></i></a>
                             <ul class="sub-menu cs-sub-menu">
                                 @foreach ($topics as $topic)
@@ -32,7 +32,8 @@
                                 <li><a href="{{ route('allTopics') }}">View All</a></li>
                             </ul>
                         </li>
-
+                        @endif
+                        @if (count($news_categories))
                         <li class="pos-unset"><a href="javascript:void(0)">Oncology News <i class="fa fa-angle-down"></i></a>
                             <ul class="sub-menu cs-sub-menu">
                                 @foreach ($news_categories as $category)
@@ -43,7 +44,8 @@
 
 
                         </li>
-
+                        @endif
+                        @if (count($videos_categories))
                         <li class="pos-unset"><a href="javascript:void(0)">Oncology Watch <i class="fa fa-angle-down"></i></a>
                             <ul class="sub-menu dsply-dsk">
                                 <div class="owl-carousel vid-carousel cs-nav carousel slide">
@@ -53,7 +55,6 @@
                                             <a href="{{ route('showCategory', [$category->post_type, $category->slug]) }}"> <img src="{{ asset('uploads/'.$category->featured_image) }}" alt="{{$category->featured_image}}"></a>
                                             <div class="caption">
                                                 <h3><a href="{{ route('showCategory', [$category->post_type, $category->slug]) }}">{{$category->title ?? ''}}</a></h3>
-
                                                 <p><a href="{{ route('showCategory', [$category->post_type, $category->slug]) }}">Read More</a></p>
                                             </div>
                                         </div>
@@ -61,34 +62,6 @@
                                     @endforeach
                                   </div>
                                   <div class="cs-readmore"><a href="/all-videos">View All</a></div>
-                                {{-- <div id="myCarousel-3" class="carousel slide" data-interval="false">
-                                    <div class="carousel-inner">
-                                        <div class="item active">
-                                            <div class="row">
-                                                @foreach ($videos_categories as $category)
-                                                <div class="col-md-3">
-                                                    <div class="thumbnail">
-                                                        <a href="{{ route('showCategory', [$category->post_type, $category->slug]) }}"> <img src="{{ asset('uploads/'.$category->featured_image) }}" alt="{{$category->featured_image}}"></a>
-                                                        <div class="caption">
-                                                            <h3><a href="{{ route('showCategory', [$category->post_type, $category->slug]) }}">{{$category->title ?? ''}} Videos</a></h3>
-
-                                                            <p><a href="{{ route('showCategory', [$category->post_type, $category->slug]) }}">Read More</a></p>
-                                                        </div>
-                                                    </div>
-                                                </div>    
-                                                @endforeach
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <a class="left carousel-control" href="#myCarousel-3" data-slide="prev"><i class="fa fa-chevron-left "></i></a>
-                                    <a class="right carousel-control" href="#myCarousel-3" data-slide="next"><i class="fa fa-chevron-right "></i></a>
-
-                                    <ol class="carousel-indicators">
-                                        <li data-target="#myCarousel-3" data-slide-to="0" class="active"></li>
-                                        <li data-target="#myCarousel-3" data-slide-to="1"></li>
-                                        <li data-target="#myCarousel-3" data-slide-to="2"></li>
-                                    </ol>
-                                </div> --}}
                             </ul>
 
                             <ul class="sub-menu cs-sub-menu dsply-mob">
@@ -98,7 +71,8 @@
                                 <li><a href="/all-videos">View All</a></li>
                             </ul>
                         </li>
-
+                        @endif
+                        @if (count($articles_categories))
                         <li class="pos-unset"><a href="javascript:void(0)">Articles <i class="fa fa-angle-down"></i></a>
                             <ul class="sub-menu dsply-dsk">
                                 <div class="owl-carousel art-carousel cs-nav carousel slide">
@@ -116,37 +90,6 @@
                                     @endforeach
                                   </div>
                                   <div class="cs-readmore"><a href="/all-articles">View All</a></div>
-
-                                {{-- <div id="myCarousel-1" class="carousel slide" data-interval="false">
-                                    <div class="carousel-inner">
-                                        <div class="item active">
-                                            <div class="row">
-
-                                                @foreach ($articles_categories as $category)
-                                                <div class="col-md-3">
-                                                    <div class="thumbnail">
-                                                        <a href="{{ route('showCategory', [$category->post_type, $category->slug]) }}"> <img src="{{ asset('uploads/'.$category->featured_image) }}" alt="{{$category->featured_image ?? ''}}"></a>
-                                                        <div class="caption">
-                                                            <h3><a href="{{ route('showCategory', [$category->post_type, $category->slug]) }}">{{$category->title ?? ''}}</a></h3>
-
-                                                            <p><a href="{{ route('showCategory', [$category->post_type, $category->slug]) }}">Read More</a></p>
-                                                        </div>
-                                                    </div>
-                                                </div>    
-                                                @endforeach
-                
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <a class="left carousel-control" href="#myCarousel-1" data-slide="prev"><i class="fa fa-chevron-left "></i></a>
-                                    <a class="right carousel-control" href="#myCarousel-1" data-slide="next"><i class="fa fa-chevron-right "></i></a>
-
-                                    <ol class="carousel-indicators">
-                                        <li data-target="#myCarousel-1" data-slide-to="0" class="active"></li>
-                                        <li data-target="#myCarousel-1" data-slide-to="1"></li>
-                                        <li data-target="#myCarousel-1" data-slide-to="2"></li>
-                                    </ol>
-                                </div> --}}
                             </ul>
 
                             <ul class="sub-menu cs-sub-menu dsply-mob">
@@ -156,9 +99,10 @@
                                 <li><a href="/all-articles">View All</a></li>
                             </ul>
                         </li>
-
+                        @endif
+                        @if (count($podcasts_categories))
                         <li class="pos-unset"><a href="/all-podcasts">Podcasts</a></li>
-
+                        @endif
 
                     </ul>
                 </div>

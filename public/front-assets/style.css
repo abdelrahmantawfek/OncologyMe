@@ -3785,9 +3785,9 @@ left: 50%;*/
 {
     border-left: 1px solid #dfdfdf;
 }
-.cs-nav.carousel.slide.owl-loaded > div.owl-stage-outer > div > div:nth-child(5){
+/* .cs-nav.carousel.slide.owl-loaded > div.owl-stage-outer > div > div:nth-child(5){
     border-left: 0 !important;
-}
+} */
 
 
 .trascript-container {

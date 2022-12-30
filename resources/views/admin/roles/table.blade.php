@@ -4,11 +4,6 @@
     <thead>
         <!--begin::Table row-->
         <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
-            <th class="w-10px pe-2">
-                <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
-                    <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_table_users .form-check-input" value="1" />
-                </div>
-            </th>
             <th class="min-w-125px">Title</th>
             <th class="text-end min-w-100px">Published on</th>
             <th class="text-end min-w-100px">Actions</th>
@@ -21,25 +16,17 @@
         @foreach ($roles as $role)
         <!--begin::Table row-->
         <tr>
-            <!--begin::Checkbox-->
-            <td>
-                <div class="form-check form-check-sm form-check-custom form-check-solid">
-                    <input class="form-check-input" type="checkbox" value="1" />
-                </div>
-            </td>
-            <!--end::Checkbox-->
             <!--begin::Page=-->
-            <td class="d-flex align-items-center">
+            <td>
                 <!--begin::Page details-->
                 <div class="d-flex flex-column">
-                    <a href="" class="text-gray-800 text-hover-primary mb-1">{{ $role->name }}</a>
-                    {{-- <span>{{ $admin->email }}</span> --}}
+                    <a href="{{ route('admin.roles.edit', $role->id) }}" class="text-gray-800 text-hover-primary mb-1">{{ $role->name }}</a>
                 </div>
                 <!--begin::Page details-->
             </td>
             <!--end::PAge-->
             <!--begin::Joined-->
-            <td class="text-end">{{ $role->created_at }}</td>
+            <td class="text-end">{{ $role->created_at->format('M, d, Y') ?? '' }}</td>
             <!--begin::Joined-->
             <!--begin::Action=-->
             <td class="text-end">
@@ -55,12 +42,12 @@
                 <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
                     <!--begin::Menu item-->
                     <div class="menu-item px-3">
-                        <a href="" class="menu-link px-3">Edit</a>
+                        <a href="{{ route('admin.roles.edit', $role->id) }}" class="menu-link px-3">Edit</a>
                     </div>
                     <!--end::Menu item-->
                     <!--begin::Menu item-->
                     <div class="menu-item px-3">
-                        <a href="#" class="menu-link px-3" data-kt-users-table-filter="delete_row">Delete</a>
+                        <a href="" class="menu-link px-3" data-kt-users-table-filter="delete_row" data-bs-toggle="modal" data-bs-target="#delete_item-{{$role->id}}">Delete</a>
                     </div>
                     <!--end::Menu item-->
                 </div>
@@ -69,84 +56,44 @@
             <!--end::Action=-->
         </tr>
         <!--end::Table row-->
+        <!--begin::Modal -  delete item-->
+        <div class="modal fade" id="delete_item-{{$role->id}}" tabindex="-1" role="dialog" aria-labelledby="delete_item-{{$role->id}}" aria-hidden="true">
+            <!--begin::Modal dialog-->
+            <div class="modal-dialog modal-dialog-centered mw-650px">
+                <!--begin::Modal content-->
+                <div class="modal-content">
+                    <!--begin::Close-->
+                    <div class="btn btn-icon btn-sm btn-active-icon-primary"  class="close" data-bs-dismiss="modal" aria-label="Close" style="margin-left: auto;">
+                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                        <span class="svg-icon svg-icon-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
+                                <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
+                            </svg>
+                        </span>
+                        <!--end::Svg Icon-->
+                    </div>
+                    <!--end::Close-->
+                    <!--begin::Modal body-->
+                    <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
+                        <div class="swal2-icon swal2-warning swal2-icon-show my-2" style="display: flex;"><div class="swal2-icon-content">!</div></div>
+                        <div class="swal2-html-container my-15" id="" style="display: block;">Are you sure you want to delete {{ $role->name ?? ''}}?</div>
+                        <div class="swal2-actions" style="display: flex;">
+                            <div class="swal2-loader"></div>
+                            {!! Form::model($role, ['route' => ['admin.roles.destroy', $role->id], 'method' => 'delete']) !!}
+                            <button class="swal2-confirm btn fw-bold btn-danger mx-2" aria-label="" style="display: inline-block;">Yes, delete!</button>
+                            {!! Form::close() !!}
+                            <button class=" btn fw-bold btn-active-light-primary mx-2" aria-label="true" style="display: inline-block;" data-bs-dismiss="modal">No, cancel</button>
+                        </div>
+                    </div>
+                    <!--end::Modal body-->
+                </div>
+                <!--end::Modal content-->
+            </div>
+            <!--end::Modal dialog-->
+        </div>
+        <!--end::Modal - New Card-->
         @endforeach
     </tbody>
     <!--end::Table body-->
 </table>
-
-{{-- <div class="table-responsive-sm">
-    <table class="table table-striped" id="admins-table">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($admins as $admin)
-                <tr>
-                    <td>{{ $role->name }}</td>
-                    <td>
-                        {!! Form::open(['route' => ['admin.roles.destroy', $role->id], 'method' => 'delete']) !!}
-                        <div class='btn-group'>
-                            <a href="{{ route('admin.admins.show', [$admin->id]) }}" class='btn btn-ghost-success'><i
-                                    class="fa fa-eye"></i></a>
-
-                            @can('admins edit')
-                                <a href="{{ route('admin.roles.edit', [$role->id]) }}" class='btn btn-ghost-info'><i
-                                        class="fa fa-edit"></i></a>
-                            @endcan
-                            @if ($admin->id != 1)
-
-                            @can('admins delete')
-                                {!! Form::button('<i class="fa fa-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-ghost-danger', 'onclick' => "return confirm('Are you sure?')"]) !!}
-                            @endcan
-                            @endif
-
-                        </div>
-                        {!! Form::close() !!}
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
-</div> --}}
-
-{{-- <div class="table-responsive-sm">
-    <table class="table table-striped" id="roles-table">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($roles as $role)
-                <tr>
-                    <td>{{ $role->name }}</td>
-                    <td>
-                        {!! Form::open(['route' => ['admin.roles.destroy', $role->id], 'method' => 'delete']) !!}
-                        <div class='btn-group'>
-                            <a href="{{ route('admin.roles.show', [$role->id]) }}" class='btn btn-ghost-success'><i
-                                    class="fa fa-eye"></i></a>
-
-                            @if ($role->id != 1)
-
-                                @can('roles edit')
-                                    <a href="{{ route('admin.roles.edit', [$role->id]) }}" class='btn btn-ghost-info'><i
-                                            class="fa fa-edit"></i></a>
-                                @endcan
-
-                                @can('roles delete')
-                                    {!! Form::button('<i class="fa fa-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-ghost-danger', 'onclick' => "return confirm('Are you sure?')"]) !!}
-                                @endcan
-
-                            @endif
-                        </div>
-                        {!! Form::close() !!}
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
-</div> --}}

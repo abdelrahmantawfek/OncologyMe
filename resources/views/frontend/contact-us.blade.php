@@ -19,7 +19,11 @@
     <div class="container">
         <div class="row">
 
+            @if (count($highlights) || count($latest_news) || count($top_banners) || count($bottom_banners))
             <div class="col-md-8 careerfy-typo-wrap">
+            @else
+            <div class="col-md-12 careerfy-typo-wrap">
+            @endif
                 <div class="careerfy-about-text">
                     <div class="careerfy-contact-info-sec">
                         <h2>Contact Information</h2>
@@ -27,7 +31,7 @@
                             Arab practice.</p>
                         <p>For healthcare professionals only.</p>
                         <ul class="careerfy-contact-info-list">
-                            <li><i class="careerfy-icon careerfy-placeholder"></i> <a href="https://maps.app.goo.gl/xSs4KQ9drppdsJgs7"> 37, Omarat Madinat Al Fath, Al Hadiqah Ad Dawleyah, Embassies District, Nasr City, Cairo Governorate, Egypt <span style="font-size: 12px; text-decoration: underline; float: none;"> Veiw on map </span></a>                                            </li>
+                            <li><i class="careerfy-icon careerfy-placeholder"></i> <a href="https://maps.app.goo.gl/xSs4KQ9drppdsJgs7" target="_blank"> 37, Omarat Madinat Al Fath, Al Hadiqah Ad Dawleyah, Embassies District, Nasr City, Cairo Governorate, Egypt <span style="font-size: 12px; text-decoration: underline; float: none;"> Veiw on map </span></a>                                            </li>
                             <li><i class="careerfy-icon careerfy-mail"></i> <a href="#">Email: Info@oncologyme.com</a></li>
                             <li><i class="careerfy-icon careerfy-technology"></i> Call: +2 0155 945 6778</li>
                         </ul>
@@ -93,7 +97,7 @@
                                      </span>
                                      @enderror
                                 </li>
-                                <li>  {!! Form::submit('supmit', ['class' => 'btn']) !!}</li>
+                                <li>  {!! Form::submit('submit', ['class' => 'btn']) !!}</li>
                             </ul>
                             <div class="clearfix"></div>
                         {!! Form::close() !!}
@@ -101,79 +105,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 tblt-nn">
-                <div class="banr-box">
-                    <img src="img/bnr2.jpg">
-                </div>
-                <div class="topics-box-clmn">
-                    <!-- TIN Calendar -->
-
-                    <div class="topics-box">
-                        <div class="topics-box-header">
-                            <div class="calendar-wrapper">
-                                Oct
-                                <div class="calendar-inner">17</div>
-                            </div>
-                            <h4>Today In OncologyMe</h4>
-                        </div>
-                        <div class="article-home-sidebar">
-                            <h5><a href="single-news-post.html" class="todayinonc">Researchers Discover Predictive Biomarker of Response to Therapy in Patients With Microsatellite Stable Metastatic Colorectal Cancer</a></h5>
-                            <h5><a href="single-news-post.html" class="todayinonc">Computer Platform May Help Match Patients With Cancer to Targeted Therapy Trials</a></h5>
-                            <h5><a href="single-news-post.html" class="todayinonc">Computer Platform May Help Match Patients With Cancer to Targeted Therapy Trials</a></h5>
-
-                            <h5><a href="single-news-post.html" class="todayinonc">Polycystic Ovary Syndrome and Risk of Pancreatic Cancer</a></h5>
-                            <h5><a href="single-news-post.html" class="todayinonc">Neoadjuvant Intensity-Modulated Radiotherapy in Centrally Located Hepatocellular Carcinoma</a></h5>
-                            <div class="link-bottom-tio"><a href="all-news.html" class="todayinonc">View More&nbsp;<span class="triangle-link fa fa-angle-right"></span></a></div>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="topics-box">
-                    <div class="topics-box-header">
-                        <h4>Perspectives</h4>
-                    </div>
-                    <div class="article-home-sidebar">
-                        <h5>
-                            <a href="single-topic-post.html" class="mostRead">
-                                <div class="topic-img"><img src="img/team5.jpg"></div>
-                                <div class="topic-link">Bruce Cheson: Death and Clinical Trials in the Plague Years</div>
-                            </a>
-                        </h5>
-                        <h5>
-                            <a href="single-topic-post.html" class="mostRead">
-                                <div class="topic-img"><img src="img/team4.jpg"></div>
-                                <div class="topic-link">Sergey Kozhukhov, and colleagues on Cancer and War in Ukraine: How the World Can Help Win This Battle</div>
-                            </a>
-                        </h5>
-
-                        <h5>
-                            <a href="single-topic-post.html" class="mostRead">
-                                <div class="topic-img"><img src="img/team2.jpg"></div>
-                                <div class="topic-link">Ronald DePinho: Basic Research Enterprise Needs Adequate Funding to Foster Treatment Innovation</div>
-                            </a>
-                        </h5>
-                        <h5>
-                            <a href="single-topic-post.html" class="mostRead">
-                                <div class="topic-img"><img src="img/team12.jpg"></div>
-                                <div class="topic-link">Daniel Vorobiof and Irad Deutsch: The Value of Managing Aggregated Data From Patients’ Online Communities</div>
-                            </a>
-                        </h5>
-                        <h5>
-                            <a href="single-topic-post.html" class="mostRead">
-                                <div class="topic-img"><img src="img/team12.jpg"></div>
-                                <div class="topic-link">Daniel Vorobiof and Irad Deutsch: The Value of Managing Aggregated Data From Patients’ Online Communities</div>
-                            </a>
-                        </h5>
-                        <div class="link-bottom-tio"><a href="all-topics.html" class="todayinonc">View More&nbsp;<span class="triangle-link fa fa-angle-right"></span></a></div>
-                    </div>
-                </div>
-
-                <div class="banr-box">
-                    <img src="img/bnr2.jpg">
-                </div>
-
-            </div>
+            <!-- sidebar -->
+            @include('partials._sidebar')
 
 
         </div>

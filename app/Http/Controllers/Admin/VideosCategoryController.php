@@ -35,22 +35,37 @@ class VideosCategoryController extends Controller
         // $parent_category = Category::find($request->parent_id);
         $slug = $request->slug;
         $category = Category::create($input);
+        $old_slug = Category::where('slug', strtolower(preg_replace('/[^A-Za-z0-9\-]/', '-', $request->title)))->exists();
         if(is_null($slug)){
-            $old_slug = Category::where('slug', strtolower(preg_replace('/\s+/', '-', $request->title)))->exists();
             if($old_slug){
                 $val = 1;
                 do{
                     $new_slug = $request->title .  ' ' . $val;
-                    $categ_slug = strtolower(preg_replace('/\s+/', '-', $new_slug));
+                    $categ_slug = strtolower(preg_replace('/[^A-Za-z0-9\-]/', '-', $new_slug));
                     $val++;
                 }
                 while(Category::where('slug', $categ_slug)->exists());
             }
             else{
-                $categ_slug = strtolower(preg_replace('/\s+/', '-', $request->title));
+                $categ_slug = strtolower(preg_replace('/[^A-Za-z0-9\-]/', '-', $request->title));
             }
-          
             $category->slug = $categ_slug;
+        }
+        else{
+            if($old_slug){
+                $val = 1;
+                do{
+                    $new_slug = $slug .  ' ' . $val;
+                    $categ_slug = strtolower(preg_replace('/[^A-Za-z0-9\-]/', '-', $new_slug));
+                    $val++;
+                }
+                while(Category::where('slug', $categ_slug)->exists());
+                $category->slug = $categ_slug;
+            }
+            else{
+                $categ_slug = strtolower(preg_replace('/[^A-Za-z0-9\-]/', '-', $slug));
+                $category->slug = $categ_slug;
+            }
         }
 
         // if(isset($parent_category)){
@@ -122,22 +137,37 @@ class VideosCategoryController extends Controller
         $input = $request->validate( Category::$rules );
         $category->fill($request->all());
         $slug = $request->slug;
+        $old_slug = Category::where('slug', strtolower(preg_replace('/[^A-Za-z0-9\-]/', '-', $request->title)))->exists();
         if(is_null($slug)){
-            $old_slug = Category::where('slug', strtolower(preg_replace('/\s+/', '-', $request->title)))->exists();
             if($old_slug){
                 $val = 1;
                 do{
                     $new_slug = $request->title .  ' ' . $val;
-                    $categ_slug = strtolower(preg_replace('/\s+/', '-', $new_slug));
+                    $categ_slug = strtolower(preg_replace('/[^A-Za-z0-9\-]/', '-', $new_slug));
                     $val++;
                 }
                 while(Category::where('slug', $categ_slug)->exists());
             }
             else{
-                $categ_slug = strtolower(preg_replace('/\s+/', '-', $request->title));
+                $categ_slug = strtolower(preg_replace('/[^A-Za-z0-9\-]/', '-', $request->title));
             }
-          
             $category->slug = $categ_slug;
+        }
+        else{
+            if($old_slug){
+                $val = 1;
+                do{
+                    $new_slug = $slug .  ' ' . $val;
+                    $categ_slug = strtolower(preg_replace('/[^A-Za-z0-9\-]/', '-', $new_slug));
+                    $val++;
+                }
+                while(Category::where('slug', $categ_slug)->exists());
+                $category->slug = $categ_slug;
+            }
+            else{
+                $categ_slug = strtolower(preg_replace('/[^A-Za-z0-9\-]/', '-', $slug));
+                $category->slug = $categ_slug;
+            }
         }
         
         $featured_image = $request->validate(['featured_image' => 'mimes:jpg,jpeg,png|max:5048']);

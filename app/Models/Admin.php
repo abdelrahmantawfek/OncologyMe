@@ -51,7 +51,6 @@ class Admin extends Authenticatable
     public static $rules = [
         'name' => 'required',
         'email' => 'required|email|unique:admins,email',
-        'mobile' => 'required',
         'password' => 'required|confirmed',
         'roles' => 'required|array'
     ];

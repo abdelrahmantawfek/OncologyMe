@@ -31,13 +31,6 @@
             <!--end::Checkbox-->
             <!--begin::User=-->
             <td class="">
-                {{-- <!--begin:: Avatar -->
-                <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
-                    <a href="{{ route('admin.topics.edit', $topic->id) }}">
-                        <div class="symbol-label fs-3 bg-light-danger text-danger">{{ strtoupper(substr($topic->title ?? '', 0, 1)) }}</div>
-                    </a>
-                </div>
-                <!--end::Avatar--> --}}
                 <!--begin::User details-->
                 <div class="d-flex flex-column">
                     <a href="{{ route('admin.podcastscategories.edit', $category->id) }}" class="text-gray-800 text-hover-primary mb-1">{{ $category->title ?? ''}}</a>
@@ -46,21 +39,9 @@
             </td>
             <!--end::User=-->
             <!--begin::Role=-->
-            {{-- <td>{{ ($category->is_parent == true) ? 'Yes' : 'No'}}</td> --}}
-            {{-- <td>{{ ($category->parent_id == 0) ? '-' : $category->parent_name}}</td> --}}
             <td>{{ ($category->is_main == true) ? 'Yes' : 'No'}}</td>
             <!--end::Role=-->
             <!--begin::Last login=-->
-            {{-- <td>
-                {{ $category->meta_title ?? ''}}
-            </td> --}}
-            <!--end::Last login=-->
-            <!--begin::Two step=-->
-            {{-- <td> {{ $category->meta_desc ?? ''}}</td> --}}
-            <!--end::Two step=-->
-            {{-- <!--begin::Two step=-->
-            <td> {{ $topic->meta_keywords ?? ''}}</td>
-            <!--end::Two step=--> --}}
             <!--begin::Joined-->
             <td>{{ $category->created_at->format('M, d, Y') ?? ''}}</td>
             <!--begin::Joined-->

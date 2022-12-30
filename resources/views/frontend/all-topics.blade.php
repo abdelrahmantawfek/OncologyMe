@@ -18,7 +18,12 @@
     <div class="container">
         <div class="row">
 
+            @if (count($highlights) || count($latest_news) || count($top_banners) || count($bottom_banners))
             <div class="col-md-8">
+            @else
+            <div class="col-md-12">
+            @endif
+            
                 @include('partials._main_banner')
 
                 <div class="m-t-20"></div>
@@ -53,9 +58,8 @@
 
             </div>
 
-            <div class="col-md-4 tblt-nn">
-                @include('partials._sidebar')
-            </div>
+            <!-- sidebar -->
+            @include('partials._sidebar')
 
         </div>
     </div>

@@ -16,26 +16,6 @@ class PageSeeder extends Seeder
     public function run()
     {
 
-        $announcements = array(
-            array('title' => 'one', 'url' => 'google.com', 'place' => '1', 'desktop_image' => 'bnr1.jpg', 'mob_image' => 'bnr2.jpg', 'created_at' => '2022-08-19 04:07:05', 'updated_at' => '2022-08-19 05:32:27'),
-            array('title' => 'one', 'url' => 'google.com', 'place' => '1', 'desktop_image' => 'bnr1.jpg', 'mob_image' => 'bnr2.jpg', 'created_at' => '2022-08-19 04:07:05', 'updated_at' => '2022-08-19 05:32:27'),
-            array('title' => 'one', 'url' => 'google.com', 'place' => '1', 'desktop_image' => 'bnr1.jpg', 'mob_image' => 'bnr2.jpg', 'created_at' => '2022-08-19 04:07:05', 'updated_at' => '2022-08-19 05:32:27'),
-            array('title' => 'one', 'url' => 'google.com', 'place' => '1', 'desktop_image' => 'bnr1.jpg', 'mob_image' => 'bnr2.jpg', 'created_at' => '2022-08-19 04:07:05', 'updated_at' => '2022-08-19 05:32:27'),
-            array('title' => 'one', 'url' => 'google.com', 'place' => '1', 'desktop_image' => 'bnr1.jpg', 'mob_image' => 'bnr2.jpg', 'created_at' => '2022-08-19 04:07:05', 'updated_at' => '2022-08-19 05:32:27'),
-            array('title' => 'one', 'url' => 'google.com', 'place' => '1', 'desktop_image' => 'bnr1.jpg', 'mob_image' => 'bnr2.jpg', 'created_at' => '2022-08-19 04:07:05', 'updated_at' => '2022-08-19 05:32:27'),
-            array('title' => 'one', 'url' => 'google.com', 'place' => '2', 'desktop_image' => 'bnr2.jpg', 'mob_image' => 'bnr2.jpg', 'created_at' => '2022-08-19 04:07:05', 'updated_at' => '2022-08-19 05:32:27'),
-            array('title' => 'one', 'url' => 'google.com', 'place' => '2', 'desktop_image' => 'bnr2.jpg', 'mob_image' => 'bnr2.jpg', 'created_at' => '2022-08-19 04:07:05', 'updated_at' => '2022-08-19 05:32:27'),
-            array('title' => 'one', 'url' => 'google.com', 'place' => '2', 'desktop_image' => 'bnr2.jpg', 'mob_image' => 'bnr2.jpg', 'created_at' => '2022-08-19 04:07:05', 'updated_at' => '2022-08-19 05:32:27'),
-            array('title' => 'one', 'url' => 'google.com', 'place' => '2', 'desktop_image' => 'bnr2.jpg', 'mob_image' => 'bnr2.jpg', 'created_at' => '2022-08-19 04:07:05', 'updated_at' => '2022-08-19 05:32:27'),
-            array('title' => 'one', 'url' => 'google.com', 'place' => '2', 'desktop_image' => 'bnr2.jpg', 'mob_image' => 'bnr2.jpg', 'created_at' => '2022-08-19 04:07:05', 'updated_at' => '2022-08-19 05:32:27'),
-            array('title' => 'one', 'url' => 'google.com', 'place' => '2', 'desktop_image' => 'bnr2.jpg', 'mob_image' => 'bnr2.jpg', 'created_at' => '2022-08-19 04:07:05', 'updated_at' => '2022-08-19 05:32:27'),
-            array('title' => 'one', 'url' => 'google.com', 'place' => '3', 'desktop_image' => 'bnr2.jpg', 'mob_image' => 'bnr2.jpg', 'created_at' => '2022-08-19 04:07:05', 'updated_at' => '2022-08-19 05:32:27'),
-            array('title' => 'one', 'url' => 'google.com', 'place' => '3', 'desktop_image' => 'bnr2.jpg', 'mob_image' => 'bnr2.jpg', 'created_at' => '2022-08-19 04:07:05', 'updated_at' => '2022-08-19 05:32:27'),
-            array('title' => 'one', 'url' => 'google.com', 'place' => '3', 'desktop_image' => 'bnr2.jpg', 'mob_image' => 'bnr2.jpg', 'created_at' => '2022-08-19 04:07:05', 'updated_at' => '2022-08-19 05:32:27'),
-            array('title' => 'one', 'url' => 'google.com', 'place' => '3', 'desktop_image' => 'bnr2.jpg', 'mob_image' => 'bnr2.jpg', 'created_at' => '2022-08-19 04:07:05', 'updated_at' => '2022-08-19 05:32:27'),
-            array('title' => 'one', 'url' => 'google.com', 'place' => '3', 'desktop_image' => 'bnr2.jpg', 'mob_image' => 'bnr2.jpg', 'created_at' => '2022-08-19 04:07:05', 'updated_at' => '2022-08-19 05:32:27'),
-        );
-
         $pages = array(
             array('id' => '1', 'title' => 'Home', 'slug' => 'home', 'meta_title' => 'Home', 'meta_keywords' => 'Home', 'meta_desc' => 'Home', 'is_main' => '1', 'status' => '1', 'created_at' => '2022-08-19 04:07:05', 'updated_at' => '2022-08-19 05:32:27'),
             array('id' => '2', 'title' => 'About OncologyMe', 'slug' => 'about-oncology-me', 'meta_title' => 'About OncologyMe', 'meta_keywords' => 'About OncologyMe', 'meta_desc' => 'About OncologyMe', 'is_main' => '0', 'status' => '1', 'created_at' => '2022-08-19 04:07:05', 'updated_at' => '2022-08-19 05:32:27'),
@@ -67,7 +47,6 @@ class PageSeeder extends Seeder
         );
 
         DB::table('pages')->insert($pages);
-        DB::table('announcements')->insert($announcements);
         DB::table('sections')->insert($sections);
     }
 }

@@ -27,7 +27,7 @@
                 <!--end::Item-->
                 <!--begin::Item-->
                 <li class="breadcrumb-item text-muted">
-                    <a href="{{ route('admin.news.index') }}" class="text-muted text-hover-primary">News</a>
+                    <a href="{{ route('admin.articles.index') }}" class="text-muted text-hover-primary">Articles</a>
                 </li>
                 <!--end::Item-->
                 <!--begin::Item-->

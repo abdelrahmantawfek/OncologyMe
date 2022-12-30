@@ -19,6 +19,8 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Auth::routes();
+Route::get('register', [App\Http\Controllers\RegisterController::class, 'close_defualt_register']);
+Route::get('signup', [App\Http\Controllers\RegisterController::class, 'register'])->name('register');
 Route::post('signup', [App\Http\Controllers\RegisterController::class, 'post_signup'])->name('postSignup');
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -63,7 +65,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function(){
         Route::post('ckeditor/upload', 'CKEditorController@upload')->name('ckeditor.image-upload');
 
         // contacts
-        Route::get('contacts', [App\Http\Controllers\Admin\ContactController::class ,'index'])->name('contacts.list');
+        Route::resource('contacts', App\Http\Controllers\Admin\ContactController::class);
+        // Route::get('contacts/{id}', [App\Http\Controllers\Admin\ContactController::class ,'show'])->name('contacts.single');
+        // Route::get('contacts/{id}', [App\Http\Controllers\Admin\ContactController::class ,'destroy'])->name('contacts.destroy');
+
 
     });
 

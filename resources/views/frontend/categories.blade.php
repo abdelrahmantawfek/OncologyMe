@@ -27,18 +27,20 @@
                      <div class="row">
                             <div class="col-md-3"></div>
                             <div class="col-md-6">
+                                @if (count($data['other-categories']))
                                 {!! Form::open(['route' => [ 'searchCategory', $data['category']->post_type], 'method' => 'GET', 'id' => 'select_category']) !!}
                                 <div class="form-group">
                                     {!! Form::select('category', $data['other-categories'], null, ['class' => 'form-control', 'id' => 'category', 'placeholder' => 'Select a category'] ) !!}
                                 </div>
                                 {!! Form::close() !!}
+                                @endif
                             </div>
                             <div class="col-md-3"></div>
                             <div class="clearfix"></div>
                     </div>
                 </div>
                 <div class="clearfix"></div>
-                @include('partials._main_banner')
+                @include('partials._video_banner')
 
                 <hr style="margin-top: 40px;">
                 <div class="articles-section">
@@ -51,7 +53,7 @@
                                     <div class="article-item">
                                         <div class="article-tags">
                                             <div class="video-thumbnail pos-rltv">
-                                                <a href="{{$post->post_type.'/'.$post->slug}}">
+                                                <a href="{{'/'.$post->post_type.'/'.$post->slug}}">
                                                     @foreach ($post->postmeta->where('meta_key', '_featured_image') as $key => $value)
                                                     <img src="{{ asset('uploads/'.$value->meta_value )}}" alt="{{$value->meta_value}}">
                                                     @endforeach
@@ -64,7 +66,7 @@
         
                                         </div>
                                         <div class="clearfix"></div>
-                                        <h2><a href="{{$post->post_type.'/'.$post->slug}}">{{ implode(' ', array_slice(explode(' ', $post->title), 0, 10)) }}@if ( str_word_count($post->title) > 10 )...@endif</a></h2>
+                                        <h2><a href="{{'/'.$post->post_type.'/'.$post->slug}}">{{ implode(' ', array_slice(explode(' ', $post->title), 0, 10)) }}@if ( str_word_count($post->title) > 10 )...@endif</a></h2>
                                         <h4>
                                             <span> {{ $post->author ?? ''}} </span>
                                             <text>&nbsp;/&nbsp;<span> {{ $post->created_at->format('M d, Y') ?? ''}} </span></text>
@@ -91,7 +93,11 @@
 <div class="careerfy-main-section careerfy-counter-full topics-section">
     <div class="container">
         <div class="row">
+            @if (count($highlights) || count($latest_news) || count($top_banners) || count($bottom_banners))
             <div class="col-md-8">
+            @else
+            <div class="col-md-12">
+            @endif
                 @include('partials._main_banner')
 
                 <div class="m-t-20"></div>
@@ -112,7 +118,9 @@
                         <div class="article-item">
                             @if (Request::is('podcasts'))
                             <div class="article-img-text combined-txt-img">
-                                <img src="{{ asset('front-assets/img/team1.jpg') }}" alt="">
+                                @foreach ($post->postmeta->where('meta_key', '_featured_image') as $key => $value)
+                                <img src="{{ asset('uploads/'.$value->meta_value )}}" alt="{{$value->meta_value}}">
+                                @endforeach
                                 <div class="new-post-sec">
 
                                     <div class="clearfix"></div>
@@ -123,10 +131,15 @@
                                     </div>
                                     <h2><a href="{{$post->post_type.'/'.$post->slug}}">{{ $post->title ?? ''}}</a></h2>
 
-                                    <p>{{ $post->excerpt ?? ''}}</p>
+                                    <div class="article-img-text">
+                                        @foreach ($post->postmeta->where('meta_key', '_featured_image') as $key => $value)
+                                        <img src="{{ asset('uploads/'.$value->meta_value )}}" alt="{{$value->meta_value}}">
+                                        @endforeach
+                                        <p>{{ implode(' ', array_slice(explode(' ', $post->excerpt), 0, 20)) }}@if ( str_word_count($post->excerpt) > 20 )...@endif</p>
+                                    </div>
                                     <div class="podcast-link">
-                                            <a href="{{ '/'.$post->post_type.'/'.$post->slug}}">Listen now <i class="fa fa-headphones"></i></a>
-                                        </div>
+                                        <a href="{{ '/'.$post->post_type.'/'.$post->slug}}">Listen now <i class="fa fa-headphones"></i></a>
+                                    </div>
                                     
                                 </div>
                             </div>
@@ -144,7 +157,12 @@
                                 <text>&nbsp;/&nbsp;<span> {{ $post->created_at->format('M d, Y') ?? ''}} </span></text>
 
                             </h4>
-                            <p>{{ $post->excerpt ?? ''}}</p>
+                            <div class="article-img-text">
+                                @foreach ($post->postmeta->where('meta_key', '_featured_image') as $key => $value)
+                                <img src="{{ asset('uploads/'.$value->meta_value )}}" alt="{{$value->meta_value}}">
+                                @endforeach
+                                <p>{{ implode(' ', array_slice(explode(' ', $post->excerpt), 0, 20)) }}@if ( str_word_count($post->excerpt) > 20 )...@endif</p>
+                            </div>
                             @endif
                         </div>
                     @endforeach
@@ -152,11 +170,8 @@
                 </div>
 
             </div>
-
-            <div class="col-md-4 tblt-nn">
-                @include('partials._sidebar')
-            </div>
-
+            <!-- sidebar -->
+            @include('partials._sidebar')
         </div>
     </div>
 </div>

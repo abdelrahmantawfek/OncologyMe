@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Post;
 use App\Models\Postmeta;
+use App\Models\Topic;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Laracasts\Flash\Flash;
@@ -14,13 +16,17 @@ class ArticlesController extends Controller
     public function index(Request $request)
     {
         /** @var Post $posts */
-        $posts = Post::where('post_type', 'articles')->get();
-        return view('admin.articles.index', compact('posts'));
+        $posts = Post::where('post_type', 'articles')->paginate(10);
+        $all_topics = Topic::where('is_parent', 0)->get();
+        $categories = Category::where('post_type', 'articles')->get();
+        return view('admin.articles.index', compact('posts', 'all_topics', 'categories'));
     }
 
     public function create()
     {
-        return view('admin.articles.create');
+        $all_topics = Topic::where('is_parent', 0)->get();
+        $categories = Category::where('post_type', 'articles')->get();
+        return view('admin.articles.create', compact('all_topics', 'categories'));
     }
 
     public function store(Request $request)
@@ -44,28 +50,58 @@ class ArticlesController extends Controller
         $slug = $request->slug;
         $post = Post::create([
             'title' => $request->title,
-            'slug' => $request->slug,
+            'slug' => preg_replace('/[^A-Za-z0-9\-]/', '-', $request->slug),
             'content' => $request->content,
             'excerpt' => $request->excerpt,
             'author' => $request->author,
         ]);
 
+        $old_slug = Post::where('slug', strtolower(preg_replace('/[^A-Za-z0-9\-]/', '-', $request->title)))->exists();
         if(is_null($slug)){
-            $old_slug = Post::where('slug', strtolower(preg_replace('/\s+/', '-', $request->title)))->exists();
             if($old_slug){
                 $val = 1;
                 do{
                     $new_slug = $request->title .  ' ' . $val;
-                    $post_slug = strtolower(preg_replace('/\s+/', '-', $new_slug));
+                    $categ_slug = strtolower(preg_replace('/[^A-Za-z0-9\-]/', '-', $new_slug));
                     $val++;
                 }
-                while(Post::where('slug', $post_slug)->exists());
+                while(Category::where('slug', $categ_slug)->exists());
             }
             else{
-                $post_slug = strtolower(preg_replace('/\s+/', '-', $request->title));
+                $categ_slug = strtolower(preg_replace('/[^A-Za-z0-9\-]/', '-', $request->title));
             }
-           
-            $post->slug = $post_slug;
+            $post->slug = $categ_slug;
+        }
+        if(is_null($slug)){
+            if($old_slug){
+                $val = 1;
+                do{
+                    $new_slug = $request->title .  ' ' . $val;
+                    $categ_slug = strtolower(preg_replace('/[^A-Za-z0-9\-]/', '-', $new_slug));
+                    $val++;
+                }
+                while(Post::where('slug', $categ_slug)->exists());
+            }
+            else{
+                $categ_slug = strtolower(preg_replace('/[^A-Za-z0-9\-]/', '-', $request->title));
+            }
+            $post->slug = $categ_slug;
+        }
+        else{
+            if($old_slug){
+                $val = 1;
+                do{
+                    $new_slug = $slug .  ' ' . $val;
+                    $categ_slug = strtolower(preg_replace('/[^A-Za-z0-9\-]/', '-', $new_slug));
+                    $val++;
+                }
+                while(Post::where('slug', $categ_slug)->exists());
+                $post->slug = $categ_slug;
+            }
+            else{
+                $categ_slug = strtolower(preg_replace('/[^A-Za-z0-9\-]/', '-', $slug));
+                $post->slug = $categ_slug;
+            }
         }
 
         $post->post_type = 'articles';
@@ -119,6 +155,18 @@ class ArticlesController extends Controller
             $post_meta->save();
         }
 
+        if($request->topic){
+            foreach ($request->topic as $item) {
+                 $post->topics()->attach($item);
+             }
+         }
+                 
+        if($request->category){
+            foreach ($request->category as $item) {
+                 $post->categories()->attach($item);
+             }
+         }
+
         DB::commit();
 
         Flash::success('Post saved successfully.');
@@ -144,14 +192,22 @@ class ArticlesController extends Controller
     {
         /** @var Post $Category */
         $post = Post::find($id);
-
+        $all_topics = Topic::where('is_parent', 0)->get();
+        $categories = Category::where('post_type', 'articles')->get();
+        $keypoints = $post->postmeta->where('meta_key', '_key_points')->pluck('meta_value');
+        $featured_image = $post->postmeta->where('meta_key', '_featured_image')->pluck('meta_value');
+        $pdf = $post->postmeta->where('meta_key', '_pdf')->pluck('meta_value');
+        $selected_topics = $post->topics->pluck('id');
+        $selected_cats = $post->categories->pluck('id');
+        
         if (empty($post)) {
             Flash::error('Post not found');
 
             return redirect(route('admin.articles.index'));
         }
 
-        return view('admin.articles.edit', compact('post'));
+        return view('admin.articles.edit', compact('post', 'all_topics', 'categories', 'featured_image', 'pdf', 'keypoints'));
+
     }
 
     public function update($id, Request $request)
@@ -183,27 +239,42 @@ class ArticlesController extends Controller
 
         $slug = $request->slug;
         $post->title = $request->title;
-        $post->slug = $request->slug;
+        $post->slug = preg_replace('/[^A-Za-z0-9\-]/', '-', $request->slug);
         $post->content = $request->content;
         $post->excerpt = $request->excerpt;
         $post->author = $request->author;
         $slug = $request->slug;
+        $old_slug = Post::where('slug', strtolower(preg_replace('/[^A-Za-z0-9\-]/', '-', $request->title)))->exists();
         if(is_null($slug)){
-            $old_slug = Post::where('slug', strtolower(preg_replace('/\s+/', '-', $request->title)))->exists();
             if($old_slug){
                 $val = 1;
                 do{
                     $new_slug = $request->title .  ' ' . $val;
-                    $post_slug = strtolower(preg_replace('/\s+/', '-', $new_slug));
+                    $categ_slug = strtolower(preg_replace('/[^A-Za-z0-9\-]/', '-', $new_slug));
                     $val++;
                 }
-                while(Post::where('slug', $post_slug)->exists());
+                while(Post::where('slug', $categ_slug)->exists());
             }
             else{
-                $post_slug = strtolower(preg_replace('/\s+/', '-', $request->title));
+                $categ_slug = strtolower(preg_replace('/[^A-Za-z0-9\-]/', '-', $request->title));
             }
-           
-            $post->slug = $post_slug;
+            $post->slug = $categ_slug;
+        }
+        else{
+            if($old_slug){
+                $val = 1;
+                do{
+                    $new_slug = $slug .  ' ' . $val;
+                    $categ_slug = strtolower(preg_replace('/[^A-Za-z0-9\-]/', '-', $new_slug));
+                    $val++;
+                }
+                while(Post::where('slug', $categ_slug)->exists());
+                $post->slug = $categ_slug;
+            }
+            else{
+                $categ_slug = strtolower(preg_replace('/[^A-Za-z0-9\-]/', '-', $slug));
+                $post->slug = $categ_slug;
+            }
         }
         $post->save();
 
@@ -230,6 +301,18 @@ class ArticlesController extends Controller
 
             // dd($post_meta);
         }
+
+        if($request->topic){
+            foreach ($request->topic as $item) {
+                 $post->topics()->attach($item);
+             }
+         }
+                 
+        if($request->category){
+            foreach ($request->category as $item) {
+                 $post->categories()->attach($item);
+             }
+         }
 
         DB::commit();
 

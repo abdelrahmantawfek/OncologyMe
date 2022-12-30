@@ -41,7 +41,7 @@ class RoleController extends Controller
 
     public function store(Request $request)
     {
-        $input = $request->all();
+        $input = $request->validate( Role::$rules );
 
         /** @var Role $role */
         $role = Role::create($input);

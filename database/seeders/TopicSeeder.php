@@ -18,7 +18,7 @@ class TopicSeeder extends Seeder
     {
         $parent_topics = array(
             array('title' => 'Solid Tumors', 'slug' => 'solid-tumors', 'is_parent' => true, 'meta_title' => null, 'meta_desc' => null, 'created_at' => '2022-08-19 04:07:05', 'updated_at' => '2022-08-19 05:32:27'),
-            array('title' => 'Hematologic Hematologic', 'slug' => 'hematologic-hematologic', 'is_parent' => true, 'meta_title' => null, 'meta_desc' => null, 'created_at' => '2022-08-19 04:07:05', 'updated_at' => '2022-08-19 05:32:27'),
+            array('title' => 'Hematologic', 'slug' => 'hematologic', 'is_parent' => true, 'meta_title' => null, 'meta_desc' => null, 'created_at' => '2022-08-19 04:07:05', 'updated_at' => '2022-08-19 05:32:27'),
             array('title' => 'Issues in Oncology', 'slug' => 'issues-in-oncology', 'is_parent' => true, 'meta_title' => null, 'meta_desc' => null, 'created_at' => '2022-08-19 04:07:05', 'updated_at' => '2022-08-19 05:32:27'),
             array('title' => 'Supportive Care', 'slug' => 'supportive-care', 'is_parent' => true, 'meta_title' => null, 'meta_desc' => null, 'created_at' => '2022-08-19 04:07:05', 'updated_at' => '2022-08-19 05:32:27'),
         );

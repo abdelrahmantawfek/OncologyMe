@@ -26,7 +26,7 @@
                 </li>
                 <!--end::Item-->
                 <!--begin::Item-->
-                <li class="breadcrumb-item text-dark">Create Post</li>
+                <li class="breadcrumb-item text-dark">Add Post</li>
                 <!--end::Item-->
             </ul>
             <!--end::Breadcrumb-->            
@@ -49,9 +49,9 @@
                                 @endforeach
                             </ul>
                         </div>
-                        @endif
-                      <div class="card">
-                          <div class="card-body">
+                    @endif
+                      <div class="">
+                          <div class="">
                               {!! Form::open(['route' => 'admin.news.store', 'files' => true]) !!}
 
                                   <div class="row">

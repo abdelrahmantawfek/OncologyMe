@@ -1,8 +1,6 @@
 @extends('layouts.admin-app')
 
 @section('content')
- <!--begin::Content-->
- <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
     <!--begin::Toolbar-->
     <div class="toolbar" id="kt_toolbar">
         <!--begin::Container-->
@@ -30,8 +28,9 @@
     </div>
     <!--end::Toolbar-->
 
-    <div class="container-fluid">
-        <div class="animated fadeIn">
+    <div class="post d-flex flex-column-fluid" id="kt_post">
+        <!--begin::Container-->
+        <div id="kt_content_container" class="container-xxl">
               <div class="row">
                   <div class="col-lg-12">
                     @if ($errors->any())
@@ -43,8 +42,8 @@
                             </ul>
                         </div>
                     @endif
-                      <div class="card">
-                        <div class="card-body">
+                      <div class="">
+                        <div class="">
                             {!! Form::model($post, ['route' => ['admin.articles.update', $post->id], 'method' => 'patch', 'files' => true]) !!}
 
                                   <div class="row">
@@ -59,7 +58,5 @@
          </div>
   </div>
 
-</div>
-<!--end::Content-->
      
 @endsection

@@ -18,7 +18,12 @@
     <div class="container">
         <div class="row">
 
-            <div class="col-md-8">
+            @if (count($highlights) || count($latest_news) || count($top_banners) || count($bottom_banners))
+            <div class="col-md-8 careerfy-typo-wrap">
+            @else
+            <div class="col-md-12 careerfy-typo-wrap">
+            @endif
+            
                 <div class="careerfy-typo-wrap categ-title">
 
                     <h3><span>Search Results</span></h3>
@@ -73,9 +78,8 @@
                 </div>
             </div>
 
-            <div class="col-md-4 tblt-nn">
-                @include('partials._sidebar')
-            </div>
+            <!-- sidebar -->
+            @include('partials._sidebar')
 
         </div>
     </div>

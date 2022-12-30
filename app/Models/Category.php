@@ -46,8 +46,6 @@ class Category extends Model
         'slug' => 'nullable|unique:categories',
         'featured_image' => 'nullable',
         'is_main' => 'integer',
-        // 'is_parent' => 'nullable',
-        // 'parent_id' => 'nullable',
         'meta_title' => 'nullable',
         'slug' => 'nullable',
         'meta_desc' => 'nullable',

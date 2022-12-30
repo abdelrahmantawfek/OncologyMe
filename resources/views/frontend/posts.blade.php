@@ -102,7 +102,11 @@
 <div class="careerfy-main-section careerfy-counter-full topics-section">
     <div class="container">
         <div class="row">
+            @if (count($highlights) || count($latest_news) || count($top_banners) || count($bottom_banners))
             <div class="col-md-8">
+            @else
+            <div class="col-md-12">
+            @endif
                 @include('partials._main_banner')
 
                 <div class="m-t-20"></div>
@@ -123,7 +127,6 @@
                         <div class="article-item">
                             @if (Request::is('podcasts'))
                             <div class="article-img-text combined-txt-img">
-                                <img src="{{ asset('front-assets/img/team1.jpg') }}" alt="">
                                 <div class="new-post-sec">
 
                                     <div class="clearfix"></div>
@@ -134,10 +137,15 @@
                                     </div>
                                     <h2><a href="{{'/'.$post->post_type.'/'.$post->slug}}">{{ $post->title ?? ''}}</a></h2>
 
-                                    <p>{{ $post->excerpt ?? ''}}</p>
+                                    <div class="article-img-text">
+                                        @foreach ($post->postmeta->where('meta_key', '_featured_image') as $key => $value)
+                                        <img src="{{ asset('uploads/'.$value->meta_value )}}" alt="{{$value->meta_value}}">
+                                        @endforeach
+                                        <p>{{ implode(' ', array_slice(explode(' ', $post->excerpt), 0, 20)) }}@if ( str_word_count($post->excerpt) > 20 )...@endif</p>
+                                    </div>
                                     <div class="podcast-link">
-                                            <a href="{{ '/'.$post->post_type.'/'.$post->slug}}">Listen now <i class="fa fa-headphones"></i></a>
-                                        </div>
+                                        <a href="{{ '/'.$post->post_type.'/'.$post->slug}}">Listen now <i class="fa fa-headphones"></i></a>
+                                    </div>
                                     
                                 </div>
                             </div>
@@ -155,7 +163,12 @@
                                 <text>&nbsp;/&nbsp;<span> {{ $post->created_at->format('M d, Y') ?? ''}} </span></text>
 
                             </h4>
-                            <p>{{ $post->excerpt ?? ''}}</p>
+                            <div class="article-img-text">
+                                @foreach ($post->postmeta->where('meta_key', '_featured_image') as $key => $value)
+                                <img src="{{ asset('uploads/'.$value->meta_value )}}" alt="{{$value->meta_value}}">
+                                @endforeach
+                                <p>{{ implode(' ', array_slice(explode(' ', $post->excerpt), 0, 20)) }}@if ( str_word_count($post->excerpt) > 20 )...@endif</p>
+                            </div>
                             @endif
                         </div>
                     @endforeach
@@ -164,9 +177,8 @@
 
             </div>
 
-            <div class="col-md-4 tblt-nn">
-                @include('partials._sidebar')
-            </div>
+            <!-- sidebar -->
+            @include('partials._sidebar')
 
         </div>
     </div>

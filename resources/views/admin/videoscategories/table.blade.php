@@ -46,21 +46,11 @@
             </td>
             <!--end::User=-->
             <!--begin::Role=-->
-            {{-- <td>{{ ($category->is_parent == true) ? 'Yes' : 'No'}}</td> --}}
-            {{-- <td>{{ ($category->parent_id == 0) ? '-' : $category->parent_name}}</td> --}}
+           
             <td>{{ ($category->is_main == true) ? 'Yes' : 'No'}}</td>
             <!--end::Role=-->
             <!--begin::Last login=-->
-            {{-- <td>
-                {{ $category->meta_title ?? ''}}
-            </td> --}}
-            <!--end::Last login=-->
-            <!--begin::Two step=-->
-            {{-- <td> {{ $category->meta_desc ?? ''}}</td> --}}
-            <!--end::Two step=-->
-            {{-- <!--begin::Two step=-->
-            <td> {{ $topic->meta_keywords ?? ''}}</td>
-            <!--end::Two step=--> --}}
+           
             <!--begin::Joined-->
             <td>{{ $category->created_at->format('M, d, Y') ?? ''}}</td>
             <!--begin::Joined-->

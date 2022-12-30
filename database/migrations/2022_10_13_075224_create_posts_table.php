@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->string('slug')->unique()->nullable();
-            $table->string('excerpt')->nullable();
+            $table->text('title');
+            $table->string('slug')->nullable();
+            $table->text('excerpt')->nullable();
             $table->text('content')->nullable();
             $table->string('author')->nullable();
             $table->string('post_type')->nullable();

@@ -81,7 +81,7 @@ class PageController extends Controller
         $input = $request->validate([
             'name' => 'required',
             'email' => 'required|email|regex:/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}/',
-            'phone' => 'required|regex:/(00)[0-9][0-9]{9}/',
+            'phone' => 'required|regex:/[0-9][0-9]{9}/',
             'subject' => 'required',
             'message' => 'required',
         ]);

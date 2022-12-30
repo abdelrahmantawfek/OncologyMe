@@ -29,7 +29,7 @@
                 </div>
             </div>
             <div class="col-md-6 careerfy-typo-wrap">
-                <div class="careerfy-about-thumb"><img src="img/vid3.jpg"></div>
+                <div class="careerfy-about-thumb"><img src="{{ asset('front-assets/img/vid3.jpg') }}"></div>
             </div>
 
 
@@ -81,7 +81,7 @@
                 </div>
             </div>
             <div class="col-md-6 careerfy-typo-wrap">
-                <div class="careerfy-about-thumb"><img src="img/vid3.jpg"></div>
+                <div class="careerfy-about-thumb"><img src="{{ asset('front-assets/img/vid3.jpg') }}"></div>
             </div>
 
 

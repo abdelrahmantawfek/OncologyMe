@@ -1,142 +1,139 @@
-<!-- Name Field -->
-<div class="form-group col-sm-12">
-    {!! Form::label('title', 'Title:') !!}
-    {!! Form::text('title', null, ['class' => 'form-control']) !!}
-</div>
-
-<!-- slug Field -->
-<div class="form-group col-sm-12">
-    {!! Form::label('slug', 'Slug:') !!}
-    {!! Form::text('slug', null, ['class' => 'form-control']) !!}
-</div>
-
-<!-- Image Field -->
-<div class="form-group col-sm-12">
-    {!! Form::label('image', 'Featured Image:') !!}
-    {!! Form::file('image', null, ['class' => 'form-control']) !!}
-</div>
-
-<!-- PDF Field -->
-<div class="form-group col-sm-12">
-    {!! Form::label('pdf', 'PDF:') !!}
-    {!! Form::file('pdf', null, ['class' => 'form-control']) !!}
-</div>
-
-<!-- Key Points Field -->
-<div class="form-group col-sm-12">
-    {!! Form::label('key_points', 'Key Points:') !!}
-    {!! Form::textarea('key_points', null, ['class' => 'form-control']) !!}
-</div>
-
-<!-- Content Field -->
-<div class="form-group col-sm-12 col-lg-12">
-    {!! Form::label('content', 'Content:') !!}
-    {!! Form::textarea('content', null, ['class' => 'form-control ckeditor']) !!}
-</div>
-
-<!-- Excerpt Field -->
-<div class="form-group col-sm-12">
-    {!! Form::label('excerpt', 'Excerpt:') !!}
-    {!! Form::textarea('excerpt', null, ['class' => 'form-control']) !!}
-</div>
-
-<!-- Author Field -->
-<div class="form-group col-sm-12">
-    {!! Form::label('author', 'Author:') !!}
-    {!! Form::text('author', null, ['class' => 'form-control']) !!}
-</div>
-
-<!-- Meta title Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('meta_title', 'Meta title:') !!}
-    {!! Form::text('meta_title', null, ['class' => 'form-control']) !!}
-</div>
-
-
-<!-- Meta description Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('meta_desc', 'Meta description:') !!}
-    {!! Form::text('meta_desc', null, ['class' => 'form-control']) !!}
-</div>
-
-<!-- Topics Field -->
-<div class="form-group col-sm-12">
-    {!! Form::label('topics', 'Topics:') !!}
-
-    <div class="row">
-        @foreach ($all_topics as $topic)
-            <div class="col-sm-2">
-                {!! Form::checkbox('topic[]', $topic->id, null, ['id' => 'topic-' . $topic->id]) !!}
-                {!! Form::label('topic-' . $topic->id, $topic->title) !!}
+<div class="col-xl-9">
+    <div class="card">
+        <div class="card-body">
+            <!-- Name Field -->
+            <div class="form-group col-sm-12 fv-row mb-10 fv-plugins-icon-container">
+                {!! Form::label('title', 'Title :', ['class' => 'form-label fs-6 fw-bolder text-dark']) !!}
+                {!! Form::text('title', null, ['class' => 'form-control']) !!}
             </div>
-        @endforeach
+
+            <!-- slug Field -->
+            <div class="form-group col-sm-12 fv-row mb-10 fv-plugins-icon-container">
+                {!! Form::label('slug', 'Slug :', ['class' => 'form-label fs-6 fw-bolder text-dark']) !!}
+                {!! Form::text('slug', null, ['class' => 'form-control']) !!}
+            </div>
+
+            <!-- Content Field -->
+            <div class="form-group col-sm-12 col-lg-12 fv-row mb-10 fv-plugins-icon-container">
+                {!! Form::label('content', 'Content :', ['class' => 'form-label fs-6 fw-bolder text-dark']) !!}
+                {!! Form::textarea('content', null, ['class' => 'form-control ckeditor']) !!}
+            </div>
+
+            <!-- Key Points Field -->
+            <div class="form-group col-sm-12 fv-row mb-10 fv-plugins-icon-container">
+                {!! Form::label('key_points', 'Key Points :', ['class' => 'form-label fs-6 fw-bolder text-dark']) !!}
+                {!! Form::textarea('key_points', $keypoints[0] ??'', ['class' => 'form-control cs-textarea-hight']) !!}
+            </div>
+
+            <!-- Excerpt Field -->
+            <div class="form-group col-sm-12 fv-row mb-10 fv-plugins-icon-container">
+                {!! Form::label('excerpt', 'Excerpt :', ['class' => 'form-label fs-6 fw-bolder text-dark']) !!}
+                {!! Form::textarea('excerpt', null, ['class' => 'form-control cs-textarea-hight']) !!}
+            </div>
+
+            <!-- Author Field -->
+            <div class="form-group col-sm-12 fv-row mb-10 fv-plugins-icon-container">
+                {!! Form::label('author', 'Author :', ['class' => 'form-label fs-6 fw-bolder text-dark']) !!}
+                {!! Form::text('author', null, ['class' => 'form-control']) !!}
+            </div>
+
+            <!-- Meta title Field -->
+            <div class="form-group col-sm-12 fv-row mb-10 fv-plugins-icon-container">
+                {!! Form::label('meta_title', 'Meta title :', ['class' => 'form-label fs-6 fw-bolder text-dark']) !!}
+                {!! Form::text('meta_title', null, ['class' => 'form-control']) !!}
+            </div>
+
+
+            <!-- Meta description Field -->
+            <div class="form-group col-sm-12 fv-row mb-10 fv-plugins-icon-container">
+                {!! Form::label('meta_desc', 'Meta description :', ['class' => 'form-label fs-6 fw-bolder text-dark']) !!}
+                {!! Form::textarea('meta_desc', null, ['class' => 'form-control cs-textarea-hight']) !!}
+            </div>
+
+    
+        </div>
     </div>
 </div>
+<div class="col-xl-3">
+    <div class="card">
+        <div class="cs-card-body">
 
-<!-- Topics Field -->
-<div class="form-group col-sm-12">
-    {!! Form::label('categories', 'Categories:') !!}
+            <!-- Topics Field -->
+            @if (count($all_topics))
+            <div class="form-group col-sm-12 fv-row mb-10 fv-plugins-icon-container">
+                {!! Form::label('topics', 'Topics :', ['class' => 'form-label fs-6 fw-bolder text-dark']) !!}
 
-    <div class="row">
-        @foreach ($categories as $category)
-            <div class="col-sm-2">
-                {!! Form::checkbox('category[]', $category->id, null, ['id' => 'category-' . $category->id]) !!}
-                {!! Form::label('category-' . $category->id, $category->title) !!}
+                <div class="row fv-row mb-10 fv-plugins-icon-container checkbox-container">
+                    @foreach ($all_topics as $topic)
+                    <div class="col-sm-12 mb-2">
+                        <label class="form-check form-check-sm form-check-custom form-check-solid">
+                            {!! Form::checkbox('topic[]', $topic->id, null, ['id' => 'topic-' . $topic->id, 'class' => 'form-check-input']) !!}
+                            {!! Form::label('topic-' . $topic->id, $topic->title, ['class' => 'form-check-label fw-bold text-gray-700']) !!}
+                        </label>
+                    </div>    
+                    @endforeach
+                </div>
             </div>
-        @endforeach
+            @endif
+
+
+            <!-- categories Field -->
+            @if (count($categories)) 
+            <div class="form-group col-sm-12 fv-row mb-10 fv-plugins-icon-container">
+                {!! Form::label('categories', 'Categories :', ['class' => 'form-label fs-6 fw-bolder text-dark']) !!}
+                <div class="row fv-row mb-10 fv-plugins-icon-container checkbox-container">
+                    {{-- {{$post->categories[0]->id}} --}}
+                    @foreach ($categories as $category)
+                    <div class="col-sm-12 mb-2">
+                        <label class="form-check form-check-sm form-check-custom form-check-solid">
+                            {!! Form::checkbox('category[]', $category->id, null, ['id' => 'category-' . $category->id, 'class' => 'form-check-input']) !!}
+                            {!! Form::label('category-' . $category->id, $category->title, ['class' => 'form-check-label fw-bold text-gray-700']) !!}
+                        </label>
+                    </div>    
+                    @endforeach
+                </div>
+            </div>
+            @endif
+
+
+            <!-- HIGHLIGHTS Field -->
+            <div class="form-group col-sm-12 fv-row mb-10 fv-plugins-icon-container">
+                <label class="form-check form-check-sm form-check-custom form-check-solid">
+                {!! Form::checkbox('highlights', $highlights, null, ['id' => 'highlights', 'class' => 'form-check-input']) !!}
+                {!! Form::label('highlights', 'Mark Oncology Highlights', ['class' => 'form-check-label fw-bold text-gray-700']) !!}
+                </label>
+            </div>
+
+            <!-- Image Field -->
+            <div class="form-group col-sm-12 fv-row mb-10 fv-plugins-icon-container">
+                {!! Form::label('image', 'Featured Image', ['class' => 'form-label fs-6 fw-bolder text-dark']) !!}
+                @isset($featured_image)
+                @if (count($featured_image))
+                <img src="{{ asset('uploads/' . $featured_image[0]) }}" alt="image" width="100%" class="mb-5">
+                @endisset
+                @endif
+                {!! Form::file('image', null, ['class' => 'form-control']) !!}
+            </div>
+
+            <!-- PDF Field -->
+            <div class="form-group col-sm-12 fv-row mb-10 fv-plugins-icon-container">
+                {!! Form::label('pdf', 'PDF file', ['class' => 'form-label fs-6 fw-bolder text-dark']) !!}
+                @isset($pdf)
+                @if(count($pdf))
+                <div class="mb-5">
+                    <a href="{{ asset('uploads/' . $pdf[0]) }}" target="_blank">{{$pdf[0]}} </a>
+                </div>
+                @endif
+                @endisset
+                {!! Form::file('pdf', null, ['class' => 'form-control']) !!}
+            </div>
+
+            <!-- Submit Field -->
+            <div class="form-group col-sm-12 fv-row mb-10 fv-plugins-icon-container">
+                {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
+                <a href="{{ route('admin.news.index') }}" class="btn btn-secondary">Cancel</a>
+            </div>
+            
+        </div>
     </div>
-</div>
-
-<!-- HIGHLIGHTS Field -->
-<div class="form-group col-sm-12">
-    {!! Form::checkbox('highlights', $highlights, ['id' => 'highlights']) !!}
-    {!! Form::label('highlights', 'MARK ONCOLOGY HIGHLIGHTS:') !!}
-</div>
-
-{{-- <!-- Name Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('meta_keywords', 'Keywords:') !!}
-    {!! Form::text('meta_keywords', null, ['class' => 'form-control']) !!}
-</div> --}}
-
-<!-- is parent Field -->
-{{-- <div class="form-group col-sm-6">
-    {!! Form::label('is_main', 'Is parent topic:') !!}
-    <label class="radio-inline">
-        {!! Form::radio('is_parent', "1", null) !!} Yes
-    </label>
-
-    <label class="radio-inline">
-        {!! Form::radio('is_parent', "0", null) !!} No
-    </label>
-</div>
-
-<!--  parent Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('parent_id', 'Select parent:') !!}
-    {!! Form::select('parent_id', $parent_topic, $parent_topic, ['class' => 'form-control form-select', 'placeholder' => 'Select parent topic']) !!}
-
-</div> --}}
-
-
-
-<!-- is main Field -->
-{{-- <div class="form-group col-sm-6">
-    {!! Form::label('is_main', 'Is main topic:') !!}
-    <label class="radio-inline">
-        {!! Form::radio('is_main', "1", null) !!} Yes
-    </label>
-
-    <label class="radio-inline">
-        {!! Form::radio('is_main', "0", null) !!} No
-    </label>
-
-    <br>
-    <small>please select Yes to add topic in the menu</small>
-</div> --}}
-
-<!-- Submit Field -->
-<div class="form-group col-sm-12">
-    {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
-    <a href="{{ route('admin.topics.index') }}" class="btn btn-secondary">Cancel</a>
 </div>

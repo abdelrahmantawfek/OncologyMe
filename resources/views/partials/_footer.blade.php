@@ -51,7 +51,7 @@
     <!-- Footer Widget -->
     <!-- CopyRight -->
     <div class="careerfy-copyright">
-        <p>Copyright © 2022 OncologyMe. All rights reserved. </p>
+        <p>Copyright © 2023 OncologyMe. All rights reserved. </p>
 
         <ul class="careerfy-social-network" style="float: none;">
 

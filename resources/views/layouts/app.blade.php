@@ -82,8 +82,10 @@
 
     <script>
         $(document).ready(function() {
-            $(".vid-carousel, .art-carousel").owlCarousel({
-                items: 4,
+
+
+
+            $(".art-carousel, .vid-carousel").owlCarousel({
                 touchDrag: false,
                 mouseDrag: false,
                 autoplay: false,
@@ -96,6 +98,7 @@
                 navText: ["<i class='fa fa-chevron-left'></i>", "<i class='fa fa-chevron-right'></i>"]
             });
 
+           
 
             // $(".vid-carousel").owlCarousel({
             //     navText: ["<i class='fa fa-chevron-right'></i>","<i class='fa fa-chevron-left'></i>"]
@@ -158,6 +161,36 @@
 
         });
     </script>
+    
+
+    <?php if(count($videos_categories) < 4){ ?>
+        <script>
+            $(".vid-carousel").owlCarousel({
+            items: {{ count($videos_categories) }},
+        });
+        </script>
+    <?php }else{ ?>
+        <script>
+        $(".vid-carousel").owlCarousel({
+            items: 4,
+        });
+        </script>
+    <?php } ?>
+
+    <?php if(count($articles_categories) < 4){ ?>
+        <script>
+            $(".art-carousel").owlCarousel({
+            items: {{count($articles_categories)}},
+        });
+        </script>
+    <?php }else{ ?>
+    <script>
+        $(".art-carousel").owlCarousel({
+            items: 4,
+        });
+    </script>
+    <?php } ?>
+
 </body>
 
 </html>
