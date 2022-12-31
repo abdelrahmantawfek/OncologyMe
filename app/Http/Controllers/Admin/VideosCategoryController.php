@@ -13,7 +13,7 @@ class VideosCategoryController extends Controller
     public function index(Request $request)
     {
         /** @var Ads $adss */
-        $categories = Category::where('post_type', 'videos')->get();
+        $categories = Category::where('post_type', 'videos')->paginate(10);
         // $parent_category = Category::where('is_parent', 1)->get()->pluck('title', 'id');
 
         return view('admin.videoscategories.index', compact('categories'));

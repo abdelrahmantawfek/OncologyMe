@@ -97,3 +97,5 @@
     </tbody>
     <!--end::Table body-->
 </table>
+
+@include('partials._pagination', ['records' => $roles ])

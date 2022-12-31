@@ -125,3 +125,4 @@
 No Topics found
 @endif
 
+@include('partials._pagination', ['records' => $topics ])

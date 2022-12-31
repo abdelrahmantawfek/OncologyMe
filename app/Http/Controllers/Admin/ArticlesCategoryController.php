@@ -12,7 +12,7 @@ class ArticlesCategoryController extends Controller
     public function index(Request $request)
     {
         /** @var Ads $adss */
-        $categories = Category::where('post_type', 'articles')->get();
+        $categories = Category::where('post_type', 'articles')->paginate(10);
         // $parent_category = Category::where('is_parent', 1)->get()->pluck('title', 'id');
 
         return view('admin.articlescategories.index', compact('categories'));

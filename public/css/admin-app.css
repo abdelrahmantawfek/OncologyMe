@@ -25,3 +25,59 @@
   .cs-textarea-hight{
     height: 120px;
   }
+
+  .careerfy-pagination-blog {
+    float: left;
+    width: 100%;
+    margin: 25px 0px 60px 0px;
+}
+.careerfy-typo-wrap * {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.careerfy-pagination-blog ul li {
+  float: left;
+  list-style: none;
+  margin: 0px 12px 10px 0px;
+  line-height: 1;
+}
+
+.careerfy-pagination-blog .prev.page-numbers, .careerfy-pagination-blog .next.page-numbers {
+  padding: 0px;
+  background-color: transparent !important;
+}
+
+.careerfy-pagination-blog ul li a, .careerfy-pagination-blog ul li span {
+  float: left;
+  width: 39px;
+  height: 39px;
+  background-color: #f5f8fa;
+  font-size: 14px;
+  color: #009ef7;
+  border-radius: 20%;
+  text-align: center;
+  padding: 13.5px 0px 0px 0px;
+  -webkit-transition: all 0.4s ease-in-out;
+  -moz-transition: all 0.4s ease-in-out;
+  -ms-transition: all 0.4s ease-in-out;
+  -o-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+}
+
+.careerfy-pagination-blog ul li:hover a, .careerfy-pagination-blog ul li:hover span, .careerfy-pagination-blog ul li span.current {
+  background-color: #009ef7;
+  color: #ffffff;
+}
+
+.careerfy-pagination-blog ul li a.prev i {
+  display: inline-block;
+  -webkit-transform: scale(-1);
+  -moz-transform: scale(-1);
+  -ms-transform: scale(-1);
+  -o-transform: scale(-1);
+  transform: scale(-1);
+}

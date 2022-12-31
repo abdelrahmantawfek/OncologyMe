@@ -136,3 +136,4 @@
 <!--end::Table-->
 
 
+@include('partials._pagination', ['records' => $posts ])

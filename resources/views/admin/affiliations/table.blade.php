@@ -114,3 +114,4 @@
 <!--end::Table-->
 
 
+@include('partials._pagination', ['records' => $affiliations ])

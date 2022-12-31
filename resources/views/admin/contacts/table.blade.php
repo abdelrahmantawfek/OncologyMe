@@ -8,7 +8,6 @@
             <th class="min-w-100px">phone</th>
             <th class="min-w-100px">email</th>
             <th class="min-w-100px">subject</th>
-            <th class="min-w-125px">message</th>
             <th class="text-end min-w-100px">Actions</th>
         </tr>
         <!--end::Table row-->
@@ -24,7 +23,6 @@
             <td> {{ $contact->phone ?? ''}}</td>
             <td> {{ $contact->email ?? ''}}</td>
             <td> {{ $contact->subject ?? ''}}</td>
-            <td> {{ $contact->message ?? ''}}</td>
             <!--begin::Action=-->
             <td class="text-end">
                 <a href="#" class="btn btn-light btn-active-light-primary btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
@@ -99,5 +97,6 @@
 No contacts found
 @endif
 
+@include('partials._pagination', ['records' => $contacts ])
 
 

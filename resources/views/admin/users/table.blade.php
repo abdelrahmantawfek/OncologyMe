@@ -112,3 +112,6 @@
 @else
 No users found
 @endif
+
+
+@include('partials._pagination', ['records' => $users ])

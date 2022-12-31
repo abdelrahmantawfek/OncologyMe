@@ -127,3 +127,6 @@
 <!--end::Table-->
 
 
+@include('partials._pagination', ['records' => $categories ])
+
+

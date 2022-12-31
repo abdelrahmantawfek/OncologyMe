@@ -120,3 +120,5 @@
 @else
 No admins found
 @endif
+
+@include('partials._pagination', ['records' => $admins ])
