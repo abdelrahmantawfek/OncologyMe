@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('country');
             $table->string('governorate');
             $table->string('affiliation');
-            $table->string('specialty');
+            $table->string('speciality');
             $table->boolean('accept_newsletter_emails')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

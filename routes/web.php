@@ -46,6 +46,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function(){
         Route::resource('posts', App\Http\Controllers\Admin\PostController::class);
         // Route::resource('categories', App\Http\Controllers\Admin\CategoryController::class);
         Route::resource('announcements', App\Http\Controllers\Admin\AnnouncementController::class);
+        Route::resource('affiliations', App\Http\Controllers\Admin\AffiliationController::class);
+        Route::resource('specialities', App\Http\Controllers\Admin\SpecialitiesController::class);
 
         // Route::get('{post_type}/add-category', [App\Http\Controllers\Admin\CategoryController::class, 'new_category'])->name('new.category');
         // Route::post('add-category', [App\Http\Controllers\Admin\CategoryController::class, 'news_category'])->name('add.category');

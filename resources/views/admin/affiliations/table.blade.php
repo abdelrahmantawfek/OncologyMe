@@ -10,8 +10,6 @@
                 </div>
             </th>
             <th class="min-w-125px">title</th>
-            <th class="min-w-125px">URL</th>
-            <th class="min-w-125px">place</th>
             <th class="min-w-125px">Published On</th>
             <th class="min-w-100px text-end">actions</th>
         </tr>
@@ -20,7 +18,7 @@
     <!--end::Table head-->
     <!--begin::Table body-->
     <tbody class="text-gray-600 fw-bold">
-        @foreach ($announcements as $announcement)
+        @foreach ($affiliations as $affiliation)
         <!--begin::Table row-->
         <tr>
             <!--begin::Checkbox-->
@@ -32,37 +30,16 @@
             <!--end::Checkbox-->
             <!--begin::User=-->
             <td class="">
-                {{-- <!--begin:: Avatar -->
-                <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
-                    <a href="{{ route('admin.announcements.edit', $announcement->id) }}">
-                        <div class="symbol-label fs-3 bg-light-danger text-danger">{{ strtoupper(substr($announcement->title ?? '', 0, 1)) }}</div>
-                    </a>
-                </div>
-                <!--end::Avatar--> --}}
                 <!--begin::User details-->
                 <div class="d-flex flex-column">
-                    <a href="{{ route('admin.announcements.edit', $announcement->id) }}" class="text-gray-800 text-hover-primary mb-1">{{ $announcement->title ?? ''}}</a>
+                    <a href="{{ route('admin.affiliations.edit', $affiliation->id) }}" class="text-gray-800 text-hover-primary mb-1">{{ $affiliation->title ?? ''}}</a>
                 </div>
                 <!--begin::User details-->
             </td>
             <!--end::User=-->
-            <!--begin::Role=-->
-            <td>{{ $announcement->url}}</td>
-            @if ($announcement->place == '1')
-            <td>{{ 'Main'}}</td>
-            @elseif ($announcement->place == '2')
-            <td>{{'top sidebar'}}</td>
-            @elseif ($announcement->place == '3')
-            <td>{{ 'bottom Sidebar'}}</td>
-            @endif
-        
-
-            <!--end::Role=-->
-            {{-- <!--begin::Two step=-->
-            <td> {{ $announcement->meta_keywords ?? ''}}</td>
-            <!--end::Two step=--> --}}
+    
             <!--begin::Joined-->
-            <td>{{ $announcement->created_at->format('M, d, Y') ?? ''}}</td>
+            <td>{{ $affiliation->created_at->format('M, d, Y') ?? ''}}</td>
             <!--begin::Joined-->
             <!--begin::Action=-->
             <td class="text-end">
@@ -78,12 +55,12 @@
                 <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
                     <!--begin::Menu item-->
                     <div class="menu-item px-3">
-                        <a href="{{ route('admin.announcements.edit', $announcement->id) }}" class="menu-link px-3">Edit</a>
+                        <a href="{{ route('admin.affiliations.edit', $affiliation->id) }}" class="menu-link px-3">Edit</a>
                     </div>
                     <!--end::Menu item-->
                     <!--begin::Menu item-->
                     <div class="menu-item px-3">
-                        <a href="" class="menu-link px-3" data-kt-users-table-filter="delete_row" data-bs-toggle="modal" data-bs-target="#delete_item-{{$announcement->id}}">Delete</a>
+                        <a href="" class="menu-link px-3" data-kt-users-table-filter="delete_row" data-bs-toggle="modal" data-bs-target="#delete_item-{{$affiliation->id}}">Delete</a>
                     </div>
                     <!--end::Menu item-->
                 </div>
@@ -94,7 +71,7 @@
         <!--end::Table row-->
         
         <!--begin::Modal -  delete item-->
-        <div class="modal fade" id="delete_item-{{$announcement->id}}" tabindex="-1" role="dialog" aria-labelledby="delete_item" aria-hidden="true">
+        <div class="modal fade" id="delete_item-{{$affiliation->id}}" tabindex="-1" role="dialog" aria-labelledby="delete_item" aria-hidden="true">
             <!--begin::Modal dialog-->
             <div class="modal-dialog modal-dialog-centered mw-650px">
                 <!--begin::Modal content-->
@@ -114,10 +91,10 @@
                     <!--begin::Modal body-->
                     <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
                         <div class="swal2-icon swal2-warning swal2-icon-show my-2" style="display: flex;"><div class="swal2-icon-content">!</div></div>
-                        <div class="swal2-html-container my-15" id="" style="display: block;">Are you sure you want to delete {{ $announcement->title ?? ''}}?</div>
+                        <div class="swal2-html-container my-15" id="" style="display: block;">Are you sure you want to delete {{ $affiliation->title ?? ''}}?</div>
                         <div class="swal2-actions" style="display: flex;">
                             <div class="swal2-loader"></div>
-                            {!! Form::model($announcement, ['route' => ['admin.announcements.destroy', $announcement->id], 'method' => 'delete']) !!}
+                            {!! Form::model($affiliation, ['route' => ['admin.affiliations.destroy', $affiliation->id], 'method' => 'delete']) !!}
                             <button class="swal2-confirm btn fw-bold btn-danger mx-2" aria-label="" style="display: inline-block;">Yes, delete!</button>
                             {!! Form::close() !!}
                             <button class=" btn fw-bold btn-active-light-primary mx-2" aria-label="true" style="display: inline-block;" data-bs-dismiss="modal">No, cancel</button>

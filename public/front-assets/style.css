@@ -5265,19 +5265,27 @@ li:hover .careerfy-read-more,
 
 .select-list-group [data-toggle="false"] {
     display: none;
+    position: absolute;
 }
 
 .select-list-group [data-toggle="true"] {
     display: inherit;
     box-shadow: 0 3px 7px -2px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    background: #fff;
+    box-shadow: 0 0 10px -5px grey;
 }
 
 .select-list-group li[data-display="false"] {
     display: none;
+    position: absolute;
 }
 
 .select-list-group li[data-display="true"] {
     display: inherit;
+    position: absolute;
+    background: #fff;
+    box-shadow: 0 0 10px -5px grey;
 }
 
 .select-list-group li[data-highlight="false"] {
@@ -5290,7 +5298,7 @@ li:hover .careerfy-read-more,
     background-color: grey;
 }
 
-.select-list-group::after {
+/* .select-list-group::after {
     position: absolute;
     right: 0;
     margin-right: -5px;
@@ -5302,7 +5310,7 @@ li:hover .careerfy-read-more,
     background: url(https://image.flaticon.com/icons/png/512/25/25756.png);
     background-repeat: no-repeat;
     background-size: 10px 10px;
-}
+} */
 
 .select-list-group li {
     list-style: none;

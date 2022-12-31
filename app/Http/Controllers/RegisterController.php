@@ -6,6 +6,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\NotifyMail;
+use App\Models\Affiliation;
+use App\Models\Speciality;
 use Illuminate\Support\Facades\Redirect;
 
 class RegisterController extends Controller
@@ -18,7 +20,12 @@ class RegisterController extends Controller
     }
     public function register()
     {
-        return view('auth.register');
+        $countries = User::countries();
+        $governorates = User::governorates();
+        $affiliations = Affiliation::all()->pluck('title');
+        $specialites = Speciality::all()->pluck('title');
+
+        return view('auth.register', compact('countries', 'governorates', 'affiliations', 'specialites'));
     }
 
     public function post_signup(Request $request)
