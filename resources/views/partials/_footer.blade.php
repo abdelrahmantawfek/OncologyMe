@@ -18,11 +18,24 @@
                     <h2>Quick Links</h2>
                 </div>
                 <ul>
-                    <li><a href="all-topics.html">Topics</a></li>
-                    <li><a href="all-meeting.html">Oncology News</a></li>
-                    <li><a href="all-news.html">Oncology Watch</a></li>
-                    <li><a href="all-videos.html">Articles</a></li>
-                    <li><a href="podcasts.html">Podcasts</a></li>
+                    @if (count($topics))
+                    <li><a href="{{ route('allTopics') }}">Topics</a></li>
+                    @endif
+                    @if (count($news_categories))
+                    <li><a href="/all-news">Oncology News</a></li>
+                    @endif
+
+                    @if (count($videos_categories))
+                    <li><a href="/all-videos">Oncology Watch</a></li>
+                    @endif
+
+                    @if (count($articles_categories))
+                    <li><a href="/all-articles">Articles</a></li>
+                    @endif
+
+                    @if (count($podcasts_categories))
+                    <li><a href="/all-podcasts">Podcasts</a></li>
+                    @endif
 
                 </ul>
             </aside>
@@ -31,9 +44,9 @@
                     <h2>Helpful Links</h2>
                 </div>
                 <ul>
-                    <li><a href="about-main.html">About Us </a></li>
-                    <li><a href="info-page.html">Privacy Policy</a></li>
-                    <li><a href="info-page.html">Rights and permissions</a></li>
+                    <li><a href="{{ route('about') }}">About Us </a></li>
+                    <li><a href="{{ route('privacy') }}">Privacy Policy</a></li>
+                    <li><a href="{{ route('rights') }}">Rights and permissions</a></li>
 
                 </ul>
             </aside>
@@ -41,9 +54,9 @@
                 <div class="footer-widget-title">
                     <h2>Contact Information</h2>
                 </div>
-                <p class="cnct-item"><i class="fa fa-map-marker"></i><span> Building 37, Embassies District, Nasr City, Cairo Governorate, Egypt</span></p>
-                <p class="cnct-item"><i class="fa fa-phone"></i> <span>+2 0155 945 6778</span></p>
-                <p class="cnct-item"><i class="fa fa-envelope"></i> <span><a href="mailto:Info@oncologyme.com">Info@oncologyme.com</a></span></p>
+                <p class="cnct-item"><i class="fa fa-map-marker"></i><span> {{$general_info[0]->location}}</span></p>
+                <p class="cnct-item"><i class="fa fa-phone"></i> <span><a href="tel:{{$general_info[0]->phone}}">{{$general_info[0]->phone}}</a></span></p>
+                <p class="cnct-item"><i class="fa fa-envelope"></i> <span><a href="mailto:{{$general_info[0]->email}}">{{$general_info[0]->email}}</a></span></p>
 
             </aside>
         </div>
@@ -56,13 +69,13 @@
         <ul class="careerfy-social-network" style="float: none;">
 
             <li>
-                <a href="https://facebook.com/oncologyme" class="careerfy-bgcolorhover fa fa-facebook"></a>
+                <a href="{{$general_info[0]->fb}}" class="careerfy-bgcolorhover fa fa-facebook" target="_blank"></a>
             </li>
             <li>
-                <a href="https://www.youtube.com/channel/UC7cUtEq-hpsbmer5nRUOw5A" class="careerfy-bgcolorhover fa fa-youtube-play"></a>
+                <a href="{{$general_info[0]->youtube}}" class="careerfy-bgcolorhover fa fa-youtube-play" target="_blank"></a>
             </li>
             <li>
-                <a href="https://www.linkedin.com/company/oncologyme" class="careerfy-bgcolorhover fa fa-linkedin"></a>
+                <a href="{{$general_info[0]->linkedin}}" class="careerfy-bgcolorhover fa fa-linkedin" target="_blank"></a>
             </li>
         </ul>
 

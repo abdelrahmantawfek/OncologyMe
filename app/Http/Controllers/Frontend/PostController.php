@@ -14,7 +14,7 @@ class PostController extends Controller
      
     public function post($post_type)
     {
-        $data['page'] = Page::with('sections')->find(9);
+        // $data['page'] = Page::with('sections')->find(9);
         $data['posts'] = Post::orderBy('created_at', 'DESC')->where('post_type', $post_type)->with('topics')->paginate(10);
         $data['post_type'] = Post::where('post_type', $post_type)->pluck('post_type')->toArray();
         $data['categories'] = Category::where('post_type', 'videos')->with('posts.topics')->get();
@@ -28,7 +28,7 @@ class PostController extends Controller
             abort(404);
         }
 
-        // dd($data['categories']);
+        // dd($data['post_type']);
         
         return view('frontend.posts', compact('data'));
     }

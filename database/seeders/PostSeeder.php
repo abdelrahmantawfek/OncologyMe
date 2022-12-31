@@ -949,7 +949,7 @@ class PostSeeder extends Seeder
             'country' => 'egy',
             'governorate' => 'cairo',
             'affiliation' => 'affiliation',
-            'specialty' => 'specialty',
+            'speciality' => 'speciality',
             'accept_newsletter_emails' => true,
             'created_at' => '2022-08-19 04:07:05', 
             'updated_at' => '2022-08-19 05:32:27'

@@ -2,7 +2,7 @@
 
 @section('meta')
 
-   <title> Login  </title>
+   <title> Login - {{$general_info[0]->tagline}} </title>
 
 @endsection
 

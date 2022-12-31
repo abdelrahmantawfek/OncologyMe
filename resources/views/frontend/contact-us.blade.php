@@ -3,7 +3,7 @@
 
 @section('meta')
 
-<title> {{ $data['page']->title }} -  </title>
+<title> {{ $data['page']->title }} - {{$general_info[0]->tagline}}  </title>
 <meta name="title" content="{{ $data['page']->meta_title ?? '' }}">
 <meta name="description" content="{{ $data['page']->meta_desc ?? '' }}">
 <meta name="keywords" content="{{ $data['page']->meta_keywords ?? '' }}">
@@ -27,18 +27,17 @@
                 <div class="careerfy-about-text">
                     <div class="careerfy-contact-info-sec">
                         <h2>Contact Information</h2>
-                        <p>“Oncology Medical Education” is an oncology-specific healthcare education platform that creates a wide spectrum of virtual scientific activities through a user-friendly approach that is culturally adapted to the Middle-East
-                            Arab practice.</p>
-                        <p>For healthcare professionals only.</p>
+                        <p>{{$general_info[0]->about}}</p>
+                        <p>{{$general_info[0]->short_description}}.</p>
                         <ul class="careerfy-contact-info-list">
                             <li><i class="careerfy-icon careerfy-placeholder"></i> <a href="https://maps.app.goo.gl/xSs4KQ9drppdsJgs7" target="_blank"> 37, Omarat Madinat Al Fath, Al Hadiqah Ad Dawleyah, Embassies District, Nasr City, Cairo Governorate, Egypt <span style="font-size: 12px; text-decoration: underline; float: none;"> Veiw on map </span></a>                                            </li>
-                            <li><i class="careerfy-icon careerfy-mail"></i> <a href="#">Email: Info@oncologyme.com</a></li>
-                            <li><i class="careerfy-icon careerfy-technology"></i> Call: +2 0155 945 6778</li>
+                            <li><i class="careerfy-icon careerfy-mail"></i> <a href="mailto:{{$general_info[0]->email}}">Email: {{$general_info[0]->email}}</a></li>
+                            <li><i class="careerfy-icon careerfy-technology"></i>  <a href="tel:{{$general_info[0]->phone}}"> Call: {{$general_info[0]->phone}}</a></li>
                         </ul>
                         <div class="careerfy-contact-media">
-                            <a href="https://facebook.com/oncologyme" class="careerfy-icon careerfy-facebook-logo" target="_blank"></a>
-                            <a href="https://www.youtube.com/channel/UC7cUtEq-hpsbmer5nRUOw5A" class="careerfy-bgcolorhover cs-yout" target="_blank"><i class="fa fa-youtube-play"></i></a>
-                            <a href="https://www.linkedin.com/company/oncologyme/" class="careerfy-icon careerfy-linkedin-button" target="_blank"></a>
+                            <a href="{{$general_info[0]->fb}}" class="careerfy-icon careerfy-facebook-logo" target="_blank"></a>
+                            <a href="{{$general_info[0]->youtube}}" class="careerfy-bgcolorhover cs-yout" target="_blank"><i class="fa fa-youtube-play"></i></a>
+                            <a href="{{$general_info[0]->linkedin}}" class="careerfy-icon careerfy-linkedin-button" target="_blank"></a>
                         </div>
                     </div>
                     <div class="careerfy-contact-form">

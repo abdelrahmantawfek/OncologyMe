@@ -3,7 +3,8 @@
 
 @section('meta')
 
-<title> {{ $data['page']->title }} -  </title>
+<title> {{ ucfirst($data['post_type'][0]) }} - {{$general_info[0]->tagline}}  </title>
+
 <meta name="title" content="{{ $data['page']->meta_title ?? '' }}">
 <meta name="description" content="{{ $data['page']->meta_desc ?? '' }}">
 <meta name="keywords" content="{{ $data['page']->meta_keywords ?? '' }}">

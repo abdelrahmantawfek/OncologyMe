@@ -39,7 +39,7 @@ class RegisterController extends Controller
             'country' => ['required', 'string'],
             'governorate' => ['required', 'string'],
             'affiliation' => ['required', 'string'],
-            'specialty' => ['required', 'string'],
+            'speciality' => ['required', 'string'],
             'accept_newsletter_emails' => ['nullable'],
         ]);
 

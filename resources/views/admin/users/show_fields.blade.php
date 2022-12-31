@@ -42,8 +42,8 @@
 
 <div class="form-group col-sm-6 fv-row mb-10 fv-plugins-icon-container">
     <div class="d-flex flex-column gap-1">
-        <div class="fw-bolder text-muted">Specialty</div>
-        <div class="fw-bolder fs-5">{{$user->specialty}}</div>
+        <div class="fw-bolder text-muted">Speciality</div>
+        <div class="fw-bolder fs-5">{{$user->speciality}}</div>
     </div>
 </div>
 

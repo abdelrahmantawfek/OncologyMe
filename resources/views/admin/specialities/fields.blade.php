@@ -5,7 +5,7 @@
 </div>
 
 <!-- Submit Field -->
-<div class="form-group col-sm-6 fv-row mb-10 fv-plugins-icon-container">
+<div class="form-group col-sm-12 fv-row mb-10 fv-plugins-icon-container">
     {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
     <a href="{{ route('admin.specialities.index') }}" class="btn btn-secondary">Cancel</a>
 </div>

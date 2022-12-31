@@ -58,7 +58,7 @@ class User extends Authenticatable
         'governorate' => 'required',
         'affiliation' => 'required',
         'mobile' => 'required',
-        'specialty' => 'required',
+        'speciality' => 'required',
         'password' => 'required|confirmed',
     ];
 

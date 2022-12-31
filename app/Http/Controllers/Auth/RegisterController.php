@@ -58,7 +58,7 @@ class RegisterController extends Controller
             'country' => ['required', 'string'],
             'governorate' => ['required', 'string'],
             'affiliation' => ['required', 'string'],
-            'specialty' => ['required', 'string'],
+            'speciality' => ['required', 'string'],
             'accept_newsletter_emails' => 'nullable',
         ]);
     }
@@ -80,7 +80,7 @@ class RegisterController extends Controller
             'country' => $data['country'],
             'governorate' => $data['governorate'],
             'affiliation' => $data['affiliation'],
-            'specialty' => $data['specialty'],
+            'speciality' => $data['speciality'],
             // 'accept_newsletter_emails' => $data['accept_newsletter_emails'],
         ]);
     }

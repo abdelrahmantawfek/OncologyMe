@@ -3,6 +3,8 @@
 
 @section('meta')
 
+<title> Search Results - {{$general_info[0]->tagline}}  </title>
+
 {{-- <title> {{ $data['page']->title }} -  </title>
 <meta name="title" content="{{ $data['page']->meta_title ?? '' }}">
 <meta name="description" content="{{ $data['page']->meta_desc ?? '' }}">

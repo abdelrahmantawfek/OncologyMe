@@ -2,7 +2,7 @@
 
 @section('meta')
 
-   <title> Forget password  </title>
+   <title> Forget password  - {{$general_info[0]->tagline}} </title>
 
 @endsection
 

@@ -25,10 +25,10 @@ class PageSeeder extends Seeder
             array('id' => '6', 'title' => 'Privacy Policy', 'slug' => 'privacy-policy', 'meta_title' => 'Contact Us', 'meta_keywords' => 'Contact Us', 'meta_desc' => 'Contact Us', 'is_main' => '0', 'status' => '1', 'created_at' => '2022-08-19 05:13:21', 'updated_at' => '2022-08-19 05:13:21'),
             array('id' => '7', 'title' => 'All topics', 'slug' => 'all-topics', 'meta_title' => 'Contact Us', 'meta_keywords' => 'Contact Us', 'meta_desc' => 'Contact Us', 'is_main' => '0', 'status' => '1', 'created_at' => '2022-08-19 05:13:21', 'updated_at' => '2022-08-19 05:13:21'),
             array('id' => '8', 'title' => 'Recent topics', 'slug' => 'recent-topics', 'meta_title' => 'Contact Us', 'meta_keywords' => 'Contact Us', 'meta_desc' => 'Contact Us', 'is_main' => '0', 'status' => '1', 'created_at' => '2022-08-19 05:13:21', 'updated_at' => '2022-08-19 05:13:21'),
-            array('id' => '9', 'title' => 'news', 'slug' => 'news', 'meta_title' => 'Contact Us', 'meta_keywords' => 'Contact Us', 'meta_desc' => 'Contact Us', 'is_main' => '0', 'status' => '1', 'created_at' => '2022-08-19 05:13:21', 'updated_at' => '2022-08-19 05:13:21'),
-            array('id' => '10', 'title' => 'watch', 'slug' => 'watch', 'meta_title' => 'Contact Us', 'meta_keywords' => 'Contact Us', 'meta_desc' => 'Contact Us', 'is_main' => '0', 'status' => '1', 'created_at' => '2022-08-19 05:13:21', 'updated_at' => '2022-08-19 05:13:21'),
-            array('id' => '11', 'title' => 'articles', 'slug' => 'articles', 'meta_title' => 'Contact Us', 'meta_keywords' => 'Contact Us', 'meta_desc' => 'Contact Us', 'is_main' => '0', 'status' => '1', 'created_at' => '2022-08-19 05:13:21', 'updated_at' => '2022-08-19 05:13:21'),
-            array('id' => '12', 'title' => 'Podcasts', 'slug' => 'podcasts', 'meta_title' => 'Contact Us', 'meta_keywords' => 'Contact Us', 'meta_desc' => 'Contact Us', 'is_main' => '0', 'status' => '1', 'created_at' => '2022-08-19 05:13:21', 'updated_at' => '2022-08-19 05:13:21'),
+            // array('id' => '9', 'title' => 'news', 'slug' => 'news', 'meta_title' => 'Contact Us', 'meta_keywords' => 'Contact Us', 'meta_desc' => 'Contact Us', 'is_main' => '0', 'status' => '1', 'created_at' => '2022-08-19 05:13:21', 'updated_at' => '2022-08-19 05:13:21'),
+            // array('id' => '10', 'title' => 'watch', 'slug' => 'watch', 'meta_title' => 'Contact Us', 'meta_keywords' => 'Contact Us', 'meta_desc' => 'Contact Us', 'is_main' => '0', 'status' => '1', 'created_at' => '2022-08-19 05:13:21', 'updated_at' => '2022-08-19 05:13:21'),
+            // array('id' => '11', 'title' => 'articles', 'slug' => 'articles', 'meta_title' => 'Contact Us', 'meta_keywords' => 'Contact Us', 'meta_desc' => 'Contact Us', 'is_main' => '0', 'status' => '1', 'created_at' => '2022-08-19 05:13:21', 'updated_at' => '2022-08-19 05:13:21'),
+            // array('id' => '12', 'title' => 'Podcasts', 'slug' => 'podcasts', 'meta_title' => 'Contact Us', 'meta_keywords' => 'Contact Us', 'meta_desc' => 'Contact Us', 'is_main' => '0', 'status' => '1', 'created_at' => '2022-08-19 05:13:21', 'updated_at' => '2022-08-19 05:13:21'),
 
         );
 
@@ -46,7 +46,24 @@ class PageSeeder extends Seeder
             array('id' => '46', 'page_id' => '7', 'title' => 'About Our Company', 'subtitle' => 'Pellentesque accumsan nisl varius risus mollis varius sed eu neque Cras fringilla sagittis rhoncus.', 'plain_text' => 'In accumsan pulvinar maximus. Phasellus elementum rutrum dolor id mollis aece et lectus accumsan ipsum facilisis malesuada vel ut diam. Pellentesque vitae tempus sapien, vel aliquam nulla. In in fringilla massa, id consectetur lacus tibul.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a auctor urna, et porttitor lorem. Fusce at neque et orci rhoncus hendrerit. Praesent nec quam ac orci placerat semper.', 'rich_text' => NULL, 'img' => '7wcS0PFLQ49064EMUyIWYGyij9I0wsjdwhWd123e.png', 'cta_text' => NULL, 'cta_link' => NULL, 'layout' => '1', 'status' => '1', 'sort' => '1'),
         );
 
+        $settings = array(
+            array(
+                'id' => '1', 
+                'tagline' => 'For healthcare professionals only',
+                'about' => '“Oncology Medical Education” is an oncology-specific healthcare education platform that creates a wide spectrum of virtual scientific activities through a user-friendly approach that is culturally adapted to the Middle-East Arab practice.', 
+                'short_Description' => 'For healthcare professionals only.', 
+                'location' => '37, Omarat Madinat Al Fath, Al Hadiqah Ad Dawleyah, Embassies District, Nasr City, Cairo Governorate, Egypt', 
+                'email' => 'info@oncologyme.com', 
+                'phone' => '+2 0155 945 6778', 
+                'map_link' => 'https://goo.gl/maps/Sksd4iPevzt5tuiw8', 
+                'fb' => 'https://www.facebook.com/oncologyme',
+                'youtube' => 'https://www.youtube.com/channel/UC7cUtEq-hpsbmer5nRUOw5A',
+                'linkedin' => 'https://www.linkedin.com/company/oncologyme/',
+                'feedback' => 'https://docs.google.com/forms/d/e/1FAIpQLSdW2J-vqW8l4YdfTe7zJfwlQp_MGDbqppvDI-MeKn1Wg8Pjqw/viewform',
+            ),
+        );
         DB::table('pages')->insert($pages);
         DB::table('sections')->insert($sections);
+        DB::table('settings')->insert($settings);
     }
 }

@@ -572,9 +572,10 @@
                 </div>
                 @endcan
 
+
                 @can('settings view')
-                {{-- <div data-kt-menu-trigger="click" class="menu-item menu-accordion {{ Request::is('admin/settings*') ? 'here show' : '' }}">
-                    <span class="menu-link">
+                <div class="menu-item {{ Request::is('admin/settings*') ? 'here show' : '' }}">
+                        <a class="menu-link {{ Request::is('admin/settings') ? 'active' : '' }}" href="{{ route('admin.settings.index') }}">
                         <span class="menu-icon">
                            <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo1/dist/../src/media/svg/icons/Weather/Thunder.svg-->
                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -587,30 +588,10 @@
                             <!--end::Svg Icon-->
                         </span>
                         <span class="menu-title">General Settings</span>
-                        <span class="menu-arrow"></span>
-                    </span>
-                    <div class="menu-sub menu-sub-accordion menu-active-bg">
-                        <div class="menu-item">
-                            <a class="menu-link" href="">
-                                <span class="menu-bullet">
-                                    <span class="bullet bullet-dot"></span>
-                                </span>
-                                <span class="menu-title">Header</span>
-                            </a>
-                        </div>
-
-                        <div class="menu-item">
-                            <a class="menu-link" href="">
-                                <span class="menu-bullet">
-                                    <span class="bullet bullet-dot"></span>
-                                </span>
-                                <span class="menu-title">Footer</span>
-                            </a>
-                        </div>
-
-                    </div>
-                </div> --}}
+                        </a>
+                </div>
                 @endcan
+
 
             </div>
             <!--end::Menu-->
