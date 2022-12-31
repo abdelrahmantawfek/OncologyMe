@@ -1,8 +1,6 @@
 @extends('layouts.admin-app')
 
 @section('content')
- <!--begin::Content-->
- <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
     <!--begin::Toolbar-->
     <div class="toolbar" id="kt_toolbar">
         <!--begin::Container-->
@@ -68,8 +66,5 @@
               </div>
          </div>
   </div>
-
-</div>
-<!--end::Content-->
      
 @endsection

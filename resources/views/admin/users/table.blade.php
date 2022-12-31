@@ -57,9 +57,9 @@
                     </div>
                     <!--end::Menu item-->
                     <!--begin::Menu item-->
-                    <div class="menu-item px-3">
+                    {{-- <div class="menu-item px-3">
                         <a href="" class="menu-link px-3" data-kt-users-table-filter="delete_row" data-bs-toggle="modal" data-bs-target="#delete_item-{{$user->id}}">Delete</a>
-                    </div>
+                    </div> --}}
                     <!--end::Menu item-->
                 </div>
                 <!--end::Menu-->
@@ -86,7 +86,7 @@
                     </div>
                     <!--end::Close-->
                     <!--begin::Modal body-->
-                    <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
+                    {{-- <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
                         <div class="swal2-icon swal2-warning swal2-icon-show my-2" style="display: flex;"><div class="swal2-icon-content">!</div></div>
                         <div class="swal2-html-container my-15" id="" style="display: block;">Are you sure you want to delete {{ $user->email ?? ''}}?</div>
                         <div class="swal2-actions" style="display: flex;">
@@ -96,7 +96,7 @@
                             {!! Form::close() !!}
                             <button class=" btn fw-bold btn-active-light-primary mx-2" aria-label="true" style="display: inline-block;" data-bs-dismiss="modal">No, cancel</button>
                         </div>
-                    </div>
+                    </div> --}}
                     <!--end::Modal body-->
                 </div>
                 <!--end::Modal content-->

@@ -40,7 +40,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function(){
         Route::resource('admins', App\Http\Controllers\Admin\AdminController::class);
         Route::resource('roles', App\Http\Controllers\Admin\RoleController::class);
         Route::get('updatePermissions', [App\Http\Controllers\Admin\RoleController::class, 'updatePermissions'])->name('roles.updatePermissions');
-        Route::resource('users', App\Http\Controllers\Admin\UserController::class)->except('create', 'destroy', 'edit');;
+        Route::resource('users', App\Http\Controllers\Admin\UserController::class)->except('create', 'destroy', 'edit');
         Route::resource('pages', App\Http\Controllers\Admin\PageController::class);
         Route::resource('topics', App\Http\Controllers\Admin\TopicController::class);
         Route::resource('posts', App\Http\Controllers\Admin\PostController::class);
