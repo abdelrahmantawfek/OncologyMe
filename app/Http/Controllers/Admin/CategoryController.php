@@ -13,7 +13,7 @@ class CategoryController extends Controller
     public function index(Request $request)
     {
         /** @var Ads $adss */
-        $categories = Category::paginate(10);
+        $categories = Category::orderBy('created_at', 'DESC')->paginate(10);
         // $parent_category = Category::where('is_parent', 1)->get()->pluck('title', 'id');
 
         return view('admin.categories.index', compact('categories'));

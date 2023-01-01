@@ -29,7 +29,7 @@
                 <div class="careerfy-typo-wrap categ-title">
 
                     <h3><span>Search Results</span></h3>
-                    <h5>Your search for <strong>{{$data['result']}}</strong></h5>
+                    <h5>Your search results for <strong>{{$data['result']}}</strong></h5>
 
                 </div>
 
@@ -69,7 +69,7 @@
                             <h4>
                                 <span> {{ $post->author ?? ''}} </span>
 
-                                <text>&nbsp;/&nbsp;<span> {{ $post->created_at->format('M d, Y') ?? ''}} </span></text>
+                                <text>@if($post->author) &nbsp;/&nbsp; @endif<span> {{ $post->created_at->format('M d, Y') ?? ''}} </span></text>
 
                             </h4>
                             <p>{{ $post->excerpt ?? ''}}</p>

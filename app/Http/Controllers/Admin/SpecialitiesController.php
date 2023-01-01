@@ -13,7 +13,7 @@ class SpecialitiesController extends Controller
     public function index(Request $request)
     {
         /** @var Ads $specialitiess */
-        $specialities = Speciality::paginate(10);
+        $specialities = Speciality::orderBy('created_at', 'DESC')->paginate(10);
 
         return view('admin.specialities.index')
             ->with('specialities', $specialities);

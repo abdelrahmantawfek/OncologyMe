@@ -2,7 +2,7 @@
 
 @section('meta')
 
-<title> 404 </title>
+<title> 404  - {{$general_info[0]->tagline}} </title>
 
 @endsection
 

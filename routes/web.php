@@ -63,10 +63,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function(){
         Route::resource('podcasts', App\Http\Controllers\Admin\PodcastsController::class);
         Route::resource('podcastscategories', App\Http\Controllers\Admin\PodcastsCategoryController::class);
 
-        Route::post('ckeditor/upload', 'CKEditorController@upload')->name('ckeditor.image-upload');
+        // Route::post('ckeditor/upload', 'CKEditorController@upload')->name('ckeditor.image-upload');
 
         // contacts
-        Route::resource('contacts', App\Http\Controllers\Admin\ContactController::class);
+        Route::resource('contacts', App\Http\Controllers\Admin\ContactController::class)->except('create', 'edit');
 
 
     });

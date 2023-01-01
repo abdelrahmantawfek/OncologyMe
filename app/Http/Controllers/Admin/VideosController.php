@@ -16,7 +16,7 @@ class VideosController extends Controller
     public function index(Request $request)
     {
         /** @var Post $posts */
-        $posts = Post::where('post_type', 'videos')->paginate(10);
+        $posts = Post::orderBy('created_at', 'DESC')->where('post_type', 'videos')->paginate(10);
         $all_topics = Topic::where('is_parent', 0)->get();
         $categories = Category::where('post_type', 'videos')->get();
         return view('admin.videos.index', compact('posts', 'all_topics', 'categories'));
@@ -172,7 +172,7 @@ class VideosController extends Controller
 
         DB::commit();
 
-        Flash::success('Post saved successfully.');
+        Flash::success('Video saved successfully.');
 
         return redirect(route('admin.videos.index'));
     }
@@ -183,7 +183,7 @@ class VideosController extends Controller
         $post = Post::find($id);
 
         if (empty($post)) {
-            Flash::error('Post not found');
+            Flash::error('Video not found');
 
             return redirect(route('admin.videos.index'));
         }
@@ -205,7 +205,7 @@ class VideosController extends Controller
         $selected_cats = $post->categories->pluck('id');
 
         if (empty($post)) {
-            Flash::error('Post not found');
+            Flash::error('Video not found');
 
             return redirect(route('admin.videos.index'));
         }
@@ -219,7 +219,7 @@ class VideosController extends Controller
         $post = Post::find($id);
 
         if (empty($post)) {
-            Flash::error('Post not found');
+            Flash::error('Video not found');
 
             return redirect(route('admin.videos.index'));
         }
@@ -283,9 +283,35 @@ class VideosController extends Controller
         $post_meta = $post->postmeta;
 
         $pdf = $request->validate(['pdf' => 'mimes:pdf|max:5048']);
-        $file = $request->file('pdf');
-        $video = $request->validate(['video' => 'required|mimes:mp4|max:5048']);
+        $featured_image = $request->validate(['image' => 'mimes:jpg,png|max:5048']);
+        $video = $request->validate(['video' => 'mimes:mp4|max:5048']);
 
+        $image = $request->file('image');
+
+        if ($image) {
+
+            $originalName = $image->getClientOriginalName();
+            $fileName = time() . '_' . $originalName;
+            $image->move('uploads/', $fileName);
+            $this->attributes['image'] = $fileName;
+
+            $old_meta = Postmeta::where('post_id', $post->id)->where('meta_key', '_featured_image')->first();
+
+            if($old_meta){
+                $old_meta->delete();
+            }
+
+            $post_meta = Postmeta::create([
+                'post_id' => $post->id,
+                'meta_key' => '_featured_image',
+                'meta_value' => $fileName,
+            ]);
+
+            $post_meta->save();
+
+        }
+
+        $file = $request->file('pdf');
 
         if ($file) {
 
@@ -294,10 +320,17 @@ class VideosController extends Controller
             $file->move('uploads/', $fileName);
             $this->attributes['pdf'] = $fileName;
 
-            $old_pdf = $post_meta->where('meta_key', '_pdf')->first();
+            $old_meta = Postmeta::where('post_id', $post->id)->where('meta_key', '_pdf')->first();
 
-            // $old_pdf->update($fileName);
-            // dd($post_meta->where('meta_key', '_pdf')->first());
+            if($old_meta){
+                $old_meta->delete();
+            }
+            
+            $post_meta = Postmeta::create([
+                'post_id' => $post->id,
+                'meta_key' => '_pdf',
+                'meta_value' => $fileName,
+            ]);
 
         }
         
@@ -310,19 +343,38 @@ class VideosController extends Controller
             $vid->move('uploads/', $fileName);
             $this->attributes['video'] = $fileName;
 
+            $old_meta = Postmeta::where('post_id', $post->id)->where('meta_key', '_video')->first();
+
+            if($old_meta){
+                $old_meta->delete();
+            }
+            
             $post_meta = Postmeta::create([
                 'post_id' => $post->id,
                 'meta_key' => '_video',
                 'meta_value' => $fileName,
             ]);
-            $post_meta->save();
+        }
+
+        if($request->script){
+            $old_meta = Postmeta::where('post_id', $post->id)->where('meta_key', '_script')->first();
+
+            if($old_meta){
+                $old_meta->delete();
+            }
+            
+            $post_meta = Postmeta::create([
+                'post_id' => $post->id,
+                'meta_key' => '_script',
+                'meta_value' => $request->script,
+            ]);
         }
 
         if($request->topic){
             foreach ($request->topic as $item) {
                  $post->topics()->attach($item);
              }
-         }
+        }
                  
         if($request->category){
             foreach ($request->category as $item) {
@@ -332,7 +384,7 @@ class VideosController extends Controller
 
         DB::commit();
 
-        Flash::success('Post updated successfully.');
+        Flash::success('Video updated successfully.');
 
         return redirect(route('admin.videos.index'));
     }
@@ -343,14 +395,14 @@ class VideosController extends Controller
         $post = Post::find($id);
 
         if (empty($post)) {
-            Flash::error('Post not found');
+            Flash::error('Video not found');
 
             return redirect(route('admin.videos.index'));
         }
 
         $post->delete();
 
-        Flash::success('Post deleted successfully.');
+        Flash::success('Video deleted successfully.');
 
         return redirect(route('admin.videos.index'));
     }

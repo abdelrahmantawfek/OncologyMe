@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('postmetas', function (Blueprint $table) {
-            $table->id('meta_id');
+            $table->id('id');
             $table->foreignId('post_id')->constrained('posts')->onUpdate('cascade')->onDelete('cascade');
             $table->text('meta_key');
             $table->text('meta_value');

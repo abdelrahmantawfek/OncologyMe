@@ -16,7 +16,7 @@ class ArticlesController extends Controller
     public function index(Request $request)
     {
         /** @var Post $posts */
-        $posts = Post::where('post_type', 'articles')->paginate(10);
+        $posts = Post::orderBy('created_at', 'DESC')->where('post_type', 'articles')->paginate(10);
         $all_topics = Topic::where('is_parent', 0)->get();
         $categories = Category::where('post_type', 'articles')->get();
         return view('admin.articles.index', compact('posts', 'all_topics', 'categories'));
@@ -34,12 +34,12 @@ class ArticlesController extends Controller
         // $input = $request->all();
         $input = $request->validate([
             'title' => 'required',
-            'slug' => 'nullable|unique:posts',
+            // 'slug' => 'nullable|unique:posts',
             // 'pdf' => 'required',
             // 'key_points' => 'required',
             // 'content' => 'required',
             // 'excerpt' => 'required',
-            'author' => 'required',
+            // 'author' => 'required',
             // 'meta_title' => 'required',
             // 'meta_desc' => 'required',
         ]);
@@ -229,7 +229,7 @@ class ArticlesController extends Controller
             // 'key_points' => 'required',
             // 'content' => 'required',
             // 'excerpt' => 'required',
-            'author' => 'required',
+            // 'author' => 'required',
             // 'meta_title' => 'required',
             // 'meta_desc' => 'required',
         ]);
@@ -281,6 +281,33 @@ class ArticlesController extends Controller
         $post_meta = $post->postmeta;
 
         $pdf = $request->validate(['pdf' => 'mimes:pdf|max:5048']);
+        $featured_image = $request->validate(['image' => 'mimes:jpg,png|max:5048']);
+
+        $image = $request->file('image');
+
+        if ($image) {
+
+            $originalName = $image->getClientOriginalName();
+            $fileName = time() . '_' . $originalName;
+            $image->move('uploads/', $fileName);
+            $this->attributes['image'] = $fileName;
+
+            $old_meta = Postmeta::where('post_id', $post->id)->where('meta_key', '_featured_image')->first();
+
+            if($old_meta){
+                $old_meta->delete();
+            }
+
+            $post_meta = Postmeta::create([
+                'post_id' => $post->id,
+                'meta_key' => '_featured_image',
+                'meta_value' => $fileName,
+            ]);
+
+            $post_meta->save();
+
+        }
+        
         $file = $request->file('pdf');
 
         if ($file) {
@@ -290,16 +317,33 @@ class ArticlesController extends Controller
             $file->move('uploads/', $fileName);
             $this->attributes['pdf'] = $fileName;
 
-            $old_pdf = $post_meta->where('meta_key', '_pdf')->first();
+            $old_meta = Postmeta::where('post_id', $post->id)->where('meta_key', '_pdf')->first();
 
-            // $old_pdf->update($fileName);
-            // dd($post_meta->where('meta_key', '_pdf')->first());
+            if($old_meta){
+                $old_meta->delete();
+            }
+            // dd($old_meta);
+
+            $post_meta = Postmeta::create([
+                'post_id' => $post->id,
+                'meta_key' => '_pdf',
+                'meta_value' => $fileName,
+            ]);
 
         }
 
         if($request->key_points){
 
-            // dd($post_meta);
+            $old_meta = Postmeta::where('post_id', $post->id)->where('meta_key', '_key_points')->first();
+
+            if($old_meta){
+                $old_meta->delete();
+            }
+            $post_meta = Postmeta::create([
+                'post_id' => $post->id,
+                'meta_key' => '_key_points',
+                'meta_value' => $request->key_points,
+            ]);
         }
 
         if($request->topic){

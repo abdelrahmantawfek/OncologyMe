@@ -67,7 +67,7 @@
                             <h4>
                                 <span> {{ $post->author ?? ''}} </span>
 
-                                <text>&nbsp;/&nbsp;<span> {{ $post->created_at->format('M d, Y') ?? ''}} </span></text>
+                                <text>@if($post->author) &nbsp;/&nbsp; @endif<span> {{ $post->created_at->format('M d, Y') ?? ''}} </span></text>
 
                             </h4>
                             <p>{{ $post->excerpt ?? ''}}</p>

@@ -24,8 +24,12 @@
                 <div class="m-t-20"></div>
                 <div class="row articles-box">
                     @if (count($data['news']))
-                        
+                     
+                    @if (count($data['videos']))
                     <div class="col-md-8 col-sm-6">
+                    @else    
+                    <div class="col-md-12 col-sm-6">
+                    @endif 
                         <div class="careerfy-typo-wrap categ-title">
                             <h3><span>Latest News</span></h3>
                         </div>
@@ -43,7 +47,7 @@
                                 <h4>
                                     <span> {{ $post->author ?? ''}} </span>
     
-                                    <text>&nbsp;/&nbsp;<span> {{ $post->created_at->format('M d, Y') ?? ''}} </span></text>
+                                    <text>@if($post->author) &nbsp;/&nbsp; @endif<span> {{ $post->created_at->format('M d, Y') ?? ''}} </span></text>
     
                                 </h4>
                                 <div class="article-img-text">
@@ -60,13 +64,17 @@
                     </div>
                     @endif
                     @if (count($data['videos']))
+                    @if (count($data['news']))
                     <div class="col-md-4 col-sm-6">
+                    @else  
+                    <div class="col-md-12 col-sm-6">
+                    @endif 
                         <div class="careerfy-typo-wrap categ-title">
                             <h3 class="text-right"><span>Latest Videos</span></h3>
                         </div>
                         <div class="videos-only brdr-bf br-nn">
                             @foreach ($data['videos'] as $post)
-                            @if (count($post->postmeta->where('meta_key', '_featured_image')) )
+                            {{-- @if (count($post->postmeta->where('meta_key', '_featured_image')) ) --}}
                             <div class="article-item">
                                 <div class="article-tags">
                                     <div class="video-thumbnail pos-rltv">
@@ -74,8 +82,9 @@
                                             @foreach ($post->postmeta->where('meta_key', '_featured_image') as $key => $value)
                                             <img src="{{ asset('uploads/'.$value->meta_value )}}" alt="{{$value->meta_value}}">
                                             @endforeach
-                                         
+                                            @if (count($post->postmeta->where('meta_key', '_featured_image')) )
                                             <img class="pos-abslt" src="{{ asset('front-assets/img/play.png') }}">
+                                            @endif
                                         </a>
                                     </div>
                                     @foreach ($post->topics as $topic)
@@ -88,11 +97,11 @@
                                 <h4>
                                     <span> {{ $post->author ?? ''}} </span>
     
-                                    <text>&nbsp;/&nbsp;<span> {{ $post->created_at->format('M d, Y') ?? ''}} </span></text>
+                                    <text>@if($post->author) &nbsp;/&nbsp; @endif<span> {{ $post->created_at->format('M d, Y') ?? ''}} </span></text>
     
                                 </h4>
                             </div>
-                            @endif
+                            {{-- @endif --}}
                             @endforeach
                         </div>
                     </div>

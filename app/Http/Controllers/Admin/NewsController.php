@@ -16,7 +16,7 @@ class NewsController extends Controller
     public function index(Request $request)
     {
         /** @var Post $posts */
-        $posts = Post::where('post_type', 'news')->paginate(10);
+        $posts = Post::orderBy('created_at', 'DESC')->where('post_type', 'news')->paginate(10);
         $all_topics = Topic::where('is_parent', 0)->get();
         $categories = Category::where('post_type', 'news')->get();
 
@@ -270,8 +270,6 @@ class NewsController extends Controller
             }
         }
 
-
-
         $pdf = $request->validate(['pdf' => 'mimes:pdf|max:5048']);
         $featured_image = $request->validate(['image' => 'mimes:jpg,png|max:5048']);
 
@@ -284,24 +282,21 @@ class NewsController extends Controller
             $image->move('uploads/', $fileName);
             $this->attributes['image'] = $fileName;
 
+            $old_meta = Postmeta::where('post_id', $post->id)->where('meta_key', '_featured_image')->first();
+
+            if($old_meta){
+                $old_meta->delete();
+            }
+
             $post_meta = Postmeta::create([
                 'post_id' => $post->id,
                 'meta_key' => '_featured_image',
                 'meta_value' => $fileName,
             ]);
 
-            // $old_image = $post->postmeta->where('post_id', $post->id)->where('meta_key', '_featured_image')->first();
-            // $meta_id = $old_image->meta_id;
-            $old_meta = Postmeta::where('post_id', $post->id)->where('meta_key', '_featured_image')->first();
-            $old_meta->delete;
-            // dd($old_meta);
-
-            // $new_image->save();
             $post_meta->save();
 
         }
-
-       
 
         $file = $request->file('pdf');
 
@@ -312,16 +307,33 @@ class NewsController extends Controller
             $file->move('uploads/', $fileName);
             $this->attributes['pdf'] = $fileName;
 
-            $old_pdf = $post_meta->where('meta_key', '_pdf')->first();
+            $old_meta = Postmeta::where('post_id', $post->id)->where('meta_key', '_pdf')->first();
 
-            // $old_pdf->update($fileName);
-            // dd($post_meta->where('meta_key', '_pdf')->first());
+            if($old_meta){
+                $old_meta->delete();
+            }
+            
+            $post_meta = Postmeta::create([
+                'post_id' => $post->id,
+                'meta_key' => '_pdf',
+                'meta_value' => $fileName,
+            ]);
 
         }
 
         if($request->key_points){
 
-            // dd($post_meta);
+            $old_meta = Postmeta::where('post_id', $post->id)->where('meta_key', '_key_points')->first();
+
+            if($old_meta){
+                $old_meta->delete();
+            }
+            $post_meta = Postmeta::create([
+                'post_id' => $post->id,
+                'meta_key' => '_key_points',
+                'meta_value' => $request->key_points,
+            ]);
+
         }
 
         if($request->topic){

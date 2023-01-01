@@ -14,7 +14,7 @@ class AdminController extends Controller
     public function index(Request $request)
     {
         /** @var Admin $admins */
-        $admins = Admin::paginate(10);
+        $admins = Admin::orderBy('created_at', 'DESC')->paginate(10);
 
         return view('admin.admins.index')
             ->with('admins', $admins);

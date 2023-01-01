@@ -16,7 +16,7 @@ class RegisterController extends Controller
     public function close_defualt_register()
     {
         return Redirect::to('signup');
-        // abort(404);
+
     }
     public function register()
     {

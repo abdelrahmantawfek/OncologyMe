@@ -12,7 +12,7 @@ class TopicController extends Controller
     public function index(Request $request)
     {
         /** @var Ads $adss */
-        $topics = Topic::paginate(10);
+        $topics = Topic::orderBy('created_at', 'DESC')->paginate(10);
         return view('admin.topics.index', compact('topics'));
     }
 

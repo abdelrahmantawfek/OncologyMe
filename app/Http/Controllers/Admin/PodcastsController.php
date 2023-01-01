@@ -16,7 +16,7 @@ class PodcastsController extends Controller
     public function index(Request $request)
     {
         /** @var Post $posts */
-        $posts = Post::where('post_type', 'podcasts')->paginate(10);
+        $posts = Post::orderBy('created_at', 'DESC')->where('post_type', 'podcasts')->paginate(10);
         $all_topics = Topic::where('is_parent', 0)->get();
         $categories = Category::where('post_type', 'podcasts')->get();
         return view('admin.podcasts.index', compact('posts', 'all_topics', 'categories'));
@@ -172,7 +172,7 @@ class PodcastsController extends Controller
 
         DB::commit();
 
-        Flash::success('Post saved successfully.');
+        Flash::success('Podcast saved successfully.');
 
         return redirect(route('admin.podcasts.index'));
     }
@@ -183,7 +183,7 @@ class PodcastsController extends Controller
         $post = Post::find($id);
 
         if (empty($post)) {
-            Flash::error('Post not found');
+            Flash::error('Podcast not found');
 
             return redirect(route('admin.podcasts.index'));
         }
@@ -205,7 +205,7 @@ class PodcastsController extends Controller
         $selected_cats = $post->categories->pluck('id');
 
         if (empty($post)) {
-            Flash::error('Post not found');
+            Flash::error('Podcast not found');
 
             return redirect(route('admin.podcasts.index'));
         }
@@ -220,7 +220,7 @@ class PodcastsController extends Controller
         $post = Post::find($id);
 
         if (empty($post)) {
-            Flash::error('Post not found');
+            Flash::error('Podcast not found');
 
             return redirect(route('admin.podcasts.index'));
         }
@@ -232,7 +232,7 @@ class PodcastsController extends Controller
             // 'key_points' => 'required',
             // 'content' => 'required',
             // 'excerpt' => 'required',
-            'author' => 'required',
+            // 'author' => 'required',
             // 'meta_title' => 'required',
             // 'meta_desc' => 'required',
         ]);
@@ -296,12 +296,20 @@ class PodcastsController extends Controller
             $image->move('uploads/', $fileName);
             $this->attributes['image'] = $fileName;
 
+            $old_meta = Postmeta::where('post_id', $post->id)->where('meta_key', '_featured_image')->first();
+
+            if($old_meta){
+                $old_meta->delete();
+            }
+
             $post_meta = Postmeta::create([
                 'post_id' => $post->id,
                 'meta_key' => '_featured_image',
                 'meta_value' => $fileName,
             ]);
+
             $post_meta->save();
+
         }
 
         $file = $request->file('pdf');
@@ -313,10 +321,17 @@ class PodcastsController extends Controller
             $file->move('uploads/', $fileName);
             $this->attributes['pdf'] = $fileName;
 
-            $old_pdf = $post_meta->where('meta_key', '_pdf')->first();
+            $old_meta = Postmeta::where('post_id', $post->id)->where('meta_key', '_pdf')->first();
 
-            // $old_pdf->update($fileName);
-            // dd($post_meta->where('meta_key', '_pdf')->first());
+            if($old_meta){
+                $old_meta->delete();
+            }
+            
+            $post_meta = Postmeta::create([
+                'post_id' => $post->id,
+                'meta_key' => '_pdf',
+                'meta_value' => $fileName,
+            ]);
 
         }
 
@@ -329,12 +344,18 @@ class PodcastsController extends Controller
             $mp3->move('uploads/', $fileName);
             $this->attributes['sound'] = $fileName;
 
+            $old_meta = Postmeta::where('post_id', $post->id)->where('meta_key', '_mp3')->first();
+
+            if($old_meta){
+                $old_meta->delete();
+            }
+            
             $post_meta = Postmeta::create([
                 'post_id' => $post->id,
-                'meta_key' => '_sound',
+                'meta_key' => '_mp3',
                 'meta_value' => $fileName,
             ]);
-            $post_meta->save();
+
         }
 
         if($request->topic){
@@ -350,7 +371,7 @@ class PodcastsController extends Controller
          }
         DB::commit();
 
-        Flash::success('Post updated successfully.');
+        Flash::success('Podcast updated successfully.');
 
         return redirect(route('admin.podcasts.index'));
     }
@@ -361,14 +382,14 @@ class PodcastsController extends Controller
         $post = Post::find($id);
 
         if (empty($post)) {
-            Flash::error('Post not found');
+            Flash::error('Podcast not found');
 
             return redirect(route('admin.podcasts.index'));
         }
 
         $post->delete();
 
-        Flash::success('Post deleted successfully.');
+        Flash::success('Podcast deleted successfully.');
 
         return redirect(route('admin.podcasts.index'));
     }

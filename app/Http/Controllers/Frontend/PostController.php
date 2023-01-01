@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
-use App\Models\Page;
 use App\Models\Post;
 use App\Models\Topic;
 use Illuminate\Http\Request;
@@ -14,30 +13,34 @@ class PostController extends Controller
      
     public function post($post_type)
     {
-        // $data['page'] = Page::with('sections')->find(9);
         $data['posts'] = Post::orderBy('created_at', 'DESC')->where('post_type', $post_type)->with('topics')->paginate(10);
         $data['post_type'] = Post::where('post_type', $post_type)->pluck('post_type')->toArray();
+
+        if (!in_array($post_type, $data['post_type']) ) {
+            abort(404);
+        }
+
         $data['categories'] = Category::where('post_type', 'videos')->with('posts.topics')->get();
         $data['other-categories'] = Category::orderBy('title')->where('post_type', $post_type)
         ->whereHas('posts')
         ->get()->pluck('title', 'slug');
         $data['other-topics'] = Topic::where('is_parent', 0)
         ->get()->pluck('title', 'slug');
-
-        if (!in_array($post_type, $data['post_type']) ) {
-            abort(404);
-        }
-
-        // dd($data['post_type']);
         
         return view('frontend.posts', compact('data'));
     }
 
     public function single_post($post_type, $slug)
     {
+        
         $data['post'] = Post::where('post_type', $post_type)->where('slug', $slug)->with('postmeta', 'topics', 'categories')->get()->first();
         $data['post_type'] = Post::where('post_type', $post_type)->pluck('post_type')->toArray();
         $data['slug'] = Post::where('slug', $slug)->pluck('slug')->toArray();
+
+        if (!in_array($post_type, $data['post_type']) || !in_array($slug, $data['slug']) ) {
+            abort(404);
+        }
+
         $data['pdf'] = $data['post']->postmeta->where('meta_key', '_pdf')->pluck('meta_value');
         $data['key_points'] = $data['post']->postmeta->where('meta_key', '_key_points')->pluck('meta_value');
         $data['sound'] = $data['post']->postmeta->where('meta_key', '_sound')->pluck('meta_value');
@@ -52,9 +55,7 @@ class PostController extends Controller
         ->get();
 
 
-        if (!in_array($post_type, $data['post_type']) || !in_array($slug, $data['slug']) ) {
-            abort(404);
-        }
+
     
         return view('frontend.single', compact('data'));
     }
@@ -68,7 +69,6 @@ class PostController extends Controller
         ->where('id', '!=', $data['category']->id)
         ->get()->pluck('title', 'slug');
 
-        // dd($data['posts']);
         return view('frontend.categories', compact('data'));
     }
 
@@ -92,15 +92,7 @@ class PostController extends Controller
     {
         $data['highlights'] = Post::orderBy('created_at', 'DESC')->where('post_type', 'news')->where('highlights', true)->with('topics', 'postmeta')->get();
         $data['category'] = Category::where('post_type',  $post_type)->with('posts.topics')->get()->first();
-        $data['other-categories'] = Category::where('post_type', $post_type)
-        ->where('id', '!=', $data['category']->id)
-        ->get()->pluck('title', 'slug');
 
-        // if (!in_array($post_type, $data['post_type']) ) {
-        //     abort(404);
-        // }
-        
-        // return 'asd';
         return view('frontend.highlights', compact('data'));
     }
    
