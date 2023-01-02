@@ -14,7 +14,7 @@
     <!--end::Table head-->
     <!--begin::Table body-->
     <tbody class="text-gray-600 fw-bold">
-        @foreach ($users as $user) 
+        @foreach ($data['users'] as $user) 
         <!--begin::Table row-->
         <tr>
             <!--begin::User=-->
@@ -114,4 +114,4 @@ No users found
 @endif
 
 
-@include('partials._pagination', ['records' => $users ])
+@include('partials._pagination', ['records' => $data['users'] ])

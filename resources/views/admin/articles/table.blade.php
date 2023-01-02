@@ -18,7 +18,7 @@
     <!--end::Table head-->
     <!--begin::Table body-->
     <tbody class="text-gray-600 fw-bold">
-        @foreach ($posts as $post)
+        @foreach ($data['posts'] as $post)
         <!--begin::Table row-->
         <tr>
             <!--begin::Checkbox-->
@@ -113,5 +113,5 @@
 </table>
 <!--end::Table-->
 
-@include('partials._pagination', ['records' => $posts ])
+@include('partials._pagination', ['records' => $data['posts'] ])
 

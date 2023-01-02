@@ -20,7 +20,7 @@
     <!--end::Table head-->
     <!--begin::Table body-->
     <tbody class="text-gray-600 fw-bold">
-        @foreach ($announcements as $announcement)
+        @foreach ($data['announcements'] as $announcement)
         <!--begin::Table row-->
         <tr>
             <!--begin::Checkbox-->
@@ -137,4 +137,4 @@
 <!--end::Table-->
 
 
-@include('partials._pagination', ['records' => $announcements ])
+@include('partials._pagination', ['records' => $data['announcements'] ])

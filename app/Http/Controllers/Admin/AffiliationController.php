@@ -13,10 +13,16 @@ class AffiliationController extends Controller
     public function index(Request $request)
     {
         /** @var Affiliation $affiliations */
-        $affiliations = Affiliation::orderBy('created_at', 'DESC')->paginate(10);
 
-        return view('admin.affiliations.index')
-            ->with('affiliations', $affiliations);
+        $query = Affiliation::query();
+    
+        if (request()->filled('search')) {
+            $query
+            ->where('title', 'LIKE', '%' . $request->search . '%');
+        }
+    
+        $data['affiliations'] = $query->orderBy('created_at', 'DESC')->paginate(10);
+        return view('admin.affiliations.index', compact('data'));
     }
 
     /**

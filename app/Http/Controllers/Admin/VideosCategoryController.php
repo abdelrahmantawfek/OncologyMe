@@ -13,10 +13,19 @@ class VideosCategoryController extends Controller
     public function index(Request $request)
     {
         /** @var Ads $adss */
-        $categories = Category::orderBy('created_at', 'DESC')->where('post_type', 'videos')->paginate(10);
-        // $parent_category = Category::where('is_parent', 1)->get()->pluck('title', 'id');
 
-        return view('admin.videoscategories.index', compact('categories'));
+        $query = Category::query();
+       
+        if (request()->filled('search')) {
+            $query
+            ->where('post_type', 'videos')
+            ->where('title', 'LIKE', '%' . $request->search . '%')
+            ->orWhere('slug', 'like', '%' . $request->search . '%');
+        }
+    
+        $data['categories'] = $query->orderBy('created_at', 'DESC')->where('post_type', 'videos')->paginate(10);
+
+        return view('admin.videoscategories.index', compact('data'));
     }
 
     public function create()

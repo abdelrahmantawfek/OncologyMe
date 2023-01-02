@@ -19,7 +19,7 @@
     <!--end::Table head-->
     <!--begin::Table body-->
     <tbody class="text-gray-600 fw-bold">
-        @foreach ($categories as $category)
+        @foreach ($data['categories'] as $category)
         <!--begin::Table row-->
         <tr>
             <!--begin::Checkbox-->
@@ -117,4 +117,4 @@
 <!--end::Table-->
 
 
-@include('partials._pagination', ['records' => $categories ])
+@include('partials._pagination', ['records' => $data['categories'] ])

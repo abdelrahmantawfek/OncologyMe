@@ -4,16 +4,25 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Contact;
+use Illuminate\Http\Request;
 use Laracasts\Flash\Flash;
 
 
 class ContactController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $contacts = Contact::orderBy('created_at', 'DESC')->paginate(10);
+        $query = Contact::query();
+       
+        if (request()->filled('search')) {
+            $query
+            ->where('name', 'LIKE', '%' . $request->search . '%')
+            ->orWhere('email', 'like', '%' . $request->search . '%');
+        }
+    
+        $data['contacts'] = $query->orderBy('created_at', 'DESC')->paginate(10);
 
-        return view('admin.contacts.index', compact('contacts'));
+        return view('admin.contacts.index', compact('data'));
     }
 
     public function show($id)

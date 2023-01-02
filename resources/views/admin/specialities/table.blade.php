@@ -18,7 +18,7 @@
     <!--end::Table head-->
     <!--begin::Table body-->
     <tbody class="text-gray-600 fw-bold">
-        @foreach ($specialities as $speciality)
+        @foreach ($data['specialities'] as $speciality)
         <!--begin::Table row-->
         <tr>
             <!--begin::Checkbox-->
@@ -113,4 +113,4 @@
 <!--end::Table-->
 
 
-@include('partials._pagination', ['records' => $specialities ])
+@include('partials._pagination', ['records' => $data['specialities'] ])

@@ -51,6 +51,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function(){
 
 
         Route::resource('news', App\Http\Controllers\Admin\NewsController::class);
+
         Route::resource('newscategories', App\Http\Controllers\Admin\NewsCategoryController::class);
 
         Route::resource('videos', App\Http\Controllers\Admin\VideosController::class);

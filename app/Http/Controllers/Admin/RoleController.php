@@ -22,10 +22,17 @@ class RoleController extends Controller
     public function index(Request $request)
     {
         /** @var Role $roles */
-        $roles = Role::orderBy('created_at', 'DESC')->paginate(10);
 
-        return view('admin.roles.index')
-            ->with('roles', $roles);
+        $query = Role::query();
+    
+        if (request()->filled('search')) {
+            $query
+            ->where('name', 'LIKE', '%' . $request->search . '%');
+        }
+    
+        $data['roles'] = $query->orderBy('created_at', 'DESC')->paginate(10);
+
+        return view('admin.roles.index', compact('data'));
     }
 
     /**

@@ -15,7 +15,7 @@
     <!--end::Table head-->
     <!--begin::Table body-->
     <tbody class="text-gray-600 fw-bold">
-        @foreach ($contacts as $contact) 
+        @foreach ($data['contacts'] as $contact) 
         <!--begin::Table row-->
         <tr>
             <!--begin::User=-->
@@ -97,6 +97,6 @@
 No contacts found
 @endif
 
-@include('partials._pagination', ['records' => $contacts ])
+@include('partials._pagination', ['records' => $data['contacts'] ])
 
 

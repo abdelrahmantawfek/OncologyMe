@@ -18,7 +18,7 @@
     <!--end::Table head-->
     <!--begin::Table body-->
     <tbody class="text-gray-600 fw-bold">
-        @foreach ($affiliations as $affiliation)
+        @foreach ($data['affiliations'] as $affiliation)
         <!--begin::Table row-->
         <tr>
             <!--begin::Checkbox-->
@@ -114,4 +114,4 @@
 <!--end::Table-->
 
 
-@include('partials._pagination', ['records' => $affiliations ])
+@include('partials._pagination', ['records' => $data['affiliations'] ])

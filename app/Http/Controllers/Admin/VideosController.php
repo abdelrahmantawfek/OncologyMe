@@ -16,10 +16,21 @@ class VideosController extends Controller
     public function index(Request $request)
     {
         /** @var Post $posts */
-        $posts = Post::orderBy('created_at', 'DESC')->where('post_type', 'videos')->paginate(10);
-        $all_topics = Topic::where('is_parent', 0)->get();
-        $categories = Category::where('post_type', 'videos')->get();
-        return view('admin.videos.index', compact('posts', 'all_topics', 'categories'));
+     
+        $query = Post::query();
+       
+        if (request()->filled('search')) {
+            $query
+            ->where('post_type', 'videos')
+            ->where('title', 'LIKE', '%' . $request->search . '%')
+            ->orWhere('slug', 'like', '%' . $request->search . '%');
+        }
+    
+        $data['posts'] = $query->orderBy('created_at', 'DESC')->where('post_type', 'videos')->paginate(10);
+        $data['all_topics'] = Topic::where('is_parent', 0)->get();
+        $data['categories'] = Category::where('post_type', 'videos')->get();
+
+        return view('admin.videos.index', compact('data'));
     }
 
     public function create()

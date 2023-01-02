@@ -13,7 +13,7 @@
     <!--end::Table head-->
     <!--begin::Table body-->
     <tbody class="text-gray-600 fw-bold">
-        @foreach ($roles as $role)
+        @foreach ($data['roles'] as $role)
         <!--begin::Table row-->
         <tr>
             <!--begin::Page=-->
@@ -98,4 +98,4 @@
     <!--end::Table body-->
 </table>
 
-@include('partials._pagination', ['records' => $roles ])
+@include('partials._pagination', ['records' => $data['roles'] ])

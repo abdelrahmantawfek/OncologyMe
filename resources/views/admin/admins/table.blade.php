@@ -15,7 +15,7 @@
     <!--end::Table head-->
     <!--begin::Table body-->
     <tbody class="text-gray-600 fw-bold">
-        @foreach ($admins as $admin) 
+        @foreach ($data['admins'] as $admin) 
         <!--begin::Table row-->
         <tr>
             <!--begin::User=-->
@@ -121,4 +121,4 @@
 No admins found
 @endif
 
-@include('partials._pagination', ['records' => $admins ])
+@include('partials._pagination', ['records' => $data['admins'] ])

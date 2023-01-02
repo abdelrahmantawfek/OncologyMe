@@ -14,10 +14,17 @@ class AdminController extends Controller
     public function index(Request $request)
     {
         /** @var Admin $admins */
-        $admins = Admin::orderBy('created_at', 'DESC')->paginate(10);
 
-        return view('admin.admins.index')
-            ->with('admins', $admins);
+        $query = Admin::query();
+
+        if (request()->filled('search')) {
+            $query
+            ->where('name', 'LIKE', '%' . $request->search . '%')
+            ->orWhere('email', 'LIKE', '%' . $request->search . '%');
+        }
+    
+        $data['admins'] = $query->orderBy('created_at', 'DESC')->paginate(10);
+        return view('admin.admins.index', compact('data'));
     }
 
     /**

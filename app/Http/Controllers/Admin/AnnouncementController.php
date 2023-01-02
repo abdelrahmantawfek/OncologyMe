@@ -20,10 +20,17 @@ class AnnouncementController extends Controller
     public function index(Request $request)
     {
         /** @var Announcement $announcements */
-        $announcements = Announcement::orderBy('created_at', 'DESC')->paginate(10);
 
-        return view('admin.announcements.index')
-            ->with('announcements', $announcements);
+        $query = Announcement::query();
+       
+        if (request()->filled('search')) {
+            $query
+            ->where('title', 'LIKE', '%' . $request->search . '%');
+        }
+    
+        $data['announcements'] = $query->orderBy('created_at', 'DESC')->paginate(10);
+    
+        return view('admin.announcements.index', compact('data'));
     }
 
     public function store(Request $request)

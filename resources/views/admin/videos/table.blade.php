@@ -18,7 +18,7 @@
     <!--end::Table head-->
     <!--begin::Table body-->
     <tbody class="text-gray-600 fw-bold">
-        @foreach ($posts as $post)
+        @foreach ($data['posts'] as $post)
         <!--begin::Table row-->
         <tr>
             <!--begin::Checkbox-->
@@ -30,13 +30,6 @@
             <!--end::Checkbox-->
             <!--begin::User=-->
             <td>
-                {{-- <!--begin:: Avatar -->
-                <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
-                    <a href="{{ route('admin.topics.edit', $topic->id) }}">
-                        <div class="symbol-label fs-3 bg-light-danger text-danger">{{ strtoupper(substr($topic->title ?? '', 0, 1)) }}</div>
-                    </a>
-                </div>
-                <!--end::Avatar--> --}}
                 <!--begin::User details-->
                 {{-- <div class="d-flex flex-column"> --}}
                     <a href="{{ route('admin.videos.edit', $post->id) }}" class="text-gray-800 text-hover-primary mb-1">{{ $post->title ?? ''}}</a>
@@ -44,22 +37,6 @@
                 <!--begin::User details-->
             </td>
             <!--end::User=-->
-            <!--begin::Role=-->
-            {{-- <td>{{ ($topic->is_parent == true) ? 'Yes' : 'No'}}</td> --}}
-            {{-- <td>{{ ($topic->parent_id == 0) ? '-' : $topic->parent_name}}</td> --}}
-            {{-- <td>{{ ($topic->is_main == true) ? 'Yes' : 'No'}}</td> --}}
-            <!--end::Role=-->
-            <!--begin::Last login=-->
-            {{-- <td>
-                {{ $post->meta_title ?? ''}}
-            </td> --}}
-            <!--end::Last login=-->
-            <!--begin::Two step=-->
-            {{-- <td> {{ $post->meta_desc ?? ''}}</td> --}}
-            <!--end::Two step=-->
-            {{-- <!--begin::Two step=-->
-            <td> {{ $topic->meta_keywords ?? ''}}</td>
-            <!--end::Two step=--> --}}
             <!--begin::Joined-->
             <td>{{ $post->created_at->format('M, d, Y') ?? ''}}</td>
             <!--begin::Joined-->
@@ -136,4 +113,4 @@
 <!--end::Table-->
 
 
-@include('partials._pagination', ['records' => $posts ])
+@include('partials._pagination', ['records' => $data['posts'] ])
