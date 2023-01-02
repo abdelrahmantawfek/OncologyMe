@@ -87,13 +87,12 @@
 		{{-- <script src="assets/js/custom/utilities/modals/upgrade-plan.js"></script> --}}
 		{{-- <script src="assets/js/custom/utilities/modals/create-app.js"></script> --}}
 		{{-- <script src="assets/js/custom/utilities/modals/users-search.js"></script> --}}
-		<script src="https://cdn.ckeditor.com/ckeditor5/29.1.0/classic/ckeditor.js"></script>
+		<script src="//cdn.ckeditor.com/4.20.1/standard/ckeditor.js"></script>
 		<script>
-			ClassicEditor
-				.create(document.querySelector('.ckeditor'))
-				.catch(error => {
-					console.error(error);
-				});
+			 CKEDITOR.replace('content', {
+				filebrowserUploadUrl: "{{route('ckeditor.upload', ['_token' => csrf_token() ])}}",
+				filebrowserUploadMethod: 'form'
+			});
 		</script>
 
 

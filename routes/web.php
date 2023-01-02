@@ -14,16 +14,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-// return view('coming-soon');
-// });
 
 Auth::routes();
 Route::get('register', [App\Http\Controllers\RegisterController::class, 'close_defualt_register']);
 Route::get('signup', [App\Http\Controllers\RegisterController::class, 'register'])->name('register');
 Route::post('signup', [App\Http\Controllers\RegisterController::class, 'post_signup'])->name('postSignup');
+// Route::resource('ckeditor', App\Http\Controllers\CkeditorController::class);
+Route::post('ckeditor', [App\Http\Controllers\CkeditorController::class, 'upload'])->name('ckeditor.upload');
 
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 
 // admin routes
 
@@ -41,7 +40,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function(){
         Route::resource('roles', App\Http\Controllers\Admin\RoleController::class);
         Route::get('updatePermissions', [App\Http\Controllers\Admin\RoleController::class, 'updatePermissions'])->name('roles.updatePermissions');
         Route::resource('users', App\Http\Controllers\Admin\UserController::class)->except('create', 'destroy', 'edit');
-        Route::resource('pages', App\Http\Controllers\Admin\PageController::class);
+        // Route::resource('pages', App\Http\Controllers\Admin\PageController::class);
         Route::resource('topics', App\Http\Controllers\Admin\TopicController::class);
         Route::resource('posts', App\Http\Controllers\Admin\PostController::class);
         // Route::resource('categories', App\Http\Controllers\Admin\CategoryController::class);
@@ -63,22 +62,14 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function(){
         Route::resource('podcasts', App\Http\Controllers\Admin\PodcastsController::class);
         Route::resource('podcastscategories', App\Http\Controllers\Admin\PodcastsCategoryController::class);
 
-        // Route::post('ckeditor/upload', 'CKEditorController@upload')->name('ckeditor.image-upload');
-
         // contacts
         Route::resource('contacts', App\Http\Controllers\Admin\ContactController::class)->except('create', 'edit');
-
 
     });
 
 });
 
-
-// user routes
-
-
 // frondend routes
-// Route::get('/-/{page}', [App\Http\Controllers\Frontend\PageController::class, 'page'])->name('page');
 
 Route::controller(App\Http\Controllers\Frontend\PageController::class)->group(
     function () {
@@ -91,7 +82,6 @@ Route::controller(App\Http\Controllers\Frontend\PageController::class)->group(
         Route::get('/rights', 'rights')->name('rights');
         Route::get('/privacy-policy', 'privacy')->name('privacy');
         Route::get('/topics', 'all_topics')->name('allTopics');
-        // Route::get('/recent-topics', 'recent_topics')->name('recentTopics');
         Route::get('/topics/{slug}', 'single_topic')->name('showTopic');
         Route::get('/search-topics', 'search_topic')->name('searchTopic');
         Route::get('results', 'search')->name('searchPosts');
@@ -104,14 +94,9 @@ Route::controller(App\Http\Controllers\Frontend\PostController::class)->group(
 
         Route::get('all-{post_type}', 'post')->name('allPosts');
         Route::get('search-{post_type}', 'search_category')->name('searchCategory');
-
         Route::get('/{post_type}/highlights', 'highlights')->name('allHighlights');
         Route::get('/{post_type}/{slug}', 'single_post')->name('singlePost');
         Route::get('{post_type}/categories/{slug}', 'single_category')->name('showCategory');
-
-        // Route::get('{post_type}/categories', 'category_archive')->name('categoryArchive');
-
-
 
     }
 );

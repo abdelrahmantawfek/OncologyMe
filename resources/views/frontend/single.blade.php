@@ -44,7 +44,7 @@
                             <h4>
                                 <span href=""> {{$data['post']->author ?? '' }} </span>
 
-                                <text>&nbsp;/&nbsp;<span href=""> {{ $data['post']->created_at->format('M d, Y') ?? ''}} </span></text>
+                                <text>@if($data['post']->author) &nbsp;/&nbsp; @endif<span> {{ $data['post']->created_at->format('M d, Y') ?? ''}} </span></text>
 
                                 
                                 @if (count($data['pdf']))

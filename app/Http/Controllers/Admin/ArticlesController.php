@@ -224,7 +224,7 @@ class ArticlesController extends Controller
         $input = $request->validate([
             'title' => 'required',
             // 'slug' => 'required',
-            'slug' => 'unique:posts',
+            // 'slug' => 'unique:posts',
             // 'pdf' => 'required',
             // 'key_points' => 'required',
             // 'content' => 'required',

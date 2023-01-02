@@ -23,8 +23,8 @@ class DatabaseSeeder extends Seeder
         // $this->call(Subcategories::class);
         // $this->call(Tags::class);
         $this->call(PageSeeder::class);
-        // $this->call(TopicSeeder::class);
-        // $this->call(PostSeeder::class);
+        $this->call(TopicSeeder::class);
+        $this->call(PostSeeder::class);
         // $this->call(ContactSeeder::class);
 
 
