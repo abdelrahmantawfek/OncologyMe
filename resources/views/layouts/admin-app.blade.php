@@ -28,6 +28,7 @@
 		<link href="{{ asset('assets/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
 		<link href="{{ asset('assets/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
 		<link href="{{ asset('css/admin-app.css') }}" rel="stylesheet" type="text/css">
+		<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 	</head>
 	<!--end::Head-->
 	<!--begin::Body-->
@@ -88,15 +89,21 @@
 		{{-- <script src="assets/js/custom/utilities/modals/create-app.js"></script> --}}
 		{{-- <script src="assets/js/custom/utilities/modals/users-search.js"></script> --}}
 		<script src="//cdn.ckeditor.com/4.20.1/standard/ckeditor.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 		<script>
-			 CKEDITOR.replace('content', {
+		$(document).ready(function() {
+			$('.js-example-basic-multiple').select2();
+		});
+			CKEDITOR.replace('content', {
 				filebrowserUploadUrl: "{{route('ckeditor.upload', ['_token' => csrf_token() ])}}",
 				filebrowserUploadMethod: 'form'
 			});
+
 		</script>
 
 
 	<script>
+
 	// topic fields script
 	$('#parent_field').hide();
 	$('#main_field').hide();
@@ -127,7 +134,7 @@
 		$('input[type=radio][name=is_main]').prop('required',false);
 	}
 
-	</script>
+	</scrip>
 
 		<!--end::Page Custom Javascript-->
 		<!--end::Javascript-->

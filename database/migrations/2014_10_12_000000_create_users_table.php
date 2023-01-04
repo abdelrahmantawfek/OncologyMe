@@ -20,12 +20,14 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('phone');
             $table->string('country');
-            $table->string('governorate');
+            $table->string('governorate')->nullable();
+            $table->string('other_governorate')->nullable();
             $table->string('affiliation');
             $table->string('speciality');
             $table->boolean('accept_newsletter_emails')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->boolean('status')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });

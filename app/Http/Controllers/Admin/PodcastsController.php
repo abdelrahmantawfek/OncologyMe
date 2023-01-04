@@ -296,7 +296,7 @@ class PodcastsController extends Controller
 
         $featured_image = $request->validate(['image' => 'mimes:jpg,png|max:5048']);
         $pdf = $request->validate(['pdf' => 'mimes:pdf|max:5048']);
-        $sound = $request->validate(['sound' => 'required|mimes:mp3|max:5048']);
+        $sound = $request->validate(['sound' => 'mimes:mp3|max:5048']);
 
         $image = $request->file('image');
 

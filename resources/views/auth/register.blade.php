@@ -22,6 +22,7 @@
                     </div>
 
                     <form method="POST" action="{{ route('postSignup') }}" class="row">
+                        @include('flash::message')
                         @csrf
                         <div class="form-group col-md-6">
                             <input id="first_name" type="text" class="form-control @error('first_name') is-invalid @enderror" name="first_name" value="{{ old('name') }}" required autocomplete="first_name" placeholder="First Name">
@@ -80,22 +81,37 @@
 
                         <div class="form-group col-md-6">
                             {!! Form::select('country', $countries, null, ['class' => 'form-control', 'placeholder' => 'Country', 'required' => 'required', 'id' => 'country' ]) !!}
+                            @error('country')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                         </div>
 
                         <div class="form-group col-md-6 cs-gov">
                             {!! Form::select('governorate', $governorates, null, ['class' => 'form-control', 'placeholder' => 'Governorate']) !!}
+                            @error('governorate')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                         </div>
 
                         <div class="form-group col-md-6 other-gov" style="display: none;">
-                            <input name='governorate' class="form-control" type="text" placeholder="Governorate">
+                            <input name='other_governorate' class="form-control" type="text" placeholder="Governorate">
                             <i class="careerfy-icon careerfy-edit"></i>
+                            @error('other_governorate')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                         </div>
 
                         <div class="form-group col-md-6">
                             <div class="combo-select-dropdown">
                                 <ul class="select-list-group" id="ComboSelect3">
                                     <li class="select-lg-dropdown">
-                                        <input type="text" class="select-list-group-search" name="affiliation" placeholder="Affiliation " />
+                                        <input type="text" class="select-list-group-search" name="affiliation" placeholder="Affiliation " required />
                                         <ul class="select-list-group-list" data-toggle="false">
                                             @foreach ($affiliations as $item)
                                                 <li class="select-list-group-list-item" data-display="true" data-highlight="false">{{$item}}</li> 
@@ -103,6 +119,11 @@
                                         </ul>
                                         </li>
                                 </ul>
+                                @error('affiliation')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                             </div>
                         </div>
 
@@ -110,7 +131,7 @@
                             <div class="combo-select-dropdown">
                                 <ul class="select-list-group" id="ComboSelect">
                                     <li class="select-lg-dropdown">
-                                        <input type="text" name="speciality" class="select-list-group-search" placeholder="Speciality" />
+                                        <input type="text" name="speciality" class="select-list-group-search" placeholder="Speciality" required />
                                         <ul class="select-list-group-list" data-toggle="false">
                                             @foreach ($specialites as $item)
                                                 <li class="select-list-group-list-item" data-display="true" data-highlight="false">{{$item}}</li> 
@@ -118,6 +139,11 @@
                                         </ul>
                                         </li>
                                 </ul>
+                                @error('affiliation')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                             </div>
                         </div>
               

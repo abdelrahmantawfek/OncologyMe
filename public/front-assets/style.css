@@ -5271,9 +5271,9 @@ li:hover .careerfy-read-more,
 .select-list-group [data-toggle="true"] {
     display: inherit;
     box-shadow: 0 3px 7px -2px rgba(0, 0, 0, 0.2);
-    position: absolute;
+    /* position: absolute; */
     background: #fff;
-    box-shadow: 0 0 10px -5px grey;
+    /* box-shadow: 0 0 10px -5px grey; */
 }
 
 .select-list-group li[data-display="false"] {
@@ -5283,9 +5283,9 @@ li:hover .careerfy-read-more,
 
 .select-list-group li[data-display="true"] {
     display: inherit;
-    position: absolute;
+    /* position: absolute; */
     background: #fff;
-    box-shadow: 0 0 10px -5px grey;
+    /* box-shadow: 0 0 10px -5px grey; */
 }
 
 .select-list-group li[data-highlight="false"] {

@@ -18,10 +18,13 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 Route::get('register', [App\Http\Controllers\RegisterController::class, 'close_defualt_register']);
 Route::get('signup', [App\Http\Controllers\RegisterController::class, 'register'])->name('register');
+Route::post('signin', [App\Http\Controllers\RegisterController::class, 'post_signin'])->name('postSignin');
 Route::post('signup', [App\Http\Controllers\RegisterController::class, 'post_signup'])->name('postSignup');
 // Route::resource('ckeditor', App\Http\Controllers\CkeditorController::class);
 Route::post('ckeditor', [App\Http\Controllers\CkeditorController::class, 'upload'])->name('ckeditor.upload');
+Route::post('export-users', [App\Http\Controllers\CkeditorController::class, 'export'])->name('users.export');
 
+Route::get('activate-account', [App\Http\Controllers\RegisterController::class, 'activate_account'])->name('active.account');
 
 
 // admin routes
@@ -39,7 +42,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function(){
         Route::resource('admins', App\Http\Controllers\Admin\AdminController::class);
         Route::resource('roles', App\Http\Controllers\Admin\RoleController::class);
         Route::get('updatePermissions', [App\Http\Controllers\Admin\RoleController::class, 'updatePermissions'])->name('roles.updatePermissions');
-        Route::resource('users', App\Http\Controllers\Admin\UserController::class)->except('create', 'destroy', 'edit');
+        Route::resource('users', App\Http\Controllers\Admin\UserController::class)->except('create', 'destroy', 'edit', 'export');
         // Route::resource('pages', App\Http\Controllers\Admin\PageController::class);
         Route::resource('topics', App\Http\Controllers\Admin\TopicController::class);
         Route::resource('posts', App\Http\Controllers\Admin\PostController::class);

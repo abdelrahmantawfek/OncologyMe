@@ -38,9 +38,7 @@
                         <div class="article-item">
                             @if (Request::is('podcasts'))
                             <div class="article-img-text combined-txt-img">
-                                <img src="{{ asset('front-assets/img/team1.jpg') }}" alt="">
                                 <div class="new-post-sec">
-
                                     <div class="clearfix"></div>
                                     <div class="article-tags">
                                         @foreach ($post->topics as $topic)

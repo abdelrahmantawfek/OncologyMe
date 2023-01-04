@@ -9,20 +9,21 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class NotifyMail extends Mailable
+class NewsNotifyMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $user;
+    public $user, $post;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($user)
+    public function __construct($user, $post)
     {
         $this->user = $user;
+        $this->post = $post;
     }
 
     /**
@@ -33,7 +34,7 @@ class NotifyMail extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Welcome to Oncology Me Website',
+            subject: 'Latest News',
         );
     }
 
@@ -45,7 +46,7 @@ class NotifyMail extends Mailable
     public function content()
     {
         return new Content(
-            view: 'emails.welcome',
+            view: 'emails.news',
         );
     }
 

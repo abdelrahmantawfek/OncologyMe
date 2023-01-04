@@ -22,8 +22,8 @@
                             <h3>Login to your account</h3>
 
                         </div>
-
-                        <form method="POST" action="{{ route('login') }}">
+                        <form method="POST" action="{{ route('postSignin') }}">
+                            @include('flash::message')
                             @csrf
                             <div class="careerfy-box-title careerfy-box-title-sub">
                                 <span>Sign In</span>

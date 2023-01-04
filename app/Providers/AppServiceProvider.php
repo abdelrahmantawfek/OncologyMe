@@ -3,11 +3,13 @@
 namespace App\Providers;
 
 use App\Models\Admin;
+use App\Models\Affiliation;
 use App\Models\Announcement;
 use App\Models\Category;
 use App\Models\Contact;
 use App\Models\Post;
 use App\Models\Settings;
+use App\Models\Speciality;
 use App\Models\Topic;
 use App\Models\User;
 use Illuminate\Support\Facades\View;
@@ -75,6 +77,12 @@ class AppServiceProvider extends ServiceProvider
         $data['st_topics'] = Topic::orderBy('created_at', 'DESC')->where('is_parent', 0)->take(5)->get();
 
         $data['general_info'] = Settings::all();
+
+        $data['countries'] = User::countries();
+        $data['governorates'] = User::governorates();
+        $data['affiliations'] = Affiliation::all()->pluck('title', 'title');
+        $data['specialites'] = Speciality::all()->pluck('title', 'title');
+
         // dd($data['st_topics']);
         View::share($data);
 

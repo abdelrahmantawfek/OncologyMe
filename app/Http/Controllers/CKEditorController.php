@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use App\Exports\Export;
+use App\Exports\UserExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class CkeditorController extends Controller
 {
@@ -34,6 +38,22 @@ class CkeditorController extends Controller
             @header('Content-type: text/html; charset=utf-8'); 
             echo $response;
         }
+    }
+
+    public function export(Request $request)
+    {
+        $query = User::query();
+
+        if (request()->filled('affiliations')) {
+            $query->where('affiliation', $request->affiliations);
+        }
+        if (request()->filled('specialities')) {
+            $query->where('speciality', $request->specialities);
+        }
+
+        $data = $query->orderBy('created_at', 'DESC')->get();
+
+        return Excel::download(new UserExport($data), 'users.xlsx');
     }
 
     /**

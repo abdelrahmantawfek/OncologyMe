@@ -29,7 +29,8 @@
 <div class="form-group col-sm-6 fv-row mb-10 fv-plugins-icon-container">
     <div class="d-flex flex-column gap-1">
         <div class="fw-bolder text-muted">Governorate</div>
-        <div class="fw-bolder fs-5">{{$user->governorate}}</div>
+        <div class="fw-bolder fs-5">{{$user->governorate ?? ''}}</div>
+        <div class="fw-bolder fs-5">{{$user->other_governorate ?? ''}}</div>
     </div>
 </div>
 

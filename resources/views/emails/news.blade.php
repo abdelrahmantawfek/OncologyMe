@@ -121,18 +121,9 @@
                 <div class="row" style="">
                     <div class="col-md-12 col-sm-12 col-xs-12" style="width:100%; ">
                         <div class="email-box clearfix" style="clear:both !important; background:#fefefe; position:relative; border-bottom:30px solid #f06926; min-height:250px; padding:25px; margin-top:-50px">
-                            <h4>Welcome to Oncology Me Website</h4>
-                            <p>You have successfully registered to Oncology Me Website, only one step left for you to be able to benefit from all the website features!</p>
-                            <p>Please confirm your email to activate your Oncology Me Website Account via clicking on the link below: <a href="{{ route('active.account', 'email='.$user->email) }}" target="_blank">Link</a></p>
-                            <p>& Enjoy the below services: </p>
-                            <ul style="padding: 0">
-                                <ol style="padding-left: 10px">1- Oncology content provided through educational programs, case presentations and CMEs</ol>
-                                <ol style="padding-left: 10px">2- Oncology Illustrated videos including infographics/Interviews</ol>
-                                <ol style="padding-left: 10px">3- Oncology-related Daily breaking news and updates</ol>
-                                <ol style="padding-left: 10px">4- Webcasts, Open discussions and live engagements</ol>
-                                <ol style="padding-left: 10px">5- Articles and trial summaries.</ol>
-                                <ol style="padding-left: 10px">6- Educational Podcasts</ol>
-                            </ul>
+                            <h4>Your latest oncology updates are summarized here for you!</h4>
+                            <p>Click the link below to view it: <a href="{{ env('APP_URL').'/'.$post->post_type.'/'.$post->slug }}" target="_blank">view</a></p></br>
+                            <p>Stay connected to Oncology me, leave us a comment on social media/ feedback via clicking the feedback bar to let us know what do you need more of.</p>
                         </div>
                         <div class="clearfix" style="clear:both !important"></div>
                         <div class="text-center m-t-30 m-b-30" style="margin-top:30px; margin-bottom:30px; text-align:center">

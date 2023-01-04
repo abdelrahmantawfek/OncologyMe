@@ -10,6 +10,9 @@ use App\Models\Topic;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Laracasts\Flash\Flash;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\NewsNotifyMail;
+use App\Models\User;
 
 class NewsController extends Controller
 {
@@ -25,7 +28,7 @@ class NewsController extends Controller
             ->where('title', 'LIKE', '%' . $request->search . '%')
             ->orWhere('slug', 'like', '%' . $request->search . '%');
         }
-    
+
         $data['posts'] = $query->orderBy('created_at', 'DESC')->where('post_type', 'news')->paginate(10);
         $data['all_topics'] = Topic::where('is_parent', 0)->get();
         $data['categories'] = Category::where('post_type', 'news')->get();
@@ -171,6 +174,12 @@ class NewsController extends Controller
         DB::commit();
 
         Flash::success('Post saved successfully.');
+
+        $users = User::where('accept_newsletter_emails', true)->get();
+
+        foreach ($users as $user){
+            Mail::to($user->email)->send(new NewsNotifyMail($user, $post));
+        }
 
         return redirect(route('admin.news.index'));
     }

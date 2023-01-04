@@ -54,6 +54,9 @@
                                     @foreach ($post->postmeta->where('meta_key', '_featured_image') as $key => $value)
                                     <img src="{{ asset('uploads/'.$value->meta_value )}}" alt="{{$value->meta_value}}">
                                     @endforeach
+                                    @if (!count($post->postmeta->where('meta_key', '_featured_image')) )
+                                    <img src="{{ asset('uploads/d-post.jpeg')}}" alt="oncologyme">
+                                    @endif
                                     <p>{{ implode(' ', array_slice(explode(' ', $post->excerpt), 0, 20)) }}@if ( str_word_count($post->excerpt) > 20 )...@endif</p>
                                 </div>
                             </div>    
@@ -82,9 +85,10 @@
                                             @foreach ($post->postmeta->where('meta_key', '_featured_image') as $key => $value)
                                             <img src="{{ asset('uploads/'.$value->meta_value )}}" alt="{{$value->meta_value}}">
                                             @endforeach
-                                            @if (count($post->postmeta->where('meta_key', '_featured_image')) )
-                                            <img class="pos-abslt" src="{{ asset('front-assets/img/play.png') }}">
+                                            @if (!count($post->postmeta->where('meta_key', '_featured_image')) )
+                                            <img src="{{ asset('uploads/d-post.jpeg')}}" alt="oncologyme">
                                             @endif
+                                            <img class="pos-abslt" src="{{ asset('front-assets/img/play.png') }}">
                                         </a>
                                     </div>
                                     @foreach ($post->topics as $topic)
@@ -126,12 +130,14 @@
                 <div class="articles-only">
                     <div class="col-md-4 col-sm-4 col-xs-12 articles-only">
                         <div class="article-item-main">
-                            {{-- @if (count($post->postmeta->where('meta_key', '_featured_image')) ) --}}
                             @foreach ($data['main_study_articles'][0]->postmeta->where('meta_key', '_featured_image') as $key => $value)
                             <a href="{{ route('showTopic', $topic->slug ?? '') }}"><img src="{{ asset('uploads/'.$value->meta_value )}}" alt="{{$value->meta_value}}"></a>
                             @endforeach
+                            @if (!count($data['main_study_articles'][0]->postmeta->where('meta_key', '_featured_image')) )
+                            <a href="{{$data['main_study_articles'][0]->post_type.'/'.$data['main_study_articles'][0]->slug}}"><img src="{{ asset('uploads/d-post.jpeg')}}" alt="oncologyme"></a>
+                            @endif
                             <div class="article-tags">
-                                @foreach ($post->topics as $topic)
+                                @foreach ($data['main_study_articles'][0]->topics as $topic)
                                 <span><a href="{{ route('showTopic', $topic->slug ?? '') }}">{{$topic->title ?? ''}}</a></span>
                                 @endforeach
                             </div>
@@ -146,7 +152,7 @@
                     <div class="col-md-8 col-sm-4 col-xs-12 articles-only">
                         @foreach ($data['study_articles'] as $post)
                         <div class="article-item col-md-6 col-sm-6 col-xs-12 ">
-                            <h2><a href="{{$post->post_type.'/'.$data['main_study_articles'][0]->slug ?? ''}}">{{ implode(' ', array_slice(explode(' ', $post->title ?? ''), 0, 10)) }}@if ( str_word_count($post->title ?? '') > 10 )...@endif</a></h2>
+                            <h2><a href="{{$post->post_type.'/'.$post->slug ?? '' }}">{{ implode(' ', array_slice(explode(' ', $post->title ?? ''), 0, 10)) }}@if ( str_word_count($post->title ?? '') > 10 )...@endif</a></h2>
                             <div class="article-tags">
                                 @foreach ($post->topics as $topic)
                                 <span><a href="{{ route('showTopic', $topic->slug ?? '') }}">{{$topic->title ?? ''}}</a></span>
@@ -158,7 +164,9 @@
                                 @foreach ($post->postmeta->where('meta_key', '_featured_image') as $key => $value)
                                 <a href="{{ route('showTopic', $topic->slug ?? '') }}"><img src="{{ asset('uploads/'.$value->meta_value )}}" alt="{{$value->meta_value}}"></a>
                                 @endforeach
-
+                                @if (!count($post->postmeta->where('meta_key', '_featured_image')) )
+                                    <a href="{{$post->post_type.'/'.$data['main_study_articles'][0]->slug}}"><img src="{{ asset('uploads/d-post.jpeg')}}" alt="oncologyme"></a>
+                                @endif
                                 <p>{{implode(' ', array_slice(explode(' ', $post->excerpt ?? ''), 0, 10)) }}@if ( str_word_count($post->excerpt ?? '') > 10 )...@endif</p>
                                 
                             </div>
@@ -186,12 +194,14 @@
                 <div class="articles-only">
                     <div class="col-md-4 col-sm-4 col-xs-12 articles-only">
                         <div class="article-item-main">
-                            {{-- @if (count($post->postmeta->where('meta_key', '_featured_image')) ) --}}
                             @foreach ($data['main_podcast'][0]->postmeta->where('meta_key', '_featured_image') as $key => $value)
                             <a href="{{ route('showTopic', $topic->slug ?? '') }}"><img src="{{ asset('uploads/'.$value->meta_value )}}" alt="{{$value->meta_value}}"></a>
                             @endforeach
+                            @if (!count($data['main_podcast'][0]->postmeta->where('meta_key', '_featured_image')) )
+                            <a href="{{$data['main_podcast'][0]->post_type.'/'.$data['main_podcast'][0]->slug}}"><img src="{{ asset('uploads/d-post.jpeg')}}" alt="oncologyme"></a>
+                            @endif
                             <div class="article-tags">
-                                @foreach ($post->topics as $topic)
+                                @foreach ($data['main_podcast'][0]->topics as $topic)
                                 <span><a href="{{ route('showTopic', $topic->slug ?? '') }}">{{$topic->title ?? ''}}</a></span>
                                 @endforeach
                             </div>
@@ -211,7 +221,7 @@
                         @foreach ($data['podcasts'] as $post)
                         
                         <div class="article-item col-md-6 col-sm-6 col-xs-12 ">
-                            <h2><a href="{{$post->post_type.'/'.$data['main_podcast'][0]->slug ?? '' }}">{{ implode(' ', array_slice(explode(' ', $post->title ?? ''), 0, 10)) }}@if ( str_word_count($post->title ?? '') > 10 )...@endif</a></h2>
+                            <h2><a href="{{$post->post_type.'/'.$post->slug ?? '' }}">{{ implode(' ', array_slice(explode(' ', $post->title ?? ''), 0, 10)) }}@if ( str_word_count($post->title ?? '') > 10 )...@endif</a></h2>
                             <div class="article-tags">
                                 @foreach ($post->topics as $topic)
                                 <span><a href="{{ route('showTopic', $topic->slug ?? '') }}">{{$topic->title ?? ''}}</a></span>
@@ -221,8 +231,11 @@
 
                             <div class="article-img-text">
                                 @foreach ($post->postmeta->where('meta_key', '_featured_image') as $key => $value)
-                                <a href="{{ route('showTopic', $topic->slug ?? '') }}"><img src="{{ asset('uploads/'.$value->meta_value )}}" alt="{{$value->meta_value}}"></a>
+                                <a href="{{$post->post_type.'/'.$post->slug}}"><img src="{{ asset('uploads/'.$value->meta_value )}}" alt="{{$value->meta_value}}"></a>
                                 @endforeach
+                                @if (!count($post->postmeta->where('meta_key', '_featured_image')) )
+                                    <a href="{{$post->post_type.'/'.$post->slug}}"><img src="{{ asset('uploads/d-post.jpeg')}}" alt="oncologyme"></a>
+                                @endif
 
                                 <p>{{implode(' ', array_slice(explode(' ', $post->excerpt ?? ''), 0, 10)) }}@if ( str_word_count($post->excerpt ?? '') > 10 )...@endif</p>
                                 

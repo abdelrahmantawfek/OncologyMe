@@ -71,9 +71,27 @@
                         </div>
                     </form>
                     <!--end::Search-->
+                    
                 </div>
-                <!--begin::Card title-->
-            </div>
+                    <!--begin::Export-->
+                    <div class="card-toolbar">
+                        <!--begin::Toolbar-->
+                        <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
+                            <!--begin::Add user-->
+                            <a href="" data-bs-toggle="modal" data-bs-target="#export_users" class="btn btn-primary"><!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
+                                <span class="svg-icon svg-icon-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1" transform="rotate(-90 11.364 20.364)" fill="currentColor" />
+                                        <rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="currentColor" />
+                                    </svg>
+                                </span>
+                                <!--end::Svg Icon-->Export Users</a>
+                            <!--end::Add user-->
+                        </div>
+                        <!--end::Toolbar-->
+                    </div>
+                    <!--end::Export-->
+                </div>
             <!--end::Card header-->
             <!--begin::Card body-->
             <div class="card-body py-4">
@@ -87,6 +105,64 @@
     </div>
     <!--end::Container-->
 </div>
+
+<!--begin::Modal -  Export users-->
+<div class="modal fade" id="export_users" tabindex="-1" role="dialog" aria-labelledby="export_users" aria-hidden="true">
+    <!--begin::Modal dialog-->
+    <div class="modal-dialog modal-dialog-centered mw-650px">
+        <!--begin::Modal content-->
+        <div class="modal-content">
+            <!--begin::Close-->
+            <div class="btn btn-icon btn-sm btn-active-icon-primary"  class="close" data-bs-dismiss="modal" aria-label="Close" style="margin-left: auto;">
+                <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                <span class="svg-icon svg-icon-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
+                        <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
+                    </svg>
+                </span>
+                <!--end::Svg Icon-->
+            </div>
+            <!--end::Close-->
+            <!--begin::Modal body-->
+            <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
+                {!! Form::open(['route' => 'users.export']) !!}
+                    <!--begin::Input group-->
+                    <div class="fv-row mb-10">
+                        <!--begin::Label-->
+                        <label class="fs-6 fw-bold form-label mb-2">Select affiliations:</label>
+                        <!--end::Label-->
+                        <!--begin::Input-->
+                        {!! Form::select('affiliations[]', $affiliations, null, ['class' => 'form-control form-select form-control-lg form-control-solid js-example-basic-multiple', 'multiple' => "multiple" ]) !!}
+                        <!--end::Input-->
+                    </div>
+                    <!--end::Input group-->
+                    <!--begin::Input group-->
+                    <div class="fv-row mb-10">
+                        <!--begin::Label-->
+                        <label class="fs-6 fw-bold form-label mb-2">Select specialites:</label>
+                        <!--end::Label-->
+                        <!--begin::Input-->
+                        {!! Form::select('specialites[]', $specialites, null, ['class' => 'form-control form-select form-control-lg form-control-solid js-example-basic-multiple', 'multiple' => "multiple"]) !!}
+                        <!--end::Input-->
+                    </div>
+                    <!--end::Input group-->
+                    <!--begin::Actions-->
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary" data-kt-users-modal-action="submit">
+                            <span class="indicator-label">Submit</span>
+                        </button>
+                    </div>
+                    <!--end::Actions-->
+                    {!! Form::close() !!}
+                </div>
+            <!--end::Modal body-->
+        </div>
+        <!--end::Modal content-->
+    </div>
+    <!--end::Modal dialog-->
+</div>
+<!--end::Modal - New Card-->
 @endsection
 
 

@@ -89,11 +89,11 @@
                     $('.other-gov').css('display', 'none');
                     $('.cs-gov').css('display', 'block');
                     $("select[name=governorate]").prop('required',true);
-                    $(".other-gov input[type=text][name=governorate]").prop('required',false);
+                    $(".other-gov input[type=text][name=other_governorate]").prop('required',false);
                 } else {
                     $('.other-gov').css('display', 'block');
                     $('.cs-gov').css('display', 'none');
-                    $(".other-gov input[type=text][name=governorate]").prop('required',true);
+                    $(".other-gov input[type=text][name=other_governorate]").prop('required',true);
                     $("select[name=governorate]").prop('required',false);
 
 

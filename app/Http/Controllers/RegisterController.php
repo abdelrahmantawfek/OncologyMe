@@ -9,6 +9,8 @@ use App\Mail\NotifyMail;
 use App\Models\Affiliation;
 use App\Models\Speciality;
 use Illuminate\Support\Facades\Redirect;
+use Laracasts\Flash\Flash;
+use Illuminate\Support\Facades\Auth;
 
 class RegisterController extends Controller
 {
@@ -30,6 +32,7 @@ class RegisterController extends Controller
 
     public function post_signup(Request $request)
     {
+        // dd($request);
         $data = $request->validate([
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
@@ -46,8 +49,55 @@ class RegisterController extends Controller
         $user = User::create($data);
          
         Mail::to($user->email)->send(new NotifyMail($user));
+        Flash::success('You are successfully registered to OncologyMe! Please check your email to activate your account');
+
+        return redirect()
+                ->back();
+        // return view('auth.login');
+    }
+
+    public function post_signin(Request $request)
+    {
+        $credentials = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+
+        $user = User::where('email', $credentials['email'])->get()->first();
+        if (Auth::attempt($credentials)) {
+            if($user->status == 1){
+                return redirect(route('home'));
+            }
+            else{
+                Flash::error('You have to activate your account');
+                return view('auth.login');
+            }
+        }
+
+    }
+
+    public function activate_account(Request $request)
+    {
+        if (request()->filled('email')) {
+            $email = $request->email;
+            $user = User::where('email', $email)->get()->first();
+    
+            $status = $user->status;
+            if($status == false){
+
+                $user->status = true;
+                $user->save();
+                Flash::success('You have successfully activated your account');
+            }
+            else{
+                Flash::success('Your account is already activated');
+            }
+            // dd($status);
+        }
 
         return view('auth.login');
+
     }
+
     
 }
