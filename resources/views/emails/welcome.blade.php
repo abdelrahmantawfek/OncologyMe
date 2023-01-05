@@ -92,7 +92,7 @@
                 <div class="row" style="">
                     <div class="col-md-12" style="width:100%;">
                         <div class=" p-t-50 p-b-50" style="padding-top:30px; padding-bottom:50px">
-                            <a href="index.html" style="outline:none"><img width="100" src="{{ asset('front-assets/img/logo.png') }}"></a>
+                            <a href="https://oncologyme.com" style="outline:none"><img width="100" src="{{ asset('front-assets/img/logo.png') }}"></a>
                         </div>
 
                     </div>

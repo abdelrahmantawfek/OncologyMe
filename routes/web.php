@@ -43,7 +43,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function(){
         Route::resource('roles', App\Http\Controllers\Admin\RoleController::class);
         Route::get('updatePermissions', [App\Http\Controllers\Admin\RoleController::class, 'updatePermissions'])->name('roles.updatePermissions');
         Route::resource('users', App\Http\Controllers\Admin\UserController::class)->except('create', 'destroy', 'edit', 'export');
-        // Route::resource('pages', App\Http\Controllers\Admin\PageController::class);
+        Route::resource('pages', App\Http\Controllers\Admin\PageController::class)->except('create', 'destroy');
         Route::resource('topics', App\Http\Controllers\Admin\TopicController::class);
         Route::resource('posts', App\Http\Controllers\Admin\PostController::class);
         // Route::resource('categories', App\Http\Controllers\Admin\CategoryController::class);
@@ -79,13 +79,14 @@ Route::controller(App\Http\Controllers\Frontend\PageController::class)->group(
     function () {
         Route::get('/',  'home')->name('home');
         Route::get('/home',  'home')->name('home');
-        Route::get('/about-us', 'about')->name('about');
+        Route::get('/about-oncology-me', 'about')->name('about');
         Route::get('/contact-us', 'contact')->name('contact');
         Route::post('/contact-us', 'store_contacts_data')->name('contact.data');
         Route::get('/editorial', 'editorial')->name('editorial');
         Route::get('/rights', 'rights')->name('rights');
         Route::get('/privacy-policy', 'privacy')->name('privacy');
         Route::get('/topics', 'all_topics')->name('allTopics');
+        Route::get('all-{post_type}', 'post')->name('allPosts');
         Route::get('/topics/{slug}', 'single_topic')->name('showTopic');
         Route::get('/search-topics', 'search_topic')->name('searchTopic');
         Route::get('results', 'search')->name('searchPosts');
@@ -96,7 +97,6 @@ Route::controller(App\Http\Controllers\Frontend\PageController::class)->group(
 Route::controller(App\Http\Controllers\Frontend\PostController::class)->group(
     function () {
 
-        Route::get('all-{post_type}', 'post')->name('allPosts');
         Route::get('search-{post_type}', 'search_category')->name('searchCategory');
         Route::get('/{post_type}/highlights', 'highlights')->name('allHighlights');
         Route::get('/{post_type}/{slug}', 'single_post')->name('singlePost');

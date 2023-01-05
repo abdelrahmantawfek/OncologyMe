@@ -6,9 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Page;
 use App\Models\Section;
-use Flash;
+use Laracasts\Flash\Flash;
 use Response;
-use Illuminate\Support\Facades\DB;
 
 class PageController extends Controller
 {
@@ -58,6 +57,39 @@ class PageController extends Controller
 
         return view('admin.pages.edit')->with('page', $page);
     }
+
+    public function update($id, Request $request)
+    {
+        /** @var Page $page */
+        $page = Page::find($id);
+
+        if (empty($page)) {
+            Flash::error('Admin not found');
+
+            return redirect(route('admin.admins.index'));
+        }
+
+        $page->page_title = $request->page_title;
+        $page->meta_title = $request->meta_title;
+        $page->meta_desc = $request->meta_desc;
+        $page->save();
+
+
+        foreach ($page->sections as $i => $sec) {
+            $section = Section::find($sec->id);
+            
+            $section->title = $request->title[$i];
+            $section->subtitle = $request->subtitle[$i];
+            $section->content = $request->content[$i];
+            $section->save();
+
+        }
+
+        Flash::success('Page updated successfully.');
+
+        return back();
+    }
+
 
     /**
      * Remove the specified Page from storage.

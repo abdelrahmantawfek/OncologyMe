@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('pages', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
+            $table->string('page_title');
             $table->string('slug')->unique()->nullable();
             $table->text('meta_title')->nullable();
             $table->text('meta_desc')->nullable();
-            $table->text('meta_keywords')->nullable();
+            // $table->text('meta_keywords')->nullable();
             // $table->string('banner_title')->nullable();
             // $table->text('banner_desc')->nullable();
             // $table->string('banner_img')->nullable();
@@ -34,7 +34,7 @@ return new class extends Migration
             $table->foreignId('page_id')->constrained();
             $table->string('title')->nullable();
             $table->string('subtitle')->nullable();
-            $table->text('plain_text')->nullable();
+            $table->text('content')->nullable();
             $table->text('rich_text')->nullable();
             $table->string('img')->nullable();
             $table->string('cta_text')->nullable();

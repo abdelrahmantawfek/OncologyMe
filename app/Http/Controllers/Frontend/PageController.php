@@ -64,7 +64,7 @@ class PageController extends Controller
 
     public function about()
     {
-        $data['page'] = Page::with('sections')->find(2);
+        $data['page'] = Page::with('sections.images')->find(2);
 
         return view('frontend.about-us', compact('data'));
     }
@@ -96,7 +96,7 @@ class PageController extends Controller
 
     public function editorial()
     {
-        $data['page'] = Page::with('sections')->find(4);
+        $data['page'] = Page::with('sections.images')->find(4);
 
         return view('frontend.editorial', compact('data'));
     }
@@ -112,6 +112,7 @@ class PageController extends Controller
     {
         $data['page'] = Page::with('sections')->find(6);
 
+        // dd($data['page']);
         return view('frontend.privacy', compact('data'));
     }
 
@@ -130,10 +131,26 @@ class PageController extends Controller
             array_push($data['child_topics'], $child_topics);
         }
         
-
-        // dd($data['child_topics']);
-
         return view('frontend.all-topics', compact('data'));
+    }
+
+    public function post($post_type)
+    {
+        $data['page'] = Page::where('slug', 'all-'.$post_type)->get()->first();
+        $data['posts'] = Post::orderBy('created_at', 'DESC')->where('post_type', $post_type)->with('topics')->paginate(10);
+        $data['post_type'] = Post::where('post_type', $post_type)->pluck('post_type')->toArray();
+        if (!in_array($post_type, $data['post_type']) ) {
+            abort(404);
+        }
+
+        $data['categories'] = Category::where('post_type', 'videos')->with('posts.topics')->get();
+        $data['other-categories'] = Category::orderBy('title')->where('post_type', $post_type)
+        ->whereHas('posts')
+        ->get()->pluck('title', 'slug');
+        $data['other-topics'] = Topic::where('is_parent', 0)
+        ->get()->pluck('title', 'slug');
+        
+        return view('frontend.posts', compact('data'));
     }
 
     public function single_topic($slug)

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Laracasts\Flash\Flash;
 
 class AuthController extends Controller
 {
@@ -28,7 +29,7 @@ class AuthController extends Controller
             return redirect(route('admin.dashboard'));
         }
 
-        // Flash::error(__('auth.failed'));
+        Flash::error(__('auth.failed'));
         return back();
     }
 

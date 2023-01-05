@@ -143,7 +143,7 @@
                 @endcan
 
                 @can('pages view')
-                {{-- <div data-kt-menu-trigger="click" class="menu-item menu-accordion {{ Request::is('admin/pages*') ? 'here show' : '' }}">
+                <div data-kt-menu-trigger="click" class="menu-item menu-accordion {{ Request::is('admin/pages*') ? 'here show' : '' }}">
                     <span class="menu-link">
                         <span class="menu-icon">
                             <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo1/dist/../src/media/svg/icons/Text/Article.svg-->
@@ -169,17 +169,8 @@
                             </a>
                         </div>
 
-                        <div class="menu-item">
-                            <a class="menu-link" href="{{ route('admin.pages.create') }}">
-                                <span class="menu-bullet">
-                                    <span class="bullet bullet-dot"></span>
-                                </span>
-                                <span class="menu-title">Add New</span>
-                            </a>
-                        </div>
-
                     </div>
-                </div> --}}
+                </div>
                 @endcan
 
                 @can('topics view')

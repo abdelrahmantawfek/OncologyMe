@@ -3,7 +3,7 @@
 
 @section('meta')
 
-<title> {{ $data['page']->title }} - {{$general_info[0]->tagline}}  </title>
+<title> {{ $data['page']->page_title  }} - {{$general_info[0]->tagline}}  </title>
 <meta name="title" content="{{ $data['page']->meta_title ?? '' }}">
 <meta name="description" content="{{ $data['page']->meta_desc ?? '' }}">
 <meta name="keywords" content="{{ $data['page']->meta_keywords ?? '' }}">

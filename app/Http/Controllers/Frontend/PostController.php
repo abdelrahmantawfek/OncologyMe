@@ -4,31 +4,13 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Page;
 use App\Models\Post;
 use App\Models\Topic;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-     
-    public function post($post_type)
-    {
-        $data['posts'] = Post::orderBy('created_at', 'DESC')->where('post_type', $post_type)->with('topics')->paginate(10);
-        $data['post_type'] = Post::where('post_type', $post_type)->pluck('post_type')->toArray();
-
-        if (!in_array($post_type, $data['post_type']) ) {
-            abort(404);
-        }
-
-        $data['categories'] = Category::where('post_type', 'videos')->with('posts.topics')->get();
-        $data['other-categories'] = Category::orderBy('title')->where('post_type', $post_type)
-        ->whereHas('posts')
-        ->get()->pluck('title', 'slug');
-        $data['other-topics'] = Topic::where('is_parent', 0)
-        ->get()->pluck('title', 'slug');
-        
-        return view('frontend.posts', compact('data'));
-    }
 
     public function single_post($post_type, $slug)
     {

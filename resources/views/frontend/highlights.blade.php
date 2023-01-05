@@ -5,7 +5,7 @@
 
 <title> ONCOLOGY HIGHLIGHTS - {{$general_info[0]->tagline}}  </title>
 
-{{-- <title> {{ $data['page']->title }} -  </title>
+{{-- <title> {{ $data['page']->page_title  }} -  </title>
 <meta name="title" content="{{ $data['page']->meta_title ?? '' }}">
 <meta name="description" content="{{ $data['page']->meta_desc ?? '' }}">
 <meta name="keywords" content="{{ $data['page']->meta_keywords ?? '' }}"> --}}

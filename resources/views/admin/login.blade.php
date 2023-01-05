@@ -18,6 +18,7 @@
                 </div>
                 <div class="">
                     <form method="POST" action="{{ route('admin.postLogin') }}">
+                        @include('flash::message')
                         @csrf
 
                         <div class="mb-3">

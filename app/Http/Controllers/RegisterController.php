@@ -74,6 +74,8 @@ class RegisterController extends Controller
             }
         }
 
+        Flash::error(__('auth.failed'));
+        return redirect()->back();
     }
 
     public function activate_account(Request $request)

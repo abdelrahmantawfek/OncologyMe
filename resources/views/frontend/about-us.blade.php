@@ -3,7 +3,7 @@
 
 @section('meta')
 
-<title> {{ $data['page']->title }} - {{$general_info[0]->tagline}}  </title>
+<title> {{ $data['page']->page_title }} - {{$general_info[0]->tagline}}  </title>
     <meta name="title" content="{{ $data['page']->meta_title ?? '' }}">
     <meta name="description" content="{{ $data['page']->meta_desc ?? '' }}">
     <meta name="keywords" content="{{ $data['page']->meta_keywords ?? '' }}">
@@ -18,10 +18,8 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 col-xs-12">
-                <h2>About OncologyMe</h2>
-                <p>“Oncology Medical Education” is an oncology-specific healthcare education platform that creates a wide spectrum of virtual scientific activities through a user-friendly approach that is culturally adapted to the Middle-East
-                    Arab practice</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a auctor urna, et porttitor lorem. Fusce at neque et orci rhoncus hendrerit. Praesent nec quam ac orci placerat semper.</p>
+                <h2>{{$data['page']->sections[0]->title?? ''}}</h2>
+                <p>{!!$data['page']->sections[0]->content?? ''!!}</p>
             </div>
         </div>
     </div>
@@ -33,31 +31,26 @@
 
             <div class="col-md-6 col-xs-12 careerfy-typo-wrap">
                 <div class="careerfy-about-text">
-                    <h3>Our Vision</h3>
-                    <span class="careerfy-about-sub">Pellentesque accumsan nisl varius risus mollis varius sed eu neque Cras fringilla sagittis rhoncus.</span>
-                    <p>In accumsan pulvinar maximus. Phasellus elementum rutrum dolor id mollis aece et lectus accumsan ipsum facilisis malesuada vel ut diam. Pellentesque vitae tempus sapien, vel aliquam nulla. In in fringilla massa, id consectetur
-                        lacus tibul.</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a auctor urna, et porttitor lorem. Fusce at neque et orci rhoncus hendrerit. Praesent nec quam ac orci placerat semper.</p>
-
+                    <h3>{{$data['page']->sections[1]->title?? ''}}</h3>
+                    <span class="careerfy-about-sub">{{$data['page']->sections[1]->subtitle?? ''}}</span>
+                    <p>{!!$data['page']->sections[1]->content?? ''!!}</p>
                 </div>
             </div>
             <div class="col-md-3 col-xs-12 careerfy-typo-wrap gray-bg">
                 <div class="careerfy-about-thumb">
-                    <img src="img/icon1.png" alt="">
-                    <h3>Our Mission</h3>
-                    <span class="careerfy-about-sub">Pellentesque accumsan nisl varius risus mollis varius sed eu neque Cras fringilla sagittis rhoncus.</span>
-                    <p>In accumsan pulvinar maximus. Phasellus elementum rutrum dolor id mollis aece et lectus accumsan ipsum facilisis malesuada vel ut diam. Pellentesque vitae tempus sapien, vel aliquam nulla. In in fringilla massa, id consectetur
-                        lacus tibul.</p>
+                    <img src="{{ asset('uploads/'.$data['page']->sections[2]->img?? '') }}" alt="oncologyme">
+                    <h3>{{$data['page']->sections[2]->title?? ''}}</h3>
+                    <span class="careerfy-about-sub">{{$data['page']->sections[2]->subtitle?? ''}}</span>
+                    <p>{!! $data['page']->sections[2]->content?? ''!!}  </p>
+
 
                 </div>
             </div>
             <div class="col-md-3 col-xs-12 careerfy-typo-wrap navy-bg">
                 <div class="careerfy-about-thumb">
-                    <img src="img/icon2.png" alt="">
-                    <h3 style="color: #fff;">Our Goal</h3>
-
-                    <p style="color: #fff;">In accumsan pulvinar maximus. Phasellus elementum rutrum dolor id mollis aece et lectus accumsan ipsum facilisis malesuada vel ut diam. Pellentesque vitae tempus sapien, vel aliquam nulla. In in fringilla massa, id consectetur
-                        lacus tibul.</p>
+                    <img src="{{ asset('uploads/'.$data['page']->sections[3]->img?? '') }}" alt="oncologyme">
+                    <h3 style="color: #fff;">{{$data['page']->sections[3]->title?? ''}}</h3>
+                    <p>{!!$data['page']->sections[4]->content?? ''!!}</p>
                 </div>
             </div>
 
@@ -75,20 +68,15 @@
 
             <div class="careerfy-typo-wrap col-md-6">
                 <section class="careerfy-about-text">
-                    <h3 class="m-b-10">Our Strategy</h3>
-
-                    <span class="careerfy-about-sub">Pellentesque accumsan nisl varius risus mollis varius sed eu neque Cras fringilla sagittis rhoncus.</span>
-                    <p>In accumsan pulvinar maximus. Phasellus elementum rutrum dolor id mollis aece et lectus accumsan ipsum facilisis malesuada vel ut diam. Pellentesque vitae tempus sapien, vel aliquam nulla. In in fringilla massa, id consectetur
-                        lacus tibul.</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a auctor urna, et porttitor lorem. Fusce at neque et orci rhoncus hendrerit. Praesent nec quam ac orci placerat semper. In accumsan pulvinar maximus.
-                    </p>
+                    <h3 class="m-b-10">{{$data['page']->sections[4]->title?? ''}}</h3>
+                    <span class="careerfy-about-sub">{{$data['page']->sections[4]->subtitle?? ''}}</span>
+                    <p>{!!$data['page']->sections[4]->content?? ''!!}</p>
                 </section>
 
             </div>
 
             <div class="careerfy-typo-wrap col-md-6">
-                <img src="img/vid3.jpg">
-
+                <div class="careerfy-about-thumb"><img src="{{ asset('uploads/'.$data['page']->sections[4]->img?? '') }}" alt="oncologyme"></div>
             </div>
 
         </div>
@@ -103,19 +91,14 @@
     <div class="container">
         <div class="row flex-order">
             <div class="careerfy-typo-wrap col-md-6 order-2">
-                <img src="img/vid3.jpg">
-
+                <div class="careerfy-about-thumb"><img src="{{ asset('uploads/'.$data['page']->sections[5]->img?? '') }}" alt="oncologyme"></div>
             </div>
 
             <div class="careerfy-typo-wrap col-md-6 order-1">
                 <section class="careerfy-about-text">
-                    <h3 class="m-b-10">Our Services</h3>
-
-                    <span class="careerfy-about-sub">Pellentesque accumsan nisl varius risus mollis varius sed eu neque Cras fringilla sagittis rhoncus.</span>
-                    <p>In accumsan pulvinar maximus. Phasellus elementum rutrum dolor id mollis aece et lectus accumsan ipsum facilisis malesuada vel ut diam. Pellentesque vitae tempus sapien, vel aliquam nulla. In in fringilla massa, id consectetur
-                        lacus tibul.</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a auctor urna, et porttitor lorem. Fusce at neque et orci rhoncus hendrerit. Praesent nec quam ac orci placerat semper. In accumsan pulvinar maximus.
-                    </p>
+                    <h3 class="m-b-10">{{$data['page']->sections[5]->title?? ''}}</h3>
+                    <span class="careerfy-about-sub">{{$data['page']->sections[5]->subtitle?? ''}}</span>
+                    <p>{!!$data['page']->sections[5]->content?? ''!!}</p>
                 </section>
 
             </div>

@@ -16,9 +16,9 @@ class Page extends Model
     public $fillable = [
         'name',
         'slug',
-        'title',
+        'page_title',
+        'content',
         'meta_title',
-        'meta_keywords',
         'meta_desc',
         // 'banner_title',
         // 'banner_desc',
