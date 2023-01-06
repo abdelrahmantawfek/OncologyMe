@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Page;
 use App\Models\Section;
+use App\Models\SectionImage;
 use Laracasts\Flash\Flash;
 use Response;
 
@@ -82,9 +83,23 @@ class PageController extends Controller
             $section->subtitle = $request->subtitle[$i];
             $section->content = $request->content[$i];
             $section->save();
-
         }
+        
+        // $files = $request->file('img[]');
+        // foreach ($request->img as $k => $item) {
 
+        //     if ($item) {
+
+        //         $originalName[$k] = $item->getClientOriginalName();
+        //         $fileName = time() . '_' . $originalName[$k];
+        //         $item->move('uploads/', $fileName);
+        //         $this->attributes['img[]'] = $fileName;
+        //         $section->img = $fileName;
+        //         $section->save();  
+        //     }
+        // }
+
+        
         Flash::success('Page updated successfully.');
 
         return back();

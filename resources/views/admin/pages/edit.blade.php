@@ -51,7 +51,7 @@
               <div class="row">
                   <div class="col-lg-12">
                       
-                            {!! Form::model($page, ['route' => ['admin.pages.update', $page->id], 'method' => 'patch']) !!}
+                            {!! Form::model($page, ['route' => ['admin.pages.update', $page->id], 'method' => 'patch', 'files' => true]) !!}
 
                                   <div class="row">
                                       @include('admin.pages.fields')

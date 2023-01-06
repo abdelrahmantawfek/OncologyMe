@@ -30,13 +30,14 @@
             <!-- Content Field -->
             <div class="form-group col-sm-12 fv-row mb-10 fv-plugins-icon-container">
                 {!! Form::label('content', 'Content:', ['class' => 'form-label fs-6 fw-bolder text-dark']) !!}
-                {!! Form::textarea('content[]', $section->content??'', ['class' => 'form-control ckeditor form-control-lg form-control-solid']) !!}
+                {!! Form::textarea('content[]', $section->content??'', ['class' => 'form-control ckeditor']) !!}
             </div>
 
             @isset($section->img)
             <img src="{{ asset('uploads/' . $section->img) }}" alt="image" width="200" class="mb-5">
             @endisset
-
+            {!! Form::file('img[]', null, ['class' => 'form-control']) !!}
+            
         </div>
     </div>
 @endforeach
