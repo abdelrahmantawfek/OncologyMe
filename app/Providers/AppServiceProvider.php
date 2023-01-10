@@ -59,6 +59,21 @@ class AppServiceProvider extends ServiceProvider
         $data['bottom_banners'] = Announcement::where('place', '3')->get();
         $data['video_banners'] = Announcement::where('place', '4')->get();
 
+        $data['allusers'] = User::orderBy('created_at', 'DESC')->get();
+        $data['allcontacts'] = Contact::orderBy('created_at', 'DESC')->get();
+        $data['alladmins'] = Admin::orderBy('created_at', 'DESC')->get();
+
+        $data['allst_news'] = Post::orderBy('created_at', 'DESC')->where('post_type', 'news')->get();
+        $data['allst_videos'] = Post::orderBy('created_at', 'DESC')->where('post_type', 'videos')->get();
+        $data['allst_articles'] = Post::orderBy('created_at', 'DESC')->where('post_type', 'articles')->get();
+        $data['allst_podcasts'] = Post::orderBy('created_at', 'DESC')->where('post_type', 'podcasts')->get();
+        $data['allst_news_cat'] = Category::orderBy('created_at', 'DESC')->where('post_type', 'news')->get();
+        $data['allst_videos_cat'] = Category::orderBy('created_at', 'DESC')->where('post_type', 'videos')->get();
+        $data['allst_articles_cat'] = Category::orderBy('created_at', 'DESC')->where('post_type', 'articles')->get();
+        $data['allst_podcasts_cat'] = Category::orderBy('created_at', 'DESC')->where('post_type', 'podcasts')->get();
+        $data['allst_topics'] = Topic::orderBy('created_at', 'DESC')->where('is_parent', 0)->get();
+
+
         $data['users'] = User::orderBy('created_at', 'DESC')->take(5)->get();
         $data['contacts'] = Contact::orderBy('created_at', 'DESC')->take(5)->get();
         $data['admins'] = Admin::orderBy('created_at', 'DESC')->take(5)->get();

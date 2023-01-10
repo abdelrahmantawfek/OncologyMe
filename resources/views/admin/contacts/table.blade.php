@@ -1,4 +1,4 @@
-@if(count($users))
+@if(count($data['contacts']))
 <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_table_users">
     <!--begin::Table head-->
     <thead>

@@ -68,14 +68,14 @@
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="{{ asset('front-assets/script/jquery.js') }}"></script>
     <script src="{{ asset('front-assets/script/bootstrap.js') }}"></script>
-    <script type="front-assets/application/javascript" src="{{ asset('js/cu-script.js') }}"></script>
+    {{-- <script type="front-assets/application/javascript" src="{{ asset('js/cu-script.js') }}"></script> --}}
     {{-- <script src="{{ asset('front-assets/script/slick-slider.js') }}"></script> --}}
     {{-- <script src="{{ asset('front-assets/plugin-script/counter.js') }}"></script> --}}
     {{-- <script src="{{ asset('front-assets/plugin-script/progressbar.js') }}"></script> --}}
     {{-- <script src="{{ asset('front-assets/plugin-script/fancybox.pack.js') }}"></script> --}}
     {{-- <script src="{{ asset('front-assets/plugin-script/isotope.min.js') }}"></script> --}}
     {{-- <script src="{{ asset('front-assets/plugin-script/functions.js') }}"></script> --}}
-    <script src="{{ asset('front-assets/script/functions.js') }}"></script>
+    {{-- <script src="{{ asset('front-assets/script/functions.js') }}"></script> --}}
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 

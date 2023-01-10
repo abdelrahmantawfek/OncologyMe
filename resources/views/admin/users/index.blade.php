@@ -78,14 +78,19 @@
                         <!--begin::Toolbar-->
                         <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
                             <!--begin::Add user-->
-                            <a href="" data-bs-toggle="modal" data-bs-target="#export_users" class="btn btn-primary"><!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
-                                <span class="svg-icon svg-icon-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                        <rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1" transform="rotate(-90 11.364 20.364)" fill="currentColor" />
-                                        <rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="currentColor" />
-                                    </svg>
-                                </span>
-                                <!--end::Svg Icon-->Export Users</a>
+                            <a href="#"  class="btn btn-primary" onclick="event.preventDefault();
+                            document.getElementById('export-form').submit();">Export Users</a>
+                            <form id="export-form" action="{{ route('users.export') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                                {{-- <a href="{{ route('users.export') }}" data-bs-toggle="modal" data-bs-target="#export_users" class="btn btn-primary"><!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
+                                    <span class="svg-icon svg-icon-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                            <rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1" transform="rotate(-90 11.364 20.364)" fill="currentColor" />
+                                            <rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="currentColor" />
+                                        </svg>
+                                    </span>
+                                    <!--end::Svg Icon-->Export Users</a> --}}
                             <!--end::Add user-->
                         </div>
                         <!--end::Toolbar-->
@@ -107,7 +112,7 @@
 </div>
 
 <!--begin::Modal -  Export users-->
-<div class="modal fade" id="export_users" tabindex="-1" role="dialog" aria-labelledby="export_users" aria-hidden="true">
+{{-- <div class="modal fade" id="export_users" tabindex="-1" role="dialog" aria-labelledby="export_users" aria-hidden="true">
     <!--begin::Modal dialog-->
     <div class="modal-dialog modal-dialog-centered mw-650px">
         <!--begin::Modal content-->
@@ -155,13 +160,13 @@
                     </div>
                     <!--end::Actions-->
                     {!! Form::close() !!}
-                </div>
+            </div>
             <!--end::Modal body-->
         </div>
         <!--end::Modal content-->
     </div>
     <!--end::Modal dialog-->
-</div>
+</div> --}}
 <!--end::Modal - New Card-->
 @endsection
 
