@@ -102,39 +102,39 @@
 		</script>
 
 
-	<script>
+		<script>
 
-	// topic fields script
-	$('#parent_field').hide();
-	$('#main_field').hide();
-	$('input[type=radio][name=is_parent]').change(function() {
-		if (this.value == '1') {
+		// topic fields script
+		$('#parent_field').hide();
+		$('#main_field').hide();
+		$('input[type=radio][name=is_parent]').change(function() {
+			if (this.value == '1') {
+				$('#parent_field').hide();
+				$('#main_field').hide();
+				$('#parent_id').prop('required',false);
+				$('input[type=radio][name=is_main]').prop('required',false);
+			}
+			else if (this.value == '0') {
+				$('#parent_field').show();
+				$('#main_field').show();
+				$('#parent_id').prop('required',true);
+				$('input[type=radio][name=is_main]').prop('required',true);
+			}
+		});
+		const isParent = $('input[type=radio][name=is_parent]:checked').val();
+		if(isParent == '0'){
+			$('#parent_field').show();
+			$('#main_field').show();
+			$('#parent_id').prop('required',true);
+			$('input[type=radio][name=is_main]').prop('required',true);
+		}else{
 			$('#parent_field').hide();
 			$('#main_field').hide();
 			$('#parent_id').prop('required',false);
 			$('input[type=radio][name=is_main]').prop('required',false);
 		}
-		else if (this.value == '0') {
-			$('#parent_field').show();
-			$('#main_field').show();
-			$('#parent_id').prop('required',true);
-			$('input[type=radio][name=is_main]').prop('required',true);
-		}
-	});
-	const isParent = $('input[type=radio][name=is_parent]:checked').val();
-	if(isParent == '0'){
-		$('#parent_field').show();
-		$('#main_field').show();
-		$('#parent_id').prop('required',true);
-		$('input[type=radio][name=is_main]').prop('required',true);
-	}else{
-		$('#parent_field').hide();
-		$('#main_field').hide();
-		$('#parent_id').prop('required',false);
-		$('input[type=radio][name=is_main]').prop('required',false);
-	}
 
-	</scrip>
+		</script>
 
 		<!--end::Page Custom Javascript-->
 		<!--end::Javascript-->

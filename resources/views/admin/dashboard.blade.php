@@ -33,7 +33,7 @@
                             <div class="card-header border-0 pt-5">
                                 <h3 class="card-title align-items-start flex-column">
                                     <span class="card-label fw-bolder fs-3 mb-1">Members Statistics</span>
-                                    <span class="text-muted mt-1 fw-bold fs-7">Over {{ count($users) }} members</span>
+                                    <span class="text-muted mt-1 fw-bold fs-7">Over {{ count($allusers) }} members</span>
                                 </h3>
                             </div>
                             <!--end::Header-->
@@ -101,6 +101,9 @@
                                     @endif
                                 </div>
                                 <!--end::Table container-->
+                                @if(count($users))
+                                <div class="view-all"><a href="{{ route('admin.users.index') }}">View All</a></div>
+                                @endif
                             </div>
                             <!--begin::Body-->
                         </div>
@@ -115,7 +118,7 @@
                             <div class="card-header border-0 pt-5">
                                 <h3 class="card-title align-items-start flex-column">
                                     <span class="card-label fw-bolder fs-3 mb-1">Contact Entries</span>
-                                    <span class="text-muted mt-1 fw-bold fs-7">Over {{ count($contacts) }} contacts</span>
+                                    <span class="text-muted mt-1 fw-bold fs-7">Over {{ count($allcontacts) }} contacts</span>
                                 </h3>
                             </div>
                             <!--end::Header-->
@@ -158,6 +161,9 @@
                                     @endif
                                 </div>
                                 <!--end::Table container-->
+                                @if(count($contacts))
+                                <div class="view-all"><a href="{{ route('admin.contacts.index') }}">View All</a></div>
+                                @endif
                             </div>
                             <!--begin::Body-->
                         </div>
@@ -178,7 +184,7 @@
                             <div class="card-header border-0 pt-5">
                                 <h3 class="card-title align-items-start flex-column">
                                     <span class="card-label fw-bolder fs-3 mb-1">Latest Topics</span>
-                                    <span class="text-muted mt-1 fw-bold fs-7">Over {{ count($st_topics) }} topics</span>
+                                    <span class="text-muted mt-1 fw-bold fs-7">Over {{ count($allst_topics) }} topics</span>
                                 </h3>
                                 <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover" title="Click to add a topic">
                                     <a href="{{ route('admin.topics.create') }}" class="btn btn-sm btn-light btn-active-primary">
@@ -246,6 +252,9 @@
                                     @endif
                                 </div>
                                 <!--end::Table container-->
+                                @if(count($st_topics))
+                                <div class="view-all"><a href="{{ route('admin.topics.index') }}">View All</a></div>
+                                @endif
                             </div>
                             <!--begin::Body-->
                         </div>
@@ -260,7 +269,7 @@
                             <div class="card-header border-0 pt-5">
                                 <h3 class="card-title align-items-start flex-column">
                                     <span class="card-label fw-bolder fs-3 mb-1">Admins Statistics</span>
-                                    <span class="text-muted mt-1 fw-bold fs-7">Over {{ count($admins) }} admins</span>
+                                    <span class="text-muted mt-1 fw-bold fs-7">Over {{ count($alladmins) }} admins</span>
                                 </h3>
                                 <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover" title="Click to add a admin">
                                     <a href="{{ route('admin.admins.create') }}" class="btn btn-sm btn-light btn-active-primary">
@@ -345,6 +354,9 @@
                                     @endif
                                 </div>
                                 <!--end::Table container-->
+                                @if(count($admins))
+                                <div class="view-all"><a href="{{ route('admin.admins.index') }}">View All</a></div>
+                                @endif
                             </div>
                             <!--begin::Body-->
                         </div>
@@ -365,7 +377,7 @@
                             <div class="card-header border-0 pt-5">
                                 <h3 class="card-title align-items-start flex-column">
                                     <span class="card-label fw-bolder fs-3 mb-1">News Statistics</span>
-                                    <span class="text-muted mt-1 fw-bold fs-7">Over news</span>
+                                    <span class="text-muted mt-1 fw-bold fs-7">Over {{count($allst_news)}} news</span>
                                 </h3>
                                 <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover" title="Click to add a post">
                                     <a href="{{ route('admin.news.create') }}" class="btn btn-sm btn-light btn-active-primary">
@@ -444,6 +456,9 @@
 
                                 </div>
                                 <!--end::Table container-->
+                                @if(count($st_news))
+                                <div class="view-all"><a href="{{ route('admin.news.index') }}">View All</a></div>
+                                @endif
                             </div>
                             <!--begin::Body-->
                         </div>
@@ -459,7 +474,7 @@
                             <div class="card-header border-0 pt-5">
                                 <h3 class="card-title align-items-start flex-column">
                                     <span class="card-label fw-bolder fs-3 mb-1">Latest News Categories</span>
-                                    <span class="text-muted mt-1 fw-bold fs-7">Over {{count($st_news_cat)}} Categories</span>
+                                    <span class="text-muted mt-1 fw-bold fs-7">Over {{count($allst_news_cat)}} categories</span>
                                 </h3>
                                 <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover" title="Click to add a category">
                                     <a href="{{ route('admin.newscategories.create') }}" class="btn btn-sm btn-light btn-active-primary">
@@ -529,6 +544,9 @@
                                     @endif
                                 </div>
                                 <!--end::Table container-->
+                                @if(count($st_news_cat))
+                                <div class="view-all"><a href="{{ route('admin.newscategories.index') }}">View All</a></div>
+                                @endif
                             </div>
                             <!--begin::Body-->
                         </div>
@@ -550,7 +568,7 @@
                             <div class="card-header border-0 pt-5">
                                 <h3 class="card-title align-items-start flex-column">
                                     <span class="card-label fw-bolder fs-3 mb-1">Latest Videos Categories</span>
-                                    <span class="text-muted mt-1 fw-bold fs-7">Over {{count($st_videos_cat)}} Categories</span>
+                                    <span class="text-muted mt-1 fw-bold fs-7">Over {{count($allst_videos_cat)}} categories</span>
                                 </h3>
                                 <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover" title="Click to add a category">
                                     <a href="{{ route('admin.videoscategories.create') }}" class="btn btn-sm btn-light btn-active-primary">
@@ -620,6 +638,9 @@
                                     @endif
                                 </div>
                                 <!--end::Table container-->
+                                @if(count($st_videos_cat))
+                                <div class="view-all"><a href="{{ route('admin.videoscategories.index') }}">View All</a></div>
+                                @endif
                             </div>
                             <!--begin::Body-->
                         </div>
@@ -635,7 +656,7 @@
                             <div class="card-header border-0 pt-5">
                                 <h3 class="card-title align-items-start flex-column">
                                     <span class="card-label fw-bolder fs-3 mb-1">Videos Statistics</span>
-                                    <span class="text-muted mt-1 fw-bold fs-7">Over news</span>
+                                    <span class="text-muted mt-1 fw-bold fs-7">Over {{count($allst_videos)}} videos</span>
                                 </h3>
                                 <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover" title="Click to add a post">
                                     <a href="{{ route('admin.videos.create') }}" class="btn btn-sm btn-light btn-active-primary">
@@ -714,6 +735,9 @@
 
                                 </div>
                                 <!--end::Table container-->
+                                @if(count($st_videos))
+                                <div class="view-all"><a href="{{ route('admin.videos.index') }}">View All</a></div>
+                                @endif
                             </div>
                             <!--begin::Body-->
                         </div>
@@ -735,7 +759,7 @@
                             <div class="card-header border-0 pt-5">
                                 <h3 class="card-title align-items-start flex-column">
                                     <span class="card-label fw-bolder fs-3 mb-1">Articles Statistics</span>
-                                    <span class="text-muted mt-1 fw-bold fs-7">Over news</span>
+                                    <span class="text-muted mt-1 fw-bold fs-7">Over {{count($allst_articles)}} articles</span>
                                 </h3>
                                 <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover" title="Click to add a post">
                                     <a href="{{ route('admin.articles.create') }}" class="btn btn-sm btn-light btn-active-primary">
@@ -814,6 +838,9 @@
 
                                 </div>
                                 <!--end::Table container-->
+                                @if(count($st_articles))
+                                <div class="view-all"><a href="{{ route('admin.articles.index') }}">View All</a></div>
+                                @endif
                             </div>
                             <!--begin::Body-->
                         </div>
@@ -829,7 +856,7 @@
                             <div class="card-header border-0 pt-5">
                                 <h3 class="card-title align-items-start flex-column">
                                     <span class="card-label fw-bolder fs-3 mb-1">Latest Articles Categories</span>
-                                    <span class="text-muted mt-1 fw-bold fs-7">Over {{count($st_articles_cat)}} Categories</span>
+                                    <span class="text-muted mt-1 fw-bold fs-7">Over {{count($allst_articles_cat)}} categories</span>
                                 </h3>
                                 <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover" title="Click to add a category">
                                     <a href="{{ route('admin.articlescategories.create') }}" class="btn btn-sm btn-light btn-active-primary">
@@ -899,6 +926,9 @@
                                     @endif
                                 </div>
                                 <!--end::Table container-->
+                                @if(count($st_articles_cat))
+                                <div class="view-all"><a href="{{ route('admin.articlescategories.index') }}">View All</a></div>
+                                @endif
                             </div>
                             <!--begin::Body-->
                         </div>
@@ -920,7 +950,7 @@
                             <div class="card-header border-0 pt-5">
                                 <h3 class="card-title align-items-start flex-column">
                                     <span class="card-label fw-bolder fs-3 mb-1">Latest Podcasts Categories</span>
-                                    <span class="text-muted mt-1 fw-bold fs-7">Over {{count($st_podcasts_cat)}} Categories</span>
+                                    <span class="text-muted mt-1 fw-bold fs-7">Over {{count($allst_podcasts_cat)}} categories</span>
                                 </h3>
                                 <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover" title="Click to add a category">
                                     <a href="{{ route('admin.podcastscategories.create') }}" class="btn btn-sm btn-light btn-active-primary">
@@ -990,6 +1020,9 @@
                                     @endif
                                 </div>
                                 <!--end::Table container-->
+                                @if(count($st_podcasts_cat))
+                                <div class="view-all"><a href="{{ route('admin.podcastscategories.index') }}">View All</a></div>
+                                @endif
                             </div>
                             <!--begin::Body-->
                         </div>
@@ -1005,7 +1038,7 @@
                             <div class="card-header border-0 pt-5">
                                 <h3 class="card-title align-items-start flex-column">
                                     <span class="card-label fw-bolder fs-3 mb-1">Podcasts Statistics</span>
-                                    <span class="text-muted mt-1 fw-bold fs-7">Over news</span>
+                                    <span class="text-muted mt-1 fw-bold fs-7">Over {{count($allst_articles)}} podcasts</span>
                                 </h3>
                                 <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover" title="Click to add a post">
                                     <a href="{{ route('admin.news.create') }}" class="btn btn-sm btn-light btn-active-primary">
@@ -1084,6 +1117,9 @@
 
                                 </div>
                                 <!--end::Table container-->
+                                @if(count($st_podcasts))
+                                <div class="view-all"><a href="{{ route('admin.podcasts.index') }}">View All</a></div>
+                                @endif
                             </div>
                             <!--begin::Body-->
                         </div>
