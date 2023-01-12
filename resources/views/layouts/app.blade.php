@@ -14,7 +14,7 @@
     {{-- <link href="{{ asset('front-assets/css/slick-slider.css') }}" rel="stylesheet"> --}}
     <link href="{{ asset('front-assets/plugin-css/fancybox.css') }}" rel="stylesheet">
     <link href="{{ asset('front-assets/plugin-css/plugin.css') }}" rel="stylesheet">
-    <link href="{{ asset('front-assets/css/color.css') }}" rel="stylesheet">
+    {{-- <link href="{{ asset('front-assets/css/color.css') }}" rel="stylesheet"> --}}
     <link href="{{ asset('front-assets/style.css') }}" rel="stylesheet">
     <link href="{{ asset('front-assets/css/responsive.css') }}" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
