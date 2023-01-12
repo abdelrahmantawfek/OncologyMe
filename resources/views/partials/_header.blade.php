@@ -106,7 +106,7 @@
                         @elseif (count($allst_articles))
                         <li class="pos-unset"><a href="/all-articles">Articles</a></li>
                         @endif
-                        @if (count($podcasts_categories))
+                        @if (count($allst_podcasts))
                         <li class="pos-unset"><a href="/all-podcasts">Podcasts</a></li>
                         @endif
 
