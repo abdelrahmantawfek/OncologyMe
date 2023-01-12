@@ -7,7 +7,7 @@
 <!-- URL Field -->
 <div class="form-group col-sm-6 fv-row mb-10 fv-plugins-icon-container">
     {!! Form::label('url', 'URL :', ['class' => 'form-label fs-6 fw-bolder text-dark']) !!}
-    {!! Form::text('url', null, ['class' => 'form-control form-control-lg form-control-solid']) !!}
+    {!! Form::text('url', 'https://', ['class' => 'form-control form-control-lg form-control-solid']) !!}
 </div>
 
 <!-- place Field -->

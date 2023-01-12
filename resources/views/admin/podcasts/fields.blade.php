@@ -127,6 +127,8 @@
                 @endif
                 @endisset
                 {!! Form::file('sound', null, ['class' => 'form-control']) !!}
+                <small>podcast extention: mp3</small><br>
+                <small>podcast maximum size: 5MB</small>
             </div>
 
             <!-- Submit Field -->

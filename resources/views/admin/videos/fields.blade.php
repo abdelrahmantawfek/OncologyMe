@@ -127,6 +127,9 @@
                 @endif
                 @endisset
                 {!! Form::file('video', null, ['class' => 'form-control']) !!}
+                <small>video extention: mp4</small><br>
+                <small>video maximum size: 5MB</small>
+
             </div>
 
             <!-- Submit Field -->

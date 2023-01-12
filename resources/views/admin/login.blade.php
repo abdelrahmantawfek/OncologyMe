@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
                
-            <div class="card rounded shadow-sm p-10 w-lg-500px p-lg-15 mx-auto" style="background-color: #778fa2">
+            <div class="card rounded shadow-sm p-10 w-lg-500px p-lg-15 mx-auto" style="background-color: #fff">
                 <div class="text-center mb-10">
                      <!--begin::Logo-->
                     <a href="/" class="mb-12 d-block">

@@ -14,7 +14,7 @@
                 </div>
                 <div class="collapse navbar-collapse" id="careerfy-navbar-collapse-1">
                     <ul class="navbar-nav">
-
+                        <li class="pos-unset"><a href="/">Home</a></li>
                         <li><a href="javascript:void(0)">About Us <i class="fa fa-angle-down"></i></a>
                             <ul class="sub-menu cs-sub-menu">
                                 <li><a href="{{ route('about') }}">About OncologyMe</a></li>
@@ -32,6 +32,8 @@
                                 <li><a href="{{ route('allTopics') }}">View All</a></li>
                             </ul>
                         </li>
+                        @elseif (count($allst_topics))
+                        <li class="pos-unset"><a href="{{ route('allTopics') }}">Topics</a></li>
                         @endif
                         @if (count($news_categories))
                         <li class="pos-unset"><a href="javascript:void(0)">Oncology News <i class="fa fa-angle-down"></i></a>
@@ -41,9 +43,9 @@
                                 @endforeach
                                 <li><a href="/all-news">View All</a></li>
                             </ul>
-
-
                         </li>
+                        @elseif (count($allst_news))
+                        <li class="pos-unset"><a href="/all-news">Oncology News</a></li>
                         @endif
                         @if (count($videos_categories))
                         <li class="pos-unset"><a href="javascript:void(0)">Oncology Watch <i class="fa fa-angle-down"></i></a>
@@ -71,6 +73,8 @@
                                 <li><a href="/all-videos">View All</a></li>
                             </ul>
                         </li>
+                        @elseif (count($allst_videos))
+                        <li class="pos-unset"><a href="/all-videos">Oncology Watch</a></li>
                         @endif
                         @if (count($articles_categories))
                         <li class="pos-unset"><a href="javascript:void(0)">Articles <i class="fa fa-angle-down"></i></a>
@@ -99,6 +103,8 @@
                                 <li><a href="/all-articles">View All</a></li>
                             </ul>
                         </li>
+                        @elseif (count($allst_articles))
+                        <li class="pos-unset"><a href="/all-articles">Articles</a></li>
                         @endif
                         @if (count($podcasts_categories))
                         <li class="pos-unset"><a href="/all-podcasts">Podcasts</a></li>
