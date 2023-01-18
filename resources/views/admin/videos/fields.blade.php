@@ -31,9 +31,9 @@
                 {!! Form::text('author', null, ['class' => 'form-control']) !!}
             </div>
 
-            <!-- Video script Field -->
+            <!-- Transcript Field -->
             <div class="form-group col-sm-12 fv-row mb-10 fv-plugins-icon-container">
-                {!! Form::label('script', 'Video script :', ['class' => 'form-label fs-6 fw-bolder text-dark']) !!}
+                {!! Form::label('script', 'Transcript :', ['class' => 'form-label fs-6 fw-bolder text-dark']) !!}
                 {!! Form::textarea('script', $video_script[0] ??'', ['class' => 'form-control cs-textarea-hight']) !!}
             </div>
 

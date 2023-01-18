@@ -90,7 +90,7 @@ class PageController extends Controller
         $contact = Contact::create($request->all());
         DB::commit();
 
-        Flash::success('Form succefully sent. We will get back to you soon');
+        Flash::success('Form successfully sent. We will get back to you soon');
         return redirect()->back();
     }
 

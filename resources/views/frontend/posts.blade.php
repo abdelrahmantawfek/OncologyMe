@@ -26,6 +26,7 @@
                     <p class="cntr-p">OncologyMe Newsreels help clinicians stay up to date on news in the world of clinical oncology and hematology. Newsreels feature leading authorities presenting high-impact clinical findings from major oncology meetings
                         and on timely topics.</p>
                     <div class="clearfix"></div>
+                    @if (count($data['categories']))
                     <div class="row">
                             <div class="col-md-3"></div>
                             <div class="col-md-6">
@@ -38,6 +39,7 @@
                             <div class="col-md-3"></div>
                             <div class="clearfix"></div>
                     </div>
+                    @endif
                 </div>
 
                 <div class="clearfix"></div>
@@ -90,9 +92,52 @@
                         </div>
                     </div>
                 </div>
+
                 <hr style="margin-top: 40px;">  
                 @endif
                 @endforeach
+                @if (!count($data['categories']))
+                <div class="articles-section">
+                    <div class="row">
+                        <div class="articles-box ">
+                            <div class="videos-only">
+                                @foreach ($posts as $post)
+                                <div class="col-md-3 col-sm-6 col-xs-12 ">
+                                    <div class="article-item">
+                                        <div class="article-tags">
+                                            <div class="video-thumbnail pos-rltv">
+                                                <a href="{{$post->post_type.'/'.$post->slug}}">
+                                                    @foreach ($post->postmeta->where('meta_key', '_featured_image') as $key => $value)
+                                                    <img src="{{ asset('uploads/'.$value->meta_value )}}" alt="{{$value->meta_value}}">
+                                                    @endforeach
+                                                    @if (!count($post->postmeta->where('meta_key', '_featured_image')) )
+                                                    <img src="{{ asset('uploads/d-post.jpeg')}}" alt="oncologyme">
+                                                    @endif
+                                                    <img class="pos-abslt" src="{{ asset('front-assets/img/play.png') }}">
+                                                </a>
+                                            </div>
+                                            @foreach ($post->topics as $topic)
+                                            <span><a href="{{ route('showTopic', $topic->slug ?? '') }}">{{$topic->title ?? ''}}</a></span>
+                                            @endforeach
+        
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <h2><a href="{{$post->post_type.'/'.$post->slug}}">{{ implode(' ', array_slice(explode(' ', $post->title), 0, 10)) }}@if ( str_word_count($post->title) > 10 )...@endif</a></h2>
+                                        <h4>
+                                            <span> {{ $post->author ?? ''}} </span>
+            
+                                            <text>@if($post->author) &nbsp;/&nbsp; @endif<span> {{ $post->created_at->format('M d, Y') ?? ''}} </span></text>
+            
+                                        </h4>
+                                    </div>
+                                    {{-- @endif --}}
+                                </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endif
             </div>
         </div>
     </div>

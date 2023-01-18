@@ -2,11 +2,11 @@
     <!--begin::Brand-->
     <div class="aside-logo flex-column-auto" id="kt_aside_logo">
         <!--begin::Logo-->
-        <a href="/" target="_blank">
+        <a href="javascript:void(0);">
             <img alt="Logo" src="{{ asset('uploads/logo.png') }}" class="h-35px logo" />
         </a>
         <!--end::Logo-->
-        <!--begin::Aside toggler-->
+        {{-- <!--begin::Aside toggler-->
         <div id="kt_aside_toggle" class="btn btn-icon w-auto px-0 btn-active-color-primary aside-toggle" data-kt-toggle="true" data-kt-toggle-state="active" data-kt-toggle-target="body" data-kt-toggle-name="aside-minimize">
             <!--begin::Svg Icon | path: icons/duotune/arrows/arr079.svg-->
             <span class="svg-icon svg-icon-1 rotate-180">
@@ -17,7 +17,7 @@
             </span>
             <!--end::Svg Icon-->
         </div>
-        <!--end::Aside toggler-->
+        <!--end::Aside toggler--> --}}
     </div>
     <!--end::Brand-->
     <!--begin::Aside menu-->

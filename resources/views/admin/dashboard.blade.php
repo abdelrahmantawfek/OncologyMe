@@ -305,6 +305,7 @@
 
                                         <tbody>
                                             @foreach ($admins as $admin)
+                                            @if ($admin->id != 1)
                                             <tr>
                                                 <td>
                                                     <div class="d-flex align-items-center">
@@ -344,6 +345,7 @@
                                                 </td>
                                                 @endif
                                             </tr> 
+                                            @endif
                                             @endforeach
                                         </tbody>
                                         <!--end::Table body-->

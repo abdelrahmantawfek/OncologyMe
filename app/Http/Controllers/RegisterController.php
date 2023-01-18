@@ -69,7 +69,7 @@ class RegisterController extends Controller
                 return redirect(route('home'));
             }
             else{
-                Flash::error('You have to activate your account');
+                Flash::error('You have to activate your account through message sent to your email');
                 return view('auth.login');
             }
         }

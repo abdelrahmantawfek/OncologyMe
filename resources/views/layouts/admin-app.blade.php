@@ -14,8 +14,9 @@
 		<meta property="og:url" content="https://keenthemes.com/metronic" />
 		<meta property="og:site_name" content="Keenthemes | Metronic" />
 		<link rel="canonical" href="https://preview.keenthemes.com/metronic8" />
-		<link rel="shortcut icon" href="{{ asset('uploads/logo.png') }}" />
-		<link rel="icon" type="image/x-icon" href="{{ asset('front-assets/img/fav.png') }}">
+		<link rel="icon" type="image/x-icon" href="{{ asset('front-assets/img/admin-favico.png') }}">
+		<link rel="shortcut icon" href="{{ asset('uploads/admin-favico.png') }}" />
+		{{-- <link rel="icon" type="image/x-icon" href="{{ asset('front-assets/img/fav.png') }}"> --}}
 		<!--begin::Fonts-->
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
 		<!--end::Fonts-->
@@ -133,6 +134,9 @@
 			$('#parent_id').prop('required',false);
 			$('input[type=radio][name=is_main]').prop('required',false);
 		}
+		$("#cs_select_all").click(function(){
+			$('input:checkbox').not(this).prop('checked', this.checked);
+		});
 
 		</script>
 

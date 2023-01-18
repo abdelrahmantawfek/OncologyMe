@@ -34,19 +34,19 @@ class UserController extends Controller
     //     return view('admin.users.create', compact('roles'));
     // }
 
-    public function store(Request $request)
-    {
-        $input = $request->all();
+    // public function store(Request $request)
+    // {
+    //     $input = $request->all();
 
-        /** @var User $admin */
-        $user = User::create($input);
+    //     /** @var User $admin */
+    //     $user = User::create($input);
 
-        // $user->syncRoles(request('roles'));
+    //     // $user->syncRoles(request('roles'));
 
-        Flash::success('User saved successfully.');
+    //     Flash::success('User saved successfully.');
 
-        return redirect(route('admin.users.index'));
-    }
+    //     return redirect(route('admin.users.index'));
+    // }
 
     /**
      * Display the specified Admin.
@@ -76,42 +76,41 @@ class UserController extends Controller
      *
      * @return Response
      */
-    public function edit($id)
-    {
-        /** @var User $admin */
-        $user = User::find($id);
+    // public function edit($id)
+    // {
+    //     /** @var User $admin */
+    //     $user = User::find($id);
 
-        if (empty($admin)) {
-            Flash::error('User not found');
+    //     if (empty($admin)) {
+    //         Flash::error('User not found');
 
-            return redirect(route('admin.users.index'));
-        }
+    //         return redirect(route('admin.users.index'));
+    //     }
 
-        $roles = Role::pluck('name', 'id');
 
-        return view('admin.users.edit', compact('user'));
-    }
+    //     return view('admin.users.edit', compact('user'));
+    // }
 
-    public function update($id, Request $request)
-    {
-        /** @var User $admin */
-        $user = User::find($id);
+    // public function update($id, Request $request)
+    // {
+    //     /** @var User $admin */
+    //     $user = User::find($id);
 
-        if (empty($user)) {
-            Flash::error('User not found');
+    //     if (empty($user)) {
+    //         Flash::error('User not found');
 
-            return redirect(route('admin.users.index'));
-        }
+    //         return redirect(route('admin.users.index'));
+    //     }
 
-        $user->fill($request->all());
-        $user->save();
+    //     $user->fill($request->all());
+    //     $user->save();
 
-        $user->syncRoles(request('roles'));
+    //     $user->syncRoles(request('roles'));
 
-        Flash::success('User updated successfully.');
+    //     Flash::success('User updated successfully.');
 
-        return redirect(route('admin.users.index'));
-    }
+    //     return redirect(route('admin.users.index'));
+    // }
 
     /**
      * Remove the specified Admin from storage.
@@ -125,12 +124,12 @@ class UserController extends Controller
     public function destroy($id)
     {
         /** @var User $user */
-        $admin = User::find($id);
+        $user = User::find($id);
 
         if (empty($user)) {
             Flash::error('User not found');
 
-            return redirect(route('admin.admins.index'));
+            return redirect(route('admin.users.index'));
         }
 
         $user->delete();

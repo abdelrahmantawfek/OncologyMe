@@ -14,17 +14,17 @@
                 </div>
                 <div class="collapse navbar-collapse" id="careerfy-navbar-collapse-1">
                     <ul class="navbar-nav">
-                        <li class="pos-unset"><a href="/">Home</a></li>
+                        <li class="pos-unset"><a href="/">{{$home_title->page_title ?? ''}}</a></li>
                         <li><a href="javascript:void(0)">About Us <i class="fa fa-angle-down"></i></a>
                             <ul class="sub-menu cs-sub-menu">
-                                <li><a href="{{ route('about') }}">About OncologyMe</a></li>
-                                <li><a href="{{ route('editorial') }}">Editorial Board</a></li>
-                                <li><a href="{{ route('rights') }}">Rights and permissions</a></li>
-                                <li><a href="{{ route('contact') }}">Contact us</a></li>
+                                <li><a href="{{ route('about') }}">{{$about_title->page_title ?? ''}}e</a></li>
+                                <li><a href="{{ route('editorial') }}">{{$contact_title->page_title ?? ''}}</a></li>
+                                <li><a href="{{ route('rights') }}">{{$editorial_title->page_title ?? ''}}</a></li>
+                                <li><a href="{{ route('contact') }}">{{$rights_title->page_title ?? ''}}</a></li>
                             </ul>
                         </li>
                         @if (count($topics))
-                        <li><a href="javascript:void(0)">Topics <i class="fa fa-angle-down"></i></a>
+                        <li><a href="javascript:void(0)">{{$topics_title->page_title ?? ''}} <i class="fa fa-angle-down"></i></a>
                             <ul class="sub-menu cs-sub-menu">
                                 @foreach ($topics as $topic)
                                 <li><a href="{{ route('showTopic', $topic->slug ?? '') }}">{{$topic->title ?? ''}}</a></li>
@@ -33,10 +33,10 @@
                             </ul>
                         </li>
                         @elseif (count($allst_topics))
-                        <li class="pos-unset"><a href="{{ route('allTopics') }}">Topics</a></li>
+                        <li class="pos-unset"><a href="{{ route('allTopics') }}">View All</a></li>
                         @endif
                         @if (count($news_categories))
-                        <li class="pos-unset"><a href="javascript:void(0)">Oncology News <i class="fa fa-angle-down"></i></a>
+                        <li class="pos-unset"><a href="javascript:void(0)">{{$news_title->page_title ?? ''}} <i class="fa fa-angle-down"></i></a>
                             <ul class="sub-menu cs-sub-menu">
                                 @foreach ($news_categories as $category)
                                 <li><a href="{{ route('showCategory', [$category->post_type, $category->slug]) }}">{{$category->title ?? ''}}</a></li>
@@ -45,10 +45,10 @@
                             </ul>
                         </li>
                         @elseif (count($allst_news))
-                        <li class="pos-unset"><a href="/all-news">Oncology News</a></li>
+                        <li class="pos-unset"><a href="/all-news">{{$news_title->page_title ?? ''}}</a></li>
                         @endif
                         @if (count($videos_categories))
-                        <li class="pos-unset"><a href="javascript:void(0)">Oncology Watch <i class="fa fa-angle-down"></i></a>
+                        <li class="pos-unset"><a href="javascript:void(0)">{{$watch_title->page_title ?? ''}} <i class="fa fa-angle-down"></i></a>
                             <ul class="sub-menu dsply-dsk">
                                 <div class="owl-carousel vid-carousel cs-nav carousel slide">
                                     @foreach ($videos_categories as $category)
@@ -74,10 +74,10 @@
                             </ul>
                         </li>
                         @elseif (count($allst_videos))
-                        <li class="pos-unset"><a href="/all-videos">Oncology Watch</a></li>
+                        <li class="pos-unset"><a href="/all-videos">{{$watch_title->page_title ?? ''}}</a></li>
                         @endif
                         @if (count($articles_categories))
-                        <li class="pos-unset"><a href="javascript:void(0)">Articles <i class="fa fa-angle-down"></i></a>
+                        <li class="pos-unset"><a href="javascript:void(0)">{{$articles_title->page_title ?? ''}} <i class="fa fa-angle-down"></i></a>
                             <ul class="sub-menu dsply-dsk">
                                 <div class="owl-carousel art-carousel cs-nav carousel slide">
                                     @foreach ($articles_categories as $category)
@@ -104,10 +104,10 @@
                             </ul>
                         </li>
                         @elseif (count($allst_articles))
-                        <li class="pos-unset"><a href="/all-articles">Articles</a></li>
+                        <li class="pos-unset"><a href="/all-articles">{{$articles_title->page_title ?? ''}}</a></li>
                         @endif
                         @if (count($allst_podcasts))
-                        <li class="pos-unset"><a href="/all-podcasts">Podcasts</a></li>
+                        <li class="pos-unset"><a href="/all-podcasts">{{$podcasts_title->page_title ?? ''}}</a></li>
                         @endif
 
                     </ul>

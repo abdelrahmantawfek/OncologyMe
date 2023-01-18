@@ -71,7 +71,7 @@
         <!--end::Aside mobile toggle-->
         <!--begin::Mobile logo-->
         <div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0">
-            <a href="" class="d-lg-none">
+            <a href="javascript:void(0);" class="d-lg-none">
                 <img alt="Logo" src="{{ asset('uploads/logo.png') }}" class="h-30px" />
             </a>
         </div>
