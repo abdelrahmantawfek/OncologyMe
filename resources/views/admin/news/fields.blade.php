@@ -60,17 +60,31 @@
 
             <!-- Topics Field -->
             @if (count($all_topics))
+            
+
             <div class="form-group col-sm-12 fv-row mb-10 fv-plugins-icon-container">
                 {!! Form::label('topics', 'Topics :', ['class' => 'form-label fs-6 fw-bolder text-dark']) !!}
 
                 <div class="row fv-row mb-10 fv-plugins-icon-container checkbox-container">
+
+                    @foreach ($post->topics as $topic)
+                    <div class="col-sm-12 mb-2">
+                        <label class="form-check form-check-sm form-check-custom form-check-solid">
+                            {!! Form::checkbox('topic[]', $topic->id, $topic, ['id' => 'topic-' . $topic->id, 'class' => 'form-check-input']) !!}
+                            {!! Form::label('topic-' . $topic->id, $topic->title, ['class' => 'form-check-label fw-bold text-gray-700']) !!}
+                        </label>
+                    </div>    
+                    @endforeach
+
                     @foreach ($all_topics as $topic)
+                    @if(!in_array($topic->id, $selected_topics))
                     <div class="col-sm-12 mb-2">
                         <label class="form-check form-check-sm form-check-custom form-check-solid">
                             {!! Form::checkbox('topic[]', $topic->id, null, ['id' => 'topic-' . $topic->id, 'class' => 'form-check-input']) !!}
                             {!! Form::label('topic-' . $topic->id, $topic->title, ['class' => 'form-check-label fw-bold text-gray-700']) !!}
                         </label>
                     </div>    
+                    @endif
                     @endforeach
                 </div>
             </div>
@@ -83,13 +97,25 @@
                 {!! Form::label('categories', 'Categories :', ['class' => 'form-label fs-6 fw-bolder text-dark']) !!}
                 <div class="row fv-row mb-10 fv-plugins-icon-container checkbox-container">
                     {{-- {{$post->categories[0]->id}} --}}
+
+                    @foreach ($post->categories as $category)
+                    <div class="col-sm-12 mb-2">
+                        <label class="form-check form-check-sm form-check-custom form-check-solid">
+                            {!! Form::checkbox('category[]', $category->id, $category, ['id' => 'category-' . $category->id, 'class' => 'form-check-input']) !!}
+                            {!! Form::label('category-' . $category->id, $category->title, ['class' => 'form-check-label fw-bold text-gray-700']) !!}
+                        </label>
+                    </div>    
+                    @endforeach
+
                     @foreach ($categories as $category)
+                    @if(!in_array($category->id, $selected_cats))
                     <div class="col-sm-12 mb-2">
                         <label class="form-check form-check-sm form-check-custom form-check-solid">
                             {!! Form::checkbox('category[]', $category->id, null, ['id' => 'category-' . $category->id, 'class' => 'form-check-input']) !!}
                             {!! Form::label('category-' . $category->id, $category->title, ['class' => 'form-check-label fw-bold text-gray-700']) !!}
                         </label>
                     </div>    
+                    @endif
                     @endforeach
                 </div>
             </div>

@@ -35,9 +35,9 @@
 
             @isset($section->img)
             <img src="{{ asset('uploads/' . $section->img) }}" alt="image" width="200" class="mb-5">
-            @endisset
             {!! Form::file('img[]', null, ['class' => 'form-control']) !!}
-            
+            @endisset
+
         </div>
     </div>
 @endforeach

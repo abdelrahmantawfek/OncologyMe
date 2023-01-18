@@ -18,9 +18,9 @@
                         <li><a href="javascript:void(0)">About Us <i class="fa fa-angle-down"></i></a>
                             <ul class="sub-menu cs-sub-menu">
                                 <li><a href="{{ route('about') }}">{{$about_title->page_title ?? ''}}e</a></li>
-                                <li><a href="{{ route('editorial') }}">{{$contact_title->page_title ?? ''}}</a></li>
-                                <li><a href="{{ route('rights') }}">{{$editorial_title->page_title ?? ''}}</a></li>
-                                <li><a href="{{ route('contact') }}">{{$rights_title->page_title ?? ''}}</a></li>
+                                <li><a href="{{ route('editorial') }}">{{$editorial_title->page_title ?? ''}}</a></li>
+                                <li><a href="{{ route('rights') }}">{{$rights_title->page_title ?? ''}}</a></li>
+                                <li><a href="{{ route('contact') }}">{{$contact_title->page_title ?? ''}}</a></li>
                             </ul>
                         </li>
                         @if (count($topics))

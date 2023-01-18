@@ -50,7 +50,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function(){
         Route::resource('announcements', App\Http\Controllers\Admin\AnnouncementController::class);
         Route::resource('affiliations', App\Http\Controllers\Admin\AffiliationController::class);
         Route::resource('specialities', App\Http\Controllers\Admin\SpecialitiesController::class);
-        Route::resource('settings', App\Http\Controllers\Admin\SettingsController::class)->except('create', 'show', 'destroy', 'edit');
+        Route::resource('settings', App\Http\Controllers\Admin\SettingsController::class)->except('create', 'show', 'destroy', 'edit', 'update');
 
 
         Route::resource('news', App\Http\Controllers\Admin\NewsController::class);
@@ -67,7 +67,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function(){
         Route::resource('podcastscategories', App\Http\Controllers\Admin\PodcastsCategoryController::class);
 
         // contacts
-        Route::resource('contacts', App\Http\Controllers\Admin\ContactController::class)->except('create', 'edit');
+        Route::resource('contacts', App\Http\Controllers\Admin\ContactController::class)->except('create', 'edit','store', 'update');
 
     });
 

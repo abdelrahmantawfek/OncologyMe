@@ -207,10 +207,8 @@ class NewsController extends Controller
         $keypoints = $post->postmeta->where('meta_key', '_key_points')->pluck('meta_value');
         $featured_image = $post->postmeta->where('meta_key', '_featured_image')->pluck('meta_value');
         $pdf = $post->postmeta->where('meta_key', '_pdf')->pluck('meta_value');
-        $selected_topics = $post->topics->pluck('id');
-        $selected_cats = $post->categories->pluck('id');
-
-        // dd($featured_image);
+        $selected_topics = $post->topics->pluck('id')->toArray();
+        $selected_cats = $post->categories->pluck('id')->toArray();
 
         if (empty($post)) {
             Flash::error('Post not found');
@@ -355,12 +353,14 @@ class NewsController extends Controller
         }
 
         if($request->topic){
+            $post->topics()->detach();
             foreach ($request->topic as $item) {
-                 $post->topics()->attach($item);
+                $post->topics()->attach($item);
              }
          }
                  
         if($request->category){
+            $post->categories()->detach();
             foreach ($request->category as $item) {
                  $post->categories()->attach($item);
              }

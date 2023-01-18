@@ -22,9 +22,8 @@
 
             <div class="col-md-12">
                 <div class="videos-filter categ-title">
-                    <h2 class="cntr-title">OncologyMe <span>Newsreels</span></h2>
-                    <p class="cntr-p">OncologyMe Newsreels help clinicians stay up to date on news in the world of clinical oncology and hematology. Newsreels feature leading authorities presenting high-impact clinical findings from major oncology meetings
-                        and on timely topics.</p>
+                    <h2 class="cntr-title">{{$data['page']->sections->first()->title ?? ''}} <span>{{$data['page']->sections->first()->subtitle ?? ''}}</span></h2>
+                    <p class="cntr-p">{!! $data['page']->sections->first()->content ??'' !!}</p>
                     <div class="clearfix"></div>
                     @if (count($data['categories']))
                     <div class="row">

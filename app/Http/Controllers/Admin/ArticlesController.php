@@ -207,8 +207,8 @@ class ArticlesController extends Controller
         $keypoints = $post->postmeta->where('meta_key', '_key_points')->pluck('meta_value');
         $featured_image = $post->postmeta->where('meta_key', '_featured_image')->pluck('meta_value');
         $pdf = $post->postmeta->where('meta_key', '_pdf')->pluck('meta_value');
-        $selected_topics = $post->topics->pluck('id');
-        $selected_cats = $post->categories->pluck('id');
+        $selected_topics = $post->topics->pluck('id')->toArray();
+        $selected_cats = $post->categories->pluck('id')->toArray();
         
         if (empty($post)) {
             Flash::error('Post not found');
@@ -216,7 +216,7 @@ class ArticlesController extends Controller
             return redirect(route('admin.articles.index'));
         }
 
-        return view('admin.articles.edit', compact('post', 'all_topics', 'categories', 'featured_image', 'pdf', 'keypoints'));
+        return view('admin.articles.edit', compact('post', 'all_topics', 'categories', 'featured_image', 'pdf', 'keypoints', 'selected_topics', 'selected_cats'));
 
     }
 
@@ -357,12 +357,14 @@ class ArticlesController extends Controller
         }
 
         if($request->topic){
+            $post->topics()->detach();
             foreach ($request->topic as $item) {
-                 $post->topics()->attach($item);
+                $post->topics()->attach($item);
              }
          }
                  
         if($request->category){
+            $post->categories()->detach();
             foreach ($request->category as $item) {
                  $post->categories()->attach($item);
              }

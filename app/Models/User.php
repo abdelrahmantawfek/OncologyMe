@@ -376,8 +376,8 @@ class User extends Authenticatable
             'Sharqiya' => 'Sharqiya',
             'Sohag' => 'Sohag',
             'South Sinai' => 'South Sinai',
-            'Suez' => 'Assiut',
-            'Tanta' => 'Assiut',
+            'Suez' => 'Suez',
+            'Tanta' => 'Tanta',
         ];
     }
 

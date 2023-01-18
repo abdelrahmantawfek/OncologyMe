@@ -21,8 +21,8 @@
             <div class="col-md-12">
                 <div class="videos-filter categ-title">
 
-                    <h2 class="cntr-title">OncologyMe <span>Roundtable Series</span></h2>
-                    <p class="cntr-p">OncologyMe Roundtable Series present case-based, tumor-specific discussions on the latest developments in cancer care. Join key experts in oncology as they discuss the management of challenging clinical scenarios in oncology..</p>
+                    <h2 class="cntr-title">{{$data['page']->sections[0]->title ?? ''}} <span>{{$data['page']->sections[0]->subtitle ?? ''}}</span></h2>
+                    <p class="cntr-p">{!! $data['page']->sections[0]->content ??'' !!}</p>
                     <div class="clearfix"></div>
                      <div class="row">
                             <div class="col-md-3"></div>

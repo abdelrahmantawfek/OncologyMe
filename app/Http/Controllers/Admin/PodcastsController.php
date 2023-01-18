@@ -212,8 +212,8 @@ class PodcastsController extends Controller
         $sound = $post->postmeta->where('meta_key', '_sound')->pluck('meta_value');
         $featured_image = $post->postmeta->where('meta_key', '_featured_image')->pluck('meta_value');
         $pdf = $post->postmeta->where('meta_key', '_pdf')->pluck('meta_value');
-        $selected_topics = $post->topics->pluck('id');
-        $selected_cats = $post->categories->pluck('id');
+        $selected_topics = $post->topics->pluck('id')->toArray();
+        $selected_cats = $post->categories->pluck('id')->toArray();
 
         if (empty($post)) {
             Flash::error('Podcast not found');
@@ -221,7 +221,7 @@ class PodcastsController extends Controller
             return redirect(route('admin.podcasts.index'));
         }
 
-        return view('admin.podcasts.edit', compact('post', 'all_topics', 'categories', 'featured_image', 'sound', 'pdf'));
+        return view('admin.podcasts.edit', compact('post', 'all_topics', 'categories', 'featured_image', 'sound', 'pdf', 'selected_topics', 'selected_cats'));
 
     }
 
@@ -370,12 +370,14 @@ class PodcastsController extends Controller
         }
 
         if($request->topic){
+            $post->topics()->detach();
             foreach ($request->topic as $item) {
-                 $post->topics()->attach($item);
+                $post->topics()->attach($item);
              }
          }
                  
         if($request->category){
+            $post->categories()->detach();
             foreach ($request->category as $item) {
                  $post->categories()->attach($item);
              }

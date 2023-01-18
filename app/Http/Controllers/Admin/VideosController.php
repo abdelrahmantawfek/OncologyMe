@@ -212,8 +212,8 @@ class VideosController extends Controller
         $video_script = $post->postmeta->where('meta_key', '_script')->pluck('meta_value');
         $featured_image = $post->postmeta->where('meta_key', '_featured_image')->pluck('meta_value');
         $pdf = $post->postmeta->where('meta_key', '_pdf')->pluck('meta_value');
-        $selected_topics = $post->topics->pluck('id');
-        $selected_cats = $post->categories->pluck('id');
+        $selected_topics = $post->topics->pluck('id')->toArray();
+        $selected_cats = $post->categories->pluck('id')->toArray();
 
         if (empty($post)) {
             Flash::error('Video not found');
@@ -221,7 +221,7 @@ class VideosController extends Controller
             return redirect(route('admin.videos.index'));
         }
 
-        return view('admin.videos.edit', compact('post', 'all_topics', 'categories', 'featured_image', 'video', 'video_script', 'pdf'));
+        return view('admin.videos.edit', compact('post', 'all_topics', 'categories', 'featured_image', 'video', 'video_script', 'pdf', 'selected_topics', 'selected_cats'));
     }
 
     public function update($id, Request $request)
@@ -382,12 +382,14 @@ class VideosController extends Controller
         }
 
         if($request->topic){
+            $post->topics()->detach();
             foreach ($request->topic as $item) {
-                 $post->topics()->attach($item);
+                $post->topics()->attach($item);
              }
-        }
+         }
                  
         if($request->category){
+            $post->categories()->detach();
             foreach ($request->category as $item) {
                  $post->categories()->attach($item);
              }

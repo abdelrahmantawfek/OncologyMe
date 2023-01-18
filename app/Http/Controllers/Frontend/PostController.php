@@ -44,6 +44,7 @@ class PostController extends Controller
 
     public function single_category($post_type, $slug)
     {
+        $data['page'] = Page::find(9);
         $data['category'] = Category::where('slug', $slug)->with('posts.topics')->get()->first();
         $data['posts'] = $data['category']->posts()->paginate(10);
         $data['other-categories'] = Category::where('post_type', $post_type)
