@@ -105,23 +105,16 @@
             $('#specialty').select2();
 
             $(".art-carousel, .vid-carousel").owlCarousel({
-                touchDrag: false,
-                mouseDrag: false,
+                // touchDrag: false,
+                // mouseDrag: false,
                 autoplay: false,
-                loop: true,
+                loop: false,
                 autoplayTimeout: 7000,
-                autoWidth: false,
-                animateOut: 'fadeOut',
+                // animateOut: 'fadeOut',
                 dots: false,
                 nav: true,
-                navText: ["<i class='fa fa-chevron-left'></i>", "<i class='fa fa-chevron-right'></i>"]
+                navText: ["<i class='fa fa-chevron-left'></i>", "<i class='fa fa-chevron-right'></i>"],
             });
-
-           
-
-            // $(".vid-carousel").owlCarousel({
-            //     navText: ["<i class='fa fa-chevron-right'></i>","<i class='fa fa-chevron-left'></i>"]
-            // });
 
             $(".main-banner").owlCarousel({
                 items: 1,
@@ -130,9 +123,11 @@
                 autoplay: true,
                 loop: true,
                 autoplayTimeout: 7000,
-                autoWidth: false,
-                animateOut: 'fadeOut',
+                // animateOut: 'fadeOut',
+                autoplayHoverPause: true,
+                nav: true,
                 dots: false,
+                navText: ["<i class='fa fa-chevron-left'></i>", "<i class='fa fa-chevron-right'></i>"],
             });
 
             $(".top-banner").owlCarousel({
@@ -142,8 +137,11 @@
                 autoplay: true,
                 loop: true,
                 autoplayTimeout: 7000,
-                animateOut: 'fadeOut',
+                // animateOut: 'fadeOut',
+                autoplayHoverPause: true,
+                nav: true,
                 dots: false,
+                navText: ["<i class='fa fa-chevron-left'></i>", "<i class='fa fa-chevron-right'></i>"],
             });
 
             $(".bottom-banner").owlCarousel({
@@ -153,8 +151,11 @@
                 autoplay: true,
                 loop: true,
                 autoplayTimeout: 7000,
-                animateOut: 'fadeOut',
+                // animateOut: 'fadeOut',
+                autoplayHoverPause: true,
+                nav: true,
                 dots: false,
+                navText: ["<i class='fa fa-chevron-left'></i>", "<i class='fa fa-chevron-right'></i>"],
             });
 
 
@@ -337,7 +338,7 @@
     </script>
     
 
-    <?php if(count($videos_categories) < 4){ ?>
+    {{-- <?php if(count($videos_categories) < 4){ ?>
         <script>
             $(".vid-carousel").owlCarousel({
             items: {{ count($videos_categories) }},
@@ -363,7 +364,7 @@
             items: 4,
         });
     </script>
-    <?php } ?>
+    <?php } ?> --}}
 
 </body>
 

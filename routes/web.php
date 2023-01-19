@@ -21,8 +21,8 @@ Route::get('signup', [App\Http\Controllers\RegisterController::class, 'register'
 Route::post('signin', [App\Http\Controllers\RegisterController::class, 'post_signin'])->name('postSignin');
 Route::post('signup', [App\Http\Controllers\RegisterController::class, 'post_signup'])->name('postSignup');
 // Route::resource('ckeditor', App\Http\Controllers\CkeditorController::class);
-Route::post('ckeditor', [App\Http\Controllers\CkeditorController::class, 'upload'])->name('ckeditor.upload');
-Route::post('export-users', [App\Http\Controllers\CkeditorController::class, 'export'])->name('users.export');
+Route::post('ckeditor', [App\Http\Controllers\CKEditorController::class, 'upload'])->name('ckeditor.upload');
+Route::post('export-users', [App\Http\Controllers\CKEditorController::class, 'export'])->name('users.export');
 
 Route::get('activate-account', [App\Http\Controllers\RegisterController::class, 'activate_account'])->name('active.account');
 
@@ -50,7 +50,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function(){
         Route::resource('announcements', App\Http\Controllers\Admin\AnnouncementController::class);
         Route::resource('affiliations', App\Http\Controllers\Admin\AffiliationController::class);
         Route::resource('specialities', App\Http\Controllers\Admin\SpecialitiesController::class);
-        Route::resource('settings', App\Http\Controllers\Admin\SettingsController::class)->except('create', 'show', 'destroy', 'edit', 'update');
+        Route::resource('settings', App\Http\Controllers\Admin\SettingsController::class)->except('create', 'show', 'destroy', 'edit');
 
 
         Route::resource('news', App\Http\Controllers\Admin\NewsController::class);

@@ -1,6 +1,6 @@
 <div class="banr-box">
     <div class="owl-carousel main-banner banner-nav">
-        @foreach ($main_banners as $item)
+        @foreach ($news_banners as $item)
         <div> 
             <a href="{{$item->url}}" target="_blank">
                 <img class="d-block w-100" height="90px" src="{{ asset('uploads/'.$item->desktop_image) }}">

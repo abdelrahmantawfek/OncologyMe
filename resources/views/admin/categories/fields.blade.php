@@ -65,7 +65,7 @@
 
 <!-- is main Field -->
 <div class="form-group col-sm-12">
-    {!! Form::label('is_main', 'Is main category:') !!}
+    {!! Form::label('is_main', 'Show in Navbar Dropdown:') !!}
     <label class="radio-inline">
         {!! Form::radio('is_main', "1", null) !!} Yes
     </label>

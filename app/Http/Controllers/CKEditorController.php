@@ -8,7 +8,7 @@ use App\Exports\Export;
 use App\Exports\UserExport;
 use Maatwebsite\Excel\Facades\Excel;
 
-class CkeditorController extends Controller
+class CKEditorController extends Controller
 {
     /**
      * Display a listing of the resource.

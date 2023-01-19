@@ -48,7 +48,6 @@
             <td>{{ $admin->created_at->format('M, d, Y') ?? ''}}</td>
             <!--begin::Joined-->
             <!--begin::Action=-->
-            @if (!$admin->id == 1)
             <td class="text-end">
                 <a href="#" class="btn btn-light btn-active-light-primary btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
                 <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
@@ -73,7 +72,6 @@
                 </div>
                 <!--end::Menu-->
             </td>
-            @endif
             <!--end::Action=-->
         </tr>
         <!--end::Table row-->

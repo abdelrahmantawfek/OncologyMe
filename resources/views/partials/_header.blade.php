@@ -17,7 +17,7 @@
                         <li class="pos-unset"><a href="/">{{$home_title->page_title ?? ''}}</a></li>
                         <li><a href="javascript:void(0)">About Us <i class="fa fa-angle-down"></i></a>
                             <ul class="sub-menu cs-sub-menu">
-                                <li><a href="{{ route('about') }}">{{$about_title->page_title ?? ''}}e</a></li>
+                                <li><a href="{{ route('about') }}">{{$about_title->page_title ?? ''}}</a></li>
                                 <li><a href="{{ route('editorial') }}">{{$editorial_title->page_title ?? ''}}</a></li>
                                 <li><a href="{{ route('rights') }}">{{$rights_title->page_title ?? ''}}</a></li>
                                 <li><a href="{{ route('contact') }}">{{$contact_title->page_title ?? ''}}</a></li>
@@ -33,7 +33,7 @@
                             </ul>
                         </li>
                         @elseif (count($allst_topics))
-                        <li class="pos-unset"><a href="{{ route('allTopics') }}">View All</a></li>
+                        <li class="pos-unset"><a href="{{ route('allTopics') }}">{{$topics_title->page_title ?? ''}}</a></li>
                         @endif
                         @if (count($news_categories))
                         <li class="pos-unset"><a href="javascript:void(0)">{{$news_title->page_title ?? ''}} <i class="fa fa-angle-down"></i></a>
@@ -85,7 +85,7 @@
                                         <div class="thumbnail">
                                             <a href="{{ route('showCategory', [$category->post_type, $category->slug]) }}"> <img src="{{ asset('uploads/'.$category->featured_image) }}" alt="{{$category->featured_image}}"></a>
                                             <div class="caption">
-                                                <h3><a href="{{ route('showCategory', [$category->post_type, $category->slug]) }}">{{$category->title ?? ''}} Videos</a></h3>
+                                                <h3><a href="{{ route('showCategory', [$category->post_type, $category->slug]) }}">{{$category->title ?? ''}}</a></h3>
 
                                                 <p><a href="{{ route('showCategory', [$category->post_type, $category->slug]) }}">Read More</a></p>
                                             </div>

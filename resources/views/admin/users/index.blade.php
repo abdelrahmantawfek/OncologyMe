@@ -73,6 +73,7 @@
                     <!--end::Search-->
                     
                 </div>
+                    @if(count($allusers))
                     <!--begin::Export-->
                     <div class="card-toolbar">
                         <!--begin::Toolbar-->
@@ -96,6 +97,7 @@
                         <!--end::Toolbar-->
                     </div>
                     <!--end::Export-->
+                    @endif
                 </div>
             <!--end::Card header-->
             <!--begin::Card body-->

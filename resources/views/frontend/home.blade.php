@@ -80,7 +80,7 @@
                             {{-- @if (count($post->postmeta->where('meta_key', '_featured_image')) ) --}}
                             <div class="article-item">
                                 <div class="article-tags">
-                                    <div class="video-thumbnail pos-rltv">
+                                    <div class="video-thumbnail pos-rltv home-vid">
                                         <a href="{{$post->post_type.'/'.$post->slug}}">
                                             @foreach ($post->postmeta->where('meta_key', '_featured_image') as $key => $value)
                                             <img src="{{ asset('uploads/'.$value->meta_value )}}" alt="{{$value->meta_value}}">

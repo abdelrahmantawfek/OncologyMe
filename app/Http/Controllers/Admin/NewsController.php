@@ -357,14 +357,21 @@ class NewsController extends Controller
             foreach ($request->topic as $item) {
                 $post->topics()->attach($item);
              }
-         }
+        }
+
+        elseif(!$request->topic){
+            $post->topics()->detach();
+        }
                  
         if($request->category){
             $post->categories()->detach();
             foreach ($request->category as $item) {
                  $post->categories()->attach($item);
              }
-         }
+        }
+        elseif(!$request->category){
+            $post->categories()->detach();
+        }
 
         if($request->highlights){
             $post->highlights = true;

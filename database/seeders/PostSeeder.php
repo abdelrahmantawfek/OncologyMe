@@ -929,6 +929,8 @@ class PostSeeder extends Seeder
             array('post_id' => 14, 'category_id' => 13),
             array('post_id' => 15, 'category_id' => 10),
             array('post_id' => 16, 'category_id' => 11),
+            array('post_id' => 11, 'category_id' => 17),
+            array('post_id' => 11, 'category_id' => 16),
 
 
             // array('post_id' => 6, 'category_id' => 7),

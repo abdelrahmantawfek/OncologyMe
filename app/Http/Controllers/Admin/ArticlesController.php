@@ -363,12 +363,19 @@ class ArticlesController extends Controller
              }
          }
                  
+         elseif(!$request->topic){
+            $post->topics()->detach();
+        }
+                 
         if($request->category){
             $post->categories()->detach();
             foreach ($request->category as $item) {
                  $post->categories()->attach($item);
              }
-         }
+        }
+        elseif(!$request->category){
+            $post->categories()->detach();
+        }
 
         DB::commit();
 

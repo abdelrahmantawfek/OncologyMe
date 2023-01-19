@@ -51,9 +51,11 @@
             @if ($announcement->place == '1')
             <td>{{ 'Main'}}</td>
             @elseif ($announcement->place == '2')
-            <td>{{'top sidebar'}}</td>
+            <td>{{'Top sidebar'}}</td>
             @elseif ($announcement->place == '3')
-            <td>{{ 'bottom Sidebar'}}</td>
+            <td>{{ 'Bottom Sidebar'}}</td>
+            @else
+            <td>{{ $announcement->place }}</td>            
             @endif
         
 

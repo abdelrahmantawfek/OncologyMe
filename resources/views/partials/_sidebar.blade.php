@@ -1,7 +1,7 @@
 @if (count($highlights) || count($latest_news) || count($top_banners) || count($bottom_banners))
 <div class="col-md-4 tblt-nn">
     <div class="banr-box">
-    <div class="owl-carousel top-banner">
+    <div class="owl-carousel top-banner banner-nav">
         @foreach ($top_banners as $item)
         <div> 
             <a href="{{$item->url}}" target="_blank">
@@ -22,7 +22,7 @@
     </div>
 
     <div class="banr-box">
-    <div class="owl-carousel bottom-banner">
+    <div class="owl-carousel bottom-banner banner-nav">
         @foreach ($bottom_banners as $item)
         <div> 
             <a href="{{$item->url}}" target="_blank">

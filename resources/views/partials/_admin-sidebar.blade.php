@@ -105,7 +105,7 @@
                 @endcan
 
                 @can('users view')
-                <div data-kt-menu-trigger="click" class="menu-item menu-accordion {{ Request::is('admin/users*') ? 'here show' : '' }} ">
+                {{-- <div data-kt-menu-trigger="click" class="menu-item menu-accordion {{ Request::is('admin/users*') ? 'here show' : '' }} ">
                     <span class="menu-link">
                         <span class="menu-icon">
                             <!--begin::Svg Icon | path: icons/duotune/communication/com013.svg-->
@@ -130,20 +130,33 @@
                             </a>
                         </div>
 
-                        {{-- <div class="menu-item">
+                        <div class="menu-item">
                             <a class="menu-link" href="{{ route('admin.users.create') }}">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
                                 <span class="menu-title">Add New</span>
                             </a>
-                        </div> --}}
+                        </div>
                     </div>
+                </div> --}}
+                <div class="menu-item {{ Request::is('admin/users*') ? 'here show' : '' }}">
+                    <a class="menu-link {{ Request::is('admin/users') ? 'active' : '' }}" href="{{ route('admin.users.index') }}">
+                        <span class="menu-icon">
+                            <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo1/dist/../src/media/svg/icons/Weather/Thunder.svg-->
+                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M6.28548 15.0861C7.34369 13.1814 9.35142 12 11.5304 12H12.4696C14.6486 12 16.6563 13.1814 17.7145 15.0861L19.3493 18.0287C20.0899 19.3618 19.1259 21 17.601 21H6.39903C4.87406 21 3.91012 19.3618 4.65071 18.0287L6.28548 15.0861Z" fill="currentColor"></path>
+                        <rect opacity="0.3" x="8" y="3" width="8" height="8" rx="4" fill="currentColor"></rect>
+                        </svg>
+                        <!--end::Svg Icon-->
+                    </span>
+                    <span class="menu-title">Users</span>
+                    </a>
                 </div>
                 @endcan
 
                 @can('pages view')
-                <div data-kt-menu-trigger="click" class="menu-item menu-accordion {{ Request::is('admin/pages*') ? 'here show' : '' }}">
+                {{-- <div data-kt-menu-trigger="click" class="menu-item menu-accordion {{ Request::is('admin/pages*') ? 'here show' : '' }}">
                     <span class="menu-link">
                         <span class="menu-icon">
                             <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo1/dist/../src/media/svg/icons/Text/Article.svg-->
@@ -170,6 +183,22 @@
                         </div>
 
                     </div>
+                </div> --}}
+                <div class="menu-item {{ Request::is('admin/pages*') ? 'here show' : '' }}">
+                    <a class="menu-link {{ Request::is('admin/pages') ? 'active' : '' }}" href="{{ route('admin.pages.index') }}">
+                    <span class="menu-icon">
+                       <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo1/dist/../src/media/svg/icons/Weather/Thunder.svg-->
+                       <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <rect x="0" y="0" width="24" height="24"/>
+                            <rect fill="#000000" x="4" y="5" width="16" height="3" rx="1.5"/>
+                            <path d="M5.5,15 L18.5,15 C19.3284271,15 20,15.6715729 20,16.5 C20,17.3284271 19.3284271,18 18.5,18 L5.5,18 C4.67157288,18 4,17.3284271 4,16.5 C4,15.6715729 4.67157288,15 5.5,15 Z M5.5,10 L12.5,10 C13.3284271,10 14,10.6715729 14,11.5 C14,12.3284271 13.3284271,13 12.5,13 L5.5,13 C4.67157288,13 4,12.3284271 4,11.5 C4,10.6715729 4.67157288,10 5.5,10 Z" fill="#000000" opacity="0.3"/>
+                        </g>
+                        </svg>
+                        <!--end::Svg Icon-->
+                    </span>
+                    <span class="menu-title">Pages</span>
+                    </a>
                 </div>
                 @endcan
 
@@ -413,7 +442,7 @@
                 @endcan
 
                 @can('contacts view')
-                <div data-kt-menu-trigger="click" class="menu-item menu-accordion {{ Request::is('admin/contacts*') ? 'here show' : '' }}">
+                {{-- <div data-kt-menu-trigger="click" class="menu-item menu-accordion {{ Request::is('admin/contacts*') ? 'here show' : '' }}">
                     <span class="menu-link">
                         <span class="menu-icon">
                             <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo1/dist/../src/media/svg/icons/Text/Article.svg-->
@@ -440,6 +469,22 @@
                         </div>
 
                     </div>
+                </div> --}}
+                <div class="menu-item {{ Request::is('admin/contacts*') ? 'here show' : '' }}">
+                    <a class="menu-link {{ Request::is('admin/contacts') ? 'active' : '' }}" href="{{ route('admin.contacts.index') }}">
+                    <span class="menu-icon">
+                       <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo1/dist/../src/media/svg/icons/Weather/Thunder.svg-->
+                       <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <polygon points="0 0 24 0 24 24 0 24"/>
+                                <polygon fill="#000000" opacity="0.3" points="10.0888887 24 14.5333331 18 12.3111109 18 12.3111109 14 7.86666648 20 10.0888887 20"/>
+                                <path d="M5.74714567,14.0425758 C4.09410362,12.9740356 3,11.1147886 3,9 C3,5.6862915 5.6862915,3 9,3 C11.7957591,3 14.1449096,4.91215918 14.8109738,7.5 L17.25,7.5 C19.3210678,7.5 21,9.17893219 21,11.25 C21,13.3210678 19.3210678,15 17.25,15 L8.25,15 C7.28817895,15 6.41093178,14.6378962 5.74714567,14.0425758 Z" fill="#000000"/>
+                            </g>
+                        </svg>
+                        <!--end::Svg Icon-->
+                    </span>
+                    <span class="menu-title">Contact Entries</span>
+                    </a>
                 </div>
                 @endcan
 

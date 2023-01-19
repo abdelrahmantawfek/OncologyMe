@@ -95,7 +95,7 @@ class TopicController extends Controller
     {
         /** @var Topic $Category */
         $topic = Topic::find($id);
-        $parent_topic = Topic::where('is_parent', 1)->get()->pluck('title', 'id');
+        $parent_topic = Topic::where('is_parent', 1)->where('id', '!=', $id)->get()->pluck('title', 'id');
 
         if (empty($topic)) {
             Flash::error('Topic not found');
@@ -110,6 +110,7 @@ class TopicController extends Controller
     {
         /** @var Topic $Category */
         $topic = Topic::find($id);
+        $parent_topic = Topic::find($request->parent_id);
 
         if (empty($topic)) {
             Flash::error('Topic not found');
@@ -156,6 +157,18 @@ class TopicController extends Controller
                 $topic->slug = $topic_slug;
             }
         }
+
+        // dd($request->is_parent);
+        if($request->is_parent == 1){
+            $topic->parent_name = '';
+            $topic->parent_id = '';
+        }
+        if(isset($parent_topic)){
+            $topic->parent_name = $parent_topic->title;  
+        }
+
+        
+
 
         $topic->save();
 

@@ -22,7 +22,7 @@
                         <div class="col-md-12">
                         @endif
                         
-                            @include('partials._main_banner')
+                            @include('partials._posts_banner')
 
                             <div class="m-t-20"></div>
                             <div class="careerfy-typo-wrap categ-title pos-rltv">

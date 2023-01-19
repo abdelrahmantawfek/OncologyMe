@@ -22,7 +22,7 @@
             @else
             <div class="col-md-12">
             @endif
-                @include('partials._main_banner')
+            @include('partials._posts_banner')
 
                 <div class="m-t-20"></div>
 
@@ -52,7 +52,9 @@
                                     @auth
                                     <a href="{{ asset('uploads/'. $data['pdf'][0] ?? '') }}" download><i class="fa Example of file-pdf-o fa-file-pdf-o"></i> Download PDF</a>
                                     @else
-                                    <a href="{{ route('login') }}"><i class="fa Example of file-pdf-o fa-file-pdf-o"></i> Download PDF</a>
+                                    {{-- <a href="{{ route('login') }}"><i class="fa Example of file-pdf-o fa-file-pdf-o"></i> Download PDF</a> --}}
+                                    <a href="#" type="button" data-toggle="modal" data-target="#note_modal"><i class="fa Example of file-pdf-o fa-file-pdf-o"></i> Download PDF</a>
+
                                     @endauth
                                 </span>
                                 @endif
@@ -91,7 +93,8 @@
                                     @auth
                                     <a href="{{ asset('uploads/'. $data['pdf'][0] ?? '') }}" download>Download slideset</a>
                                     @else
-                                    <a href="{{ route('login') }}">Download slideset</a>
+                                    {{-- <a href="{{ route('login') }}">Download slideset</a> --}}
+                                    <a href="#" type="button" data-toggle="modal" data-target="#note_modal">Download PDF</a>
                                     @endauth
 
 
@@ -208,4 +211,28 @@
 @endif
 
 @endif
+
+<!-- Modal -->
+<div id="note_modal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+  
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">You must be logged in to enjoy this feature.</h4>
+        </div>
+        <div class="modal-body post-body">
+          <p>You can login from here<a href="{{route('login')}}" class=""> Sign in</a></p>
+          <p>If you are not previously registered with us, 
+            <br>you can Register Now from here <a href="{{route('register')}}" class=""> Sign Up</a></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary pull-left" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+  
+    </div>
+</div>
+
 @endsection

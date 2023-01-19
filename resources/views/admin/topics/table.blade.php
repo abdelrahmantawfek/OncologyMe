@@ -11,9 +11,8 @@
                 </div>
             </th>
             <th class="min-w-125px">title</th>
-            <th class="min-w-125px">is parent</th>
-            <th class="min-w-125px">parent topic</th>
-            <th class="min-w-125px">is main</th>
+            <th class="min-w-125px">type</th>
+            <th class="min-w-125px">in dropdown menu</th>
             <th class="min-w-125px">Published date</th>
             <th class="min-w-100px text-end">actions</th>
         </tr>
@@ -42,8 +41,9 @@
             </td>
             <!--end::User=-->
             <!--begin::Role=-->
-            <td>{{ ($topic->is_parent == true) ? 'Yes' : 'No'}}</td>
-            <td>{{ ($topic->parent_id == 0) ? '-' : $topic->parent_name}}</td>
+            <td>{{ ($topic->is_parent == true) ? 'Main' : 'Sub of :'}} <small>{{ ($topic->parent_id == 0) ? '' : $topic->parent_name}}</small>
+            </td>
+            {{-- <td>{{ ($topic->parent_id == 0) ? '-' : $topic->parent_name}}</td> --}}
             <td>{{ ($topic->is_main == true) ? 'Yes' : 'No'}}</td>
             <!--end::Role=-->
             <!--begin::Joined-->

@@ -68,8 +68,8 @@ class TopicSeeder extends Seeder
         array('title' => 'videos 4', 'slug' => 'videos-4', 'is_main' => true, 'featured_image' => 'post.jpg', 'post_type' => 'videos', 'featured_image' => 'post.jpg', 'meta_title' => null, 'meta_desc' => null, 'created_at' => '2022-08-19 04:07:05', 'updated_at' => '2022-08-19 05:32:27'),
         array('title' => 'videos 5', 'slug' => 'videos-5', 'is_main' => true, 'featured_image' => 'post.jpg', 'post_type' => 'videos', 'featured_image' => 'post.jpg', 'meta_title' => null, 'meta_desc' => null, 'created_at' => '2022-08-19 04:07:05', 'updated_at' => '2022-08-19 05:32:27'),
         array('title' => 'videos 6', 'slug' => 'videos-6', 'is_main' => true, 'featured_image' => 'post.jpg', 'post_type' => 'videos', 'featured_image' => 'post.jpg', 'meta_title' => null, 'meta_desc' => null, 'created_at' => '2022-08-19 04:07:05', 'updated_at' => '2022-08-19 05:32:27'),
-        // array('title' => 'videos 4', 'slug' => 'videos-5', 'is_main' => true, 'featured_image' => 'post.jpg', 'post_type' => 'videos', 'featured_image' => 'post.jpg', 'meta_title' => null, 'meta_desc' => null, 'created_at' => '2022-08-19 04:07:05', 'updated_at' => '2022-08-19 05:32:27'),
-        // array('title' => 'videos 6', 'slug' => 'videos-6', 'is_main' => true, 'featured_image' => 'post.jpg', 'post_type' => 'videos', 'featured_image' => 'post.jpg', 'meta_title' => null, 'meta_desc' => null, 'created_at' => '2022-08-19 04:07:05', 'updated_at' => '2022-08-19 05:32:27'),
+        array('title' => 'videos 4', 'slug' => 'videos-5', 'is_main' => true, 'featured_image' => 'post.jpg', 'post_type' => 'videos', 'featured_image' => 'post.jpg', 'meta_title' => null, 'meta_desc' => null, 'created_at' => '2022-08-19 04:07:05', 'updated_at' => '2022-08-19 05:32:27'),
+        array('title' => 'videos 6', 'slug' => 'videos-6', 'is_main' => true, 'featured_image' => 'post.jpg', 'post_type' => 'videos', 'featured_image' => 'post.jpg', 'meta_title' => null, 'meta_desc' => null, 'created_at' => '2022-08-19 04:07:05', 'updated_at' => '2022-08-19 05:32:27'),
    
 
         );

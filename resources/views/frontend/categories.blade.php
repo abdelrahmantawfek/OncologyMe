@@ -40,7 +40,7 @@
                     </div>
                 </div>
                 <div class="clearfix"></div>
-                @include('partials._video_banner')
+                @include('partials._posts_banner')
 
                 <hr style="margin-top: 40px;">
                 <div class="articles-section">
@@ -52,7 +52,7 @@
                                     {{-- @if (count($post->postmeta->where('meta_key', '_featured_image')) ) --}}
                                     <div class="article-item">
                                         <div class="article-tags">
-                                            <div class="video-thumbnail pos-rltv">
+                                            <div class="video-thumbnail cs-all-vid pos-rltv">
                                                 <a href="{{'/'.$post->post_type.'/'.$post->slug}}">
                                                     @foreach ($post->postmeta->where('meta_key', '_featured_image') as $key => $value)
                                                     <img src="{{ asset('uploads/'.$value->meta_value )}}" alt="{{$value->meta_value}}">
@@ -101,7 +101,7 @@
             @else
             <div class="col-md-12">
             @endif
-                @include('partials._main_banner')
+            @include('partials._posts_banner')
 
                 <div class="m-t-20"></div>
                 <div class="careerfy-typo-wrap categ-title pos-rltv">

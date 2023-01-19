@@ -13,6 +13,7 @@ use App\Models\Settings;
 use App\Models\Speciality;
 use App\Models\Topic;
 use App\Models\User;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -72,7 +73,11 @@ class AppServiceProvider extends ServiceProvider
         $data['main_banners'] = Announcement::where('place', '1')->get();
         $data['top_banners'] = Announcement::where('place', '2')->get();
         $data['bottom_banners'] = Announcement::where('place', '3')->get();
-        $data['video_banners'] = Announcement::where('place', '4')->get();
+        $data['video_banners'] = Announcement::where('place', 'Videos')->get();
+        
+        $post_type = Request::segment(1);
+        $all_posts_type = Request::segment(1);
+        $data['news_banners'] = Announcement::where('place', $post_type)->orWhere('place', trim($all_posts_type, 'all-'))->get();
 
         $data['allusers'] = User::orderBy('created_at', 'DESC')->get();
         $data['allcontacts'] = Contact::orderBy('created_at', 'DESC')->get();

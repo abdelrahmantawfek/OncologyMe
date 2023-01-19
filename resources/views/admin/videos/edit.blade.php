@@ -26,7 +26,7 @@
                 </li>
                 <!--end::Item-->
                 <!--begin::Item-->
-                <li class="breadcrumb-item text-dark">Edit Video</li>
+                <li class="breadcrumb-item text-dark">Edit Post</li>
                 <!--end::Item-->
             </ul>
             <!--end::Breadcrumb-->            

@@ -107,7 +107,7 @@ class PodcastsController extends Controller
       
         $featured_image = $request->validate(['image' => 'mimes:jpg,png|max:5048']);
         $pdf = $request->validate(['pdf' => 'mimes:pdf|max:5048']);
-        $sound = $request->validate(['sound' => 'required|mimes:mp3|max:5048']);
+        $sound = $request->validate(['sound' => 'required|mimes:mp3|max:28000']);
 
         $image = $request->file('image');
 
@@ -296,7 +296,7 @@ class PodcastsController extends Controller
 
         $featured_image = $request->validate(['image' => 'mimes:jpg,png|max:5048']);
         $pdf = $request->validate(['pdf' => 'mimes:pdf|max:5048']);
-        $sound = $request->validate(['sound' => 'mimes:mp3|max:5048']);
+        $sound = $request->validate(['sound' => 'mimes:mp3|max:28000']);
 
         $image = $request->file('image');
 
@@ -376,12 +376,20 @@ class PodcastsController extends Controller
              }
          }
                  
+         elseif(!$request->topic){
+            $post->topics()->detach();
+        }
+                 
         if($request->category){
             $post->categories()->detach();
             foreach ($request->category as $item) {
                  $post->categories()->attach($item);
              }
-         }
+        }
+        elseif(!$request->category){
+            $post->categories()->detach();
+        }
+        
         DB::commit();
 
         Flash::success('Podcast updated successfully.');
