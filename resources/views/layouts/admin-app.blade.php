@@ -89,16 +89,34 @@
 		{{-- <script src="assets/js/custom/utilities/modals/upgrade-plan.js"></script> --}}
 		{{-- <script src="assets/js/custom/utilities/modals/create-app.js"></script> --}}
 		{{-- <script src="assets/js/custom/utilities/modals/users-search.js"></script> --}}
-		<script src="//cdn.ckeditor.com/4.20.1/standard/ckeditor.js"></script>
+		{{-- <script src="//cdn.ckeditor.com/4.20.1/standard/ckeditor.js"></script> --}}
 		<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+		<script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
+
 		<script>
 		$(document).ready(function() {
 			$('.js-example-basic-multiple').select2();
 		});
-			CKEDITOR.replace('content', {
-				filebrowserUploadUrl: "{{route('ckeditor.upload', ['_token' => csrf_token() ])}}",
-				filebrowserUploadMethod: 'form'
-			});
+		// ClassicEditor
+        //     .create( document.querySelector( '#content' ) )
+        //     .then( editor => {
+        //             console.log( editor );
+        //     } )
+        //     .catch( error => {
+        //             console.error( error );
+        //     } );
+
+			ClassicEditor
+            .create( document.querySelector( '#content' ),{
+                ckfinder: {
+                    uploadUrl: '{{route('image.upload').'?_token='.csrf_token()}}',
+        }
+            })
+            .catch( error => {
+                console.error( error );
+            } );
+
+	
 
 		</script>
 

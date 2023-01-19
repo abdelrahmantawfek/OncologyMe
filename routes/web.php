@@ -21,7 +21,7 @@ Route::get('signup', [App\Http\Controllers\RegisterController::class, 'register'
 Route::post('signin', [App\Http\Controllers\RegisterController::class, 'post_signin'])->name('postSignin');
 Route::post('signup', [App\Http\Controllers\RegisterController::class, 'post_signup'])->name('postSignup');
 // Route::resource('ckeditor', App\Http\Controllers\CkeditorController::class);
-Route::post('ckeditor', [App\Http\Controllers\CKEditorController::class, 'upload'])->name('ckeditor.upload');
+Route::post('ckeditor', [App\Http\Controllers\CKEditorController::class, 'storeImage'])->name('image.upload');
 Route::post('export-users', [App\Http\Controllers\CKEditorController::class, 'export'])->name('users.export');
 
 Route::get('activate-account', [App\Http\Controllers\RegisterController::class, 'activate_account'])->name('active.account');

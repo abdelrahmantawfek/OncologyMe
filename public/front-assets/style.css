@@ -5363,7 +5363,9 @@ li:hover .careerfy-read-more,
 #pdf-download {
     margin-top: 25px;
 }
-
+.post-body img{
+    width: 100% !important;
+}
 .articles-section h3,
 .categ-title h3.text-right {
     position: relative;
