@@ -87,12 +87,12 @@
 </head>
 <body>
     <header>
-        <div class=" bg_white text-center" style=" background: #0c4e8c !important; text-align:center">
+        <div class=" bg_white text-center" style="text-align:center">
             <div class="container" style="  margin-right: auto; margin-left: auto; max-width:600px; width:100%">
                 <div class="row" style="">
                     <div class="col-md-12" style="width:100%;">
                         <div class=" p-t-50 p-b-50" style="padding-top:30px; padding-bottom:50px">
-                            <a href="https://oncologyme.com" style="outline:none"><img width="100" src="{{ asset('front-assets/img/logo.png') }}"></a>
+                            <a href="https://oncologyme.com" style="outline:none"><img width="220" src="{{ asset('front-assets/img/logo.png') }}"></a>
                         </div>
 
                     </div>

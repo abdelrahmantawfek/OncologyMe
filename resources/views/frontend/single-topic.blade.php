@@ -22,7 +22,6 @@
                         <div class="col-md-12">
                         @endif
                         
-                            @include('partials._posts_banner')
 
                             <div class="m-t-20"></div>
                             <div class="careerfy-typo-wrap categ-title pos-rltv">
@@ -35,6 +34,8 @@
                                 {!! Form::close() !!}
                                 @endif
                             </div>
+                            @include('partials._posts_banner')
+
                             <div class="row articles-box">
                                 <div class=" @if( !count($data['videos']->where('meta_key', '_featured_image')) )col-md-8 @else col-md-12 @endif col-sm-6">
                                     <div class="articles-only br-nn">

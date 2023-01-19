@@ -220,12 +220,12 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">You must be logged in to enjoy this feature.</h4>
+          <h3 class="modal-title">Member Feature!</h3>
         </div>
         <div class="modal-body post-body">
-          <p>You can login from here<a href="{{route('login')}}" class=""> Sign in</a></p>
-          <p>If you are not previously registered with us, 
-            <br>you can Register Now from here <a href="{{route('register')}}" class=""> Sign Up</a></p>
+            <p>You must be logged in to enjoy this feature.</p>
+            <p>You can login <a href="{{route('login')}}" class=""> From here</a></p>
+            <p>If you are not previously registered with us, you can Register Now  <a href="{{route('register')}}" class="">From here</a></p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-primary pull-left" data-dismiss="modal">Close</button>

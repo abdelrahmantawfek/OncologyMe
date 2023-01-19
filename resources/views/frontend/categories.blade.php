@@ -101,9 +101,7 @@
             @else
             <div class="col-md-12">
             @endif
-            @include('partials._posts_banner')
 
-                <div class="m-t-20"></div>
                 <div class="careerfy-typo-wrap categ-title pos-rltv">
                     <h3><span>{{ ucfirst($data['category']->title) ?? '' }}</span></h3>
                     @if (count($data['other-categories']))
@@ -114,6 +112,9 @@
                     {!! Form::close() !!}
                     @endif
                 </div>
+                <div class="m-t-20"></div>
+                @include('partials._posts_banner')
+
 
                 <div class=" {{ Request::is('podcasts') ? 'articles-section' : '' }} articles-box">
                     <div class="articles-only">

@@ -5401,7 +5401,22 @@ bottom: -2px;
 #note_modal {
     z-index: 999999;
 }
+#note_modal p{
+    color: #1a3965;
+}
 
+#note_modal a{
+    text-decoration: underline;
+    letter-spacing: 0;
+    color: #f06926;
+}
+
+#note_modal .modal-dialog {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) !important;
+}
 .banner-nav .owl-prev{
     left: 0;
     margin-left: 10px;
@@ -5411,7 +5426,7 @@ bottom: -2px;
     margin-right: 10px;
 }
 .banner-nav .owl-nav button {
-    background-color: #fff !important;
+    /* background-color: #fff !important; */
     border-radius: 50%;
     position: absolute;
     top: 50%;

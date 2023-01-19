@@ -7,17 +7,15 @@
 <!-- URL Field -->
 <div class="form-group col-sm-6 fv-row mb-10 fv-plugins-icon-container">
     {!! Form::label('url', 'URL :', ['class' => 'form-label fs-6 fw-bolder text-dark']) !!}
-    @if($announcement->url)
-    {!! Form::text('url', null, ['class' => 'form-control form-control-lg form-control-solid']) !!}
-    @else
-    {!! Form::text('url', 'https://', ['class' => 'form-control form-control-lg form-control-solid']) !!}
-    @endif
+    {!! Form::text('url', null, ['class' => 'form-control form-control-lg form-control-solid', 'placeholder' => 'https://']) !!}
+    <br><small>Link format should be: https://example.com</small>
+
 </div>
 
 <!-- place Field -->
 <div class="form-group col-sm-6 fv-row mb-10 fv-plugins-icon-container">
     {!! Form::label('place', 'Place :', ['class' => 'form-label fs-6 fw-bolder text-dark']) !!}
-    {!! Form::select('place', ['1' => 'Main Banner', '2' => 'Top Sidebar banner', '3' => 'Bottom sidebar banner', 'Topics' => 'topics', 'videos' => 'Videos', 'news' => 'News', 'articles' => 'Articles', 'podcasts' => 'Podcasts'], null, ['class' => 'form-control form-select form-control-lg form-control-solid', 'placeholder' => 'Select Ads place']) !!}
+    {!! Form::select('place', ['1' => 'Home', '2' => 'Top Sidebar', '3' => 'Bottom sidebar', 'Topics' => 'topics', 'videos' => 'Videos', 'news' => 'News', 'articles' => 'Articles', 'podcasts' => 'Podcasts'], null, ['class' => 'form-control form-select form-control-lg form-control-solid', 'placeholder' => 'Select Ads place']) !!}
 </div>
 
 <!-- Desktop Image Field -->
@@ -27,9 +25,7 @@
     <img src="{{ asset('uploads/' . $announcement->desktop_image) }}" alt="image" width="100%" class="my-5"><br>
     @endisset
     {!! Form::file('desktop_image', null, ['class' => 'form-control form-control-lg form-control-solid']) !!}<br>
-    <small class="ma-banner">recommended size for main banners : 730x90 px</small><br>
-    <small class="vd-banner">recommended size for videos banners : 1000x124 px</small><br>
-    <small class="side-banner">recommended size for sidebar banners: 300x192 px</small><br>
+    <small class="ma-banner">recommended size for home banners : 730x90 px, videos banners : 1000x124 px, sidebar banners: 300x192 px, pages banners 730x90 px</small><br>
     <small>Image maximum size: 5MB</small>
 
 </div>

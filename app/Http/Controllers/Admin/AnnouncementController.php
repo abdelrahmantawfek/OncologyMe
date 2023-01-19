@@ -131,8 +131,8 @@ class AnnouncementController extends Controller
             'title' => 'required',
             'url' => 'required|url',
             'place' => 'required',
-            'desktop_image' => 'required|mimes:jpg,png|max:5048',
-            'mob_image' => 'required|mimes:jpg,png|max:5048',
+            'desktop_image' => 'mimes:jpg,png|max:5048',
+            'mob_image' => 'mimes:jpg,png|max:5048',
         ]);
 
         if (empty($announcement)) {
