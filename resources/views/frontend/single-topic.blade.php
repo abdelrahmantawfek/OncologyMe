@@ -70,7 +70,7 @@
                                     <div class="videos-only brdr-bf br-nn">
                                         @foreach ($data['videos'] as $post)
                                         @if (count($post->postmeta->where('meta_key', '_featured_image')) )
-                                        <div class="article-item">
+                                        <div class="article-item @if(!count($data['news'])) col-md-4 @else col-md-12 @endif p-0">
                                             <div class="article-tags">
                                                 <div class="video-thumbnail pos-rltv">
                                                     <a href="{{'/'.$post->post_type.'/'.$post->slug}}">
