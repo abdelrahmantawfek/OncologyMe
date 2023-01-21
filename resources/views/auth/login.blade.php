@@ -22,8 +22,19 @@
                             <h3>Login to your account</h3>
 
                         </div>
-                        <form method="POST" action="{{ route('postSignin') }}">
+                        <div class="cs-msgs">
+                            @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                            @endif
                             @include('flash::message')
+                        </div>
+                        <form method="POST" action="{{ route('postSignin') }}">
                             @csrf
                             <div class="careerfy-box-title careerfy-box-title-sub">
                                 <span>Sign In</span>
@@ -36,22 +47,22 @@
                                         <i class="careerfy-icon careerfy-mail"></i>
                                        
                                     </li>
-                                    @error('email')
+                                    {{-- @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                    @enderror
+                                    @enderror --}}
                                     <li>
                                         <label>Password:</label>
                                         <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Enter Password">
                                         <i class="careerfy-icon careerfy-multimedia"></i>
                                         
                                     </li>
-                                    @error('password')
+                                    {{-- @error('password')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
-                                    @enderror
+                                    @enderror --}}
                                     <li>
                                         <input type="submit" value="Sign In">
                                     </li>

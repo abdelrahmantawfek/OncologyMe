@@ -20,58 +20,70 @@
                         <h3>Create New Account</h3>
 
                     </div>
+                    <div class="cs-msgs form-group">
+                        @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
+                        @include('flash::message')
+                    </div>
+                
 
                     <form method="POST" action="{{ route('postSignup') }}" class="row">
-                        @include('flash::message')
                         @csrf
                         <div class="form-group col-md-6">
-                            <input id="first_name" type="text" class="form-control @error('first_name') is-invalid @enderror" name="first_name" value="{{ old('name') }}" required autocomplete="first_name" placeholder="First Name">
+                            <input id="first_name" type="text" class="form-control @error('first_name') is-invalid @enderror" name="first_name" value="{{ old('first_name') }}" required autocomplete="first_name" placeholder="First Name">
                             <i class="careerfy-icon careerfy-user"></i>
-                            @error('first_name')
+                            {{-- @error('first_name')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
-                            @enderror
+                            @enderror --}}
                         </div>
 
                         <div class="form-group col-md-6">
                             <input id="last_name" type="text" class="form-control @error('last_name') is-invalid @enderror" name="last_name" value="{{ old('last_name') }}" required autocomplete="last_name" placeholder="Last Name">
                             <i class="careerfy-icon careerfy-user"></i>
-                            @error('last_name')
+                            {{-- @error('last_name')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
-                            @enderror
+                            @enderror --}}
                         </div>
 
                         <div class="form-group col-md-6">
                             <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Email"> 
                             <i class="careerfy-icon careerfy-mail"></i>
-                            @error('email')
+                            {{-- @error('email')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
-                            @enderror
+                            @enderror --}}
                         </div>
 
                         <div class="form-group col-md-6">
-                            <input id="phone" type="phone" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="last_name" placeholder="Phone">
+                            <input id="phone" type="phone" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="phone" placeholder="Phone">
                             <i class="careerfy-icon careerfy-technology"></i>
-                            @error('phone')
+                            {{-- @error('phone')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
-                            @enderror
+                            @enderror --}}
                         </div>
 
                         <div class="form-group col-md-6">
-                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Password">
+                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="password" placeholder="Password">
                             <i class="careerfy-icon careerfy-multimedia"></i>
-                            @error('password')
+                            {{-- @error('password')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
-                            @enderror
+                            @enderror --}}
                         </div>
 
                         <div class="form-group col-md-6">
@@ -81,30 +93,30 @@
 
                         <div class="form-group col-md-6">
                             {!! Form::select('country', $countries, null, ['class' => 'form-control', 'placeholder' => 'Country', 'required' => 'required', 'id' => 'country' ]) !!}
-                            @error('country')
+                            {{-- @error('country')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
-                        @enderror
+                        @enderror --}}
                         </div>
 
                         <div class="form-group col-md-6 cs-gov">
                             {!! Form::select('governorate', $governorates, null, ['class' => 'form-control', 'placeholder' => 'Governorate']) !!}
-                            @error('governorate')
+                            {{-- @error('governorate')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
-                        @enderror
+                        @enderror --}}
                         </div>
 
                         <div class="form-group col-md-6 other-gov" style="display: none;">
                             <input name='other_governorate' class="form-control" type="text" placeholder="Governorate">
                             <i class="careerfy-icon careerfy-edit"></i>
-                            @error('other_governorate')
+                            {{-- @error('other_governorate')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
-                        @enderror
+                        @enderror --}}
                         </div>
 
                         <div class="form-group col-md-6">
@@ -119,11 +131,11 @@
                                         </ul>
                                         </li>
                                 </ul>
-                                @error('affiliation')
+                                {{-- @error('affiliation')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
-                            @enderror
+                            @enderror --}}
                             </div>
                         </div>
 
@@ -139,11 +151,11 @@
                                         </ul>
                                         </li>
                                 </ul>
-                                @error('affiliation')
+                                {{-- @error('affiliation')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
-                            @enderror
+                            @enderror --}}
                             </div>
                         </div>
               

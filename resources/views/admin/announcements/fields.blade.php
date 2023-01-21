@@ -8,14 +8,14 @@
 <div class="form-group col-sm-6 fv-row mb-10 fv-plugins-icon-container">
     {!! Form::label('url', 'URL :', ['class' => 'form-label fs-6 fw-bolder text-dark']) !!}
     {!! Form::text('url', null, ['class' => 'form-control form-control-lg form-control-solid', 'placeholder' => 'https://']) !!}
-    <br><small>Link format should be: https://example.com</small>
+    <br><small>Your link it must initially contain to <b style="color: #009ef7">https://</b></small>
 
 </div>
 
 <!-- place Field -->
 <div class="form-group col-sm-6 fv-row mb-10 fv-plugins-icon-container">
     {!! Form::label('place', 'Place :', ['class' => 'form-label fs-6 fw-bolder text-dark']) !!}
-    {!! Form::select('place', ['1' => 'Home', '2' => 'Top Sidebar', '3' => 'Bottom sidebar', 'Topics' => 'topics', 'videos' => 'Videos', 'news' => 'News', 'articles' => 'Articles', 'podcasts' => 'Podcasts'], null, ['class' => 'form-control form-select form-control-lg form-control-solid', 'placeholder' => 'Select Ads place']) !!}
+    {!! Form::select('place', ['1' => 'Home', '2' => 'Top sidebar', '3' => 'Bottom sidebar', 'topics' => 'Topics', 'videos' => 'Videos', 'news' => 'News', 'articles' => 'Articles', 'podcasts' => 'Podcasts'], null, ['class' => 'form-control form-select form-control-lg form-control-solid', 'placeholder' => 'Select Ads place']) !!}
 </div>
 
 <!-- Desktop Image Field -->

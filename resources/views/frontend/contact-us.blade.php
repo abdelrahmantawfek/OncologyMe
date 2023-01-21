@@ -99,7 +99,9 @@
                             </ul>
                             <div class="clearfix"></div>
                         {!! Form::close() !!}
+                        <div class="cs-msgs">
                         @include('flash::message')
+                        </div>
                     </div>
                 </div>
             </div>
