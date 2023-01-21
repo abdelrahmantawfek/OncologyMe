@@ -65,9 +65,9 @@ class PageController extends Controller
         $page = Page::find($id);
 
         if (empty($page)) {
-            Flash::error('Admin not found');
+            Flash::error('Page not found');
 
-            return redirect(route('admin.admins.index'));
+            return redirect(route('admin.pages.index'));
         }
 
         $page->page_title = $request->page_title;
@@ -78,10 +78,20 @@ class PageController extends Controller
 
         foreach ($page->sections as $i => $sec) {
             $section = Section::find($sec->id);
+            if (isset($request->img[$sec->id])) {
+                $item = $request->img[$sec->id];
+                $originalName = $item->getClientOriginalName();
+                $fileName = time() . '_' . $originalName;
+                $item->move('uploads/', $fileName);
+                // $this->attributes['img'] = $fileName;
+                // $section->img = $fileName;
+                // $section->save();
+                $section->img = $fileName;
+            }
             
-            $section->title = $request->title[$i];
-            $section->subtitle = $request->subtitle[$i];
-            $section->content = $request->content[$i];
+            $section->title = $request->title[$sec->id];
+            $section->subtitle = $request->subtitle[$sec->id];
+            $section->content = $request->content[$sec->id];
             $section->save();
         }
         
@@ -93,9 +103,9 @@ class PageController extends Controller
         //         $originalName[$k] = $item->getClientOriginalName();
         //         $fileName = time() . '_' . $originalName[$k];
         //         $item->move('uploads/', $fileName);
-        //         $this->attributes['img[]'] = $fileName;
+        //         // $this->attributes['img'] = $fileName;
         //         $section->img = $fileName;
-        //         $section->save();  
+        //         $section->save();
         //     }
         // }
 

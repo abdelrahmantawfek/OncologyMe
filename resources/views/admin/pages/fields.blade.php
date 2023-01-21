@@ -18,24 +18,24 @@
             <!-- Title Field -->
             <div class="form-group col-sm-12 fv-row mb-10 fv-plugins-icon-container">
                 {!! Form::label('title', 'Title:', ['class' => 'form-label fs-6 fw-bolder text-dark']) !!}
-                {!! Form::text('title[]', $section->title??'', ['class' => 'form-control form-control-lg form-control-solid']) !!}
+                {!! Form::text('title['.$section->id.']', $section->title??'', ['class' => 'form-control form-control-lg form-control-solid']) !!}
             </div>
 
             <!-- Title Field -->
             <div class="form-group col-sm-12 fv-row mb-10 fv-plugins-icon-container">
                 {!! Form::label('subtitle', 'Sub Title:', ['class' => 'form-label fs-6 fw-bolder text-dark']) !!}
-                {!! Form::text('subtitle[]', $section->subtitle??'', ['class' => 'form-control form-control-lg form-control-solid']) !!}
+                {!! Form::text('subtitle['.$section->id.']', $section->subtitle??'', ['class' => 'form-control form-control-lg form-control-solid']) !!}
             </div>
 
             <!-- Content Field -->
             <div class="form-group col-sm-12 fv-row mb-10 fv-plugins-icon-container">
                 {!! Form::label('content', 'Content:', ['class' => 'form-label fs-6 fw-bolder text-dark']) !!}
-                {!! Form::textarea('content[]', $section->content??'', ['class' => 'form-control ckeditor']) !!}
+                {!! Form::textarea('content['.$section->id.']', $section->content??null, ['class' => 'form-control ckeditor']) !!}
             </div>
 
             @isset($section->img)
             <img src="{{ asset('uploads/' . $section->img) }}" alt="image" width="200" class="mb-5">
-            {!! Form::file('img[]', null, ['class' => 'form-control']) !!}
+            {!! Form::file('img['.$section->id.']', null, ['class' => 'form-control']) !!}
             @endisset
 
         </div>

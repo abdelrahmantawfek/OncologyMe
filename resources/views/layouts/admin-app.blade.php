@@ -107,16 +107,14 @@
         //     } );
 
 			ClassicEditor
-            .create( document.querySelector( '#content' ),{
+            .create( document.querySelector( '.ckeditor' ),{
                 ckfinder: {
-                    uploadUrl: '{{route('image.upload').'?_token='.csrf_token()}}',
+                    uploadUrl: "{{route('image.upload').'?_token='.csrf_token()}}",
         }
             })
             .catch( error => {
                 console.error( error );
-            } );
-
-	
+            } );	
 
 		</script>
 
