@@ -5346,6 +5346,9 @@ li:hover .careerfy-read-more,
     position: relative;
 }
 
+.cs-vid-only .brdr-bf.videos-only::before {
+    border-left: 0;
+}
 .brdr-bf.videos-only::before {
     border-left: 1px solid #dcdcdc;
     position: absolute;

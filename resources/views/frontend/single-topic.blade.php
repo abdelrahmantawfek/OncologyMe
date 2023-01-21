@@ -65,7 +65,7 @@
                                     </div>
 
                                 </div>
-                                <div class=" @if(!count($data['news'])) col-md-12 @else col-md-4 @endif col-sm-6">
+                                <div class=" @if(!count($data['news'])) col-md-12 @else col-md-4 @endif col-sm-6 cs-vid-only">
 
                                     <div class="videos-only brdr-bf br-nn">
                                         @foreach ($data['videos'] as $post)
