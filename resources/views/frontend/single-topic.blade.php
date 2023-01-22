@@ -49,9 +49,9 @@
                                             <div class="clearfix"></div>
                                             <h2><a href="{{'/'.$post->post_type.'/'.$post->slug}}">{{ implode(' ', array_slice(explode(' ', $post->title), 0, 30)) }}@if ( str_word_count($post->title) > 30 )...@endif</a></h2>
                                             <h4>
-                                                <span> {{ $post->author ?? ''}} </span>
+                                                {{-- <span> {{ $post->author ?? ''}} </span> --}}
                 
-                                                <text>@if($post->author) &nbsp;/&nbsp; @endif<span> {{ $post->created_at->format('M d, Y') ?? ''}} </span></text>
+                                                {{-- <text>@if($post->author) &nbsp;/&nbsp; @endif<span> {{ $post->created_at->format('M d, Y') ?? ''}} </span></text> --}}
                 
                                             </h4>
                                             <div class="article-img-text">
@@ -89,9 +89,9 @@
                                             <div class="clearfix"></div>
                                             <h2><a href="{{'/'.$post->post_type.'/'.$post->slug}}">{{ implode(' ', array_slice(explode(' ', $post->title), 0, 10)) }}@if ( str_word_count($post->title) > 10 )...@endif</a></h2>
                                             <h4>
-                                                <span> {{ $post->author ?? ''}} </span>
+                                                {{-- <span> {{ $post->author ?? ''}} </span> --}}
                 
-                                                <text>@if($post->author) &nbsp;/&nbsp; @endif<span> {{ $post->created_at->format('M d, Y') ?? ''}} </span></text>
+                                                {{-- <text>@if($post->author) &nbsp;/&nbsp; @endif<span> {{ $post->created_at->format('M d, Y') ?? ''}} </span></text> --}}
                 
                                             </h4>
                                         </div>

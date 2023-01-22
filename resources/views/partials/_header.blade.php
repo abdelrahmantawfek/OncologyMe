@@ -14,41 +14,43 @@
                 </div>
                 <div class="collapse navbar-collapse" id="careerfy-navbar-collapse-1">
                     <ul class="navbar-nav">
-                        <li class="pos-unset"><a href="/">{{$home_title->page_title ?? ''}}</a></li>
-                        <li><a href="javascript:void(0)">About Us <i class="fa fa-angle-down"></i></a>
+                        <li class="{{ Request::is('/') ? 'active' : '' }}"><a href="/">{{$home_title->page_title ?? ''}}</a></li>
+                        <li class="{{ Request::is('about-oncology-me') ? 'active' : '' }} {{ Request::is('editorial') ? 'active' : '' }} {{ Request::is('rights') ? 'active' : '' }} {{ Request::is('contact-us') ? 'active' : '' }}"><a href="javascript:void(0)">About Us <i class="fa fa-angle-down"></i></a>
                             <ul class="sub-menu cs-sub-menu">
-                                <li><a href="{{ route('about') }}">{{$about_title->page_title ?? ''}}</a></li>
-                                <li><a href="{{ route('editorial') }}">{{$editorial_title->page_title ?? ''}}</a></li>
-                                <li><a href="{{ route('rights') }}">{{$rights_title->page_title ?? ''}}</a></li>
-                                <li><a href="{{ route('contact') }}">{{$contact_title->page_title ?? ''}}</a></li>
+                                <li><a href="{{ route('about') }}" class="{{ Request::is('about-oncology-me') ? 'active' : '' }}">{{$about_title->page_title ?? ''}}</a></li>
+                                <li><a href="{{ route('editorial') }}" class="{{ Request::is('editorial') ? 'active' : '' }}">{{$editorial_title->page_title ?? ''}}</a></li>
+                                <li><a href="{{ route('rights') }}" class="{{ Request::is('rights') ? 'active' : '' }}">{{$rights_title->page_title ?? ''}}</a></li>
+                                <li><a href="{{ route('contact') }}" class="{{ Request::is('contact-us') ? 'active' : '' }}">{{$contact_title->page_title ?? ''}}</a></li>
                             </ul>
                         </li>
                         @if (count($topics))
-                        <li><a href="javascript:void(0)">{{$topics_title->page_title ?? ''}} <i class="fa fa-angle-down"></i></a>
+                        <li class="{{ Request::is('topics') ? 'active' : '' }} {{ Request::is('topics/*') ? 'active' : '' }} "><a href="javascript:void(0)">{{$topics_title->page_title ?? ''}} <i class="fa fa-angle-down"></i></a>
                             <ul class="sub-menu cs-sub-menu">
                                 @foreach ($topics as $topic)
-                                <li><a href="{{ route('showTopic', $topic->slug ?? '') }}">{{$topic->title ?? ''}}</a></li>
+                                <li><a href="{{ route('showTopic', $topic->slug ?? '') }}" class="{{ Request::is('topics/' .$topic->slug) ? 'active' : '' }}">{{$topic->title ?? ''}}</a></li>
                                 @endforeach
-                                <li><a href="{{ route('allTopics') }}">View All</a></li>
+                                <li><a href="{{ route('allTopics') }}" class="{{ Request::is('topics') ? 'active' : '' }}">View All</a></li>
                             </ul>
                         </li>
+                        
                         @elseif (count($allst_topics))
-                        <li class="pos-unset"><a href="{{ route('allTopics') }}">{{$topics_title->page_title ?? ''}}</a></li>
+                        <li class="pos-unset {{ Request::is('topics') ? 'active' : '' }} {{ Request::is('topics/*') ? 'active' : '' }}"><a href="{{ route('allTopics') }}">{{$topics_title->page_title ?? ''}}</a></li>
                         @endif
                         @if (count($news_categories))
-                        <li class="pos-unset"><a href="javascript:void(0)">{{$news_title->page_title ?? ''}} <i class="fa fa-angle-down"></i></a>
+                        <li class="pos-unset {{ Request::is('all-news') ? 'active' : '' }} {{ Request::is('news/*') ? 'active' : '' }} ">
+                            <a href="javascript:void(0)">{{$news_title->page_title ?? ''}} <i class="fa fa-angle-down"></i></a>
                             <ul class="sub-menu cs-sub-menu">
                                 @foreach ($news_categories as $category)
-                                <li><a href="{{ route('showCategory', [$category->post_type, $category->slug]) }}">{{$category->title ?? ''}}</a></li>
+                                <li><a href="{{ route('showCategory', [$category->post_type, $category->slug]) }}" class="{{ Request::is('news/categories/' .$category->slug) ? 'active' : '' }}">{{$category->title ?? ''}}</a></li>
                                 @endforeach
-                                <li><a href="/all-news">View All</a></li>
+                                <li><a href="/all-news" class="{{ Request::is('all-news') ? 'active' : '' }}">View All</a></li>
                             </ul>
                         </li>
                         @elseif (count($allst_news))
-                        <li class="pos-unset"><a href="/all-news">{{$news_title->page_title ?? ''}}</a></li>
+                        <li class="pos-unset {{ Request::is('all-news') ? 'active' : '' }}"><a href="/all-news">{{$news_title->page_title ?? ''}}</a></li>
                         @endif
                         @if (count($videos_categories))
-                        <li class="pos-unset"><a href="javascript:void(0)">{{$watch_title->page_title ?? ''}} <i class="fa fa-angle-down"></i></a>
+                        <li class="pos-unset {{ Request::is('all-videos') ? 'active' : '' }} {{ Request::is('videos/*') ? 'active' : '' }}"><a href="javascript:void(0)">{{$watch_title->page_title ?? ''}} <i class="fa fa-angle-down"></i></a>
                             <ul class="sub-menu dsply-dsk">
                                 <div class="owl-carousel vid-carousel cs-nav carousel slide">
                                     @foreach ($videos_categories as $category)
@@ -74,10 +76,10 @@
                             </ul>
                         </li>
                         @elseif (count($allst_videos))
-                        <li class="pos-unset"><a href="/all-videos">{{$watch_title->page_title ?? ''}}</a></li>
+                        <li class="pos-unset {{ Request::is('all-videos') ? 'active' : '' }}"><a href="/all-videos">{{$watch_title->page_title ?? ''}}</a></li>
                         @endif
                         @if (count($articles_categories))
-                        <li class="pos-unset"><a href="javascript:void(0)">{{$articles_title->page_title ?? ''}} <i class="fa fa-angle-down"></i></a>
+                        <li class="pos-unset {{ Request::is('all-articles') ? 'active' : '' }} {{ Request::is('articles/*') ? 'active' : '' }}"><a href="javascript:void(0)">{{$articles_title->page_title ?? ''}} <i class="fa fa-angle-down"></i></a>
                             <ul class="sub-menu dsply-dsk">
                                 <div class="owl-carousel art-carousel cs-nav carousel slide">
                                     @foreach ($articles_categories as $category)
@@ -104,10 +106,10 @@
                             </ul>
                         </li>
                         @elseif (count($allst_articles))
-                        <li class="pos-unset"><a href="/all-articles">{{$articles_title->page_title ?? ''}}</a></li>
+                        <li class="pos-unset {{ Request::is('all-articles') ? 'active' : '' }}"><a href="/all-articles">{{$articles_title->page_title ?? ''}}</a></li>
                         @endif
                         @if (count($allst_podcasts))
-                        <li class="pos-unset"><a href="/all-podcasts">{{$podcasts_title->page_title ?? ''}}</a></li>
+                        <li class="pos-unset {{ Request::is('all-podcasts') ? 'active' : '' }}"><a href="/all-podcasts">{{$podcasts_title->page_title ?? ''}}</a></li>
                         @endif
 
                     </ul>

@@ -168,59 +168,69 @@
                     @endif
                 </div>
 
-                <div class=" {{ Request::is('podcasts') ? 'articles-section' : '' }} articles-box">
+                @if (Request::is('all-podcasts')) <div class="articles-section cs-all-podcasts"> @endif
+                <div class="articles-box">
+
                     <div class="articles-only">
+                    
                     @foreach ($data['posts'] as $post)
-                        <div class="article-item">
-                            @if (Request::is('podcasts'))
-                            <div class="article-img-text combined-txt-img">
-                                <div class="new-post-sec">
 
-                                    <div class="clearfix"></div>
-                                    <div class="article-tags">
-                                        @foreach ($post->topics as $topic)
-                                        <span><a href="{{ route('showTopic', $topic->slug ?? '') }}">{{$topic->title ?? ''}}</a></span>
-                                        @endforeach
-                                    </div>
-                                    <h2><a href="{{'/'.$post->post_type.'/'.$post->slug}}">{{ $post->title ?? ''}}</a></h2>
+                    @if (Request::is('all-podcasts'))
+                    <div class="article-item">
 
-                                    <div class="article-img-text">
-                                        @foreach ($post->postmeta->where('meta_key', '_featured_image') as $key => $value)
-                                        <img src="{{ asset('uploads/'.$value->meta_value )}}" alt="{{$value->meta_value}}">
-                                        @endforeach
-                                        <p>{{ implode(' ', array_slice(explode(' ', $post->excerpt), 0, 20)) }}@if ( str_word_count($post->excerpt) > 20 )...@endif</p>
-                                    </div>
-                                    <div class="podcast-link">
-                                        <a href="{{ '/'.$post->post_type.'/'.$post->slug}}">Listen now <i class="fa fa-headphones"></i></a>
-                                    </div>
-                                    
+                        <div class="article-img-text combined-txt-img">
+
+                            @foreach ($post->postmeta->where('meta_key', '_featured_image') as $key => $value)
+                            <img src="{{ asset('uploads/'.$value->meta_value )}}" alt="{{$value->meta_value}}">
+                            @endforeach
+                            <div class="new-post-sec">
+
+                                <div class="clearfix"></div>
+                                <div class="article-tags">
+                                    @foreach ($post->topics as $topic)
+                                    <span><a href="{{ route('showTopic', $topic->slug ?? '') }}">{{$topic->title ?? ''}}</a></span>
+                                    @endforeach
+                                </div>
+                                <h2><a href="{{'/'.$post->post_type.'/'.$post->slug}}">{{ $post->title ?? ''}}</a></h2>
+
+                                <p>{{ implode(' ', array_slice(explode(' ', $post->excerpt), 0, 20)) }}@if ( str_word_count($post->excerpt) > 20 )...@endif</p>
+                                <div class="podcast-link">
+                                    <a href="{{ '/'.$post->post_type.'/'.$post->slug}}">Listen now <i class="fa fa-headphones"></i></a>
+
                                 </div>
                             </div>
-                            @else
-                            <div class="article-tags">
-                                @foreach ($post->topics as $topic)
-                                <span><a href="{{ route('showTopic', $topic->slug ?? '') }}">{{$topic->title ?? ''}}</a></span>
-                                @endforeach
-                            </div>
-                            <div class="clearfix"></div>
-                            <h2><a href="{{'/'.$post->post_type.'/'.$post->slug}}">{{ $post->title ?? ''}}</a></h2>
-                            <h4>
-                                <span> {{ $post->author ?? ''}} </span>
-
-                                <text>@if($post->author) &nbsp;/&nbsp; @endif<span> {{ $post->created_at->format('M d, Y') ?? ''}} </span></text>
-
-                            </h4>
-                            <div class="article-img-text">
-                                @foreach ($post->postmeta->where('meta_key', '_featured_image') as $key => $value)
-                                <img src="{{ asset('uploads/'.$value->meta_value )}}" alt="{{$value->meta_value}}">
-                                @endforeach
-                                <p>{{ implode(' ', array_slice(explode(' ', $post->excerpt), 0, 20)) }}@if ( str_word_count($post->excerpt) > 20 )...@endif</p>
-                            </div>
-                            @endif
                         </div>
+                    </div>
+
+                    @else
+                    <div class="article-item">
+                        <div class="article-tags">
+                            @foreach ($post->topics as $topic)
+                            <span><a href="{{ route('showTopic', $topic->slug ?? '') }}">{{$topic->title ?? ''}}</a></span>
+                            @endforeach
+                        </div>
+                        <div class="clearfix"></div>
+                        <h2><a href="{{'/'.$post->post_type.'/'.$post->slug}}">{{ $post->title ?? ''}}</a></h2>
+                        <h4>
+                            <span> {{ $post->author ?? ''}} </span>
+
+                            <text>@if($post->author) &nbsp;/&nbsp; @endif<span> {{ $post->created_at->format('M d, Y') ?? ''}} </span></text>
+
+                        </h4>
+                        <div class="article-img-text">
+                            {{-- @foreach ($post->postmeta->where('meta_key', '_featured_image') as $key => $value)
+                            <img src="{{ asset('uploads/'.$value->meta_value )}}" alt="{{$value->meta_value}}">
+                            @endforeach --}}
+                            <p>{{ implode(' ', array_slice(explode(' ', $post->excerpt), 0, 20)) }}@if ( str_word_count($post->excerpt) > 20 )...@endif</p>
+                        </div>
+                    </div>
+                    @endif
                     @endforeach
+
+
+                    </div>
                 </div>
-                </div>
+                @if (Request::is('all-podcasts')) </div> @endif
 
             </div>
 

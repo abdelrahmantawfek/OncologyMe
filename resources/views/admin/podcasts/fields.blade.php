@@ -143,7 +143,7 @@
                 @endif
                 @endisset
                 {!! Form::file('image', null, ['class' => 'form-control']) !!}
-                <small>Image size: 1280x720px</small><br>
+                <small>Image size: 1280x1280px</small><br>
                 <small>Image maximum size: 25MB</small>
             </div>
 

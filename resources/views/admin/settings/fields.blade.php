@@ -43,7 +43,7 @@
 <!-- FB Field -->
 <div class="form-group col-sm-12 fv-row mb-10 fv-plugins-icon-container">
     {!! Form::label('feedback', 'Facebook URL :', ['class' => 'form-label fs-6 fw-bolder text-dark']) !!}
-    {!! Form::text('feedback', $general_info[0]->feedback, ['class' => 'form-control form-control-lg form-control-solid']) !!}
+    {!! Form::text('fb', $general_info[0]->fb, ['class' => 'form-control form-control-lg form-control-solid']) !!}
 </div>
 
 <!-- Youtube Field -->

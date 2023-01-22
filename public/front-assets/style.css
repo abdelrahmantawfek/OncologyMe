@@ -461,7 +461,7 @@ ul.navbar-nav {
     list-style: none;
 }
 
-.navbar-nav li.active a {
+.navbar-nav li.active > a, ul.sub-menu.cs-sub-menu li .active {
     color: #f06926;
 }
 
@@ -3597,6 +3597,10 @@ left: 50%;*/
 .articles-section .articles-box .articles-only .article-item:nth-child(odd){
     margin-right: 30px;
 }
+.articles-section.cs-all-podcasts .articles-box .articles-only .article-item{
+    margin-right: 0;
+    max-width: 100%;
+}
 
 .articles-section h3,
 .categ-title h3 {
@@ -5449,6 +5453,11 @@ bottom: -2px;
 .banner-nav:hover .owl-nav button{
     opacity: 1;
 }
+.careerfy-contact-form .cs-msgs {
+    padding: 10px 0 25px;
+    max-width: 100%;
+}
+
 .cs-msgs{
     padding: 30px 20px 0;
     max-width: 610px;

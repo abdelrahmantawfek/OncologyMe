@@ -162,9 +162,9 @@
 
                             </h4>
                             <div class="article-img-text">
-                                @foreach ($post->postmeta->where('meta_key', '_featured_image') as $key => $value)
+                                {{-- @foreach ($post->postmeta->where('meta_key', '_featured_image') as $key => $value)
                                 <img src="{{ asset('uploads/'.$value->meta_value )}}" alt="{{$value->meta_value}}">
-                                @endforeach
+                                @endforeach --}}
                                 <p>{{ implode(' ', array_slice(explode(' ', $post->excerpt), 0, 20)) }}@if ( str_word_count($post->excerpt) > 20 )...@endif</p>
                             </div>
                             @endif
