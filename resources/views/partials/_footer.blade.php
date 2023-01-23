@@ -5,11 +5,8 @@
             <aside class="widget col-md-4 widget_contact_info">
                 <div class="widget_contact_wrap">
                     <a class="careerfy-footer-logo" href="/"><img src="{{ asset('front-assets/img/logo.png') }}" alt=""></a>
-                    <p>“Oncology Medical Education” is an oncology-specific healthcare education platform that creates a wide spectrum of virtual scientific activities through a user-friendly approach that is culturally adapted to the Middle-East
-                        Arab practice.
-                    </p>
-                    <p>
-                        For healthcare professionals only.</p>
+                    <p>{{$general_info[0]->about}}</p>
+                    <p>{{$general_info[0]->short_description}}</p>
 
                 </div>
             </aside>

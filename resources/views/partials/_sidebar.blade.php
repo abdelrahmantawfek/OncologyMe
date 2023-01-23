@@ -1,5 +1,5 @@
 @if (count($highlights) || count($latest_news) || count($top_banners) || count($bottom_banners))
-<div class="col-md-4 tblt-nn">
+<div class="col-md-4 col-sm-4">
     <div class="banr-box">
     <div class="owl-carousel top-banner banner-nav">
         @foreach ($top_banners as $item)

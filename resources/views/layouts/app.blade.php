@@ -88,10 +88,12 @@
                 if ($(this).val() == 'Egypt') {
                     $('.other-gov').css('display', 'none');
                     $('.cs-gov').css('display', 'block');
+                    $('input[name=other_governorate]').val('');
                     $("select[name=governorate]").prop('required',true);
                     $(".other-gov input[type=text][name=other_governorate]").prop('required',false);
                 } else {
                     $('.other-gov').css('display', 'block');
+                    $('select[name=governorate]').val('');
                     $('.cs-gov').css('display', 'none');
                     $(".other-gov input[type=text][name=other_governorate]").prop('required',true);
                     $("select[name=governorate]").prop('required',false);
@@ -99,6 +101,18 @@
 
                 }
             });
+
+            if($("#country").val() == 'Egypt'){
+                $('.cs-gov').css('display', 'block');
+                $('.other-gov').css('display', 'none');
+                $(".other-gov input[type=text][name=other_governorate]").prop('required',false);
+                $("select[name=governorate]").prop('required',true);
+            }else{
+                $('.other-gov').css('display', 'block');
+                $('.cs-gov').css('display', 'none');
+                $(".other-gov input[type=text][name=other_governorate]").prop('required',true);
+                $("select[name=governorate]").prop('required',false);
+            }
 
 
             $('#affiliation').select2();

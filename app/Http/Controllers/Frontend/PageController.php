@@ -28,10 +28,10 @@ class PageController extends Controller
         // return view('frontend.page', compact('page'));
     }
 
-    public function coming_soon()
-    {
-        return view('coming-soon');
-    }
+    // public function coming_soon()
+    // {
+    //     return view('coming-soon');
+    // }
 
     public function home()
     {

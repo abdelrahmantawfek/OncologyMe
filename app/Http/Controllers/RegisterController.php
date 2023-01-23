@@ -67,6 +67,7 @@ class RegisterController extends Controller
         if (Auth::attempt($credentials)) {
             if($user->status == 1){
                 return redirect(route('home'));
+                // return redirect(route('user.profile'));
             }
             else{
                 Flash::error('You have to activate your account through message sent to your email');

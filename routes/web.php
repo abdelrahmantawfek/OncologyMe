@@ -73,12 +73,28 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function(){
 
 });
 
+// profile 
+Route::group(['middleware' => ['auth:web', 'user']], function () {
+
+    Route::group(['prefix' => 'profile', 'as' => 'user.'], function () {
+
+        Route::controller(App\Http\Controllers\ProfileController::class)->group(
+            function () {
+                Route::get('/', 'profile')->name('profile');
+                Route::post('/', 'updateProfile')->name('update');
+            }
+        );
+    });
+
+});
+
+
 // frondend routes
 
 Route::controller(App\Http\Controllers\Frontend\PageController::class)->group(
     function () {
         Route::get('/',  'home')->name('home');
-        Route::get('/home',  'home')->name('home');
+        // Route::get('/home',  'home')->name('home');
         Route::get('/about-oncology-me', 'about')->name('about');
         Route::get('/contact-us', 'contact')->name('contact');
         Route::post('/contact-us', 'store_contacts_data')->name('contact.data');

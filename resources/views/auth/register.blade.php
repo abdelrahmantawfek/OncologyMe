@@ -109,7 +109,7 @@
                         @enderror --}}
                         </div>
 
-                        <div class="form-group col-md-6 other-gov" style="display: none;">
+                        <div class="form-group col-md-6 other-gov">
                             <input name='other_governorate' class="form-control" type="text" placeholder="Governorate">
                             <i class="careerfy-icon careerfy-edit"></i>
                             {{-- @error('other_governorate')

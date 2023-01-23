@@ -121,6 +121,7 @@
                 @if (Route::has('login'))
                 <ul class="careerfy-user-section cs-acc-menu dsply-dsk">
                     @auth
+                    <li class="btn1"><a class="careerfy-color careerfy-open-signin-tab" href="{{route('user.profile')}}"><i class="fa fa-user"></i></a></li>
                     <li class="logout-btn"><a class="careerfy-color careerfy-open-signin-tab" href="{{route('logout')}}" onclick="event.preventDefault();
                         document.getElementById('logout-form').submit();">Log out</a></li>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -135,6 +136,7 @@
                 </ul>
                 <ul class="careerfy-user-section cs-acc-menu dsply-mob">
                     @auth
+                    <li class="btn1"><a class="careerfy-color careerfy-open-signin-tab" href="{{route('user.profile')}}"><i class="fa fa-user"></i></a></li>
                     <li class="logout-btn"><a class="careerfy-color careerfy-open-signin-tab" href="{{route('logout')}}" onclick="event.preventDefault();
                         document.getElementById('logout-form').submit();"><i class="fa fa-sign-out"></i></a></li>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
