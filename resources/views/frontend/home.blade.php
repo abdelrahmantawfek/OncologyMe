@@ -131,7 +131,7 @@
                     <div class="col-md-4 col-sm-4 col-xs-12 articles-only">
                         <div class="article-item-main">
                             @foreach ($data['main_study_articles'][0]->postmeta->where('meta_key', '_featured_image') as $key => $value)
-                            <a href="{{ route('showTopic', $topic->slug ?? '') }}"><img src="{{ asset('uploads/'.$value->meta_value )}}" alt="{{$value->meta_value}}"></a>
+                            <a href="{{ $data['main_study_articles'][0]->post_type.'/'.$data['main_study_articles'][0]->slug}}"><img src="{{ asset('uploads/'.$value->meta_value )}}" alt="{{$value->meta_value}}"></a>
                             @endforeach
                             @if (!count($data['main_study_articles'][0]->postmeta->where('meta_key', '_featured_image')) )
                             <a href="{{$data['main_study_articles'][0]->post_type.'/'.$data['main_study_articles'][0]->slug}}"><img src="{{ asset('uploads/d-post.jpeg')}}" alt="oncologyme"></a>
@@ -195,7 +195,7 @@
                     <div class="col-md-4 col-sm-4 col-xs-12 articles-only">
                         <div class="article-item-main">
                             @foreach ($data['main_podcast'][0]->postmeta->where('meta_key', '_featured_image') as $key => $value)
-                            <a href="{{ route('showTopic', $topic->slug ?? '') }}"><img src="{{ asset('uploads/'.$value->meta_value )}}" alt="{{$value->meta_value}}"></a>
+                            <a href="{{ $data['main_podcast'][0]->post_type.'/'.$data['main_podcast'][0]->slug }}"><img src="{{ asset('uploads/'.$value->meta_value )}}" alt="{{$value->meta_value}}"></a>
                             @endforeach
                             @if (!count($data['main_podcast'][0]->postmeta->where('meta_key', '_featured_image')) )
                             <a href="{{$data['main_podcast'][0]->post_type.'/'.$data['main_podcast'][0]->slug}}"><img src="{{ asset('uploads/d-post.jpeg')}}" alt="oncologyme"></a>
@@ -238,7 +238,9 @@
                                 @endif
 
                                 <p class="wth-img">{{implode(' ', array_slice(explode(' ', $post->excerpt ?? ''), 0, 10)) }}@if ( str_word_count($post->excerpt ?? '') > 10 )...@endif</p>
-                                
+                                <div class="podcast-link">
+                                    <a href="{{$data['main_podcast'][0]->post_type.'/'.$data['main_podcast'][0]->slug}}">Listen now <i class="fa fa-headphones"></i></a>
+                                </div>
                             </div>
                         </div>
                         
