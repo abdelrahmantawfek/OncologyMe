@@ -57,7 +57,7 @@
                                     @if (!count($post->postmeta->where('meta_key', '_featured_image')) )
                                     <img src="{{ asset('uploads/d-post.jpeg')}}" alt="oncologyme">
                                     @endif
-                                    <p>{{ implode(' ', array_slice(explode(' ', $post->excerpt), 0, 20)) }}@if ( str_word_count($post->excerpt) > 20 )...@endif</p>
+                                    <p class="wth-img">{{ implode(' ', array_slice(explode(' ', $post->excerpt), 0, 20)) }}@if ( str_word_count($post->excerpt) > 20 )...@endif</p>
                                 </div>
                             </div>    
                             @endforeach
@@ -167,7 +167,7 @@
                                 @if (!count($post->postmeta->where('meta_key', '_featured_image')) )
                                     <a href="{{$post->post_type.'/'.$data['main_study_articles'][0]->slug}}"><img src="{{ asset('uploads/d-post.jpeg')}}" alt="oncologyme"></a>
                                 @endif
-                                <p>{{implode(' ', array_slice(explode(' ', $post->excerpt ?? ''), 0, 10)) }}@if ( str_word_count($post->excerpt ?? '') > 10 )...@endif</p>
+                                <p class="wth-img">{{implode(' ', array_slice(explode(' ', $post->excerpt ?? ''), 0, 10)) }}@if ( str_word_count($post->excerpt ?? '') > 10 )...@endif</p>
                                 
                             </div>
                         </div>
@@ -237,7 +237,7 @@
                                     <a href="{{$post->post_type.'/'.$post->slug}}"><img src="{{ asset('uploads/d-post.jpeg')}}" alt="oncologyme"></a>
                                 @endif
 
-                                <p>{{implode(' ', array_slice(explode(' ', $post->excerpt ?? ''), 0, 10)) }}@if ( str_word_count($post->excerpt ?? '') > 10 )...@endif</p>
+                                <p class="wth-img">{{implode(' ', array_slice(explode(' ', $post->excerpt ?? ''), 0, 10)) }}@if ( str_word_count($post->excerpt ?? '') > 10 )...@endif</p>
                                 
                             </div>
                         </div>

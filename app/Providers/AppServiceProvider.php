@@ -13,6 +13,8 @@ use App\Models\Settings;
 use App\Models\Speciality;
 use App\Models\Topic;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -36,6 +38,29 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+
+        // view()->composer('*', function()
+        // {
+
+
+            Blade::if('admin', function () {
+                    
+                if (Auth::check()) {
+                    $user =  Auth::user();       
+                    $admin = Admin::where('email', $user->email)->get();
+                    // dd($admin);
+                    if(count($admin)){
+                        return true;
+                    }
+                }
+                
+            });
+
+            
+        // });
+
+
+
 
         $data['home_title'] = Page::find(1);
         $data['about_title'] = Page::find(2);

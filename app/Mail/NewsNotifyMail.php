@@ -35,7 +35,7 @@ class NewsNotifyMail extends Mailable
     public function envelope()
     {
         return new Envelope(
-            from: new Address('news@oncologyme.com', 'Test Sender'),
+            // from: new Address('news@oncologyme.com', 'Test Sender'),
             subject: 'Latest News',
         );
     }

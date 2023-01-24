@@ -40,16 +40,16 @@
 			<!--begin::Page-->
 			<div class="page d-flex flex-row flex-column-fluid">
 				<!--begin::Aside-->
-				@if (Auth::user('admin'))
+				@admin
 				@include('partials._admin-sidebar')
-				@endif
+				@endadmin
 				<!--end::Aside-->
 				<!--begin::Wrapper-->
 				<div class="wrapper d-flex flex-column flex-row-fluid @if (Request::is('admin/login')) justify-content-center @elseif (Request::is('login')) justify-content-center @endif" id="kt_wrapper">
 					<!--begin::Header-->
-					@if (Auth::user('admin'))
+					@admin
 					@include('partials._admin-header')
-					@endif
+					@endadmin
 					<!--end::Header-->
 					<!--begin::Content-->
 					<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
@@ -59,9 +59,9 @@
 					</div>
 					<!--end::Content-->
 					<!--begin::Footer-->
-					@if (Auth::user('admin'))
+					@admin
 					@include('partials._admin-footer')
-					@endif
+					@endadmin
 					<!--end::Footer-->
 				</div>
 				<!--end::Wrapper-->

@@ -34,7 +34,7 @@ class NotifyMail extends Mailable
     public function envelope()
     {
         return new Envelope(
-            from: new Address('support@oncologyme.com', 'Test Sender'),
+            // from: new Address('support@oncologyme.com', 'Test Sender'),
             subject: 'Welcome to Oncology Me Website',
         );
     }
