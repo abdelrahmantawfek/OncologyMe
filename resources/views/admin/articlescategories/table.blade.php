@@ -20,6 +20,7 @@
     <!--begin::Table body-->
     <tbody class="text-gray-600 fw-bold">
         @foreach ($data['categories'] as $category)
+        @if($category->id != 1 )
         <!--begin::Table row-->
         <tr>
             <!--begin::Checkbox-->
@@ -130,6 +131,7 @@
             <!--end::Modal dialog-->
         </div>
         <!--end::Modal - New Card-->
+        @endif
         @endforeach
     </tbody>
     <!--end::Table body-->
