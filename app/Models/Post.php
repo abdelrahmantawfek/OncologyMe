@@ -16,6 +16,8 @@ class Post extends Model
         'excerpt',
         'content',
         'author',
+        'meta_title',
+        'meta_desc',
     ];
 
        /**

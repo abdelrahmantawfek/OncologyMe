@@ -22,6 +22,8 @@ return new class extends Migration
             $table->string('author')->nullable();
             $table->string('post_type')->nullable();
             $table->boolean('highlights')->default(0);
+            $table->text('meta_title')->nullable();
+            $table->text('meta_desc')->nullable();
             $table->timestamps();
         });
     }

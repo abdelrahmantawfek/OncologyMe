@@ -3606,6 +3606,7 @@ left: 50%;*/
     border: 1px solid #eee;
     background-color: #fff;
     max-width: 350px;
+    min-height: 235px;
 }
 
 .articles-section .articles-box .articles-only .article-item:nth-child(odd){

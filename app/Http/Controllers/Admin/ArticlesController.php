@@ -64,6 +64,8 @@ class ArticlesController extends Controller
             'content' => $request->content,
             'excerpt' => $request->excerpt,
             'author' => $request->author,
+            'meta_title' => $request->meta_title,
+            'meta_desc' => $request->meta_desc,
         ]);
 
         $old_slug = Post::where('slug', strtolower(preg_replace('/[^A-Za-z0-9\-]/', '-', $request->title)))->exists();
@@ -128,7 +130,6 @@ class ArticlesController extends Controller
             $originalName = $image->getClientOriginalName();
             $fileName = time() . '_' . $originalName;
             $image->move('uploads/', $fileName);
-            $this->attributes['image'] = $fileName;
 
             $post_meta = Postmeta::create([
                 'post_id' => $post->id,
@@ -145,7 +146,6 @@ class ArticlesController extends Controller
             $originalName = $file->getClientOriginalName();
             $fileName = time() . '_' . $originalName;
             $file->move('uploads/', $fileName);
-            $this->attributes['pdf'] = $fileName;
 
             $post_meta = Postmeta::create([
                 'post_id' => $post->id,
@@ -253,6 +253,8 @@ class ArticlesController extends Controller
         $post->content = $request->content;
         $post->excerpt = $request->excerpt;
         $post->author = $request->author;
+        $post->meta_title = $request->meta_title;
+        $post->meta_desc = $request->meta_desc;
         $slug = $request->slug;
         $old_slug = Post::where('slug', strtolower(preg_replace('/[^A-Za-z0-9\-]/', '-', $request->title)))->exists();
         if(is_null($slug)){
@@ -300,7 +302,6 @@ class ArticlesController extends Controller
             $originalName = $image->getClientOriginalName();
             $fileName = time() . '_' . $originalName;
             $image->move('uploads/', $fileName);
-            $this->attributes['image'] = $fileName;
 
             $old_meta = Postmeta::where('post_id', $post->id)->where('meta_key', '_featured_image')->first();
 
@@ -325,7 +326,6 @@ class ArticlesController extends Controller
             $originalName = $file->getClientOriginalName();
             $fileName = time() . '_' . $originalName;
             $file->move('uploads/', $fileName);
-            $this->attributes['pdf'] = $fileName;
 
             $old_meta = Postmeta::where('post_id', $post->id)->where('meta_key', '_pdf')->first();
 
