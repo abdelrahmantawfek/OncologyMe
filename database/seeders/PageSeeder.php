@@ -64,7 +64,7 @@ class PageSeeder extends Seeder
         );
 
         $categories = array(
-            array('id' => '1', 'title' => 'study presentations', 'slug' => 'study-presentations', 'is_main' => false, 'featured_image' => null, 'post_type' => 'articles', 'meta_title' => null, 'meta_desc' => null, 'created_at' => '2022-08-19 04:07:05', 'updated_at' => '2022-08-19 05:32:27'),
+            array('id' => '1', 'title' => 'Study Presentations', 'slug' => 'study-presentations', 'is_main' => false, 'featured_image' => null, 'post_type' => 'articles', 'meta_title' => null, 'meta_desc' => null, 'created_at' => '2022-08-19 04:07:05', 'updated_at' => '2022-08-19 05:32:27'),
 
             );
     
