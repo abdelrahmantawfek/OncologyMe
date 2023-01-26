@@ -144,7 +144,8 @@
                             <div class="clearfix"></div>
                             <h2><a href="{{$data['main_study_articles'][0]->post_type.'/'.$data['main_study_articles'][0]->slug}}">{{ implode(' ', array_slice(explode(' ', $data['main_study_articles'][0]->title ?? ''), 0, 10)) }}@if ( str_word_count($data['main_podcast'][0]->title ?? '') > 10 )...@endif</a></h2>
                             <div class="article-img-text">
-                                <p>{{$data['main_study_articles'][0]->excerpt}}</p>
+                                <p>{{implode(' ', array_slice(explode(' ', $data['main_study_articles'][0]->excerpt ?? ''), 0, 10)) }}@if ( str_word_count($data['main_study_articles'][0]->excerpt ?? '') > 10 )...@endif</p>
+
                             </div>
                             {{-- @endif --}}
                         </div>
@@ -167,7 +168,7 @@
                                 @if (!count($post->postmeta->where('meta_key', '_featured_image')) )
                                     <a href="{{$post->post_type.'/'.$data['main_study_articles'][0]->slug}}"><img src="{{ asset('uploads/d-post.jpeg')}}" alt="oncologyme"></a>
                                 @endif
-                                <p class="wth-img">{{implode(' ', array_slice(explode(' ', $post->excerpt ?? ''), 0, 10)) }}@if ( str_word_count($post->excerpt ?? '') > 10 )...@endif</p>
+                                <p class="wth-img">{{implode(' ', array_slice(explode(' ', $post->excerpt ?? ''), 0, 7)) }}@if ( str_word_count($post->excerpt ?? '') > 7 )...@endif</p>
                                 
                             </div>
                         </div>
@@ -208,7 +209,8 @@
                             <div class="clearfix"></div>
                             <h2><a href="{{$data['main_podcast'][0]->post_type.'/'.$data['main_podcast'][0]->slug}}">{{ implode(' ', array_slice(explode(' ', $data['main_podcast'][0]->title ?? ''), 0, 10)) }}@if ( str_word_count($data['main_podcast'][0]->title ?? '') > 10 )...@endif</a></h2>
                             <div class="article-img-text">
-                                <p>{{$data['main_podcast'][0]->excerpt}}</p>
+                                <p>{{implode(' ', array_slice(explode(' ', $data['main_podcast'][0]->excerpt ?? ''), 0, 10)) }}@if ( str_word_count($data['main_podcast'][0]->excerpt ?? '') > 10 )...@endif</p>
+
                                 <div class="podcast-link">
                                     <a href="{{$data['main_podcast'][0]->post_type.'/'.$data['main_podcast'][0]->slug}}">Listen now <i class="fa fa-headphones"></i></a>
                                 </div>
@@ -221,7 +223,7 @@
                         @foreach ($data['podcasts'] as $post)
                         
                         <div class="article-item col-md-6 col-sm-6 col-xs-12 ">
-                            <h2><a href="{{$post->post_type.'/'.$post->slug ?? '' }}">{{ implode(' ', array_slice(explode(' ', $post->title ?? ''), 0, 10)) }}@if ( str_word_count($post->title ?? '') > 10 )...@endif</a></h2>
+                            <h2><a href="{{$post->post_type.'/'.$post->slug ?? '' }}">{{ implode(' ', array_slice(explode(' ', $post->title ?? ''), 0, 5)) }}@if ( str_word_count($post->title ?? '') > 10 )...@endif</a></h2>
                             <div class="article-tags">
                                 @foreach ($post->topics as $topic)
                                 <span><a href="{{ route('showTopic', $topic->slug ?? '') }}">{{$topic->title ?? ''}}</a></span>
@@ -237,7 +239,7 @@
                                     <a href="{{$post->post_type.'/'.$post->slug}}"><img src="{{ asset('uploads/d-post.jpeg')}}" alt="oncologyme"></a>
                                 @endif
 
-                                <p class="wth-img">{{implode(' ', array_slice(explode(' ', $post->excerpt ?? ''), 0, 10)) }}@if ( str_word_count($post->excerpt ?? '') > 10 )...@endif</p>
+                                <p class="wth-img">{{implode(' ', array_slice(explode(' ', $post->excerpt ?? ''), 0, 7)) }}@if ( str_word_count($post->excerpt ?? '') > 7 )...@endif</p>
                                 <div class="podcast-link">
                                     <a href="{{$data['main_podcast'][0]->post_type.'/'.$data['main_podcast'][0]->slug}}">Listen now <i class="fa fa-headphones"></i></a>
                                 </div>
