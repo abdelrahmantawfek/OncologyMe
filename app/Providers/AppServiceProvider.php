@@ -75,19 +75,19 @@ class AppServiceProvider extends ServiceProvider
         $data['podcasts_title'] = Page::find(11);
        
 
-        $data['topics'] = Topic::where('is_parent', 0)->where('is_main', 1)
+        $data['topics'] = Topic::orderBy('title')->where('is_parent', 0)->where('is_main', 1)
         ->whereHas('posts')
         ->get();
-        $data['news_categories'] = Category::where('is_main', 1)->where('post_type', 'news')
+        $data['news_categories'] = Category::orderBy('title')->where('is_main', 1)->where('post_type', 'news')
         ->whereHas('posts')
         ->get();
-        $data['videos_categories'] = Category::where('is_main', 1)->where('post_type', 'videos')
+        $data['videos_categories'] = Category::orderBy('title')->where('is_main', 1)->where('post_type', 'videos')
         ->whereHas('posts')
         ->get();
-        $data['articles_categories'] = Category::where('is_main', 1)->where('post_type', 'articles')
+        $data['articles_categories'] = Category::orderBy('title')->where('is_main', 1)->where('post_type', 'articles')
         ->whereHas('posts')
         ->get();
-        $data['podcasts_categories'] = Category::where('is_main', 1)->where('post_type', 'podcasts')
+        $data['podcasts_categories'] = Category::orderBy('title')->where('is_main', 1)->where('post_type', 'podcasts')
         ->whereHas('posts')
         ->get();
         $data['latest_news'] = Post::orderBy('created_at', 'DESC')->where('post_type', 'articles')->take(5)->get();
@@ -102,8 +102,7 @@ class AppServiceProvider extends ServiceProvider
         
         $post_type = Request::segment(1);
         $all_posts_type = Request::segment(1);
-        $data['news_banners'] = Announcement::where('place', $post_type)->orWhere('place', trim($all_posts_type, 'all-'))->get();
-
+        $data['news_banners'] = Announcement::where('place', $post_type)->orWhere('place', substr($all_posts_type, 4))->get();
         $data['allusers'] = User::orderBy('created_at', 'DESC')->get();
         $data['allcontacts'] = Contact::orderBy('created_at', 'DESC')->get();
         $data['alladmins'] = Admin::orderBy('created_at', 'DESC')->get();
@@ -121,7 +120,7 @@ class AppServiceProvider extends ServiceProvider
 
         $data['users'] = User::orderBy('created_at', 'DESC')->take(5)->get();
         $data['contacts'] = Contact::orderBy('created_at', 'DESC')->take(5)->get();
-        $data['admins'] = Admin::orderBy('created_at', 'DESC')->skip(1)->take(5)->get();
+        $data['admins'] = Admin::orderBy('created_at', 'DESC')->take(5)->get();
 
         $data['st_news'] = Post::orderBy('created_at', 'DESC')->where('post_type', 'news')->take(5)->get();
         $data['st_videos'] = Post::orderBy('created_at', 'DESC')->where('post_type', 'videos')->take(5)->get();

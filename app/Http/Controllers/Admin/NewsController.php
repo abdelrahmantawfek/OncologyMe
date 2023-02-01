@@ -49,14 +49,9 @@ class NewsController extends Controller
         // $input = $request->all();
         $input = $request->validate([
             'title' => 'required',
-            'slug' => '',
-            'pdf' => '',
-            'key_points' => '',
-            'content' => '',
-            'excerpt' => '',
-            'author' => '',
-            'meta_title' => '',
-            'meta_desc' => '',
+            'content' => 'required',
+            'topic' => 'required',
+            'category' => 'required',
         ]);
 
         // dd($input);

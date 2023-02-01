@@ -44,14 +44,9 @@ class ArticlesController extends Controller
         // $input = $request->all();
         $input = $request->validate([
             'title' => 'required',
-            // 'slug' => 'nullable|unique:posts',
-            // 'pdf' => 'required',
-            // 'key_points' => 'required',
-            // 'content' => 'required',
-            // 'excerpt' => 'required',
-            // 'author' => 'required',
-            // 'meta_title' => 'required',
-            // 'meta_desc' => 'required',
+            'content' => 'required',
+            'topic' => 'required',
+            'category' => 'required',
         ]);
 
         // dd($input);

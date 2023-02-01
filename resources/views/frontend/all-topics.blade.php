@@ -37,7 +37,7 @@
 
                 @foreach ($data['parent_topics'] as $topic)
                 <?php    
-                $children = DB::table('topics')->where('parent_id', $topic->id)->get();
+                $children = DB::table('topics')->where('parent_id', $topic->id)->orderBy('title')->get();
                 ?>
                 @if (count($children) != 0)
                 <div class="topics-list">

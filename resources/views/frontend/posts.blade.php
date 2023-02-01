@@ -24,6 +24,8 @@
                 <div class="videos-filter categ-title">
                     <h2 class="cntr-title">{{$data['page']->sections->first()->title ?? ''}} <span>{{$data['page']->sections->first()->subtitle ?? ''}}</span></h2>
                     <p class="cntr-p">{!! $data['page']->sections->first()->content ??'' !!}</p>
+                    @include('partials._posts_banner')
+                    <div class="m-t-40"></div>
                     <div class="clearfix"></div>
                     @if (count($data['categories']))
                     <div class="row">
@@ -39,13 +41,13 @@
                             <div class="clearfix"></div>
                     </div>
                     @endif
+                    <hr style="margin-top: 10px;">
+
                 </div>
 
                 <div class="clearfix"></div>
-                @include('partials._posts_banner')
 
-
-                <hr style="margin-top: 40px;">
+ 
                 @foreach ($data['categories'] as $category)
                 @if (count($category->posts))
                 <div class="articles-section">

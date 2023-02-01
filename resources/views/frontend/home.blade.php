@@ -120,7 +120,7 @@
 
 @if (count( $data['main_study_articles'] ) )
 <!-- Main Section -->
-<div class="careerfy-main-section careerfy-parallex-full articles-section">
+<div class="careerfy-main-section careerfy-parallex-full articles-section cs-h-study">
     <div class="container">
         <div class="row">
             <div class="col-md-12 careerfy-typo-wrap">
@@ -144,7 +144,7 @@
                             <div class="clearfix"></div>
                             <h2><a href="{{$data['main_study_articles'][0]->post_type.'/'.$data['main_study_articles'][0]->slug}}">{{ implode(' ', array_slice(explode(' ', $data['main_study_articles'][0]->title ?? ''), 0, 10)) }}@if ( str_word_count($data['main_podcast'][0]->title ?? '') > 10 )...@endif</a></h2>
                             <div class="article-img-text">
-                                <p>{{implode(' ', array_slice(explode(' ', $data['main_study_articles'][0]->excerpt ?? ''), 0, 10)) }}@if ( str_word_count($data['main_study_articles'][0]->excerpt ?? '') > 10 )...@endif</p>
+                                <p>{{ substr($data['main_study_articles'][0]->excerpt ?? '', 0, 170); }}@if ( strlen($data['main_study_articles'][0]->excerpt ?? '') > 170 )...@endif</p>
 
                             </div>
                             {{-- @endif --}}
@@ -168,7 +168,7 @@
                                 @if (!count($post->postmeta->where('meta_key', '_featured_image')) )
                                     <a href="{{$post->post_type.'/'.$data['main_study_articles'][0]->slug}}"><img src="{{ asset('uploads/d-post.jpeg')}}" alt="oncologyme"></a>
                                 @endif
-                                <p class="wth-img">{{implode(' ', array_slice(explode(' ', $post->excerpt ?? ''), 0, 7)) }}@if ( str_word_count($post->excerpt ?? '') > 7 )...@endif</p>
+                                <p class="wth-img">{{ substr($post->excerpt, 0, 64); }}@if ( strlen($post->excerpt ?? '') > 64 )...@endif</p>
                                 
                             </div>
                         </div>
@@ -185,7 +185,7 @@
 
 @if (count( $data['main_podcast'] ) )
 <!-- Main Section -->
-<div class="careerfy-main-section careerfy-parallex-full articles-section">
+<div class="careerfy-main-section careerfy-parallex-full articles-section cs-h-pods">
     <div class="container">
         <div class="row">
             <div class="col-md-12 careerfy-typo-wrap">
@@ -209,7 +209,7 @@
                             <div class="clearfix"></div>
                             <h2><a href="{{$data['main_podcast'][0]->post_type.'/'.$data['main_podcast'][0]->slug}}">{{ implode(' ', array_slice(explode(' ', $data['main_podcast'][0]->title ?? ''), 0, 10)) }}@if ( str_word_count($data['main_podcast'][0]->title ?? '') > 10 )...@endif</a></h2>
                             <div class="article-img-text">
-                                <p>{{implode(' ', array_slice(explode(' ', $data['main_podcast'][0]->excerpt ?? ''), 0, 10)) }}@if ( str_word_count($data['main_podcast'][0]->excerpt ?? '') > 10 )...@endif</p>
+                                <p>{{ substr($data['main_podcast'][0]->excerpt ?? '', 0, 170); }}@if ( strlen($data['main_podcast'][0]->excerpt ?? '') > 170 )...@endif</p>
 
                                 <div class="podcast-link">
                                     <a href="{{$data['main_podcast'][0]->post_type.'/'.$data['main_podcast'][0]->slug}}">Listen now <i class="fa fa-headphones"></i></a>
@@ -239,7 +239,7 @@
                                     <a href="{{$post->post_type.'/'.$post->slug}}"><img src="{{ asset('uploads/d-post.jpeg')}}" alt="oncologyme"></a>
                                 @endif
 
-                                <p class="wth-img">{{implode(' ', array_slice(explode(' ', $post->excerpt ?? ''), 0, 7)) }}@if ( str_word_count($post->excerpt ?? '') > 7 )...@endif</p>
+                                <p class="wth-img">{{ substr($post->excerpt, 0, 64); }}@if ( strlen($post->excerpt ?? '') > 64 )...@endif</p>
                                 <div class="podcast-link">
                                     <a href="{{$data['main_podcast'][0]->post_type.'/'.$data['main_podcast'][0]->slug}}">Listen now <i class="fa fa-headphones"></i></a>
                                 </div>

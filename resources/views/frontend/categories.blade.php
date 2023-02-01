@@ -23,6 +23,8 @@
 
                     <h2 class="cntr-title">{{$data['page']->sections[0]->title ?? ''}} <span>{{$data['page']->sections[0]->subtitle ?? ''}}</span></h2>
                     <p class="cntr-p">{!! $data['page']->sections[0]->content ??'' !!}</p>
+                    @include('partials._posts_banner')
+                    <div class="m-t-40"></div>
                     <div class="clearfix"></div>
                      <div class="row">
                             <div class="col-md-3"></div>
@@ -38,11 +40,12 @@
                             <div class="col-md-3"></div>
                             <div class="clearfix"></div>
                     </div>
+                    <hr style="margin-top: 10px;">
                 </div>
                 <div class="clearfix"></div>
-                @include('partials._posts_banner')
 
-                <hr style="margin-top: 40px;">
+
+
                 <div class="articles-section">
                     <div class="row">
                         <div class="articles-box ">
@@ -82,6 +85,7 @@
                         </div>
                     </div>
                 </div>
+                
             </div>
         </div>
     </div>
@@ -101,6 +105,8 @@
             @else
             <div class="col-md-12">
             @endif
+            @include('partials._posts_banner')
+            <div class="m-t-20"></div>
 
                 <div class="careerfy-typo-wrap categ-title pos-rltv">
                     <h3><span>{{ ucfirst($data['category']->title) ?? '' }}</span></h3>
@@ -112,8 +118,7 @@
                     {!! Form::close() !!}
                     @endif
                 </div>
-                <div class="m-t-20"></div>
-                @include('partials._posts_banner')
+                
 
 
                 <div class=" {{ Request::is('podcasts') ? 'articles-section' : '' }} articles-box">

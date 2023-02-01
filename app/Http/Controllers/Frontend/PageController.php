@@ -120,7 +120,7 @@ class PageController extends Controller
     public function all_topics()
     {
         $data['page'] = Page::with('sections')->find(7);
-        $data['parent_topics'] = Topic::where('is_parent', 1)->get();
+        $data['parent_topics'] = Topic::orderBy('title')->where('is_parent', 1)->get();
         $data['child_topics'] = [];
         foreach ($data['parent_topics'] as $topic){
             $child_topics = Topic::where('is_parent', 0)
@@ -143,7 +143,7 @@ class PageController extends Controller
             abort(404);
         }
 
-        $data['categories'] = Category::where('post_type', 'videos')->with('posts.topics')->get();
+        $data['categories'] = Category::orderBy('title')->where('post_type', 'videos')->with('posts.topics')->get();
         $data['other-categories'] = Category::orderBy('title')->where('post_type', $post_type)
         ->whereHas('posts')
         ->get()->pluck('title', 'slug');

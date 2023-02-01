@@ -45,14 +45,9 @@ class VideosController extends Controller
         // $input = $request->all();
         $input = $request->validate([
             'title' => 'required',
-            'slug' => '',
-            'pdf' => '',
-            'key_points' => '',
-            'content' => '',
-            'excerpt' => '',
-            'author' => '',
-            'meta_title' => '',
-            'meta_desc' => '',
+            'content' => 'required',
+            'topic' => 'required',
+            'category' => 'required',
         ]);
 
         // dd($input);
@@ -109,7 +104,7 @@ class VideosController extends Controller
        
         $featured_image = $request->validate(['image' => 'mimes:jpg,png|max:5048']);
         $pdf = $request->validate(['pdf' => 'mimes:pdf|max:5048']);
-        $video = $request->validate(['video' => 'required|mimes:mp4|max:28000']);
+        $video = $request->validate(['video' => 'mimes:mp4|max:28000']);
 
         $image = $request->file('image');
 
@@ -168,11 +163,20 @@ class VideosController extends Controller
             $post_meta->save();
         }
 
+        if($request->youtube_video){
+            $post_meta = Postmeta::create([
+                'post_id' => $post->id,
+                'meta_key' => '_youtube_video',
+                'meta_value' => $request->youtube_video,
+            ]);
+            $post_meta->save();
+        }
+
         if($request->topic){
             foreach ($request->topic as $item) {
                  $post->topics()->attach($item);
              }
-         }
+        }
  
          if($request->category){
              foreach ($request->category as $item) {
@@ -208,6 +212,7 @@ class VideosController extends Controller
         $all_topics = Topic::where('is_parent', 0)->get();
         $categories = Category::where('post_type', 'videos')->get();
         $video = $post->postmeta->where('meta_key', '_video')->pluck('meta_value');
+        $youtube_video = $post->postmeta->where('meta_key', '_youtube_video')->pluck('meta_value');
         $video_script = $post->postmeta->where('meta_key', '_script')->pluck('meta_value');
         $featured_image = $post->postmeta->where('meta_key', '_featured_image')->pluck('meta_value');
         $pdf = $post->postmeta->where('meta_key', '_pdf')->pluck('meta_value');
@@ -220,7 +225,7 @@ class VideosController extends Controller
             return redirect(route('admin.videos.index'));
         }
 
-        return view('admin.videos.edit', compact('post', 'all_topics', 'categories', 'featured_image', 'video', 'video_script', 'pdf', 'selected_topics', 'selected_cats'));
+        return view('admin.videos.edit', compact('post', 'all_topics', 'categories', 'featured_image', 'video', 'video_script', 'pdf', 'selected_topics', 'selected_cats', 'youtube_video'));
     }
 
     public function update($id, Request $request)
@@ -352,18 +357,42 @@ class VideosController extends Controller
             $fileName = time() . '_' . $originalName;
             $vid->move('uploads/', $fileName);
 
-            $old_meta = Postmeta::where('post_id', $post->id)->where('meta_key', '_video')->first();
-
+            $old_meta = Postmeta::where('post_id', $post->id)->where('meta_key', '_youtube_video')->first();
+            $old_meta_file = Postmeta::where('post_id', $post->id)->where('meta_key', '_video')->first();
+            
             if($old_meta){
                 $old_meta->delete();
             }
-            
+            if($old_meta_file){
+                $old_meta_file->delete();
+            }
+
             $post_meta = Postmeta::create([
                 'post_id' => $post->id,
                 'meta_key' => '_video',
                 'meta_value' => $fileName,
             ]);
         }
+
+        if($request->youtube_video){
+
+            $old_meta = Postmeta::where('post_id', $post->id)->where('meta_key', '_youtube_video')->first();
+            $old_meta_file = Postmeta::where('post_id', $post->id)->where('meta_key', '_video')->first();
+
+            if($old_meta){
+                $old_meta->delete();
+            }
+            if($old_meta_file){
+                $old_meta_file->delete();
+            }
+
+            $post_meta = Postmeta::create([
+                'post_id' => $post->id,
+                'meta_key' => '_youtube_video',
+                'meta_value' => $request->youtube_video,
+            ]);
+        }
+
 
         if($request->script){
             $old_meta = Postmeta::where('post_id', $post->id)->where('meta_key', '_script')->first();

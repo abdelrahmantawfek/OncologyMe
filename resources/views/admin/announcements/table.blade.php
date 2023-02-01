@@ -49,7 +49,7 @@
             <!--begin::Role=-->
             <td>{{ $announcement->url}}</td>
             @if ($announcement->place == '1')
-            <td>{{ 'Main'}}</td>
+            <td>{{ 'Home'}}</td>
             @elseif ($announcement->place == '2')
             <td>{{'Top sidebar'}}</td>
             @elseif ($announcement->place == '3')

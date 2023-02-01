@@ -28,6 +28,8 @@ class PostController extends Controller
         $data['sound'] = $data['post']->postmeta->where('meta_key', '_sound')->pluck('meta_value');
         $data['script'] = $data['post']->postmeta->where('meta_key', '_script')->pluck('meta_value');
         $data['video'] = $data['post']->postmeta->where('meta_key', '_video')->pluck('meta_value');
+        $data['youtube_video'] = $data['post']->postmeta->where('meta_key', '_youtube_video')->pluck('meta_value');
+
         $post = $data['post'];
         $data['related-posts'] = Post::where('post_type', $post_type)
         ->whereHas('categories', function ($query) use ($post){
@@ -35,8 +37,6 @@ class PostController extends Controller
            })
         ->where('id', '!=', $post->id)
         ->get();
-
-
 
     
         return view('frontend.single', compact('data'));
@@ -47,7 +47,7 @@ class PostController extends Controller
         $data['page'] = Page::find(9);
         $data['category'] = Category::where('slug', $slug)->with('posts.topics')->get()->first();
         $data['posts'] = $data['category']->posts()->paginate(10);
-        $data['other-categories'] = Category::where('post_type', $post_type)
+        $data['other-categories'] = Category::orderBy('title')->where('post_type', $post_type)
         ->whereHas('posts')
         ->where('id', '!=', $data['category']->id)
         ->get()->pluck('title', 'slug');

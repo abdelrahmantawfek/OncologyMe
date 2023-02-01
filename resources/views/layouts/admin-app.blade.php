@@ -121,6 +121,49 @@
 
 		<script>
 
+
+
+		// var topics = [];
+
+		// $('input.cs-topics').each(function(){
+		// 	$(this).on('change', function() {
+		// 		var topic = $('.cs-topics:checked').length;
+		// 		// alert(topic);
+		// 		topics.push(topic);
+		// 	});
+
+		// });
+
+		// console.log(topics);
+
+
+
+		// $('.cs_save_btn').click(function(e){
+		// 	e.preventDefault();
+
+		// 	var title = $('#title');
+		// 	var content = $('#content');
+		// 	var topic = $('.cs-topics:checked').length;
+		// 	var category = $('.cs-categories:checked').length;
+
+		// 	// console.log(topic);
+		// 	if(title.val()  == ''){
+		// 		$('.cs-validate-title').html('field is required');
+		// 	}
+		// 	if(content.val()  == ''){
+		// 		$('.cs-validate-content').html('field is required');
+		// 	}
+		// 	if(topic == 0){
+		// 		$('.cs-validate-topic').html('field is required');
+		// 	}
+		// 	if(category == 0){
+		// 		$('.cs-validate-category').html('field is required');
+		// 	}
+		// 	else{
+		// 		$("form").submit();
+		// 	}
+		// });
+
 		// topic fields script
 		$('#parent_field').hide();
 		$('#main_field').hide();
@@ -153,6 +196,24 @@
 		$("#cs_select_all").click(function(){
 			$('input:checkbox').not(this).prop('checked', this.checked);
 		});
+
+		$('.cs-vid-type input').change(function(){
+			if($(this).val() == 'video'){
+				$('.cs-vid').css('display', 'block');
+				$('.cs-youtube').css('display', 'none');
+			}else{
+				$('.cs-youtube').css('display', 'block');
+				$('.cs-vid').css('display', 'none');
+			}
+		});
+
+		if ($(".post_vid")[0]){
+    		$('[value="video"]').prop("checked", true);
+			$('.cs-vid').css('display', 'block');
+		} else {
+    		$('[value="youtube"]').prop("checked", true);
+			$('.cs-youtube').css('display', 'block');
+		}
 
 		</script>
 

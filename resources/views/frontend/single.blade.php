@@ -33,10 +33,14 @@
 
                             @if (count($data['video']))
                             <video width="100%" controls>
-                                {{-- <source src="horse.ogg" type="audio/ogg"> --}}
                                 <source src="{{ asset('uploads/'. $data['video'][0] ?? '') }}" type="video/mp4">
                                     Your browser does not support HTML video.
                             </video>
+                            @endif
+
+                            @if (count($data['youtube_video']))
+                            <iframe width="100%" height="415" src="https://www.youtube.com/embed/{{$data['youtube_video'][0] ?? ''}}" frameborder="0" allowfullscreen></iframe>
+
                             @endif
 
                             <div class="clearfix"></div>

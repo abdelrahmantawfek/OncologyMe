@@ -121,7 +121,7 @@ body {
     background-color: #ffffff;
     color: #999999;
     font-family: 'Bahnschrift', sans-serif !important;
-    font-size: 14px;
+    font-size: 15px;
     line-height: 24px;
     overflow-x: hidden;
 }
@@ -621,7 +621,7 @@ ul.sub-menu.cs-sub-menu {
 }
 
 .careerfy-user-section a {
-    font-size: 13px;
+    font-size: 14px;
 }
 
 .careerfy-user-section li {
@@ -1191,7 +1191,7 @@ li:hover .careerfy-read-more {
 
 .careerfy-about-text p {
     margin-bottom: 15px;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 1.4;
     font-weight: 400;
     color: #555;
@@ -3241,8 +3241,8 @@ left: 50%;*/
 }
 
 .articles-box.single-news-post .articles-only .article-item p {
-    font-size: 13.5px;
-    line-height: 1.35;
+    font-size: 14.5px;
+    line-height: 1.5;
     margin-top: 10px;
     margin-bottom: 10px;
     letter-spacing: .5px;
@@ -3283,7 +3283,7 @@ left: 50%;*/
     display: inline-block;
     vertical-align: middle;
     font-family: 'Bahnschrift', sans-serif !important;
-    font-size: 13.5px;
+    font-size: 14.5px;
     line-height: 1.3;
     color: #333;
     /*margin-left: 3%;*/
@@ -3307,7 +3307,7 @@ left: 50%;*/
 .articles-box .articles-only .article-item h4,
 .articles-box .videos-only .article-item h4 {
     font-family: 'Bahnschrift', sans-serif !important;
-    font-size: 13px;
+    font-size: 14px;
     line-height: 1.3;
     color: #f06926;
     letter-spacing: 0;
@@ -3328,7 +3328,7 @@ left: 50%;*/
 
 .article-tags span a {
     color: #fff;
-    font-size: 10px;
+    font-size: 12px;
     text-transform: none;
 }
 
@@ -3491,7 +3491,7 @@ left: 50%;*/
     display: inline-block;
     max-width: 250px;
     vertical-align: middle;
-    font-size: 13.5px;
+    font-size: 14.5px;
 }
 
 .topics-box label {
@@ -3606,7 +3606,24 @@ left: 50%;*/
     border: 1px solid #eee;
     background-color: #fff;
     max-width: 350px;
-    min-height: 235px;
+}
+/*.cs-h-study.articles-section .articles-box .articles-only .article-item {*/
+/*        min-height: 196px;*/
+/*}*/
+
+/*.cs-h-pods.articles-section .articles-box .articles-only .article-item {*/
+/*        min-height: 216px;*/
+/*}*/
+
+.article-img-text img{
+    height: 61px;
+    object-fit: cover;
+}
+.cs-all-podcasts .article-img-text img{
+    height: 137px;
+}
+.cs-h-study .article-img-text img, .cs-h-pods .article-img-text img{
+    height: 35px;
 }
 
 .articles-section .articles-box .articles-only .article-item:nth-child(odd){
@@ -3620,7 +3637,7 @@ left: 50%;*/
 .articles-section h3,
 .categ-title h3 {
     border-bottom: 2px solid #1a3965;
-    font-size: 15px;
+    font-size: 16px;
     letter-spacing: 0;
     font-weight: 500;
     margin-bottom: 20px;
@@ -3653,7 +3670,7 @@ left: 50%;*/
 }
 
 .articles-box .articles-only .article-item h2 {
-    font-size: 14px;
+    font-size: 15.5px;
 }
 
 .article-img-text {
@@ -3671,7 +3688,7 @@ left: 50%;*/
 .widget_contact_info p {
     margin-bottom: 20px;
     line-height: 1.4;
-    font-size: 13.5px;
+    font-size: 14.5px;
     margin-top: 20px;
     columns: #555;
 }
@@ -3727,7 +3744,7 @@ left: 50%;*/
     text-transform: none !important;
     width: 100% !important;
     display: block !important;
-    font-size: 14px !important;
+    font-size: 16px !important;
     margin-left: 0 !important;
 }
 
@@ -3799,7 +3816,7 @@ left: 50%;*/
     color: #fff;
     padding: 3px 14px 4px;
     display: block;
-    font-size: 12px;
+    font-size: 14px;
 }
 
 .sub-menu .thumbnail {
@@ -5082,12 +5099,12 @@ ul#social_side_links li,
 }
 
 .about-main-section .row .careerfy-typo-wrap h3 {
-    font-size: 18px;
+    font-size: 20px;
 }
 
 .about-main-section .row .careerfy-typo-wrap p {
     line-height: 1.5;
-    font-size: 13px;
+    font-size: 15px;
 }
 
 .gray-bg {
@@ -5237,7 +5254,7 @@ li:hover .careerfy-read-more,
     color: #1a3965;
     font-weight: lighter;
     line-height: 32px !important;
-    font-size: 13px;
+    font-size: 15px;
 }
 
 .cs-acc-menu {
@@ -5394,7 +5411,7 @@ li:hover .careerfy-read-more,
     margin-top: 25px;
 }
 .post-body img{
-    width: 100% !important;
+    width: auto !important;
 }
 .articles-section h3,
 .categ-title h3.text-right {

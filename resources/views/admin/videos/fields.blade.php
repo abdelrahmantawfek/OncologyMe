@@ -3,8 +3,9 @@
         <div class="card-body">
             <!-- Name Field -->
             <div class="form-group col-sm-12 fv-row mb-10 fv-plugins-icon-container">
-                {!! Form::label('title', 'Title :', ['class' => 'form-label fs-6 fw-bolder text-dark']) !!}
+                {!! Form::label('title', 'Title :', ['class' => 'form-label fs-6 fw-bolder text-dark']) !!} <span>*</span>
                 {!! Form::text('title', null, ['class' => 'form-control']) !!}
+                <span class="cs-validate-title cs-error"></span>
             </div>
 
             <!-- slug Field -->
@@ -15,8 +16,9 @@
 
             <!-- Content Field -->
             <div class="form-group col-sm-12 col-lg-12 fv-row mb-10 fv-plugins-icon-container">
-                {!! Form::label('content', 'Content :', ['class' => 'form-label fs-6 fw-bolder text-dark']) !!}
+                {!! Form::label('content', 'Content :', ['class' => 'form-label fs-6 fw-bolder text-dark']) !!} <span>*</span>
                 {!! Form::textarea('content', null, ['class' => 'form-control ckeditor']) !!}
+                <span class="cs-validate-content cs-error"></span>
             </div>
 
             <!-- Excerpt Field -->
@@ -57,18 +59,17 @@
 <div class="col-xl-3">
     <div class="card">
         <div class="cs-card-body">
-
             <!-- Topics Field -->
             @if (count($all_topics))
             <div class="form-group col-sm-12 fv-row mb-10 fv-plugins-icon-container">
-                {!! Form::label('topics', 'Topics :', ['class' => 'form-label fs-6 fw-bolder text-dark']) !!}
+                {!! Form::label('topics', 'Topics :', ['class' => 'form-label fs-6 fw-bolder text-dark']) !!} <span>*</span>
                 <div class="row fv-row mb-10 fv-plugins-icon-container checkbox-container">
 
                     @if(!empty($selected_topics))
                     @foreach ($post->topics as $topic)
                     <div class="col-sm-12 mb-2">
                         <label class="form-check form-check-sm form-check-custom form-check-solid">
-                            {!! Form::checkbox('topic[]', $topic->id, $topic, ['id' => 'topic-' . $topic->id, 'class' => 'form-check-input']) !!}
+                            {!! Form::checkbox('topic[]', $topic->id, $topic, ['id' => 'topic-' . $topic->id, 'class' => 'form-check-input cs-topics']) !!}
                             {!! Form::label('topic-' . $topic->id, $topic->title, ['class' => 'form-check-label fw-bold text-gray-700']) !!}
                         </label>
                     </div>    
@@ -80,7 +81,7 @@
                         @if(!in_array($topic->id, $selected_topics))
                         <div class="col-sm-12 mb-2">
                             <label class="form-check form-check-sm form-check-custom form-check-solid">
-                                {!! Form::checkbox('topic[]', $topic->id, null, ['id' => 'topic-' . $topic->id, 'class' => 'form-check-input']) !!}
+                                {!! Form::checkbox('topic[]', $topic->id, null, ['id' => 'topic-' . $topic->id, 'class' => 'form-check-input cs-topics']) !!}
                                 {!! Form::label('topic-' . $topic->id, $topic->title, ['class' => 'form-check-label fw-bold text-gray-700']) !!}
                             </label>
                         </div>    
@@ -88,13 +89,14 @@
                     @else
                     <div class="col-sm-12 mb-2">
                         <label class="form-check form-check-sm form-check-custom form-check-solid">
-                            {!! Form::checkbox('topic[]', $topic->id, null, ['id' => 'topic-' . $topic->id, 'class' => 'form-check-input']) !!}
+                            {!! Form::checkbox('topic[]', $topic->id, null, ['id' => 'topic-' . $topic->id, 'class' => 'form-check-input cs-topics']) !!}
                             {!! Form::label('topic-' . $topic->id, $topic->title, ['class' => 'form-check-label fw-bold text-gray-700']) !!}
                         </label>
                     </div>   
                     @endif
                     @endforeach
                 </div>
+                <span class="cs-validate-topic cs-error"></span>
             </div>
             @endif
 
@@ -102,7 +104,7 @@
             <!-- categories Field -->
             @if (count($categories)) 
             <div class="form-group col-sm-12 fv-row mb-10 fv-plugins-icon-container">
-                {!! Form::label('categories', 'Categories :', ['class' => 'form-label fs-6 fw-bolder text-dark']) !!}
+                {!! Form::label('categories', 'Categories :', ['class' => 'form-label fs-6 fw-bolder text-dark']) !!} <span>*</span>
                 <div class="row fv-row mb-10 fv-plugins-icon-container checkbox-container">
                     {{-- {{$post->categories[0]->id}} --}}
 
@@ -110,7 +112,7 @@
                     @foreach ($post->categories as $category)
                     <div class="col-sm-12 mb-2">
                         <label class="form-check form-check-sm form-check-custom form-check-solid">
-                            {!! Form::checkbox('category[]', $category->id, $category, ['id' => 'category-' . $category->id, 'class' => 'form-check-input']) !!}
+                            {!! Form::checkbox('category[]', $category->id, $category, ['id' => 'category-' . $category->id, 'class' => 'form-check-input cs-categories']) !!}
                             {!! Form::label('category-' . $category->id, $category->title, ['class' => 'form-check-label fw-bold text-gray-700']) !!}
                         </label>
                     </div>    
@@ -122,7 +124,7 @@
                         @if(!in_array($category->id, $selected_cats))
                         <div class="col-sm-12 mb-2">
                             <label class="form-check form-check-sm form-check-custom form-check-solid">
-                                {!! Form::checkbox('category[]', $category->id, null, ['id' => 'category-' . $category->id, 'class' => 'form-check-input']) !!}
+                                {!! Form::checkbox('category[]', $category->id, null, ['id' => 'category-' . $category->id, 'class' => 'form-check-input cs-categories']) !!}
                                 {!! Form::label('category-' . $category->id, $category->title, ['class' => 'form-check-label fw-bold text-gray-700']) !!}
                             </label>
                         </div>    
@@ -130,13 +132,14 @@
                     @else
                     <div class="col-sm-12 mb-2">
                         <label class="form-check form-check-sm form-check-custom form-check-solid">
-                            {!! Form::checkbox('category[]', $category->id, null, ['id' => 'category-' . $category->id, 'class' => 'form-check-input']) !!}
+                            {!! Form::checkbox('category[]', $category->id, null, ['id' => 'category-' . $category->id, 'class' => 'form-check-input cs-categories']) !!}
                             {!! Form::label('category-' . $category->id, $category->title, ['class' => 'form-check-label fw-bold text-gray-700']) !!}
                         </label>
                     </div>     
                     @endif
                     @endforeach
                 </div>
+                <span class="cs-validate-category cs-error"></span>
             </div>
             @endif
 
@@ -167,12 +170,21 @@
                 <small>Pdf maximum size: 5MB</small>
             </div>
 
+            <!-- video type -->
+            <div class="form-group col-sm-12 fv-row mb-10 fv-plugins-icon-container cs-vid-type">
+                {!! Form::label('type', 'Select video type :', ['class' => 'form-label fs-6 fw-bolder text-dark']) !!}
+                <label class="form-check form-check-sm form-check-custom form-check-solid">
+                    {!! Form::radio('type', "youtube", null, ['class' => 'form-check-label fw-bold text-gray-700 mx-2']) !!} youtube
+                    {!! Form::radio('type', "video", null, ['class' => 'form-check-label fw-bold text-gray-700 mx-2']) !!} video
+                </label>
+            </div>
+
             <!-- Video Field -->
-            <div class="form-group col-sm-12 fv-row mb-10 fv-plugins-icon-container">
+            <div class="form-group col-sm-12 fv-row mb-10 fv-plugins-icon-container cs-vid" style="display: none">
                 {!! Form::label('video', 'Video', ['class' => 'form-label fs-6 fw-bolder text-dark']) !!}
                 @isset($video)
                 @if (count($video))
-                <video src="{{ asset('uploads/' . $video[0]) }}" width="100%" class="mb-5" controls></video>
+                <video src="{{ asset('uploads/' . $video[0]) }}" width="100%" class="mb-5 post_vid" controls></video>
                 @endif
                 @endisset
                 {!! Form::file('video', null, ['class' => 'form-control']) !!}
@@ -181,9 +193,18 @@
 
             </div>
 
+            <div class="form-group col-sm-12 fv-row mb-10 fv-plugins-icon-container cs-youtube" style="display: none">
+                {!! Form::label('youtube_video', 'Youtube ID', ['class' => 'form-label fs-6 fw-bolder text-dark']) !!}
+                @if (count($youtube_video))
+                {!! Form::text('youtube_video', $youtube_video[0], ['class' => 'form-control']) !!}
+                @else
+                {!! Form::text('youtube_video', null, ['class' => 'form-control']) !!}
+                @endif
+            </div>
+
             <!-- Submit Field -->
             <div class="form-group col-sm-12 fv-row mb-10 fv-plugins-icon-container">
-                {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
+                {!! Form::submit('Save', ['class' => 'btn btn-primary cs_save_btn']) !!}
                 <a href="{{ route('admin.videos.index') }}" class="btn btn-secondary">Cancel</a>
             </div>
             

@@ -37,7 +37,7 @@
     <!--end::Toolbar-->
 
     <div class="container-fluid">
-        <div class="animated fadeIn">
+        <div id="kt_content_container" class="container-xxl">
             @include('flash::message')
               <div class="row">
                   <div class="col-lg-12">

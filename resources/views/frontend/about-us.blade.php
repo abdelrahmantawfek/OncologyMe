@@ -50,7 +50,7 @@
                 <div class="careerfy-about-thumb">
                     <img src="{{ asset('uploads/'.$data['page']->sections[3]->img?? '') }}" alt="oncologyme">
                     <h3 style="color: #fff;">{{$data['page']->sections[3]->title?? ''}}</h3>
-                    <p>{!!$data['page']->sections[4]->content?? ''!!}</p>
+                    <p style="color: #fff;">{!!$data['page']->sections[4]->content?? ''!!}</p>
                 </div>
             </div>
 
