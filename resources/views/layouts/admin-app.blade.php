@@ -77,7 +77,7 @@
 		<script src="assets/js/scripts.bundle.js"></script>
 		<!--end::Global Javascript Bundle-->
 		<!--begin::Page Vendors Javascript(used by this page)-->
-		<script src="assets/plugins/custom/datatables/datatables.bundle.js"></script>
+		{{-- <script src="assets/plugins/custom/datatables/datatables.bundle.js"></script> --}}
 		<!--end::Page Vendors Javascript-->
 		<!--begin::Page Custom Javascript(used by this page)-->
 		{{-- <script src="assets/js/custom/apps/user-management/users/list/table.js"></script> --}}

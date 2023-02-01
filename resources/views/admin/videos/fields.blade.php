@@ -195,11 +195,7 @@
 
             <div class="form-group col-sm-12 fv-row mb-10 fv-plugins-icon-container cs-youtube" style="display: none">
                 {!! Form::label('youtube_video', 'Youtube ID', ['class' => 'form-label fs-6 fw-bolder text-dark']) !!}
-                @if (count($youtube_video))
-                {!! Form::text('youtube_video', $youtube_video[0], ['class' => 'form-control']) !!}
-                @else
-                {!! Form::text('youtube_video', null, ['class' => 'form-control']) !!}
-                @endif
+                {!! Form::text('youtube_video', $youtube_video[0] ?? '', ['class' => 'form-control']) !!}
             </div>
 
             <!-- Submit Field -->
