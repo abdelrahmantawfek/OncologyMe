@@ -107,7 +107,7 @@
             <!-- categories Field -->
             @if (count($categories)) 
             <div class="form-group col-sm-12 fv-row mb-10 fv-plugins-icon-container">
-                {!! Form::label('categories', 'Categories *:', ['class' => 'form-label fs-6 fw-bolder text-dark']) !!} <span>*</span>
+                {!! Form::label('categories', 'Categories :', ['class' => 'form-label fs-6 fw-bolder text-dark']) !!} <span>*</span>
                 <div class="row fv-row mb-10 fv-plugins-icon-container checkbox-container">
                     {{-- {{$post->categories[0]->id}} --}}
 
