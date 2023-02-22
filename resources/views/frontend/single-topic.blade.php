@@ -69,7 +69,7 @@
 
                                     <div class="videos-only brdr-bf br-nn">
                                         @foreach ($data['videos'] as $post)
-                                        @if (count($post->postmeta->where('meta_key', '_featured_image')) )
+                                        {{-- @if (count($post->postmeta->where('meta_key', '_featured_image')) ) --}}
                                         <div class="article-item @if(!count($data['news'])) col-md-4 @else col-md-12 @endif p-0">
                                             <div class="article-tags">
                                                 <div class="video-thumbnail pos-rltv">
@@ -77,6 +77,9 @@
                                                         @foreach ($post->postmeta->where('meta_key', '_featured_image') as $key => $value)
                                                         <img src="{{ asset('uploads/'.$value->meta_value )}}" alt="{{$value->meta_value}}">
                                                         @endforeach
+                                                        @if (!count($post->postmeta->where('meta_key', '_featured_image')) )
+                                                        <img src="{{ asset('uploads/d-post.jpeg')}}" alt="oncologyme">
+                                                        @endif
                                                     
                                                         <img class="pos-abslt" src="{{ asset('front-assets/img/play.png') }}">
                                                     </a>
@@ -95,7 +98,7 @@
                 
                                             </h4>
                                         </div>
-                                        @endif
+                                        {{-- @endif --}}
                                         @endforeach
                                     </div>
 

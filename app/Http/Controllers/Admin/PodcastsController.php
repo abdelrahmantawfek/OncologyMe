@@ -35,7 +35,7 @@ class PodcastsController extends Controller
 
     public function create()
     {
-        $all_topics = Topic::where('is_parent', 0)->get();
+        $all_topics = Topic::orderby('title')->where('is_parent', 0)->get();
         $categories = Category::where('post_type', 'podcasts')->get();
         return view('admin.podcasts.create', compact('all_topics', 'categories'));
     }
@@ -199,7 +199,7 @@ class PodcastsController extends Controller
     {
         /** @var Post $Category */
         $post = Post::find($id);
-        $all_topics = Topic::where('is_parent', 0)->get();
+        $all_topics = Topic::orderby('title')->where('is_parent', 0)->get();
         $categories = Category::where('post_type', 'podcasts')->get();
 
         $sound = $post->postmeta->where('meta_key', '_sound')->pluck('meta_value');

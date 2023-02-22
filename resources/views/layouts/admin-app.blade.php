@@ -106,15 +106,28 @@
         //             console.error( error );
         //     } );
 
-			ClassicEditor
-            .create( document.querySelector( '.ckeditor' ),{
-                ckfinder: {
-                    uploadUrl: "{{route('image.upload').'?_token='.csrf_token()}}",
-        }
-            })
-            .catch( error => {
-                console.error( error );
-            } );	
+		document.querySelectorAll('.ckeditor').forEach(function (val) {
+		ClassicEditor
+			.create(val, {
+				// toolbar: ['bold', 'italic', 'link', 'bulletedList', 'numberedList'],
+				ckfinder: {
+						uploadUrl: "{{route('image.upload').'?_token='.csrf_token()}}",
+				}
+			})
+			.catch(error => {
+				console.log(error);
+			});
+		});
+
+		// 	ClassicEditor
+        //     .create( document.querySelector( '.ckeditor' ),{
+        //         ckfinder: {
+        //             uploadUrl: "{{route('image.upload').'?_token='.csrf_token()}}",
+        // }
+        //     })
+        //     .catch( error => {
+        //         console.error( error );
+        //     } );	
 
 		</script>
 

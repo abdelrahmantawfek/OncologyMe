@@ -12,13 +12,23 @@ class TopicController extends Controller
     public function index(Request $request)
     {
         /** @var Ads $adss */
-        $topics = Topic::orderBy('created_at', 'DESC')->paginate(10);
+        $query = Topic::query();
+
+        if (request()->filled('search')) {
+            $query
+            ->where('title', 'LIKE', '%' . $request->search . '%');
+        }
+    
+        $data['admins'] = $query->orderBy('created_at', 'DESC')->paginate(10);
+
+        $topics = $query->orderBy('created_at', 'DESC')->paginate(10);
+
         return view('admin.topics.index', compact('topics'));
     }
 
     public function create()
     {
-        $parent_topic = Topic::where('is_parent', 1)->get()->pluck('title', 'id');
+        $parent_topic = Topic::orderBy('title', 'ASC')->where('is_parent', 1)->get()->pluck('title', 'id');
 
         return view('admin.topics.create', compact('parent_topic'));
     }
@@ -95,7 +105,7 @@ class TopicController extends Controller
     {
         /** @var Topic $Category */
         $topic = Topic::find($id);
-        $parent_topic = Topic::where('is_parent', 1)->where('id', '!=', $id)->get()->pluck('title', 'id');
+        $parent_topic = Topic::orderBy('title', 'ASC')->where('is_parent', 1)->where('id', '!=', $id)->get()->pluck('title', 'id');
 
         if (empty($topic)) {
             Flash::error('Topic not found');

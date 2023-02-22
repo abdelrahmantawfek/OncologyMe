@@ -120,7 +120,7 @@ class PageController extends Controller
     public function all_topics()
     {
         $data['page'] = Page::with('sections')->find(7);
-        $data['parent_topics'] = Topic::orderBy('title')->where('is_parent', 1)->get();
+        $data['parent_topics'] = Topic::orderBy('title', 'DESC')->where('is_parent', 1)->get();
         $data['child_topics'] = [];
         foreach ($data['parent_topics'] as $topic){
             $child_topics = Topic::where('is_parent', 0)

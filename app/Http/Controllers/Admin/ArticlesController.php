@@ -34,7 +34,7 @@ class ArticlesController extends Controller
 
     public function create()
     {
-        $all_topics = Topic::where('is_parent', 0)->get();
+        $all_topics = Topic::orderby('title')->where('is_parent', 0)->get();
         $categories = Category::where('post_type', 'articles')->get();
         return view('admin.articles.create', compact('all_topics', 'categories'));
     }
@@ -197,7 +197,7 @@ class ArticlesController extends Controller
     {
         /** @var Post $Category */
         $post = Post::find($id);
-        $all_topics = Topic::where('is_parent', 0)->get();
+        $all_topics = Topic::orderby('title')->where('is_parent', 0)->get();
         $categories = Category::where('post_type', 'articles')->get();
         $keypoints = $post->postmeta->where('meta_key', '_key_points')->pluck('meta_value');
         $featured_image = $post->postmeta->where('meta_key', '_featured_image')->pluck('meta_value');

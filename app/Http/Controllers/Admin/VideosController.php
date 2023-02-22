@@ -35,7 +35,7 @@ class VideosController extends Controller
 
     public function create()
     {
-        $all_topics = Topic::where('is_parent', 0)->get();
+        $all_topics = Topic::orderby('title')->where('is_parent', 0)->get();
         $categories = Category::where('post_type', 'videos')->get();
         return view('admin.videos.create', compact('all_topics', 'categories'));
     }
@@ -209,7 +209,7 @@ class VideosController extends Controller
     {
         /** @var Post $Category */
         $post = Post::find($id);
-        $all_topics = Topic::where('is_parent', 0)->get();
+        $all_topics = Topic::orderby('title')->where('is_parent', 0)->get();
         $categories = Category::where('post_type', 'videos')->get();
         $video = $post->postmeta->where('meta_key', '_video')->pluck('meta_value');
         $youtube_video = $post->postmeta->where('meta_key', '_youtube_video')->pluck('meta_value');

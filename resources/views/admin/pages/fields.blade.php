@@ -63,7 +63,6 @@
 
 <div class="col-xl-3">
     <div class="card">
-        @include('flash::message')
         <div class="cs-card-body">
             <!-- Submit Field -->
             <div class="form-group col-sm-12 fv-row mb-10 fv-plugins-icon-container">

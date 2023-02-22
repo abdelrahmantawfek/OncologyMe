@@ -31,12 +31,12 @@ class PostController extends Controller
         $data['youtube_video'] = $data['post']->postmeta->where('meta_key', '_youtube_video')->pluck('meta_value');
 
         $post = $data['post'];
-        $data['related-posts'] = Post::where('post_type', $post_type)
+        $data['related-posts'] = Post::inRandomOrder()->where('post_type', $post_type)
         ->whereHas('categories', function ($query) use ($post){
             $query->whereIn('slug', $post->categories->pluck('slug'));
            })
         ->where('id', '!=', $post->id)
-        ->get();
+        ->limit(4)->get();
 
     
         return view('frontend.single', compact('data'));

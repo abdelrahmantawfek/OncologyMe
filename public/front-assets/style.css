@@ -3324,6 +3324,9 @@ left: 50%;*/
     border-radius: 4px;
     padding: 2px 6px 3px;
     margin: 0 5px 5px 0;
+    display: inline-block;
+    height: 22.5px;
+    line-height: 1.2;
 }
 
 .article-tags span a {
@@ -5051,7 +5054,8 @@ ul#social_side_links li,
 
 .orange-bg {
     background: rgb(238, 101, 33);
-    background: linear-gradient(0deg, rgba(238, 101, 33, 1) 0%, rgba(255, 142, 66, 1) 50%);
+    /* background: linear-gradient(0deg, rgba(238, 101, 33, 1) 0%, rgba(255, 142, 66, 1) 50%); */
+    background: linear-gradient(0deg, rgba(238, 101, 33, 1) 0%, rgb(255 119 27) 50%);
 }
 
 .orange-bg.careerfy-main-section {

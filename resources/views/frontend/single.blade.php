@@ -183,7 +183,9 @@
                                                     @foreach ($post->postmeta->where('meta_key', '_featured_image') as $key => $value)
                                                     <img src="{{ asset('uploads/'.$value->meta_value )}}" alt="{{$value->meta_value}}">
                                                     @endforeach
-                                                 
+                                                    @if (!count($post->postmeta->where('meta_key', '_featured_image')) )
+                                                    <img src="{{ asset('uploads/d-post.jpeg')}}" alt="oncologyme">
+                                                    @endif
                                                     <img class="pos-abslt" src="{{ asset('front-assets/img/play.png') }}">
                                                 </a>
                                             </div>
