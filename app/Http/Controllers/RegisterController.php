@@ -41,6 +41,7 @@ class RegisterController extends Controller
             'password' => ['required', 'string', 'min:6', 'confirmed'],
             'country' => ['required', 'string'],
             'governorate' => '',
+            'other_governorate' => '',
             'affiliation' => ['required', 'string'],
             'speciality' => ['required', 'string'],
             'accept_newsletter_emails' => ['nullable'],
