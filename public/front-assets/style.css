@@ -3277,6 +3277,9 @@ left: 50%;*/
     display: inline-block;
     vertical-align: middle;
 }
+.articles-box .articles-only .article-item .feature_image{
+    width: 100%;
+}
 
 .articles-box .articles-only .article-item p {
     width: 74%;

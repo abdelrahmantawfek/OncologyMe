@@ -43,7 +43,7 @@
                             @endif
 
                             @foreach ($data['post']->postmeta->where('meta_key', '_featured_image') as $key => $value)
-                            <img src="{{ asset('uploads/'.$value->meta_value )}}" alt="{{$value->meta_value}}" width="100%">
+                            <img src="{{ asset('uploads/'.$value->meta_value )}}" alt="{{$value->meta_value}}" width="100%" class="feature_image">
                             @endforeach
 
                             <div class="clearfix"></div>
