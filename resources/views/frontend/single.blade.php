@@ -40,8 +40,11 @@
 
                             @if (count($data['youtube_video']))
                             <iframe width="100%" height="415" src="https://www.youtube.com/embed/{{$data['youtube_video'][0] ?? ''}}" frameborder="0" allowfullscreen></iframe>
-
                             @endif
+
+                            @foreach ($data['post']->postmeta->where('meta_key', '_featured_image') as $key => $value)
+                            <img src="{{ asset('uploads/'.$value->meta_value )}}" alt="{{$value->meta_value}}" width="100%">
+                            @endforeach
 
                             <div class="clearfix"></div>
                             <h2>{{ $data['post']->title  ?? ''}} </h2>
@@ -179,7 +182,7 @@
                                     <div class="article-item">
                                         <div class="article-tags">
                                             <div class="video-thumbnail pos-rltv">
-                                                <a href="{{$post->post_type.'/'.$post->slug}}">
+                                                <a href="{{'/'.$post->post_type.'/'.$post->slug}}">
                                                     @foreach ($post->postmeta->where('meta_key', '_featured_image') as $key => $value)
                                                     <img src="{{ asset('uploads/'.$value->meta_value )}}" alt="{{$value->meta_value}}">
                                                     @endforeach
@@ -195,7 +198,7 @@
         
                                         </div>
                                         <div class="clearfix"></div>
-                                        <h2><a href="{{$post->post_type.'/'.$post->slug}}">{{ implode(' ', array_slice(explode(' ', $post->title), 0, 10)) }}@if ( str_word_count($post->title) > 10 )...@endif</a></h2>
+                                        <h2><a href="{{'/'.$post->post_type.'/'.$post->slug}}">{{ implode(' ', array_slice(explode(' ', $post->title), 0, 10)) }}@if ( str_word_count($post->title) > 10 )...@endif</a></h2>
                                         <h4>
                                             <span> {{ $post->author ?? ''}} </span>
             
