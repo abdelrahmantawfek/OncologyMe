@@ -47,7 +47,20 @@ class RegisterController extends Controller
             'accept_newsletter_emails' => ['nullable'],
         ]);
 
-        $user = User::create($data);
+        
+        $user = User::create([
+            'first_name'  => $request->first_name,
+            'last_name'  =>  $request->last_name ,
+            'email'  =>   $request->email,
+            'phone'  =>   $request->phone,
+            'password'  =>   bcrypt($request->password),
+            'country'  =>   $request->country,
+            'governorate'  =>   $request->governorate,
+            'affiliation'  =>   $request->affiliation,
+            'speciality'  =>   $request->speciality,
+            'accept_newsletter_emails'  =>  $request->accept_newsletter_emails,
+        ]);
+        // $user = User::create($data);
          
         Mail::to($user->email)->send(new NotifyMail($user));
         Flash::success('You are successfully registered to OncologyMe! Please check your email to activate your account');

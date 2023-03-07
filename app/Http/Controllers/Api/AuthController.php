@@ -9,9 +9,11 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\NotifyMail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Contracts\Auth\PasswordBroker;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Facades\Hash;
 
 
 class AuthController extends Controller
@@ -257,11 +259,27 @@ class AuthController extends Controller
 
         $accept_emails= Validator::make($request->all(), ['accept_newsletter_emails' => 'nullable']);
 
-        $user = User::create($request->all());
+        $user = User::create([
+            'first_name'  => $request->first_name,
+            'last_name'  =>  $request->last_name ,
+            'email'  =>   $request->email,
+            'phone'  =>   $request->phone,
+            'password'  =>   bcrypt($request->password),
+            'country'  =>   $request->country,
+            'governorate'  =>   $request->governorate,
+            'affiliation'  =>   $request->affiliation,
+            'speciality'  =>   $request->speciality,
+            'accept_newsletter_emails'  =>   $request->accept_newsletter_emails,
+        ]);
+
          
         Mail::to($user->email)->send(new NotifyMail($user));
 
-        return $this->response($user);
+        // return $this->response($user);
+        return response()->json([
+            'success' => true,
+            'message' => "You are successfully registered to OncologyMe! Please check your email to activate your account",
+        ]); 
 
     }
 
@@ -299,7 +317,7 @@ class AuthController extends Controller
         }
 
         // $remember_me = $request->has('remember_me') ? true : false; 
-
+   
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $user = User::where('email', $request->email)->first();
             if($user->status == 0) {

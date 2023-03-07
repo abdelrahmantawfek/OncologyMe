@@ -72,12 +72,12 @@ class User extends Authenticatable
      * @param String $val
      * @return void
      */
-    public function setPasswordAttribute($val)
-    {
-        if ($val) {
-            $this->attributes['password'] = bcrypt($val);
-        }
-    }
+    // public function setPasswordAttribute($val)
+    // {
+    //     if ($val) {
+    //         $this->attributes['password'] = bcrypt($val);
+    //     }
+    // }
 
     public static function countries()
     {
