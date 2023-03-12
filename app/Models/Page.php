@@ -35,6 +35,6 @@ class Page extends Model
      */
     public function sections(): HasMany
     {
-        return $this->hasMany(Section::class);
+        return $this->hasMany(Section::class)->select(['title', 'subtitle', 'content']);
     }
 }

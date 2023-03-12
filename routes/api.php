@@ -24,6 +24,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::controller(App\Http\Controllers\Api\PageController::class)->group(
     function (){
-        Route::get('/pages',  'pages');
+        Route::get('/pages/{slug}',  'pages');
     }
 );
