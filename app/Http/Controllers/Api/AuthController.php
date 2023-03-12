@@ -339,7 +339,7 @@ class AuthController extends Controller
         return $this->response($user);
     }
 
-    public function forget_password(Request $request)
+    public function forgetPassword(Request $request)
     {
         $input = $request->only('email');
 

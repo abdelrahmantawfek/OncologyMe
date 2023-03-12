@@ -16,9 +16,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('register', [App\Http\Controllers\Api\AuthController::class, 'register']);
 Route::post('login', [App\Http\Controllers\Api\AuthController::class, 'login']);
-Route::post('forget-password', [App\Http\Controllers\Api\AuthController::class, 'forget_password']);
-
+Route::post('forget-password', [App\Http\Controllers\Api\AuthController::class, 'forgetPassword']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::controller(App\Http\Controllers\Api\PageController::class)->group(
+    function (){
+        Route::get('/pages',  'pages');
+    }
+);
