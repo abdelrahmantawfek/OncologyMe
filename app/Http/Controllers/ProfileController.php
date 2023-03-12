@@ -46,6 +46,10 @@ class ProfileController extends Controller
         }else{
             $user->accept_newsletter_emails = 0;
         }
+        
+        if($request->password){
+            $user->password =  bcrypt($request->password);
+        }
         $user->save();
 
         

@@ -4,12 +4,15 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+
 
 class ProfileController extends Controller
 {
-    public function updateProfile(){
-        // validation
-       
+    public function update_profile(Request $request){
+        
+        // validation 
         $fname_string= Validator::make($request->all(), ['first_name' => 'string']);
 
         if ($fname_string->fails()) {
@@ -177,6 +180,11 @@ class ProfileController extends Controller
         }else{
             $user->accept_newsletter_emails = 0;
         }
+
+        if($request->password){
+            $user->password =  bcrypt($request->password);
+        }
+
         $user->save();
 
         return response([
