@@ -26,6 +26,14 @@ class PostController extends Controller
 
         $data['topics'] = $query->with('posts')->whereHas('posts')->orderBy('created_at', 'desc')->get();
 
+        foreach($data['topics'] as $key => $topic)
+        {
+            foreach($topic['posts'] as $item)
+            {
+                unset($item['content']);
+            }
+        }
+
         return response()->json($data);
     }
 
@@ -52,7 +60,7 @@ class PostController extends Controller
 
         $query->limit( request('limit') ?? 10 );
 
-        $data['posts'] = $query->orderBy('created_at', 'desc')->get();
+        $data['posts'] = $query->orderBy('created_at', 'desc')->get()->makeHidden(['content']);
 
         return response()->json($data);
     }
