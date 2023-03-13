@@ -26,6 +26,15 @@ Route::group(['middleware' => ['auth:sanctum', 'user']], function () {
             Route::post('/update-profile', 'update_profile');
         }
     );
+
+    Route::controller(App\Http\Controllers\Api\PostController::class)->group(
+        function () {
+            Route::get('/topics', 'topics'); 
+            Route::get('/topics/{slug}', 'topic');
+            Route::get('/posts', 'posts');
+            Route::get('/posts/{slug}', 'post');
+        }
+    );
 });
 
 // Pages
