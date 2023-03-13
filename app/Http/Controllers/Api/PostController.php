@@ -9,7 +9,7 @@ use App\Models\Topic;
 
 class PostController extends Controller
 {
-
+         
     public function topics()
     {
         $query = Topic::query();
