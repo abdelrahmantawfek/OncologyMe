@@ -27,14 +27,6 @@ Route::group(['middleware' => ['auth:sanctum', 'user']], function () {
         }
     );
 
-    Route::controller(App\Http\Controllers\Api\PostController::class)->group(
-        function () {
-            Route::get('/topics', 'topics'); 
-            Route::get('/topics/{slug}', 'topic');
-            Route::get('/posts', 'posts');
-            Route::get('/posts/{slug}', 'post');
-        }
-    );
 });
 
 // Pages
@@ -44,6 +36,15 @@ Route::controller(App\Http\Controllers\Api\PageController::class)->group(
     }
 );
 
+// Posts & Topics
+Route::controller(App\Http\Controllers\Api\PostController::class)->group(
+    function () {
+        Route::get('/topics', 'topics'); 
+        Route::get('/topics/{slug}', 'topic');
+        Route::get('/posts', 'posts');
+        Route::get('/posts/{slug}', 'post');
+    }
+);
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();

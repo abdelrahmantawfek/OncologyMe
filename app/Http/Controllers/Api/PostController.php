@@ -18,20 +18,12 @@ class PostController extends Controller
             $query->where('title', request('title'))->get(); 
         }
 
-        if( request()->filled('offset') ){
-            $query->offset( request('offset') );
-        }
+        // parents
+        $data['topics'] = $query->where('is_parent', 1)->orderBy('created_at', 'desc')->get();
 
-        $query->limit( request('limit') ?? 10 );
-
-        $data['topics'] = $query->with('posts')->whereHas('posts')->orderBy('created_at', 'desc')->get();
-
-        foreach($data['topics'] as $key => $topic)
-        {
-            foreach($topic['posts'] as $item)
-            {
-                unset($item['content']);
-            }
+        // children
+        foreach($data['topics'] as $key => $topic){
+            $topic['child_topics'] = Topic::where('is_parent', 0)->where('parent_id', $topic->id)->whereHas('posts')->get();
         }
 
         return response()->json($data);
@@ -41,14 +33,18 @@ class PostController extends Controller
     {
         $query = Topic::query();
 
-        $data['topic'] = $query->with('posts')->where('slug', $slug)->orWhere(['title' =>'', 'is_parent' => 0])->first();
+        $data['topic'] = Topic::where('slug', $slug)->first(["id", "title"]);
+
+        $data['topic']['posts'] = $data['topic']->posts()->get()->makeHidden(['content', 'meta_title', 'meta_desc', 'highlights', 'created_at', 'updated_at', 'pivot']);   
+
+        $data['other_child_topics'] =  Topic::where('is_parent', 0)->where('id', '!=', $data['topic']->id)->whereHas('posts')->get()->pluck('title', 'slug');
 
         return response()->json($data);
     }
 
     public function posts()
     {
-        $query = Post::query()->with('topics');
+        $query = Post::query();
 
         if(request()->filled('post_type')){
             $query->where('post_type', request('post_type'))->get(); 
@@ -60,7 +56,11 @@ class PostController extends Controller
 
         $query->limit( request('limit') ?? 10 );
 
-        $data['posts'] = $query->orderBy('created_at', 'desc')->get()->makeHidden(['content']);
+        $data['posts'] = $query->orderBy('created_at', 'desc')->get()->makeHidden(['content', 'meta_title', 'meta_desc', 'highlights', 'created_at', 'updated_at', 'pivot']);
+
+        foreach($data['posts'] as $key => $post){
+            $post['topics'] = $post->topics()->get()->pluck('title', 'slug');
+        }
 
         return response()->json($data);
     }
@@ -69,8 +69,16 @@ class PostController extends Controller
     {
         $query = Post::query();
 
-        $data['post'] = $query->with('topics')->where('slug', $slug)->first();
+        $data['post'] = $query->with('topics:title,slug')->where('slug', $slug)->first();
 
         return response()->json($data);
     }
 }
+
+ // foreach($data['topics'] as $key => $topic)
+        // {
+        //     foreach($topic['posts'] as $item)
+        //     {
+        //         unset($item['content']);
+        //     }
+        // }
