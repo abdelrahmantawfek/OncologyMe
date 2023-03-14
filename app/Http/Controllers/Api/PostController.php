@@ -50,6 +50,13 @@ class PostController extends Controller
             $query->where('post_type', request('post_type'))->get(); 
         }
 
+        if(request()->filled('category')){
+
+            $query->whereHas('categories', function($q) {
+                $q->where('title', 'like', '%' . request('category') . '%');
+            });
+        }
+
         if( request()->filled('offset') ){
             $query->offset( request('offset') );
         }
@@ -62,6 +69,16 @@ class PostController extends Controller
             $post['topics'] = $post->topics()->get()->pluck('title', 'slug');
         }
 
+        foreach($data['posts'] as $key => $post){
+            if(request()->filled('category'))
+            {
+                $post['categories'] = $post->categories()->where('post_type', request('post_type'))->where('title', '!=', request('category'))->get()->pluck('title', 'slug');
+            }
+            else{
+                $post['categories'] = $post->categories()->where('post_type', request('post_type'))->get()->pluck('title', 'slug');
+            }
+        }
+        
         return response()->json($data);
     }
 
