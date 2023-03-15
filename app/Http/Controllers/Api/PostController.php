@@ -38,6 +38,11 @@ class PostController extends Controller
 
         $data['topic']['posts'] = $data['topic']->posts()->get()->makeHidden(['content', 'meta_title', 'meta_desc', 'highlights', 'created_at', 'updated_at', 'pivot']);   
 
+        foreach($data['topic']['posts'] as $key => $post){
+
+           $post['postmeta'] = Post::where('id', $post->id)->first()->postmeta()->first(['meta_key', 'meta_value']);
+        }
+
         $data['topics_filter'] =  Topic::select(['title', 'slug'])->where('is_parent', 0)->where('id', '!=', $data['topic']->id)->whereHas('posts')->get();
 
         return response()->json($data);
@@ -67,10 +72,8 @@ class PostController extends Controller
 
         foreach($data['posts'] as $key => $post){
             $post['topics'] = $post->topics()->select(['title', 'slug'])->get()->makeHidden(['pivot']);
-        }
-
-        foreach($data['posts'] as $key => $post){
             $post['categories'] = $post->categories()->select(['title', 'slug'])->where('post_type', request('post_type'))->get()->makeHidden(['pivot']);
+            $post['postmeta'] = $post->postmeta()->first(['meta_key', 'meta_value']);
         }
         
         if(request()->filled('category'))
