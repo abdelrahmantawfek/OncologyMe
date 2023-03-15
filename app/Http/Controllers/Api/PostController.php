@@ -70,13 +70,7 @@ class PostController extends Controller
         }
 
         foreach($data['posts'] as $key => $post){
-            if(request()->filled('category'))
-            {
-               $post['categories'] = $post->categories()->select(['title', 'slug'])->where('post_type', request('post_type'))->where('slug', '!=', request('category'))->get()->makeHidden(['pivot']);
-            }
-            else{
-                $post['categories'] = $post->categories()->select(['title', 'slug'])->where('post_type', request('post_type'))->get()->makeHidden(['pivot']);
-            }
+            $post['categories'] = $post->categories()->select(['title', 'slug'])->where('post_type', request('post_type'))->get()->makeHidden(['pivot']);
         }
         
        if(request()->filled('category'))
