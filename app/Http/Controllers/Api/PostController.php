@@ -38,7 +38,7 @@ class PostController extends Controller
 
         $data['topic']['posts'] = $data['topic']->posts()->get()->makeHidden(['content', 'meta_title', 'meta_desc', 'highlights', 'created_at', 'updated_at', 'pivot']);   
 
-        $data['topics_filter'] =  Topic::where('is_parent', 0)->where('id', '!=', $data['topic']->id)->whereHas('posts')->get()->pluck('title', 'slug');
+        $data['topics_filter'] =  Topic::select(['title', 'slug'])->where('is_parent', 0)->where('id', '!=', $data['topic']->id)->whereHas('posts')->get();
 
         return response()->json($data);
     }
@@ -51,11 +51,11 @@ class PostController extends Controller
             $query->where('post_type', request('post_type'))->get(); 
         }
 
-        // if(request()->filled('category')){
-        //     $query->whereHas('categories', function($q) {
-        //         $q->where('title', 'like', '%' . request('category') . '%');
-        //     });
-        // }
+        if(request()->filled('category')){
+            $query->whereHas('categories', function($q) {
+                $q->where('title', 'like', '%' . request('category') . '%');
+            });
+        }
 
         if( request()->filled('offset') ){
             $query->offset( request('offset') );
@@ -66,7 +66,7 @@ class PostController extends Controller
         $data['posts'] = $query->orderBy('created_at', 'desc')->get()->makeHidden(['content', 'meta_title', 'meta_desc', 'highlights', 'created_at', 'updated_at', 'pivot']);
 
         foreach($data['posts'] as $key => $post){
-            $post['topics'] = $post->topics()->get()->pluck('title', 'slug');
+            $post['topics'] = $post->topics()->select(['title', 'slug'])->get();
         }
 
         // foreach($data['posts'] as $key => $post){
@@ -81,10 +81,10 @@ class PostController extends Controller
         
        if(request()->filled('category'))
         {
-            $data['categories_filter'] = Category::where('post_type', request('post_type'))->where('title', '!=', request('category'))->whereHas('posts')->get()->pluck('title', 'slug');
+            $data['categories_filter'] = Category::select(['title', 'slug'])->where('post_type', request('post_type'))->where('title', '!=', request('category'))->whereHas('posts')->get();
         }
         else{
-            $data['categories_filter'] = Category::where('post_type', request('post_type'))->whereHas('posts')->get()->pluck('title', 'slug');
+            $data['categories_filter'] = Category::select(['title', 'slug'])->where('post_type', request('post_type'))->whereHas('posts')->get();
         }
         
         return response()->json($data);
