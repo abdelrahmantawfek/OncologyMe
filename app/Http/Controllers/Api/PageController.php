@@ -41,6 +41,6 @@ class PageController extends Controller
         })->take(5)->get();
         $data['Latest Podcasts'] = Post::select(['title', 'slug', 'excerpt'])->where('post_type', 'podcasts')->take(5)->get();
 
-        return response()->json($data);
+        return response()->json($data); 
     }
 }
