@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Page;
 use App\Models\Settings;
+use App\Models\Post;
 
 class PageController extends Controller
 {
@@ -29,5 +30,17 @@ class PageController extends Controller
         return response()->json([
             'data' => $data
         ]);
+    }
+
+    public function home()
+    {
+        $data['Latest News'] = Post::select(['title', 'slug', 'excerpt'])->where('post_type', 'news')->take(5)->get();
+        $data['Latest Videos'] = Post::select(['title', 'slug', 'excerpt'])->where('post_type', 'videos')->take(5)->get();
+        $data['Latest Studying slides'] = Post::select(['title', 'slug', 'excerpt'])->where('post_type', 'articles')->whereHas('categories', function($q) {
+            $q->where('slug', 'like', 'study-presentations');
+        })->take(5)->get();
+        $data['Latest Podcasts'] = Post::select(['title', 'slug', 'excerpt'])->where('post_type', 'podcasts')->take(5)->get();
+
+        return response()->json($data);
     }
 }

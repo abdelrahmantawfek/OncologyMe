@@ -32,6 +32,7 @@ Route::group(['middleware' => ['auth:sanctum', 'user']], function () {
 // Pages
 Route::controller(App\Http\Controllers\Api\PageController::class)->group(
     function (){
+        Route::get('/home',  'home');
         Route::get('/pages/{slug}',  'pages');
     }
 );
