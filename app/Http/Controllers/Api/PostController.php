@@ -81,10 +81,10 @@ class PostController extends Controller
         
        if(request()->filled('category'))
         {
-            $data['categories_filter'] = Category::where('post_type', request('post_type'))->where('title', '!=', request('category'))->get()->pluck('title', 'slug');
+            $data['categories_filter'] = Category::where('post_type', request('post_type'))->where('title', '!=', request('category'))->whereHas('posts')->get()->pluck('title', 'slug');
         }
         else{
-            $data['categories_filter'] = Category::where('post_type', request('post_type'))->get()->pluck('title', 'slug');
+            $data['categories_filter'] = Category::where('post_type', request('post_type'))->whereHas('posts')->get()->pluck('title', 'slug');
         }
         
         return response()->json($data);
