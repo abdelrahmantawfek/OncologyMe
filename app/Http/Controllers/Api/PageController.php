@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Page;
 use App\Models\Settings;
 use App\Models\Post;
+use App\Models\Announcement;
+
 
 class PageController extends Controller
 {
@@ -40,7 +42,7 @@ class PageController extends Controller
             $q->where('slug', 'like', 'study-presentations');
         })->take(5)->get();
         $data['Latest Podcasts'] = Post::select(['title', 'slug', 'excerpt'])->where('post_type', 'podcasts')->take(5)->get();
-
+        $data['home_ads'] = Announcement::where('place', '1')->get();
         return response()->json($data); 
     }
 }

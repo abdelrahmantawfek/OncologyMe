@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Topic;
 use App\Models\Category;
+use App\Models\Announcement;
 
 class PostController extends Controller
 {
@@ -27,6 +28,8 @@ class PostController extends Controller
             $topic['child_topics'] = Topic::where('is_parent', 0)->where('parent_id', $topic->id)->whereHas('posts')->get();
         }
 
+        $data['topics_ads'] = Announcement::where('place', 'topics')->get();
+
         return response()->json($data);
     }
 
@@ -44,6 +47,8 @@ class PostController extends Controller
         }
 
         $data['topics_filter'] =  Topic::select(['title', 'slug'])->where('is_parent', 0)->where('id', '!=', $data['topic']->id)->whereHas('posts')->get();
+
+        $data['topics_ads'] = Announcement::where('place', 'topics')->get();
 
         return response()->json($data);
     }
@@ -84,6 +89,8 @@ class PostController extends Controller
             $data['categories_filter'] = Category::select(['title', 'slug'])->where('post_type', request('post_type'))->whereHas('posts')->get();
         }
         
+        $data[request('post_type').'_ads'] = Announcement::where('place', request('post_type'))->get();
+
         return response()->json($data);
     }
 
@@ -94,6 +101,8 @@ class PostController extends Controller
         $data['post'] = $query->where('slug', $slug)->first(['id', 'title', 'slug', 'content', 'author', 'post_type', 'meta_title', 'meta_desc']);
         $data['post']['postmeta'] = $data['post']->postmeta()->first(['meta_key', 'meta_value']);
         $data['post']['topics'] = $data['post']->topics()->select(['title', 'slug'])->get()->makeHidden(['pivot']);
+
+        $data[$data['post']->post_type.'_ads'] = Announcement::where('place', $data['post']->post_type)->get();
 
         return response()->json($data);
     }
