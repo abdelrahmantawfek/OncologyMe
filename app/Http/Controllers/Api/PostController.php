@@ -73,7 +73,7 @@ class PostController extends Controller
             $post['categories'] = $post->categories()->select(['title', 'slug'])->where('post_type', request('post_type'))->get()->makeHidden(['pivot']);
         }
         
-       if(request()->filled('category'))
+        if(request()->filled('category'))
         {
             $data['categories_filter'] = Category::select(['title', 'slug'])->where('post_type', request('post_type'))->where('slug', '!=', request('category'))->whereHas('posts')->get();
         }
@@ -89,6 +89,7 @@ class PostController extends Controller
         $query = Post::query();
 
         $data['post'] = $query->where('slug', $slug)->first(['id', 'title', 'slug', 'content', 'author', 'post_type', 'meta_title', 'meta_desc']);
+        $data['post']['postmeta'] = $data['post']->postmeta()->first(['meta_key', 'meta_value']);
         $data['post']['topics'] = $data['post']->topics()->select(['title', 'slug'])->get()->makeHidden(['pivot']);
 
         return response()->json($data);
