@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Topic;
+use App\Models\Category;
 
 class PostController extends Controller
 {
@@ -37,7 +38,7 @@ class PostController extends Controller
 
         $data['topic']['posts'] = $data['topic']->posts()->get()->makeHidden(['content', 'meta_title', 'meta_desc', 'highlights', 'created_at', 'updated_at', 'pivot']);   
 
-        $data['other_child_topics'] =  Topic::where('is_parent', 0)->where('id', '!=', $data['topic']->id)->whereHas('posts')->get()->pluck('title', 'slug');
+        $data['topics_filter'] =  Topic::where('is_parent', 0)->where('id', '!=', $data['topic']->id)->whereHas('posts')->get()->pluck('title', 'slug');
 
         return response()->json($data);
     }
@@ -50,12 +51,11 @@ class PostController extends Controller
             $query->where('post_type', request('post_type'))->get(); 
         }
 
-        if(request()->filled('category')){
-
-            $query->whereHas('categories', function($q) {
-                $q->where('title', 'like', '%' . request('category') . '%');
-            });
-        }
+        // if(request()->filled('category')){
+        //     $query->whereHas('categories', function($q) {
+        //         $q->where('title', 'like', '%' . request('category') . '%');
+        //     });
+        // }
 
         if( request()->filled('offset') ){
             $query->offset( request('offset') );
@@ -69,14 +69,22 @@ class PostController extends Controller
             $post['topics'] = $post->topics()->get()->pluck('title', 'slug');
         }
 
-        foreach($data['posts'] as $key => $post){
-            if(request()->filled('category'))
-            {
-                $post['categories'] = $post->categories()->where('post_type', request('post_type'))->where('title', '!=', request('category'))->get()->pluck('title', 'slug');
-            }
-            else{
-                $post['categories'] = $post->categories()->where('post_type', request('post_type'))->get()->pluck('title', 'slug');
-            }
+        // foreach($data['posts'] as $key => $post){
+        //     if(request()->filled('category'))
+        //     {
+        //        // $post['categories_filter'] = $post->categories()->where('post_type', request('post_type'))->where('title', '!=', request('category'))->get()->pluck('title', 'slug');
+        //     }
+        //     else{
+        //         // $post['categories_filter'] = $post->categories()->where('post_type', request('post_type'))->get()->pluck('title', 'slug');
+        //     }
+        // }
+        
+       if(request()->filled('category'))
+        {
+            $data['categories_filter'] = Category::where('post_type', request('post_type'))->where('title', '!=', request('category'))->get()->pluck('title', 'slug');
+        }
+        else{
+            $data['categories_filter'] = Category::where('post_type', request('post_type'))->get()->pluck('title', 'slug');
         }
         
         return response()->json($data);
@@ -86,16 +94,8 @@ class PostController extends Controller
     {
         $query = Post::query();
 
-        $data['post'] = $query->with('topics:title,slug')->where('slug', $slug)->first();
+        $data['post'] = $query->with('topics:title,slug')->where('slug', $slug)->first(['id', 'title', 'slug', 'content', 'author', 'post_type', 'meta_title', 'meta_desc']);
 
         return response()->json($data);
     }
 }
-
- // foreach($data['topics'] as $key => $topic)
-        // {
-        //     foreach($topic['posts'] as $item)
-        //     {
-        //         unset($item['content']);
-        //     }
-        // }
