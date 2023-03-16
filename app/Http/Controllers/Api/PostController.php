@@ -67,6 +67,22 @@ class PostController extends Controller
             });
         }
 
+        if (request()->filled('search')) {
+            $query
+            ->where('title', 'LIKE', '%' . request('search') . '%')
+            ->orWhere('slug', 'like', '%' . request('search') . '%')
+            ->orWhere('excerpt', 'like', '%' . request('search') . '%')
+            ->orWhere('content', 'like', '%' . request('search') . '%')
+            ->orWhere('author', 'like', '%' . request('search') . '%')
+            ->orWhere('post_type', 'like', '%' . request('search') . '%')
+            ->orWhereHas('topics', function($q){
+                $q->where('title', 'like', '%' . request('search') . '%');
+            })
+            ->orWhereHas('categories', function($q){
+                $q->where('title', 'like', '%' . request('search') . '%');
+            });
+        }
+
         if( request()->filled('offset') ){
             $query->offset( request('offset') );
         }
