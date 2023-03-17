@@ -64,8 +64,8 @@ class PageController extends Controller
 
     public function about()
     {
+        
         $data['page'] = Page::with('sections.images')->find(2);
-
         return view('frontend.about-us', compact('data'));
     }
 

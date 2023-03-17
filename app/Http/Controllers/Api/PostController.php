@@ -14,19 +14,44 @@ class PostController extends Controller
          
     public function topics()
     {
-        $query = Topic::query();
 
-        if(request()->filled('title')){
-            $query->where('title', request('title'))->get(); 
+        $query = Post::query();
+
+        if(request()->filled('post_type')){
+            $query->where('post_type', request('post_type'))->get(); 
         }
 
-        // parents
-        $data['topics'] = $query->where('is_parent', 1)->orderBy('created_at', 'desc')->get();
-
-        // children
-        foreach($data['topics'] as $key => $topic){
-            $topic['child_topics'] = Topic::where('is_parent', 0)->where('parent_id', $topic->id)->whereHas('posts')->get();
+        if( request()->filled('offset') ){
+            $query->offset( request('offset') );
         }
+
+        $query->limit( request('limit') ?? 10 );
+
+        $data['posts'] = $query->orderBy('created_at', 'desc')->get()->makeHidden(['content', 'meta_title', 'meta_desc', 'highlights', 'created_at', 'updated_at', 'pivot']);
+
+        foreach($data['posts'] as $key => $post){
+            $post['topics'] = $post->topics()->select(['title', 'slug'])->get()->makeHidden(['pivot']);
+            $post['postmeta'] = $post->postmeta()->first(['meta_key', 'meta_value']);
+        }
+        // $query = Topic::query();
+
+        // if(request()->filled('title')){
+        //     $query->where('title', request('title'))->get(); 
+        // }
+
+        // if( request()->filled('offset') ){
+        //     $query->offset( request('offset') );
+        // }
+
+        // $query->limit( request('limit') ?? 10 );
+
+        // // parents
+        // $data['topics'] = $query->where('is_parent', 1)->orderBy('created_at', 'desc')->get();
+
+        // // children
+        // foreach($data['topics'] as $key => $topic){
+        //     $topic['child_topics'] = Topic::where('is_parent', 0)->where('parent_id', $topic->id)->whereHas('posts')->get();
+        // }
 
         $data['topics_ads'] = Announcement::where('place', 'topics')->get();
 
