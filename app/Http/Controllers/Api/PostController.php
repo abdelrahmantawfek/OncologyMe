@@ -27,11 +27,17 @@ class PostController extends Controller
 
         $query->limit( request('limit') ?? 10 );
 
-        $data['posts'] = $query->orderBy('created_at', 'desc')->get()->makeHidden(['content', 'meta_title', 'meta_desc', 'highlights', 'created_at', 'updated_at', 'pivot']);
+        $data['posts'] = $query->orderBy('created_at', 'desc')->get()->makeHidden(['content', 'meta_title', 'meta_desc', 'highlights', 'pivot']);
 
         foreach($data['posts'] as $key => $post){
             $post['topics'] = $post->topics()->select(['title', 'slug'])->get()->makeHidden(['pivot']);
-            $post['postmeta'] = $post->postmeta()->first(['meta_key', 'meta_value']);
+
+            $post['featured_image'] = $post->postmeta()->select(['meta_value'])->where('meta_key', '_featured_image')->get();
+            if(count($post['featured_image']) == 0){
+                $post['featured_image'] = array(['meta_value'=> 'd-post.jpeg']);
+            }
+
+            // $post['postmeta'] = $post->postmeta()->first(['meta_key', 'meta_value']);
         }
         // $query = Topic::query();
 
@@ -53,7 +59,9 @@ class PostController extends Controller
         //     $topic['child_topics'] = Topic::where('is_parent', 0)->where('parent_id', $topic->id)->whereHas('posts')->get();
         // }
 
-        $data['topics_ads'] = Announcement::where('place', 'topics')->get();
+        $data['topics_filter'] =  Topic::select(['title', 'slug'])->where('is_parent', 0)->whereHas('posts')->get();
+
+        $data['topics_ads'] = Announcement::where('place', 'topics')->orWhere('place', '1')->get();
 
         return response()->json($data);
     }
@@ -64,11 +72,16 @@ class PostController extends Controller
 
         $data['topic'] = Topic::where('slug', $slug)->first(["id", "title"]);
 
-        $data['topic']['posts'] = $data['topic']->posts()->get()->makeHidden(['content', 'meta_title', 'meta_desc', 'highlights', 'created_at', 'updated_at', 'pivot']);   
+        $data['topic']['posts'] = $data['topic']->posts()->get()->makeHidden(['content', 'meta_title', 'meta_desc', 'highlights', 'pivot']);   
 
         foreach($data['topic']['posts'] as $key => $post){
 
-           $post['postmeta'] = Post::where('id', $post->id)->first()->postmeta()->first(['meta_key', 'meta_value']);
+            $post['featured_image'] = $post->postmeta()->select(['meta_value'])->where('meta_key', '_featured_image')->get();
+            if(count($post['featured_image']) == 0){
+                $post['featured_image'] = array(['meta_value'=> 'd-post.jpeg']);
+            }
+
+        //    $post['postmeta'] = $post->postmeta()->first(['meta_key', 'meta_value']);
         }
 
         $data['topics_filter'] =  Topic::select(['title', 'slug'])->where('is_parent', 0)->where('id', '!=', $data['topic']->id)->whereHas('posts')->get();
@@ -114,12 +127,18 @@ class PostController extends Controller
 
         $query->limit( request('limit') ?? 10 );
 
-        $data['posts'] = $query->orderBy('created_at', 'desc')->get()->makeHidden(['content', 'meta_title', 'meta_desc', 'highlights', 'created_at', 'updated_at', 'pivot']);
+        $data['posts'] = $query->orderBy('created_at', 'desc')->get()->makeHidden(['content', 'meta_title', 'meta_desc', 'highlights', 'pivot']);
 
         foreach($data['posts'] as $key => $post){
             $post['topics'] = $post->topics()->select(['title', 'slug'])->get()->makeHidden(['pivot']);
+            // $post['postmeta'] = $post->postmeta()->first(['meta_key', 'meta_value']);
+
+            $post['featured_image'] = $post->postmeta()->select(['meta_value'])->where('meta_key', '_featured_image')->get();
+            if(count($post['featured_image']) == 0){
+                $post['featured_image'] = array(['meta_value'=> 'd-post.jpeg']);
+            }
             $post['categories'] = $post->categories()->select(['title', 'slug'])->where('post_type', request('post_type'))->get()->makeHidden(['pivot']);
-            $post['postmeta'] = $post->postmeta()->first(['meta_key', 'meta_value']);
+
         }
         
         if(request()->filled('category'))
@@ -139,8 +158,19 @@ class PostController extends Controller
     {
         $query = Post::query();
 
-        $data['post'] = $query->where('slug', $slug)->first(['id', 'title', 'slug', 'content', 'author', 'post_type', 'meta_title', 'meta_desc']);
-        $data['post']['postmeta'] = $data['post']->postmeta()->first(['meta_key', 'meta_value']);
+        $data['post'] = $query->where('slug', $slug)->first(['id', 'title', 'slug', 'content', 'author', 'post_type']);
+        // $data['post']['postmeta'] = $data['post']->postmeta()->first(['meta_key', 'meta_value']);
+        
+        $data['post']['featured_image'] = $data['post']->postmeta()->select(['meta_value'])->where('meta_key', '_featured_image')->get();
+        if(count($data['post']['featured_image']) == 0){
+            $data['post']['featured_image'] = array(['meta_value'=> 'd-post.jpeg']);
+        }
+        $data['post']['key_points'] = $data['post']->postmeta()->select(['meta_value'])->where('meta_key', '_key_points')->get();
+        $data['post']['pdf'] = $data['post']->postmeta()->select(['meta_value'])->where('meta_key', '_pdf')->get();
+        $data['post']['sound'] = $data['post']->postmeta()->select(['meta_value'])->where('meta_key', '_sound')->get();
+        $data['post']['youtube_video'] = $data['post']->postmeta()->select(['meta_value'])->where('meta_key', '_youtube_video')->get();
+        $data['post']['script'] = $data['post']->postmeta()->select(['meta_value'])->where('meta_key', '_script')->get();
+
         $data['post']['topics'] = $data['post']->topics()->select(['title', 'slug'])->get()->makeHidden(['pivot']);
 
         $data[$data['post']->post_type.'_ads'] = Announcement::where('place', $data['post']->post_type)->get();
