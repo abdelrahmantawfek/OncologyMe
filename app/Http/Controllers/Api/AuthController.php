@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\NotifyMail;
+use App\Models\Affiliation;
+use App\Models\Speciality;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Contracts\Auth\PasswordBroker;
@@ -291,7 +293,7 @@ class AuthController extends Controller
         if ($cred->fails()) {
             return response([
                 'success' => false,
-                'type' => 'noCredntialsAdded',
+                'type' => 'noEmailAdded',
                 'errors'=>$cred->errors()->first(),
             ], 422);
         }
@@ -385,5 +387,16 @@ class AuthController extends Controller
             
         return response($response, 200);
     }
+
+    public function registerData()
+    {
+        $data['affiliations'] = Affiliation::all();
+        $data['specialities'] = Speciality::all();
+
+        return response($data);
+
+    }
+
+    
 
 }

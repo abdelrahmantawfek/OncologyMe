@@ -3258,6 +3258,7 @@ left: 50%;*/
     margin-top: 10px;
     /* margin-bottom: 0px; */
     letter-spacing: .5px;
+    min-height: 40px;
 }
 
 .articles-box .articles-only .article-item h2 a,
