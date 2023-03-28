@@ -45,4 +45,12 @@ class PageController extends Controller
         $data['home_ads'] = Announcement::where('place', '1')->get();
         return response()->json($data); 
     }
+
+    public function feedback()
+    {
+
+        $data['feedback_url'] = Settings::select('feedback')->get();
+
+        return response()->json($data);
+    }
 }

@@ -393,8 +393,7 @@ class AuthController extends Controller
         $data['affiliations'] = Affiliation::all();
         $data['specialities'] = Speciality::all();
 
-        return response($data);
-
+        return response()->json($data);
     }
 
     

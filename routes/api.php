@@ -36,6 +36,8 @@ Route::controller(App\Http\Controllers\Api\PageController::class)->group(
     function (){
         Route::get('/home',  'home');
         Route::get('/pages/{slug}',  'pages');
+        Route::get('/feedback',  'feedback');
+
     }
 );
 
