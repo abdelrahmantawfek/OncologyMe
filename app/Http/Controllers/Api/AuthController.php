@@ -390,8 +390,8 @@ class AuthController extends Controller
 
     public function registerData()
     {
-        $data['affiliations'] = Affiliation::all();
-        $data['specialities'] = Speciality::all();
+        $data['affiliations'] = Affiliation::select('title')->get();
+        $data['specialities'] = Speciality::select('title')->get();
 
         return response()->json($data);
     }
