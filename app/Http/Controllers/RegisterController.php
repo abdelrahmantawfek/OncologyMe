@@ -96,7 +96,6 @@ class RegisterController extends Controller
             }
         }
 
-        // $msg = __('auth.failed');
         Flash::error("Password is incorrect, try again!");
         return redirect()->back();
     }
