@@ -78,7 +78,14 @@ class RegisterController extends Controller
         ]);
 
         $user = User::where('email', $credentials['email'])->get()->first();
-        if (Auth::attempt($credentials)) {
+        if(!$user)
+        {
+            $msg = "Your entered email does not match our records, try with another one";
+            Flash::error($msg);
+            return redirect()->back();
+        }
+
+        if (Auth::attempt($credentials) && $user) {
             if($user->status == 1){
                 return redirect(route('home'));
                 // return redirect(route('user.profile'));
@@ -89,7 +96,8 @@ class RegisterController extends Controller
             }
         }
 
-        Flash::error(__('auth.failed'));
+        // $msg = __('auth.failed');
+        Flash::error("Password is incorrect, try again!");
         return redirect()->back();
     }
 
