@@ -6263,3 +6263,8 @@ bottom: -2px;
         font-size: 13px;
     }
 }
+@media (min-width:1024px) {
+.articles-box .videos-only .article-item {
+max-height: 340px;
+}
+}
