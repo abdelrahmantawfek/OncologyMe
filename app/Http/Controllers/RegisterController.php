@@ -80,7 +80,7 @@ class RegisterController extends Controller
         $user = User::where('email', $credentials['email'])->get()->first();
         if(!$user)
         {
-            $msg = "Your email does not match our records!";
+            $msg = "Incorrect email!";
             Flash::error($msg);
             return redirect()->back();
         }
