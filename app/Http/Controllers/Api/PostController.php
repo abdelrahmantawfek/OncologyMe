@@ -75,6 +75,7 @@ class PostController extends Controller
         $data['topic']['posts'] = $data['topic']->posts()->get()->makeHidden(['content', 'meta_title', 'meta_desc', 'highlights', 'pivot']);   
 
         foreach($data['topic']['posts'] as $key => $post){
+            $post['topics'] = $post->topics()->select(['title', 'slug'])->get()->makeHidden(['pivot']);
 
             $post['featured_image'] = $post->postmeta()->select(['meta_value'])->where('meta_key', '_featured_image')->get();
             if(count($post['featured_image']) == 0){

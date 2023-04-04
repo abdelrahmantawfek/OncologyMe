@@ -390,6 +390,8 @@ class AuthController extends Controller
 
     public function registerData()
     {
+        $data['cities'] = User::countries();
+        $data['governorates'] = User::governorates();
         $data['affiliations'] = Affiliation::select('title')->get();
         $data['specialities'] = Speciality::select('title')->get();
 
