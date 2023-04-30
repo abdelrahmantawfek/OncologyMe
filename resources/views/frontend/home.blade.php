@@ -75,7 +75,7 @@
                         <div class="careerfy-typo-wrap categ-title">
                             <h3 class="text-right"><span>Latest Videos</span></h3>
                         </div>
-                        <div class="videos-only brdr-bf br-nn">
+                        <div class="videos-only brdr-bf br-nn list_vid">
                             @foreach ($data['videos'] as $post)
                             {{-- @if (count($post->postmeta->where('meta_key', '_featured_image')) ) --}}
                             <div class="article-item">

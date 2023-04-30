@@ -258,7 +258,7 @@ class ArticlesController extends Controller
             if($old_slug){
                 $val = 1;
                 do{
-                    $new_slug = $request->title .  ' ' . $val;
+                    $new_slug = substr($request->title, 0, 200) .  ' ' . $val;
                     $categ_slug = strtolower(preg_replace('/[^A-Za-z0-9\-]/', '-', $new_slug));
                     $val++;
                 }
@@ -273,7 +273,7 @@ class ArticlesController extends Controller
             if($old_slug){
                 $val = 1;
                 do{
-                    $new_slug = $slug .  ' ' . $val;
+                    $new_slug = substr($request->title, 0, 200) .  ' ' . $val;
                     $categ_slug = strtolower(preg_replace('/[^A-Za-z0-9\-]/', '-', $new_slug));
                     $val++;
                 }

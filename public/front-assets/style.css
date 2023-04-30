@@ -3260,6 +3260,9 @@ left: 50%;*/
     letter-spacing: .5px;
     min-height: 40px;
 }
+.articles-box .videos-only.list_vid .article-item h2{
+    min-height: unset;
+}
 
 .articles-box .articles-only .article-item h2 a,
 .articles-box .videos-only .article-item h2 a,

@@ -259,7 +259,7 @@ class PodcastsController extends Controller
             if($old_slug){
                 $val = 1;
                 do{
-                    $new_slug = substr($request->title, 0, 255) .  ' ' . $val;
+                    $new_slug = substr($request->title, 0, 200) .  ' ' . $val;
                     $categ_slug = strtolower(preg_replace('/[^A-Za-z0-9\-]/', '-', $new_slug));
                     $val++;
                 }
@@ -274,7 +274,7 @@ class PodcastsController extends Controller
             if($old_slug){
                 $val = 1;
                 do{
-                    $new_slug = $slug .  ' ' . $val;
+                    $new_slug = substr($request->title, 0, 200) .  ' ' . $val;
                     $categ_slug = strtolower(preg_replace('/[^A-Za-z0-9\-]/', '-', $new_slug));
                     $val++;
                 }
