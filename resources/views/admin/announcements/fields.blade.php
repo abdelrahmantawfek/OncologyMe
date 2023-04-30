@@ -20,7 +20,7 @@
 
 <!-- Desktop Image Field -->
 <div class="form-group col-sm-12 fv-row mb-10 fv-plugins-icon-container">
-    {!! Form::label('desktop_image', 'Desktop Image :', ['class' => 'form-label fs-6 fw-bolder text-dark']) !!}<br>
+    {!! Form::label('desktop_image', 'Image :', ['class' => 'form-label fs-6 fw-bolder text-dark']) !!}<br>
     @isset($announcement->desktop_image)
     <img src="{{ asset('uploads/' . $announcement->desktop_image) }}" alt="image" width="100%" class="my-5"><br>
     @endisset
@@ -30,7 +30,7 @@
 
 </div>
 
-<!-- Mob Image Field -->
+{{-- <!-- Mob Image Field -->
 <div class="form-group col-sm-12 fv-row mb-10 fv-plugins-icon-container">
     {!! Form::label('mob_image', 'Mob Image :', ['class' => 'form-label fs-6 fw-bolder text-dark']) !!}<br>
     @isset($announcement->mob_image)
@@ -39,7 +39,7 @@
     {!! Form::file('mob_image', null, ['class' => 'form-control form-control-lg form-control-solid']) !!}<br>
     <small>recommended size : 350x224 px</small><br>
     <small>Image maximum size: 5MB</small>
-</div>
+</div> --}}
 
 
 
