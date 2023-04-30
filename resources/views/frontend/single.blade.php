@@ -42,9 +42,13 @@
                             <iframe width="100%" height="415" src="https://www.youtube.com/embed/{{$data['youtube_video'][0] ?? ''}}" frameborder="0" allowfullscreen></iframe>
                             @endif
 
+                            @if (!Request::is('videos/*'))
+
                             @foreach ($data['post']->postmeta->where('meta_key', '_featured_image') as $key => $value)
                             <img src="{{ asset('uploads/'.$value->meta_value )}}" alt="{{$value->meta_value}}" width="100%" class="feature_image">
                             @endforeach
+
+                            @endif
 
                             <div class="clearfix"></div>
                             <h2>{{ $data['post']->title  ?? ''}} </h2>

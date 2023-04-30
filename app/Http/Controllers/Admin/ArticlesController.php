@@ -44,6 +44,8 @@ class ArticlesController extends Controller
         // $input = $request->all();
         $input = $request->validate([
             'title' => 'required',
+            'slug' => 'max:255',
+
             'content' => 'required',
             'topic' => 'required',
             'category' => 'required',
@@ -63,19 +65,19 @@ class ArticlesController extends Controller
             'meta_desc' => $request->meta_desc,
         ]);
 
-        $old_slug = Post::where('slug', strtolower(preg_replace('/[^A-Za-z0-9\-]/', '-', $request->title)))->exists();
+        $old_slug = Post::where('slug', strtolower(preg_replace('/[^A-Za-z0-9\-]/', '-', substr($request->title, 0, 255))))->exists();
         if(is_null($slug)){
             if($old_slug){
                 $val = 1;
                 do{
-                    $new_slug = $request->title .  ' ' . $val;
+                    $new_slug = substr($request->title, 0, 255) .  ' ' . $val;
                     $categ_slug = strtolower(preg_replace('/[^A-Za-z0-9\-]/', '-', $new_slug));
                     $val++;
                 }
                 while(Category::where('slug', $categ_slug)->exists());
             }
             else{
-                $categ_slug = strtolower(preg_replace('/[^A-Za-z0-9\-]/', '-', $request->title));
+                $categ_slug = strtolower(preg_replace('/[^A-Za-z0-9\-]/', '-', substr($request->title, 0, 255)));
             }
             $post->slug = $categ_slug;
         }
@@ -228,7 +230,7 @@ class ArticlesController extends Controller
 
         $input = $request->validate([
             'title' => 'required',
-            // 'slug' => 'required',
+            'slug' => 'max:255',
             // 'slug' => 'unique:posts',
             // 'pdf' => 'required',
             // 'key_points' => 'required',

@@ -171,13 +171,13 @@
             </div>
 
             <!-- video type -->
-            <div class="form-group col-sm-12 fv-row mb-10 fv-plugins-icon-container cs-vid-type">
+            {{-- <div class="form-group col-sm-12 fv-row mb-10 fv-plugins-icon-container cs-vid-type">
                 {!! Form::label('type', 'Select video type :', ['class' => 'form-label fs-6 fw-bolder text-dark']) !!}
                 <label class="form-check form-check-sm form-check-custom form-check-solid">
                     {!! Form::radio('type', "youtube", null, ['class' => 'form-check-label fw-bold text-gray-700 mx-2']) !!} youtube
                     {!! Form::radio('type', "video", null, ['class' => 'form-check-label fw-bold text-gray-700 mx-2']) !!} video
                 </label>
-            </div>
+            </div> --}}
 
             <!-- Video Field -->
             <div class="form-group col-sm-12 fv-row mb-10 fv-plugins-icon-container cs-vid" style="display: none">
@@ -194,7 +194,7 @@
             </div>
 
             <div class="form-group col-sm-12 fv-row mb-10 fv-plugins-icon-container cs-youtube" style="display: none">
-                {!! Form::label('youtube_video', 'Youtube ID', ['class' => 'form-label fs-6 fw-bolder text-dark']) !!}
+                {!! Form::label('youtube_video', 'Youtube video ID', ['class' => 'form-label fs-6 fw-bolder text-dark']) !!}
                 {!! Form::text('youtube_video', $youtube_video[0] ?? '', ['class' => 'form-control']) !!}
             </div>
 
