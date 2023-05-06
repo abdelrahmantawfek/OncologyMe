@@ -6267,7 +6267,7 @@ bottom: -2px;
     }
 }
 @media (min-width:1024px) {
-.articles-box .videos-only .article-item {
+.articles-box .videos-only:not(.list_vid) .article-item {
 max-height: 340px;
 min-height: 320px;
 }
