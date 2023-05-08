@@ -122,6 +122,7 @@
                     <div class="col-md-12 col-sm-12 col-xs-12" style="width:100%; ">
                         <div class="email-box clearfix" style="clear:both !important; background:#fefefe; position:relative; border-bottom:30px solid #f06926; min-height:250px; padding:25px; margin-top:-50px">
                             <h4>Your latest oncology updates are summarized here for you!</h4>
+                            <h1>{{$post->title}}</h1>
                             <p>Click the link below to view it: <a href="{{ env('APP_URL').'/'.$post->post_type.'/'.$post->slug }}" target="_blank">view</a></p></br>
                             <p>Stay connected to Oncology me, leave us a comment on social media/ feedback via clicking the feedback bar to let us know what do you need more of.</p>
                         </div>
